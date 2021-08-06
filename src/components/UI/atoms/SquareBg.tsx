@@ -6,10 +6,14 @@ interface Props {
   height: string;
 }
 
-const Box = styled.div`
+const Box = styled.div.attrs((props: Props) => ({
+  width: props.width,
+  height: props.height,
+}))`
   width: ${({ width }: Props) => `${width}%`};
   height: ${({ height }: Props) => `${height}%`};
 `;
+
 function SquareBg(): JSX.Element {
   return <Box />;
 }

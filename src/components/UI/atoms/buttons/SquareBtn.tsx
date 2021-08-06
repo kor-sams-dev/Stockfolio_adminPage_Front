@@ -10,7 +10,12 @@ interface Props {
   filled: boolean;
 }
 
-const Button = styled.button`
+const Button = styled.button.attrs((props: Props) => ({
+  fontLarge: props.fontLarge,
+  fontSmall: props.fontSmall,
+  btnWidth: props.btnWidth,
+  filled: props.filled,
+}))`
   font-size: ${({ fontLarge, fontSmall }: Props) =>
     (fontLarge && "18px") || (fontSmall && "16px")};
   width: ${({ btnWidth }: Props) => `${btnWidth}px`};
