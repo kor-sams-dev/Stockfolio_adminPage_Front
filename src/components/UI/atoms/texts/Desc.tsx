@@ -17,10 +17,20 @@ const Text = styled.p.attrs((props: Props) => ({
   color: ${({ fontColor }: Props) => `${fontColor}`};
   font-size: ${({ fontSize }: Props) => `${fontSize}px`};
   font-weight: ${({ fontWeight }: Props) => `${fontWeight}`};
+  line-height: 1.7em;
 `;
 
-function Desc({ children }: ChildrenPropsType): JSX.Element {
-  return <Text>{children}</Text>;
+function Desc({
+  children,
+  fontColor,
+  fontSize,
+  fontWeight,
+}: ChildrenPropsType): JSX.Element {
+  return (
+    <Text fontColor={fontColor} fontSize={fontSize} fontWeight={fontWeight}>
+      {children}
+    </Text>
+  );
 }
 
 export default Desc;

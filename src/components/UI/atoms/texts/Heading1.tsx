@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { ChildrenPropsType } from "../ChildrenPropsType";
 
 const H1 = styled.h1`
-  font-size: 64px;
+  margin: 10px 0px 50px;
+  font-size: 60px;
   font-weight: 700;
+  line-height: 75px;
 `;
 
 function Heading1({ children }: ChildrenPropsType): JSX.Element {

@@ -6,7 +6,7 @@ interface Props {
 
 const Inner = styled.div`
   width: ${({ size }: Props) =>
-    (size === "narrow" && "45%") || (size === "wide" && "60%")};
+    (size === "narrow" && "45%") || (size === "wide" && "62%")};
 `;
 
 export default Inner;
