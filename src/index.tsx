@@ -1,20 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "mobx-react";
-import stores from "./stores";
-import "./index.css";
+import { ThemeProvider } from "styled-components";
+
 import App from "./App";
+import theme from "./styles/theme";
+
+import "./index.css";
 
 ReactDOM.render(
-  <Provider stores={stores}>
+  <ThemeProvider theme={theme}>
     <App />
-  </Provider>,
+  </ThemeProvider>,
   document.getElementById("root")
 );
-<<<<<<< HEAD
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-=======
->>>>>>> d4bde4ed76cbcbd4bd5cc81e86791fe2d64265bd
