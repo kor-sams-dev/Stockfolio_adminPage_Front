@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "mobx-react";
-import stores from "./stores";
-import "./index.css";
+import { ThemeProvider } from "styled-components";
+
 import App from "./App";
+import theme from "./styles/theme";
+
+import "./index.css";
 
 ReactDOM.render(
-  <Provider stores={stores}>
+  <ThemeProvider theme={theme}>
     <App />
-  </Provider>,
+  </ThemeProvider>,
   document.getElementById("root")
 );
