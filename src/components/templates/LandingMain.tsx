@@ -8,6 +8,7 @@ import Heading1 from "../UI/atoms/texts/Heading1";
 
 const FlexBox = styled.div`
   ${({ theme }) => theme.flexMixin("space-between", "flex-end")};
+  margin-top: -60px;
 `;
 
 const ImgContainer = styled.div`
