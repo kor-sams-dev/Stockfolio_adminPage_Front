@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ChildrenPropsType } from "../ChildrenPropsType";
 
 const H4 = styled.h4`
+  margin-bottom: 20px;
   font-size: 24px;
   font-weight: 700;
 `;
