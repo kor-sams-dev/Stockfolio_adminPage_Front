@@ -11,11 +11,13 @@ interface Props {
 }
 
 const Title = styled.span`
+  margin-left: 50px;
   font-weight: 700;
 `;
 
 const List = styled.ul`
   ${({ theme }) => theme.flexMixin("center", "center")};
+  margin-top: 20px;
 `;
 
 function CoAgencies(): JSX.Element {
@@ -24,12 +26,7 @@ function CoAgencies(): JSX.Element {
       <Title>협력 기관</Title>
       <List>
         {coAgencies.map((li: Props) => (
-          <CoAgenciesItem
-            key={li.itemId}
-            title={li.title}
-            itemId={li.itemId}
-            imgSrc={li.imgSrc}
-          />
+          <CoAgenciesItem key={li.itemId} title={li.title} imgSrc={li.imgSrc} />
         ))}
       </List>
     </>

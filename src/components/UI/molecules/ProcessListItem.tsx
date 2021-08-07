@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ChildrenPropsType } from "../atoms/ChildrenPropsType";
 import Desc from "../atoms/texts/Desc";
+
+interface Props {
+  imgSrc: string;
+  itemId: string;
+  title: string;
+  desc: string;
+}
 
 const Item = styled.li`
   width: 296px;
@@ -14,12 +20,7 @@ const Title = styled.span`
   font-weight: 700;
 `;
 
-function ProcessListItem({
-  itemId,
-  imgSrc,
-  title,
-  desc,
-}: ChildrenPropsType): JSX.Element {
+function ProcessListItem({ itemId, imgSrc, title, desc }: Props): JSX.Element {
   return (
     <Item>
       <img src={imgSrc} alt={title} />

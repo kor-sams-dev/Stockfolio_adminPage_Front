@@ -5,6 +5,7 @@ interface Props {
 }
 
 const Inner = styled.div`
+  background: lightblue;
   width: ${({ size }: Props) =>
     (size === "narrow" && "45%") || (size === "wide" && "62%")};
 `;

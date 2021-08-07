@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { ChildrenPropsType } from "../ChildrenPropsType";
 
-interface Props {
+interface Props extends ChildrenPropsType {
   fontColor: string;
   fontSize: string;
   fontWeight: string;
@@ -25,7 +25,7 @@ function Desc({
   fontColor,
   fontSize,
   fontWeight,
-}: ChildrenPropsType): JSX.Element {
+}: Props): JSX.Element {
   return (
     <Text fontColor={fontColor} fontSize={fontSize} fontWeight={fontWeight}>
       {children}

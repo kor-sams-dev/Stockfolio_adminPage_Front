@@ -1,19 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
+import ViewportBox from "../../styles/ViewportBox";
 import Inner from "../../styles/Inner";
 import Desc from "../UI/atoms/texts/Desc";
 import CoAgencies from "../UI/organisms/CoAgencies";
 import ProcessList from "../UI/organisms/ProcessList";
 
-const Box = styled.div`
-  ${({ theme }) => theme.flexMixin("center", "center")};
-  margin-top: 80px;
-`;
-
 const Divider = styled.div`
   ${({ theme }) => theme.flexMixin};
   flex-direction: column;
+  margin-top: 40px;
   text-align: center;
 `;
 
@@ -25,7 +22,7 @@ const Title = styled.span`
 
 function Overview(): JSX.Element {
   return (
-    <Box>
+    <ViewportBox>
       <Inner size="wide">
         <Divider>
           <Title>몇 년 전 찍은 영상, 이제 깨우러 가자</Title>
@@ -42,7 +39,7 @@ function Overview(): JSX.Element {
         <ProcessList />
         <CoAgencies />
       </Inner>
-    </Box>
+    </ViewportBox>
   );
 }
 

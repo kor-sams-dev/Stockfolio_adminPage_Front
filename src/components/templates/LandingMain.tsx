@@ -1,14 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+import ViewportBox from "../../styles/ViewportBox";
 import Inner from "../../styles/Inner";
 import Desc from "../UI/atoms/texts/Desc";
 import Heading1 from "../UI/atoms/texts/Heading1";
-
-const Box = styled.div`
-  ${({ theme }) => theme.flexMixin("center", "center")};
-  margin-top: 20px;
-`;
 
 const FlexBox = styled.div`
   ${({ theme }) => theme.flexMixin("space-between", "flex-end")};
@@ -42,7 +38,7 @@ const ContentContainer = styled.div`
 
 function LandingMain(): JSX.Element {
   return (
-    <Box>
+    <ViewportBox>
       <Inner size="wide">
         <FlexBox>
           <ImgContainer>
@@ -71,7 +67,7 @@ function LandingMain(): JSX.Element {
           </ContentContainer>
         </FlexBox>
       </Inner>
-    </Box>
+    </ViewportBox>
   );
 }
 
