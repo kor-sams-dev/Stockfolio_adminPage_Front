@@ -44,7 +44,7 @@ function ArrowBtn({ direction }: Props): JSX.Element {
   return (
     <Box direction={direction}>
       <Img
-        src={`./images/${direction}_arrow.png`}
+        src={`./images/${direction}Arrow.png`}
         alt={`${direction} button`}
         direction={direction}
       />

@@ -28,7 +28,7 @@ function MacbookSlide(): JSX.Element {
   return (
     <Box>
       <ArrowBtn direction="prev" />
-      <img src="./images/Device - Macbook Pro.png" alt="macbook pro" />
+      <img src="./images/macbookProDisplay.png" alt="macbook pro" />
       <ViewingSection>
         <SlideBox>
           {[...Array(3)].map((_, i) => (

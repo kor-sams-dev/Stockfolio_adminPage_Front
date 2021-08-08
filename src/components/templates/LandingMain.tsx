@@ -47,8 +47,8 @@ function LandingMain(): JSX.Element {
       <Inner size="wide">
         <FlexBox>
           <ImgContainer>
-            <img src="./images/Frame 3.png" alt="frame" />
-            <img src="./images/Mask Group.png" alt="main" />
+            <img src="./images/mainFrame.png" alt="frame" />
+            <img src="./images/mainImage.png" alt="main" />
           </ImgContainer>
           <ContentContainer>
             <Sub>센스쟁이 크리에이터를 위한</Sub>
