@@ -17,6 +17,7 @@ const Title = styled.em`
   display: inline-block;
   margin-bottom: 30px;
   font-weight: 700;
+  font-size: 18px;
 `;
 
 function IntroduceListItem({ title, desc }: Props): JSX.Element {

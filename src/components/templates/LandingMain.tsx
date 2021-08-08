@@ -6,9 +6,9 @@ import Inner from "../../styles/Inner";
 import Desc from "../UI/atoms/texts/Desc";
 import Heading1 from "../UI/atoms/texts/Heading1";
 
-const FlexBox = styled.div`
+const FlexBox = styled.section`
   ${({ theme }) => theme.flexMixin("space-between", "flex-end")};
-  margin-top: -60px;
+  margin-top: -55px;
 `;
 
 const ImgContainer = styled.div`
@@ -25,16 +25,20 @@ const ImgContainer = styled.div`
 
 const ContentContainer = styled.div`
   position: relative;
-  padding-bottom: 120px;
+  padding-bottom: 105px;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: 90px;
+    bottom: 80px;
     left: 0;
     width: 60px;
     border-top: ${({ theme }) => `2px solid ${theme.colorMain}`};
   }
+`;
+
+const Sub = styled.span`
+  font-size: 24px;
 `;
 
 function LandingMain(): JSX.Element {
@@ -47,14 +51,14 @@ function LandingMain(): JSX.Element {
             <img src="./images/Mask Group.png" alt="main" />
           </ImgContainer>
           <ContentContainer>
-            <span>센스쟁이 크리에이터를 위한</span>
+            <Sub>센스쟁이 크리에이터를 위한</Sub>
             <Heading1>
               <>
                 저작권 걱정 없는
                 <br /> 한국형 영상 저장소
               </>
             </Heading1>
-            <Desc fontColor="black" fontSize="18" fontWeight="400">
+            <Desc fontColor="black" fontSize="17" fontWeight="400">
               <>
                 해외 스톡 사이트에서 한국영상 찾아
                 <br />

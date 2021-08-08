@@ -22,14 +22,17 @@ const Item = styled.li`
   position: relative;
   ${({ theme }) => theme.flexMixin("normal", "normal")};
   flex-direction: column;
+  &:nth-child(1) {
+    margin-top: -5px;
+  }
   &:nth-child(2) {
-    margin-top: 40px;
+    margin-top: 76px;
   }
 
   ${({ isEven }: StyleProps) =>
     (isEven &&
       css`
-        margin-top: -10px;
+        margin-top: -18px;
         padding-left: 60px;
       `) ||
     (!isEven &&
@@ -45,7 +48,7 @@ const Item = styled.li`
     `}
 `;
 
-const Texts = styled.div`
+const Texts = styled.section`
   ${({ theme }) => theme.flexMixin("normal", "normal")};
   flex-direction: column;
   width: 389px;
@@ -55,8 +58,8 @@ const Texts = styled.div`
 const Circle = styled.div`
   position: absolute;
   top: 0;
-  width: 15px;
-  height: 15px;
+  width: 19px;
+  height: 19px;
   border: 2px solid #7f6fc1;
   border-radius: 50%;
   background: white;
@@ -77,11 +80,11 @@ const Circle = styled.div`
 const Date = styled.span`
   color: ${({ theme }) => theme.colorMain};
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
 `;
 
 const Title = styled.em`
-  margin: 12px 0;
+  margin: 16px 0;
   font-weight: 700;
   font-size: 18px;
 `;

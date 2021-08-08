@@ -6,11 +6,11 @@ import DotBtn from "../atoms/buttons/DotBtn";
 const Dots = styled.div`
   position: fixed;
   top: 50%;
-  right: 40px;
-  transform: translateY(-50%);
+  right: 39px;
+  transform: translateY(5%);
   ${({ theme }) => theme.flexMixin("space-between", "normal")};
   flex-direction: column;
-  height: 110px;
+  height: 108px;
 `;
 
 function ScrollNavigator(): JSX.Element {

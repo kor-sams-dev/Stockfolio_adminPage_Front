@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const Img = styled.img`
   position: fixed;
-  top: 170px;
-  right: 120px;
+  top: 205px;
+  right: 110px;
 `;
 
 function AppDownloadBtn(): JSX.Element {

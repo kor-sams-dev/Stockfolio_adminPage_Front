@@ -6,15 +6,13 @@ import histories from "../molecules/histories";
 import HistoryListItem from "../molecules/HistoryListItem";
 import HistoryBar from "../atoms/HistoryBar";
 
-const Box = styled.div`
+const Box = styled.section`
   position: relative;
 `;
 
 const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, auto);
-  margin-top: 20px;
 `;
 
 function HistoryList(): JSX.Element {

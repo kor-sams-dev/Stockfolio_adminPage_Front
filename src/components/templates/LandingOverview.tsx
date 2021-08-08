@@ -10,12 +10,12 @@ import ProcessList from "../UI/organisms/ProcessList";
 const Divider = styled.div`
   ${({ theme }) => theme.flexMixin};
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 74px;
   text-align: center;
 `;
 
 const Title = styled.span`
-  margin-bottom: 15px;
+  margin-bottom: 6px;
   font-weight: 700;
   font-size: 24px;
 `;

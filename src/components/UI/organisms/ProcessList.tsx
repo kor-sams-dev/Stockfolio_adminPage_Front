@@ -5,22 +5,15 @@ import ProcessListItem from "../molecules/ProcessListItem";
 
 import processData from "../molecules/processData";
 
-interface Props {
-  imgSrc: string;
-  itemId: string;
-  title: string;
-  desc: string;
-}
-
 const List = styled.ol`
   ${({ theme }) => theme.flexMixin("space-around", "center")};
-  margin: 50px 0 110px;
+  margin: 38px 0 105px;
 `;
 
 function ProcessList(): JSX.Element {
   return (
     <List>
-      {processData.map((li: Props) => (
+      {processData.map(li => (
         <ProcessListItem
           key={li.itemId}
           itemId={li.itemId}

@@ -7,14 +7,14 @@ const Box = styled.div`
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 140px);
   overflow: hidden;
 `;
 
 const Bar = styled.div`
   position: relative;
   width: 2px;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 140px);
   background: #7f6fc1;
 
   &::before {
@@ -32,6 +32,7 @@ const Bar = styled.div`
   }
 
   &::after {
+    border: 1px solid red;
     content: "";
     position: absolute;
     bottom: -75px;

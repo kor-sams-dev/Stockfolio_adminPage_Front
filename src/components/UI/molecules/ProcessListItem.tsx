@@ -18,6 +18,7 @@ const Title = styled.span`
   display: block;
   margin: 20px 0;
   font-weight: 700;
+  font-size: 18px;
 `;
 
 function ProcessListItem({ itemId, imgSrc, title, desc }: Props): JSX.Element {

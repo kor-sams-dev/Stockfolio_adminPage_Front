@@ -3,24 +3,24 @@ import styled from "styled-components";
 import Desc from "../atoms/texts/Desc";
 import Heading4 from "../atoms/texts/Heading4";
 
-const Box = styled.div`
+const List = styled.ul`
   width: 78%;
   padding: 25px 10% 0 0;
   border-top: 1px solid black;
 `;
 
-const Divider = styled.div`
+const Item = styled.li`
   color: ${({ theme }) => theme.colorDesc};
 
-  & + div {
-    margin-top: 40px;
+  & + li {
+    margin-top: 38px;
   }
 `;
 
 function MissionContents(): JSX.Element {
   return (
-    <Box>
-      <Divider>
+    <List>
+      <Item>
         <Heading4>회사 소개</Heading4>
         <Desc fontColor="inherit" fontSize="14" fontWeight="400">
           &lsquo;스톡폴리오&rsquo;는 공정성을 추구하는 크리에이터에게 편리한
@@ -30,8 +30,8 @@ function MissionContents(): JSX.Element {
           &lsquo;스톡폴리오&rsquo;는 플랫폼과 데이터 기반의 혁신적인 서비스를
           통해 시장을 개척하고 새로운 이정표를 제시합니다.
         </Desc>
-      </Divider>
-      <Divider>
+      </Item>
+      <Item>
         <Heading4>창업 동기</Heading4>
         <Desc fontColor="inherit" fontSize="14" fontWeight="400">
           스톡폴리오의 CEO인 오연우님은 과학 유튜브 채널을 운영하던 중 한국의
@@ -46,8 +46,8 @@ function MissionContents(): JSX.Element {
           할 수 있는 기능까지 더하며 지금의 &lsquo;공정한 콘텐츠 C2C
           플랫폼&rsquo;이라는 스톡폴리오 비즈니스 모델이 탄생했습니다.
         </Desc>
-      </Divider>
-    </Box>
+      </Item>
+    </List>
   );
 }
 

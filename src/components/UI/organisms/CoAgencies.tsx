@@ -4,20 +4,15 @@ import styled from "styled-components";
 import coAgencies from "../molecules/coAgencies";
 import CoAgenciesItem from "../molecules/CoAgenciesItem";
 
-interface Props {
-  imgSrc: string;
-  itemId: string;
-  title: string;
-}
-
 const Title = styled.span`
-  margin-left: 50px;
+  margin-left: 58px;
   font-weight: 700;
+  font-size: 18px;
 `;
 
 const List = styled.ul`
   ${({ theme }) => theme.flexMixin("center", "center")};
-  margin-top: 20px;
+  margin-top: 16px;
 `;
 
 function CoAgencies(): JSX.Element {
@@ -25,8 +20,8 @@ function CoAgencies(): JSX.Element {
     <>
       <Title>협력 기관</Title>
       <List>
-        {coAgencies.map((li: Props) => (
-          <CoAgenciesItem key={li.itemId} title={li.title} imgSrc={li.imgSrc} />
+        {coAgencies.map(li => (
+          <CoAgenciesItem key={li.title} title={li.title} imgSrc={li.imgSrc} />
         ))}
       </List>
     </>

@@ -16,7 +16,7 @@ const Box = styled.div`
   ${({ direction }: Props) =>
     (direction === "prev" &&
       css`
-        left: 0;
+        left: 15px;
       `) ||
     (direction === "next" &&
       css`
