@@ -1,23 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ChildrenPropsType } from "../ChildrenPropsType";
+import { DescProps } from "../../../../models/commonInterfaces";
 
-interface Props extends ChildrenPropsType {
-  fontColor: string;
-  fontSize: string;
-  fontWeight: string;
-}
-
-const Text = styled.p.attrs((props: Props) => ({
+const Text = styled.p.attrs((props: DescProps) => ({
   fontColor: props.fontColor,
   fontSize: props.fontSize,
   fontWeight: props.fontWeight,
+  lineHeight: props.lineHeight,
 }))`
-  color: ${({ fontColor }: Props) => `${fontColor}`};
-  font-size: ${({ fontSize }: Props) => `${fontSize}px`};
-  font-weight: ${({ fontWeight }: Props) => `${fontWeight}`};
-  line-height: 1.7em;
+  color: ${({ fontColor }: DescProps) => `${fontColor}`};
+  font-size: ${({ fontSize }: DescProps) => `${fontSize}px`};
+  font-weight: ${({ fontWeight }: DescProps) => `${fontWeight}`};
+  line-height: ${({ lineHeight }: DescProps) => `${lineHeight}`};
 `;
 
 function Desc({
@@ -25,9 +20,15 @@ function Desc({
   fontColor,
   fontSize,
   fontWeight,
-}: Props): JSX.Element {
+  lineHeight,
+}: DescProps): JSX.Element {
   return (
-    <Text fontColor={fontColor} fontSize={fontSize} fontWeight={fontWeight}>
+    <Text
+      fontColor={fontColor}
+      fontSize={fontSize}
+      fontWeight={fontWeight}
+      lineHeight={lineHeight}
+    >
       {children}
     </Text>
   );

@@ -9,6 +9,9 @@ declare module "styled-components" {
     colorBgGrey: string;
     colorBgLightGrey: string;
     colorBgLightBlue: string;
-    flexMixin: function;
   }
+
+  // export interface DefaultMixin {
+  //   flexMixin: function;
+  // }
 }

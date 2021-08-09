@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ChildrenPropsType } from "../ChildrenPropsType";
-
 const Dot = styled.div`
   position: relative;
   width: 10px;
@@ -22,8 +20,8 @@ const Dot = styled.div`
   }
 `;
 
-function DotBtn({ children }: ChildrenPropsType): JSX.Element {
-  return <Dot>{children}</Dot>;
+function DotBtn(): JSX.Element {
+  return <Dot />;
 }
 
 export default DotBtn;
