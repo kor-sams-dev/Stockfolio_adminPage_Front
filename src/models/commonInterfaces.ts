@@ -5,9 +5,9 @@ interface ChildrenProps {
 }
 
 interface TextProps extends ChildrenProps {
-  fontColor?: string;
+  fontColor?: string | "black";
   fontSize?: number;
-  fontWeight?: number;
+  fontWeight?: number | 400;
 }
 
 interface SquareBtnProps extends TextProps {
@@ -16,8 +16,13 @@ interface SquareBtnProps extends TextProps {
   btnColor: string;
 }
 
+interface LabelProps extends TextProps {
+  labelColor?: string;
+  labelWidth?: number;
+}
+
 interface DescProps extends TextProps {
-  lineHeight: number;
+  lineHeight?: number;
 }
 
 interface CheckBoxProps {
@@ -39,10 +44,12 @@ interface InnerProps {
 }
 
 export type {
+  TextProps,
   SquareBtnProps,
+  LabelProps,
+  DescProps,
   CheckBoxProps,
   InputProps,
   SelectProps,
-  DescProps,
   InnerProps,
 };

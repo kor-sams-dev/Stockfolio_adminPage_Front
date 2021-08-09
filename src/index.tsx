@@ -4,8 +4,7 @@ import { ThemeProvider } from "styled-components";
 
 import App from "./App";
 import theme from "./styles/theme";
-
-import "./index.css";
+// import mixin from "./styles/mixin";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

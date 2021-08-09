@@ -8,7 +8,6 @@ const Button = styled.button.attrs((props: SquareBtnProps) => ({
   isFilled: props.isFilled,
   btnColor: props.btnColor,
 }))`
-  ${({ theme }) => theme.flexMixin};
   width: ${({ btnWidth }: SquareBtnProps) => `${btnWidth}px`};
   color: ${({ fontColor }: SquareBtnProps) => fontColor};
   font-size: ${({ fontSize }: SquareBtnProps) => `${fontSize}px`};
@@ -49,3 +48,5 @@ function SquareBtn({
 }
 
 export default SquareBtn;
+
+/* ${({ theme }) => theme.flexMixin}; */

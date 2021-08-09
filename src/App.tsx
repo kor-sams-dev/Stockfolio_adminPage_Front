@@ -1,9 +1,13 @@
 import React from "react";
-import "./App.css";
-import SquareBtn from "./components/UI/atoms/buttons/SquareBtn";
+// import Desc from "./components/UI/atoms/texts/Desc";
+// import handleThemeKey from "./utils/handleThemeKey";
 
 function App(): JSX.Element {
-  return <div className="App" />;
+  return (
+    <div className="App">
+      {/* <Desc fontColor={handleThemeKey("colorMain")}>왕춘식 최고</Desc> */}
+    </div>
+  );
 }
 
 export default App;
