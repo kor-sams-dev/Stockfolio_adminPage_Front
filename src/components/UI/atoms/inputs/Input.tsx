@@ -1,21 +1,9 @@
 import React from "react";
-import { ChildrenPropsType } from "../ChildrenPropsType";
+import { InputProps } from "../../../../models/commonInterfaces";
 
-interface InputChildrenType extends ChildrenPropsType {
-  type: string;
-  placeholder: string;
-  name: string;
-}
-
-function Input({ children }: ChildrenPropsType): JSX.Element {
-  const inputs = { children } as InputChildrenType;
-
+function Input({ type, placeholder, name }: InputProps): JSX.Element {
   return (
-    <input
-      type={`${inputs.type}`}
-      placeholder={`${inputs.placeholder}`}
-      name={`${inputs.name}`}
-    />
+    <input type={`${type}`} placeholder={`${placeholder}`} name={`${name}`} />
   );
 }
 

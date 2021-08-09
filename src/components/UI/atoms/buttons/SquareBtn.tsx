@@ -1,38 +1,51 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import { ChildrenPropsType } from "../ChildrenPropsType";
+import { SquareBtnProps } from "../../../../models/commonInterfaces";
 
-interface Props {
-  fontLarge: string;
-  fontSmall: string;
-  btnWidth: string;
-  filled: boolean;
-}
-
-const Button = styled.button.attrs((props: Props) => ({
-  fontLarge: props.fontLarge,
-  fontSmall: props.fontSmall,
+const Button = styled.button.attrs((props: SquareBtnProps) => ({
   btnWidth: props.btnWidth,
-  filled: props.filled,
+  isFilled: props.isFilled,
+  btnColor: props.btnColor,
 }))`
-  font-size: ${({ fontLarge, fontSmall }: Props) =>
-    (fontLarge && "18px") || (fontSmall && "16px")};
-  width: ${({ btnWidth }: Props) => `${btnWidth}px`};
   ${({ theme }) => theme.flexMixin};
-  ${({ filled }: Props) =>
-    (filled &&
+  width: ${({ btnWidth }: SquareBtnProps) => `${btnWidth}px`};
+  color: ${({ fontColor }: SquareBtnProps) => fontColor};
+  font-size: ${({ fontSize }: SquareBtnProps) => `${fontSize}px`};
+  font-weight: ${({ fontWeight }: SquareBtnProps) => fontWeight};
+  ${({ isFilled }: SquareBtnProps) =>
+    (isFilled &&
       css`
-        color: white;
+        background: ${({ btnColor }: SquareBtnProps) => btnColor};
       `) ||
-    (!filled &&
+    (!isFilled &&
       css`
-        border: 1px solid black;
+        border: ${({ btnColor }: SquareBtnProps) => `1px solid ${btnColor}`};
       `)}
 `;
 
-function SquareBtn({ children }: ChildrenPropsType): JSX.Element {
-  return <Button type="button">{children}</Button>;
+function SquareBtn({
+  children,
+  isFilled,
+  btnWidth,
+  btnColor,
+  fontSize,
+  fontColor,
+  fontWeight,
+}: SquareBtnProps): JSX.Element {
+  return (
+    <Button
+      type="button"
+      isFilled={isFilled}
+      btnWidth={btnWidth}
+      btnColor={btnColor}
+      fontSize={fontSize}
+      fontColor={fontColor}
+      fontWeight={fontWeight}
+    >
+      {children}
+    </Button>
+  );
 }
 
 export default SquareBtn;

@@ -1,16 +1,10 @@
 import React from "react";
-import { ChildrenPropsType } from "../ChildrenPropsType";
+import { SelectProps } from "../../../../models/commonInterfaces";
 
-interface SelectChildrenType extends ChildrenPropsType {
-  name: string;
-}
-
-function Input({ children }: ChildrenPropsType): JSX.Element {
-  const selects = { children } as SelectChildrenType;
-
+function Input({ name }: SelectProps): JSX.Element {
   return (
     <>
-      <select name={`${selects}`}>
+      <select name={name}>
         {[...Array(8)].map(option => (
           <option key={option} value={`${option}`}>
             {option}
