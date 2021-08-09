@@ -8,8 +8,9 @@ const Dots = styled.div`
   top: 50%;
   right: 39px;
   transform: translateY(5%);
-  ${({ theme }) => theme.flexMixin("space-between", "normal")};
+  display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 108px;
 `;
 

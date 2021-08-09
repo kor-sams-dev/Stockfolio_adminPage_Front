@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import histories from "../molecules/histories";
-
 import HistoryListItem from "../molecules/HistoryListItem";
 import HistoryBar from "../atoms/HistoryBar";
+
+import histories from "../../../assets/data/histories";
 
 const Box = styled.section`
   position: relative;

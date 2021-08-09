@@ -21,7 +21,7 @@ function PdIntroduce(): JSX.Element {
     <ViewportBox>
       <Background />
       <Inner size="wide">
-        <Heading2>프로덕트 소개</Heading2>
+        <Heading2 fontWeight={700}>프로덕트 소개</Heading2>
         <MacbookSlide />
         <IntroduceList />
       </Inner>

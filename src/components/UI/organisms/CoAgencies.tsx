@@ -1,18 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-import coAgencies from "../molecules/coAgencies";
 import CoAgenciesItem from "../molecules/CoAgenciesItem";
 
+import coAgencies from "../../../assets/data/coAgencies";
+
 const Title = styled.span`
-  margin-left: 58px;
+  margin-left: 57px;
   font-weight: 700;
   font-size: 18px;
 `;
 
 const List = styled.ul`
-  ${({ theme }) => theme.flexMixin("center", "center")};
-  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 17px;
 `;
 
 function CoAgencies(): JSX.Element {
@@ -21,7 +24,11 @@ function CoAgencies(): JSX.Element {
       <Title>협력 기관</Title>
       <List>
         {coAgencies.map(li => (
-          <CoAgenciesItem key={li.title} title={li.title} imgSrc={li.imgSrc} />
+          <CoAgenciesItem
+            key={li.imgAlt}
+            imgAlt={li.imgAlt}
+            imgSrc={li.imgSrc}
+          />
         ))}
       </List>
     </>

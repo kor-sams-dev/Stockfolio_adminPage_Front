@@ -3,11 +3,13 @@ import styled from "styled-components";
 
 import ProcessListItem from "../molecules/ProcessListItem";
 
-import processData from "../molecules/processData";
+import processData from "../../../assets/data/processData";
 
 const List = styled.ol`
-  ${({ theme }) => theme.flexMixin("space-around", "center")};
-  margin: 38px 0 105px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 43px 0 108px;
 `;
 
 function ProcessList(): JSX.Element {
@@ -18,7 +20,7 @@ function ProcessList(): JSX.Element {
           key={li.itemId}
           itemId={li.itemId}
           imgSrc={li.imgSrc}
-          title={li.title}
+          imgAlt={li.imgAlt}
           desc={li.desc}
         />
       ))}

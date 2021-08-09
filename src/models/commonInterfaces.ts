@@ -25,6 +25,11 @@ interface DescProps extends TextProps {
   lineHeight?: number;
 }
 
+interface ImgProps {
+  imgSrc: string;
+  imgAlt: string;
+}
+
 interface CheckBoxProps {
   name: string;
 }
@@ -48,6 +53,7 @@ export type {
   SquareBtnProps,
   LabelProps,
   DescProps,
+  ImgProps,
   CheckBoxProps,
   InputProps,
   SelectProps,

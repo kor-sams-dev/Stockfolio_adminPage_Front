@@ -8,14 +8,16 @@ import CoAgencies from "../UI/organisms/CoAgencies";
 import ProcessList from "../UI/organisms/ProcessList";
 
 const Divider = styled.div`
-  ${({ theme }) => theme.flexMixin};
+  display: flex;
   flex-direction: column;
-  margin-top: 74px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 39px;
   text-align: center;
 `;
 
 const Title = styled.span`
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   font-weight: 700;
   font-size: 24px;
 `;
@@ -26,7 +28,12 @@ function Overview(): JSX.Element {
       <Inner size="wide">
         <Divider>
           <Title>몇 년 전 찍은 영상, 이제 깨우러 가자</Title>
-          <Desc fontColor="black" fontSize="16px" fontWeight="500">
+          <Desc
+            fontColor="black"
+            fontSize={16}
+            fontWeight={500}
+            lineHeight={1.5}
+          >
             <>
               정의로운 크리에이터가 자생하는 올인원, 올뉴 영상 제작 생태계
               스톡폴리오.

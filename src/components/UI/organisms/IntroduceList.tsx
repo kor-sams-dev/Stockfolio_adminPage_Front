@@ -3,10 +3,12 @@ import styled from "styled-components";
 
 import IntroduceListItem from "../molecules/IntroduceListItem";
 
-import introduces from "../molecules/introduces";
+import introduces from "../../../assets/data/introduces";
 
 const List = styled.ul`
-  ${({ theme }) => theme.flexMixin("space-around", "start")};
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
 `;
 
 function IntroduceList(): JSX.Element {

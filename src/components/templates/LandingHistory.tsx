@@ -9,7 +9,7 @@ function History(): JSX.Element {
   return (
     <ViewportBox>
       <Inner size="wide">
-        <Heading2>스폴이 걸어온 길</Heading2>
+        <Heading2 fontWeight={700}>스폴이 걸어온 길</Heading2>
         <HistoryList />
       </Inner>
     </ViewportBox>

@@ -3,14 +3,9 @@ import styled, { css } from "styled-components";
 
 import Desc from "../atoms/texts/Desc";
 
-interface Props {
-  title: string;
-  date: string;
-  desc: string;
-  itemId: string;
-  isEven: boolean;
-  idx: number;
-}
+import handleThemeKey from "../../../utils/handleThemeKey";
+
+import { HistoryProps } from "../../../models/landingInterfaces";
 
 interface StyleProps {
   itemId?: string;
@@ -20,7 +15,7 @@ interface StyleProps {
 
 const Item = styled.li`
   position: relative;
-  ${({ theme }) => theme.flexMixin("normal", "normal")};
+  display: flex;
   flex-direction: column;
   &:nth-child(1) {
     margin-top: -5px;
@@ -32,7 +27,7 @@ const Item = styled.li`
   ${({ isEven }: StyleProps) =>
     (isEven &&
       css`
-        margin-top: -18px;
+        margin-top: -17px;
         padding-left: 60px;
       `) ||
     (!isEven &&
@@ -49,10 +44,9 @@ const Item = styled.li`
 `;
 
 const Texts = styled.section`
-  ${({ theme }) => theme.flexMixin("normal", "normal")};
+  display: flex;
   flex-direction: column;
   width: 389px;
-  color: ${({ theme }) => theme.colorDesc};
 `;
 
 const Circle = styled.div`
@@ -96,13 +90,18 @@ function HistoryListItem({
   desc,
   itemId,
   idx,
-}: Props): JSX.Element {
+}: HistoryProps): JSX.Element {
   return (
     <Item isEven={isEven} itemId={itemId} idx={idx}>
       <Texts>
         <Date>{date}</Date>
         <Title>{title}</Title>
-        <Desc fontSize="14" fontColor="inherit" fontWeight="400">
+        <Desc
+          fontColor={handleThemeKey("colorDesc")}
+          fontSize={14}
+          fontWeight={400}
+          lineHeight={1.7}
+        >
           {desc}
         </Desc>
       </Texts>

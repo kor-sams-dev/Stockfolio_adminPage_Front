@@ -9,7 +9,9 @@ import MissionHeader from "../UI/molecules/MissionHeader";
 import MissionContents from "../UI/molecules/MissionContents";
 
 const Divider = styled.div`
-  ${({ theme }) => theme.flexMixin("space-between", "start")};
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 const Box = styled.div`
@@ -22,11 +24,11 @@ function Mission(): JSX.Element {
   return (
     <ViewportBox>
       <Inner size="wide">
-        <Heading2>우리의 Mission</Heading2>
+        <Heading2 fontWeight={700}>우리의 Mission</Heading2>
         <MissionHeader />
         <Divider>
           <Box>
-            <Heading3>스톡폴리오</Heading3>
+            <Heading3 fontWeight={700}>스톡폴리오</Heading3>
           </Box>
           <MissionContents />
         </Divider>

@@ -5,7 +5,9 @@ import MacbookSlideItem from "../molecules/MacbookSlideItem";
 import ArrowBtn from "../atoms/buttons/ArrowBtn";
 
 const Box = styled.section`
-  ${({ theme }) => theme.flexMixin("center", "center")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 58px 0 35px;
 `;
@@ -18,7 +20,9 @@ const ViewingSection = styled.div`
 `;
 
 const SlideBox = styled.ul`
-  ${({ theme }) => theme.flexMixin("start", "start")};
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
   position: absolute;
   top: 0;
   left: 0;

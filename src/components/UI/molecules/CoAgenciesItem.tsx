@@ -1,12 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ChildrenPropsType } from "../atoms/ChildrenPropsType";
-
-interface Props extends ChildrenPropsType {
-  imgSrc: string;
-  title: string;
-}
+import { ImgProps } from "../../../models/commonInterfaces";
 
 const Item = styled.li`
   & + li {
@@ -14,10 +9,10 @@ const Item = styled.li`
   }
 `;
 
-function CoAgenciesItem({ imgSrc, title }: Props): JSX.Element {
+function CoAgenciesItem({ imgSrc, imgAlt }: ImgProps): JSX.Element {
   return (
     <Item>
-      <img src={imgSrc} alt={title} />
+      <img src={imgSrc} alt={imgAlt} />
     </Item>
   );
 }

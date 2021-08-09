@@ -1,9 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-interface Props {
-  direction: string;
-}
+import { ArrowBtnProps } from "../../../../models/landingInterfaces";
 
 const Box = styled.div`
   position: absolute;
@@ -13,7 +11,7 @@ const Box = styled.div`
   border-radius: 50%;
   opacity: 0.7;
   cursor: pointer;
-  ${({ direction }: Props) =>
+  ${({ direction }: ArrowBtnProps) =>
     (direction === "prev" &&
       css`
         left: 15px;
@@ -27,7 +25,7 @@ const Box = styled.div`
 const Img = styled.img`
   position: absolute;
   top: 50%;
-  ${({ direction }: Props) =>
+  ${({ direction }: ArrowBtnProps) =>
     (direction === "prev" &&
       css`
         left: 50%;
@@ -40,7 +38,7 @@ const Img = styled.img`
       `)}
 `;
 
-function ArrowBtn({ direction }: Props): JSX.Element {
+function ArrowBtn({ direction }: ArrowBtnProps): JSX.Element {
   return (
     <Box direction={direction}>
       <Img

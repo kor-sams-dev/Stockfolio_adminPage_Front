@@ -7,6 +7,7 @@ const Dot = styled.div`
   height: 10px;
   border-radius: 50%;
   background: ${({ theme }) => theme.colorBgGrey};
+  cursor: pointer;
 
   &::after {
     content: "";

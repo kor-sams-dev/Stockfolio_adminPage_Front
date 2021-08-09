@@ -4,14 +4,13 @@ import styled from "styled-components";
 import { TextProps } from "../../../../models/commonInterfaces";
 
 const H1 = styled.h1`
-  /* margin: 12px 0px 75px;
-  font-size: 60px;
-  font-weight: 700;
-  line-height: 75px; */
+  margin: 12px 0px 68px;
   color: ${({ fontColor }: TextProps) => fontColor};
   font-size: ${({ fontSize }: TextProps) =>
     fontSize ? `${fontSize}px` : "60px"};
   font-weight: ${({ fontWeight }: TextProps) => fontWeight};
+  font-weight: 700;
+  line-height: 75px;
 `;
 
 function Heading1({

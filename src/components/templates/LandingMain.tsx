@@ -7,8 +7,10 @@ import Desc from "../UI/atoms/texts/Desc";
 import Heading1 from "../UI/atoms/texts/Heading1";
 
 const FlexBox = styled.section`
-  ${({ theme }) => theme.flexMixin("space-between", "flex-end")};
-  margin-top: -55px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: -90px;
 `;
 
 const ImgContainer = styled.div`
@@ -25,12 +27,12 @@ const ImgContainer = styled.div`
 
 const ContentContainer = styled.div`
   position: relative;
-  padding-bottom: 105px;
+  padding-bottom: 101px;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: 80px;
+    bottom: 68px;
     left: 0;
     width: 60px;
     border-top: ${({ theme }) => `2px solid ${theme.colorMain}`};
@@ -52,13 +54,18 @@ function LandingMain(): JSX.Element {
           </ImgContainer>
           <ContentContainer>
             <Sub>센스쟁이 크리에이터를 위한</Sub>
-            <Heading1>
+            <Heading1 fontWeight={700}>
               <>
                 저작권 걱정 없는
                 <br /> 한국형 영상 저장소
               </>
             </Heading1>
-            <Desc fontColor="black" fontSize="17" fontWeight="400">
+            <Desc
+              fontColor="black"
+              fontSize={18}
+              fontWeight={400}
+              lineHeight={1.7}
+            >
               <>
                 해외 스톡 사이트에서 한국영상 찾아
                 <br />
