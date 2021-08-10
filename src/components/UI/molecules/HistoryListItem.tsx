@@ -4,7 +4,6 @@ import styled, { css, keyframes } from "styled-components";
 import Desc from "../atoms/texts/Desc";
 
 import handleThemeKey from "../../../utils/handleThemeKey";
-
 import { HistoryProps } from "../../../models/landingInterfaces";
 
 interface StyleProps {
