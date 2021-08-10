@@ -3,11 +3,7 @@ import styled, { css } from "styled-components";
 
 import { SquareBtnProps } from "../../../../models/commonInterfaces";
 
-const Button = styled.button.attrs((props: SquareBtnProps) => ({
-  btnWidth: props.btnWidth,
-  isFilled: props.isFilled,
-  btnColor: props.btnColor,
-}))`
+const Button = styled.button`
   width: ${({ btnWidth }: SquareBtnProps) => `${btnWidth}px`};
   color: ${({ fontColor }: SquareBtnProps) => fontColor};
   font-size: ${({ fontSize }: SquareBtnProps) => `${fontSize}px`};
@@ -48,5 +44,3 @@ function SquareBtn({
 }
 
 export default SquareBtn;
-
-/* ${({ theme }) => theme.flexMixin}; */

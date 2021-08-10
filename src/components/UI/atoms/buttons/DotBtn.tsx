@@ -7,15 +7,17 @@ const Dot = styled.div`
   height: 10px;
   border-radius: 50%;
   background: ${({ theme }) => theme.colorBgGrey};
+  cursor: pointer;
 
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 24px;
-    height: 24px;
+    top: -6px;
+    left: -6px;
+    width: 20px;
+    height: 20px;
     border: ${({ theme }) => `1px solid ${theme.colorMain}`};
+    border-radius: 50%;
   }
 `;
 

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { TextProps } from "../../../../models/commonInterfaces";
 
 const H4 = styled.h4`
+  margin-bottom: 16px;
   color: ${({ fontColor }: TextProps) => fontColor};
   font-size: ${({ fontSize }: TextProps) =>
     fontSize ? `${fontSize}px` : "20px"};
