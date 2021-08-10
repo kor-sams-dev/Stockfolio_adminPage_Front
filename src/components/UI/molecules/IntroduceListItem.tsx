@@ -7,7 +7,19 @@ import { IntroduceProps } from "../../../models/landingInterfaces";
 import handleThemeKey from "../../../utils/handleThemeKey";
 
 const Item = styled.li`
+  position: relative;
   width: 25%;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 1px;
+    height: 1px;
+    border: 7px solid transparent;
+    border-bottom: ${({ theme }) => `7px solid ${theme.colorMain}`};
+  }
 `;
 
 const Title = styled.em`

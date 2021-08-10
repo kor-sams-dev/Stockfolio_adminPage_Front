@@ -5,6 +5,7 @@ const Img = styled.img`
   position: fixed;
   top: 205px;
   right: 110px;
+  cursor: pointer;
 `;
 
 function AppDownloadBtn(): JSX.Element {

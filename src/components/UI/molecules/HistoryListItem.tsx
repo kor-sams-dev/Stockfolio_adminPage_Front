@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 import Desc from "../atoms/texts/Desc";
 
@@ -13,17 +13,23 @@ interface StyleProps {
   idx?: number;
 }
 
+const fadeIn = keyframes`
+  to {
+    opacity: 1
+  }
+`;
+
 const Item = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
+  opacity: 0;
   &:nth-child(1) {
     margin-top: -5px;
   }
   &:nth-child(2) {
     margin-top: 76px;
   }
-
   ${({ isEven }: StyleProps) =>
     (isEven &&
       css`
@@ -40,6 +46,10 @@ const Item = styled.li`
       &:nth-child(${Number(idx) + 1}) {
         order: ${Number(itemId)};
       }
+    `}
+  ${({ idx }: StyleProps) =>
+    css`
+      animation: ${fadeIn} 1s ${`${Number(idx) * 4}s`} 1 ease-in forwards;
     `}
 `;
 
