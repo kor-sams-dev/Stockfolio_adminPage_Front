@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+import { observer } from "mobx-react";
 import MacbookSlideItem from "../molecules/MacbookSlideItem";
 import ArrowBtn from "../atoms/buttons/ArrowBtn";
+
+import RootStore from "../../../stores/RootStore";
+
+interface EventProps {
+  slideSpot: number;
+}
 
 const Box = styled.section`
   display: flex;
@@ -25,16 +32,20 @@ const SlideBox = styled.ul`
   align-items: flex-start;
   position: absolute;
   top: 0;
-  left: 0;
+  left: ${({ slideSpot }: EventProps) => `${slideSpot}px`};
+  padding-left: 4px;
+  transition: left 0.7s ease-out;
 `;
 
-function MacbookSlide(): JSX.Element {
+const MacbookSlide = observer(() => {
+  const { SlideStore } = RootStore();
+
   return (
     <Box>
       <ArrowBtn direction="prev" />
       <img src="./images/macbookProDisplay.png" alt="macbook pro" />
       <ViewingSection>
-        <SlideBox>
+        <SlideBox slideSpot={SlideStore.slideSpot}>
           {[...Array(3)].map((_, i) => (
             <MacbookSlideItem
               key={`introduceDisplay${i + 1}`}
@@ -47,6 +58,6 @@ function MacbookSlide(): JSX.Element {
       <ArrowBtn direction="next" />
     </Box>
   );
-}
+});
 
 export default MacbookSlide;

@@ -14,8 +14,13 @@ const List = styled.ul`
 function IntroduceList(): JSX.Element {
   return (
     <List>
-      {introduces.map(li => (
-        <IntroduceListItem key={li.title} title={li.title} desc={li.desc} />
+      {introduces.map((li, idx) => (
+        <IntroduceListItem
+          key={li.title}
+          title={li.title}
+          desc={li.desc}
+          idx={idx}
+        />
       ))}
     </List>
   );

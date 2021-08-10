@@ -3,10 +3,12 @@ import { ImgProps } from "./commonInterfaces";
 interface IntroduceProps {
   title: string;
   desc: string;
+  idx: number;
 }
 
 interface ArrowBtnProps {
   direction: string;
+  onClick?: () => void;
 }
 
 interface HistoryProps {
