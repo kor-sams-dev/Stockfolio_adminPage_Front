@@ -1,5 +1,6 @@
 import React from "react";
 
+import Nav from "./components/templates/Nav";
 import Landing from "./components/pages/Landing";
 // import Desc from "./components/UI/atoms/texts/Desc";
 // import handleThemeKey from "./utils/handleThemeKey";
@@ -7,6 +8,7 @@ import Landing from "./components/pages/Landing";
 function App(): JSX.Element {
   return (
     <div className="App">
+      <Nav />
       <Landing />
       {/* <Desc fontColor={handleThemeKey("colorMain")}>왕춘식 최고</Desc> */}
     </div>
