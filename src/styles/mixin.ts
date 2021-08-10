@@ -1,6 +1,6 @@
 // import { DefaultMixin } from "styled-components";
 
-const mixin: any = {
+const mixin = {
   flexMixin: (justify = "center", align = "center"): string => `
   display: flex;
   justify-content: ${justify};

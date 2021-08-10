@@ -1,6 +1,6 @@
 import theme from "../styles/theme";
 
-function handleThemeKey(key: keyof typeof theme) {
+function handleThemeKey(key: keyof typeof theme): string {
   return theme[key];
 }
 
