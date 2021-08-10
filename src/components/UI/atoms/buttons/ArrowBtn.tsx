@@ -11,7 +11,7 @@ const Box = styled.div`
   position: absolute;
   width: 45px;
   height: 45px;
-  background: ${({ theme }) => theme.colorDesc};
+  background: ${({ theme }) => theme.color.Desc};
   border-radius: 50%;
   opacity: 0.7;
   cursor: pointer;

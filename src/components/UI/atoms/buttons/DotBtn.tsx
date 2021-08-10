@@ -6,7 +6,7 @@ const Dot = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: ${({ theme }) => theme.colorBgGrey};
+  background: ${({ theme }) => theme.color.BgGrey};
   cursor: pointer;
 
   &::after {
@@ -16,7 +16,7 @@ const Dot = styled.div`
     left: -6px;
     width: 20px;
     height: 20px;
-    border: ${({ theme }) => `1px solid ${theme.colorMain}`};
+    border: ${({ theme }) => `1px solid ${theme.color.Main}`};
     border-radius: 50%;
   }
 `;

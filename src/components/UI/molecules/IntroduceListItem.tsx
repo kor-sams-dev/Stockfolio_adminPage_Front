@@ -24,7 +24,7 @@ const Item = styled.li`
     width: 1px;
     height: 1px;
     border: 7px solid transparent;
-    border-bottom: ${({ theme }) => `7px solid ${theme.colorMain}`};
+    border-bottom: ${({ theme }) => `7px solid ${theme.color.Main}`};
     opacity: ${({ isActive }: EventProps) => (isActive ? 1 : 0)};
     transition: opacity 0.7s ease-out;
   }
@@ -49,9 +49,7 @@ const IntroduceListItem = observer(({ title, desc, idx }: IntroduceProps) => {
       <Title isActive={isActive}>{title}</Title>
       <Desc
         fontColor={
-          isActive
-            ? handleThemeKey("colorDesc")
-            : handleThemeKey("colorLightGrey")
+          isActive ? handleThemeKey("Desc") : handleThemeKey("LightGrey")
         }
         fontSize={14}
         fontWeight={400}
