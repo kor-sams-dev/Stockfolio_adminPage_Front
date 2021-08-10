@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
+import _ from "lodash";
 
 import LandingMain from "../templates/LandingMain";
 import Overview from "../templates/LandingOverview";
@@ -26,7 +27,7 @@ const ViewingSection = styled.div`
 const Box = styled.div`
   margin-top: ${({ viewingSectionIdx }: EventProps) =>
     `${viewingSectionIdx * 100}vh`};
-  transition: margin-top 1s ease-out;
+  transition: margin-top 0.5s ease-in-out;
 `;
 
 const handleScroll = (e: any) => {
@@ -42,7 +43,17 @@ const handleScroll = (e: any) => {
 
 const Landing = observer(() => {
   useEffect(() => {
-    window.addEventListener("mousewheel", handleScroll);
+    window.addEventListener(
+      "mousewheel",
+      _.debounce(handleScroll, 300, {
+        leading: true,
+        trailing: false,
+      })
+    );
+
+    return () => {
+      window.removeEventListener("mousewheel", handleScroll);
+    };
   }, []);
 
   return (

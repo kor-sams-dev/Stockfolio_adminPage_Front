@@ -5,6 +5,9 @@ const ScrollStore = observable({
   setViewingSectionIdx: action((value: number) => {
     ScrollStore.viewingSectionIdx += value;
   }),
+  changeViewingSectionIdx: action((value: number) => {
+    ScrollStore.viewingSectionIdx = value;
+  }),
 });
 
 export default ScrollStore;

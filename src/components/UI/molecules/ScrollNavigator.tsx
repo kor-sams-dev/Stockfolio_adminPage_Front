@@ -11,13 +11,14 @@ const Dots = styled.div`
   ${({ theme }) => theme.mixin.flex("space-between", "normal")};
   flex-direction: column;
   height: 108px;
+  z-index: 9999;
 `;
 
 function ScrollNavigator(): JSX.Element {
   return (
     <Dots>
       {[...Array(5)].map((dot, idx) => (
-        <DotBtn key={dot} />
+        <DotBtn key={dot} idx={idx} />
       ))}
     </Dots>
   );
