@@ -12,7 +12,7 @@ const Background = styled.div`
   bottom: 0;
   width: 100%;
   height: 40%;
-  background: ${({ theme }) => theme.colorBgLightGrey};
+  background: ${({ theme }) => theme.color.BgLightGrey};
   z-index: -1;
 `;
 

@@ -8,10 +8,8 @@ import CoAgencies from "../UI/organisms/CoAgencies";
 import ProcessList from "../UI/organisms/ProcessList";
 
 const Divider = styled.div`
-  display: flex;
+  ${({ theme }) => theme.mixin.flex("center", "center")};
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top: 39px;
   text-align: center;
 `;
