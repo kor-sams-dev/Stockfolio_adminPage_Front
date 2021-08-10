@@ -7,9 +7,7 @@ import Desc from "../UI/atoms/texts/Desc";
 import Heading1 from "../UI/atoms/texts/Heading1";
 
 const FlexBox = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  ${({ theme }) => theme.mixin.flex("space-between", "flex-end")};
   margin-top: -90px;
 `;
 
@@ -35,7 +33,7 @@ const ContentContainer = styled.div`
     bottom: 68px;
     left: 0;
     width: 60px;
-    border-top: ${({ theme }) => `2px solid ${theme.colorMain}`};
+    border-top: ${({ theme }) => `2px solid ${theme.color.Main}`};
   }
 `;
 

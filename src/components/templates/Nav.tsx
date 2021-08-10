@@ -4,9 +4,7 @@ import styled from "styled-components";
 import Inner from "../../styles/Inner";
 
 const NavHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.mixin.flex("center", "center")};
   position: fixed;
   width: 100%;
   height: 80px;
@@ -15,9 +13,7 @@ const NavHeader = styled.div`
 `;
 
 const AlignBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${({ theme }) => theme.mixin.flex("space-between", "center")};
   position: relative;
 `;
 
@@ -31,8 +27,7 @@ const LogoBox = styled.div`
 `;
 
 const NavMenuList = styled.ul`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.mixin.flex("normal", "center")};
   position: absolute;
   right: 0;
 `;

@@ -28,7 +28,7 @@ function ProcessListItem({
       <img src={imgSrc} alt={imgAlt} />
       <Title>{`${itemId}. ${imgAlt}`}</Title>
       <Desc
-        fontColor={handleThemeKey("colorDesc")}
+        fontColor={handleThemeKey("Desc")}
         fontSize={16}
         fontWeight={400}
         lineHeight={1.6}

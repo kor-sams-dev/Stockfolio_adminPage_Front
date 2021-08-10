@@ -6,9 +6,7 @@ import IntroduceListItem from "../molecules/IntroduceListItem";
 import introduces from "../../../assets/data/introduces";
 
 const List = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  ${({ theme }) => theme.mixin.flex("space-around", "flex-start")};
 `;
 
 function IntroduceList(): JSX.Element {

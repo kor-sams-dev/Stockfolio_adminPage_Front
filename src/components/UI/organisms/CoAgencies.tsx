@@ -12,9 +12,7 @@ const Title = styled.span`
 `;
 
 const List = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.mixin.flex("center", "center")};
   margin-top: 17px;
 `;
 

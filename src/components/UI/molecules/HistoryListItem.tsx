@@ -20,7 +20,7 @@ const fadeIn = keyframes`
 
 const Item = styled.li`
   position: relative;
-  display: flex;
+  ${({ theme }) => theme.mixin.flex("normal", "normal")};
   flex-direction: column;
   opacity: 0;
   &:nth-child(1) {
@@ -53,7 +53,7 @@ const Item = styled.li`
 `;
 
 const Texts = styled.section`
-  display: flex;
+  ${({ theme }) => theme.mixin.flex("normal", "normal")};
   flex-direction: column;
   width: 389px;
 `;
@@ -81,7 +81,7 @@ const Circle = styled.div`
 `;
 
 const Date = styled.span`
-  color: ${({ theme }) => theme.colorMain};
+  color: ${({ theme }) => theme.color.Main};
   font-weight: 500;
   font-size: 15px;
 `;
@@ -106,7 +106,7 @@ function HistoryListItem({
         <Date>{date}</Date>
         <Title>{title}</Title>
         <Desc
-          fontColor={handleThemeKey("colorDesc")}
+          fontColor={handleThemeKey("Desc")}
           fontSize={14}
           fontWeight={400}
           lineHeight={1.7}
