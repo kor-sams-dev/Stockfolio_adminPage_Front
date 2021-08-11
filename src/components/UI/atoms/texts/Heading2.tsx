@@ -1,15 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ChildrenPropsType } from "../ChildrenPropsType";
+import { TextProps } from "../../../../models/commonInterfaces";
 
 const H2 = styled.h2`
-  font-size: 36px;
-  font-weight: 700;
+  color: ${({ fontColor }: TextProps) => fontColor};
+  font-size: ${({ fontSize }: TextProps) =>
+    fontSize ? `${fontSize}px` : "36px"};
+  font-weight: ${({ fontWeight }: TextProps) => fontWeight};
 `;
 
-function Heading2({ children }: ChildrenPropsType): JSX.Element {
-  return <H2>{children}</H2>;
+function Heading2({
+  children,
+  fontColor,
+  fontSize,
+  fontWeight,
+}: TextProps): JSX.Element {
+  return (
+    <H2 fontColor={fontColor} fontSize={fontSize} fontWeight={fontWeight}>
+      {children}
+    </H2>
+  );
 }
 
 export default Heading2;

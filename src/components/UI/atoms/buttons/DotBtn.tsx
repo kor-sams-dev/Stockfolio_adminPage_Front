@@ -1,28 +1,35 @@
 import React from "react";
+import { observer } from "mobx-react";
 import styled from "styled-components";
 
-import { ChildrenPropsType } from "../ChildrenPropsType";
+import RootStore from "../../../../stores/RootStore";
+import { IdxProps } from "../../../../models/commonInterfaces";
+
+const { ScrollStore } = RootStore();
+
+interface EventProps {
+  isActive: boolean;
+}
 
 const Dot = styled.div`
   position: relative;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: ${({ theme }) => theme.colorBgGrey};
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 24px;
-    height: 24px;
-    border: ${({ theme }) => `1px solid ${theme.colorMain}`};
-  }
+  background: ${({ isActive }: EventProps) => (isActive ? "white" : "#ccc")};
+  transition: background 0.5s ease-in-out;
+  cursor: pointer;
 `;
 
-function DotBtn({ children }: ChildrenPropsType): JSX.Element {
-  return <Dot>{children}</Dot>;
-}
+const DotBtn = observer(({ idx }: IdxProps) => {
+  const isActive = Math.abs(ScrollStore.viewingSectionIdx) === idx;
+
+  return (
+    <Dot
+      onClick={() => ScrollStore.changeViewingSectionIdx(idx * -1)}
+      isActive={isActive}
+    />
+  );
+});
 
 export default DotBtn;
