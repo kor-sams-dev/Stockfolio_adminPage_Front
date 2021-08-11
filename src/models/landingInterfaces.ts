@@ -1,5 +1,9 @@
 import { ImgProps } from "./commonInterfaces";
 
+interface ViewportBoxProps {
+  bgColor?: string | "white";
+}
+
 interface IntroduceProps {
   title: string;
   desc: string;
@@ -25,4 +29,10 @@ interface ProcessProps extends ImgProps {
   desc: string;
 }
 
-export type { IntroduceProps, ArrowBtnProps, HistoryProps, ProcessProps };
+export type {
+  ViewportBoxProps,
+  IntroduceProps,
+  ArrowBtnProps,
+  HistoryProps,
+  ProcessProps,
+};

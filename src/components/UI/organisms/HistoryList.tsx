@@ -8,6 +8,7 @@ import histories from "../../../assets/data/histories";
 
 const Box = styled.section`
   position: relative;
+  padding-top: 100px;
 `;
 
 const List = styled.ul`

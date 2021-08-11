@@ -8,6 +8,8 @@ import Heading3 from "../UI/atoms/texts/Heading3";
 import MissionHeader from "../UI/molecules/MissionHeader";
 import MissionContents from "../UI/molecules/MissionContents";
 
+import theme from "../../styles/theme";
+
 const Divider = styled.div`
   display: flex;
   justify-content: space-between;
@@ -22,9 +24,11 @@ const Box = styled.div`
 
 function Mission(): JSX.Element {
   return (
-    <ViewportBox>
+    <ViewportBox bgColor={theme.color.bgLight}>
       <Inner size="wide">
-        <Heading2 fontWeight={700}>우리의 Mission</Heading2>
+        <Heading2 fontWeight={700} fontSize={24}>
+          우리의 Mission
+        </Heading2>
         <MissionHeader />
         <Divider>
           <Box>

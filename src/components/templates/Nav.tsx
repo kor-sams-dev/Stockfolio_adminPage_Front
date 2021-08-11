@@ -8,10 +8,11 @@ const NavHeader = styled.div`
   justify-content: center;
   align-items: center;
   position: fixed;
+  top: 0;
   width: 100%;
   height: 80px;
   background-color: transparent;
-  z-index: 1;
+  z-index: 99999;
 `;
 
 const AlignBox = styled.div`

@@ -2,26 +2,28 @@ import React from "react";
 import styled from "styled-components";
 
 import CoAgenciesItem from "../molecules/CoAgenciesItem";
+import Heading2 from "../atoms/texts/Heading2";
 
 import coAgencies from "../../../assets/data/coAgencies";
 
-const Title = styled.span`
-  margin-left: 57px;
-  font-weight: 700;
-  font-size: 18px;
+const Box = styled.section`
+  margin-bottom: 240px;
+  text-align: center;
 `;
 
 const List = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 17px;
+  margin-top: 115px;
 `;
 
-function CoAgencies(): JSX.Element {
+function CoAgencyList(): JSX.Element {
   return (
-    <>
-      <Title>협력 기관</Title>
+    <Box>
+      <Heading2 fontWeight={700} fontSize={24}>
+        다양한 협력기관과 함께 합니다.
+      </Heading2>
       <List>
         {coAgencies.map(li => (
           <CoAgenciesItem
@@ -31,8 +33,8 @@ function CoAgencies(): JSX.Element {
           />
         ))}
       </List>
-    </>
+    </Box>
   );
 }
 
-export default CoAgencies;
+export default CoAgencyList;
