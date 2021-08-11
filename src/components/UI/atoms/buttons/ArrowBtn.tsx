@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
+import theme from "../../../../styles/theme";
+
 import { ArrowBtnProps } from "../../../../models/landingInterfaces";
 
 import RootStore from "../../../../stores/RootStore";
@@ -11,7 +13,7 @@ const Box = styled.div`
   position: absolute;
   width: 45px;
   height: 45px;
-  background: ${({ theme }) => theme.color.Desc};
+  background: ${theme.color.desc};
   border-radius: 50%;
   opacity: 0.7;
   cursor: pointer;

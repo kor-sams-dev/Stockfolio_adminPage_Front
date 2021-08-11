@@ -2,6 +2,8 @@ import React from "react";
 import { observer } from "mobx-react";
 import styled from "styled-components";
 
+import theme from "../../../../styles/theme";
+
 import RootStore from "../../../../stores/RootStore";
 import { IdxProps } from "../../../../models/commonInterfaces";
 
@@ -16,8 +18,8 @@ const Dot = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: ${({ theme, isActive }) =>
-    isActive ? theme.color.Main : theme.color.BgGrey};
+  background: ${({ isActive }) =>
+    isActive ? theme.color.main : theme.color.bgGrey};
   transition: background 0.5s ease-in-out;
   cursor: pointer;
 
@@ -28,7 +30,7 @@ const Dot = styled.div`
     left: -6px;
     width: 20px;
     height: 20px;
-    border: ${({ theme }) => `1px solid ${theme.color.Main}`};
+    border: 1px solid ${theme.color.main};
     border-radius: 50%;
     opacity: ${({ isActive }: EventProps) => (isActive ? 1 : 0)};
     transition: opacity 0.3s ease-in-out;
