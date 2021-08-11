@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
+
 import Desc from "../atoms/texts/Desc";
+import theme from "../../../styles/theme";
 
 import { IntroduceProps } from "../../../models/landingInterfaces";
-import handleThemeKey from "../../../utils/handleThemeKey";
 import RootStore from "../../../stores/RootStore";
+
+import handleThemeKey from "../../../utils/handleThemeKey";
 
 interface EventProps {
   isActive: boolean;
@@ -24,7 +26,7 @@ const Item = styled.li`
     width: 1px;
     height: 1px;
     border: 7px solid transparent;
-    border-bottom: ${({ theme }) => `7px solid ${theme.color.Main}`};
+    border-bottom: 7px solid ${theme.color.main};
     opacity: ${({ isActive }: EventProps) => (isActive ? 1 : 0)};
     transition: opacity 0.7s ease-out;
   }
@@ -49,7 +51,7 @@ const IntroduceListItem = observer(({ title, desc, idx }: IntroduceProps) => {
       <Title isActive={isActive}>{title}</Title>
       <Desc
         fontColor={
-          isActive ? handleThemeKey("Desc") : handleThemeKey("LightGrey")
+          isActive ? handleThemeKey("desc") : handleThemeKey("lightGrey")
         }
         fontSize={14}
         fontWeight={400}

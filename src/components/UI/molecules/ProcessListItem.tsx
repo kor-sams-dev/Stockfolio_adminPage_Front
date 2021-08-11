@@ -3,8 +3,9 @@ import styled from "styled-components";
 
 import Desc from "../atoms/texts/Desc";
 
-import handleThemeKey from "../../../utils/handleThemeKey";
 import { ProcessProps } from "../../../models/landingInterfaces";
+
+import handleThemeKey from "../../../utils/handleThemeKey";
 
 const Item = styled.li`
   width: 296px;
@@ -28,7 +29,7 @@ function ProcessListItem({
       <img src={imgSrc} alt={imgAlt} />
       <Title>{`${itemId}. ${imgAlt}`}</Title>
       <Desc
-        fontColor={handleThemeKey("Desc")}
+        fontColor={handleThemeKey("desc")}
         fontSize={16}
         fontWeight={400}
         lineHeight={1.6}

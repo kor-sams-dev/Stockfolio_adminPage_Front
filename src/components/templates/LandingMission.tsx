@@ -9,7 +9,9 @@ import MissionHeader from "../UI/molecules/MissionHeader";
 import MissionContents from "../UI/molecules/MissionContents";
 
 const Divider = styled.div`
-  ${({ theme }) => theme.mixin.flex("space-between", "flex-start")}
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 
 const Box = styled.div`

@@ -6,7 +6,9 @@ import ProcessListItem from "../molecules/ProcessListItem";
 import processData from "../../../assets/data/processData";
 
 const List = styled.ol`
-  ${({ theme }) => theme.mixin.flex("space-around", "center")};
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   margin: 43px 0 108px;
 `;
 

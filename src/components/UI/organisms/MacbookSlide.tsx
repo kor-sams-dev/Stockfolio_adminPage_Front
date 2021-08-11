@@ -12,7 +12,9 @@ interface EventProps {
 }
 
 const Box = styled.section`
-  ${({ theme }) => theme.mixin.flex("center", "center")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 58px 0 35px;
 `;
@@ -25,7 +27,9 @@ const ViewingSection = styled.div`
 `;
 
 const SlideBox = styled.ul`
-  ${({ theme }) => theme.mixin.flex("start", "flex-start")};
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
   position: absolute;
   top: 0;
   left: ${({ slideSpot }: EventProps) => `${slideSpot}px`};

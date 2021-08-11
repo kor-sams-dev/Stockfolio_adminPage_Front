@@ -6,13 +6,14 @@ import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import MacbookSlide from "../UI/organisms/MacbookSlide";
 import IntroduceList from "../UI/organisms/IntroduceList";
+import theme from "../../styles/theme";
 
 const Background = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 40%;
-  background: ${({ theme }) => theme.color.BgLightGrey};
+  background: ${theme.color.bgLightGrey};
   z-index: -1;
 `;
 

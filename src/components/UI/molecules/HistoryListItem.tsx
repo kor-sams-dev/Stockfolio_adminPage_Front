@@ -2,9 +2,14 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import Desc from "../atoms/texts/Desc";
+import theme from "../../../styles/theme";
+
+import { HistoryProps } from "../../../models/landingInterfaces";
+import RootStore from "../../../stores/RootStore";
 
 import handleThemeKey from "../../../utils/handleThemeKey";
-import { HistoryProps } from "../../../models/landingInterfaces";
+
+const { ScrollStore } = RootStore();
 
 interface StyleProps {
   itemId?: string;
@@ -20,7 +25,7 @@ const fadeIn = keyframes`
 
 const Item = styled.li`
   position: relative;
-  ${({ theme }) => theme.mixin.flex("normal", "normal")};
+  display: flex;
   flex-direction: column;
   opacity: 0;
   &:nth-child(1) {
@@ -47,13 +52,14 @@ const Item = styled.li`
       }
     `}
   ${({ idx }: StyleProps) =>
+    ScrollStore.viewingSectionIdx === -4 &&
     css`
-      animation: ${fadeIn} 1s ${`${Number(idx) * 4}s`} 1 ease-in forwards;
+      animation: ${fadeIn} 0.4s ${`${Number(idx) * 2}s`} 1 ease-in forwards;
     `}
 `;
 
 const Texts = styled.section`
-  ${({ theme }) => theme.mixin.flex("normal", "normal")};
+  display: flex;
   flex-direction: column;
   width: 389px;
 `;
@@ -81,7 +87,7 @@ const Circle = styled.div`
 `;
 
 const Date = styled.span`
-  color: ${({ theme }) => theme.color.Main};
+  color: ${theme.color.main};
   font-weight: 500;
   font-size: 15px;
 `;
@@ -106,7 +112,7 @@ function HistoryListItem({
         <Date>{date}</Date>
         <Title>{title}</Title>
         <Desc
-          fontColor={handleThemeKey("Desc")}
+          fontColor={handleThemeKey("desc")}
           fontSize={14}
           fontWeight={400}
           lineHeight={1.7}

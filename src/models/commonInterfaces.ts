@@ -30,6 +30,10 @@ interface ImgProps {
   imgAlt: string;
 }
 
+interface IdxProps {
+  idx: number;
+}
+
 interface CheckBoxProps {
   name: string;
 }
@@ -54,6 +58,7 @@ export type {
   LabelProps,
   DescProps,
   ImgProps,
+  IdxProps,
   CheckBoxProps,
   InputProps,
   SelectProps,
