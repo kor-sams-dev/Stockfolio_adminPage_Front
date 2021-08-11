@@ -5,6 +5,9 @@ import Desc from "../atoms/texts/Desc";
 
 import handleThemeKey from "../../../utils/handleThemeKey";
 import { HistoryProps } from "../../../models/landingInterfaces";
+import RootStore from "../../../stores/RootStore";
+
+const { ScrollStore } = RootStore();
 
 interface StyleProps {
   itemId?: string;
@@ -47,8 +50,9 @@ const Item = styled.li`
       }
     `}
   ${({ idx }: StyleProps) =>
+    ScrollStore.viewingSectionIdx === -4 &&
     css`
-      animation: ${fadeIn} 1s ${`${Number(idx) * 4}s`} 1 ease-in forwards;
+      animation: ${fadeIn} 0.4s ${`${Number(idx) * 2}s`} 1 ease-in forwards;
     `}
 `;
 
