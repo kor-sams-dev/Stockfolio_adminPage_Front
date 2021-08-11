@@ -5,9 +5,12 @@ import ViewportBox from "../../styles/ViewportBox";
 import Inner from "../../styles/Inner";
 import Desc from "../UI/atoms/texts/Desc";
 import Heading1 from "../UI/atoms/texts/Heading1";
+import theme from "../../styles/theme";
 
 const FlexBox = styled.section`
-  ${({ theme }) => theme.mixin.flex("space-between", "flex-end")};
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-top: -90px;
 `;
 
@@ -33,7 +36,7 @@ const ContentContainer = styled.div`
     bottom: 68px;
     left: 0;
     width: 60px;
-    border-top: ${({ theme }) => `2px solid ${theme.color.Main}`};
+    border: 2px solid ${theme.color.main};
   }
 `;
 

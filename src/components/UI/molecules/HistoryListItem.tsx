@@ -2,10 +2,12 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import Desc from "../atoms/texts/Desc";
+import theme from "../../../styles/theme";
 
-import handleThemeKey from "../../../utils/handleThemeKey";
 import { HistoryProps } from "../../../models/landingInterfaces";
 import RootStore from "../../../stores/RootStore";
+
+import handleThemeKey from "../../../utils/handleThemeKey";
 
 const { ScrollStore } = RootStore();
 
@@ -23,7 +25,7 @@ const fadeIn = keyframes`
 
 const Item = styled.li`
   position: relative;
-  ${({ theme }) => theme.mixin.flex("normal", "normal")};
+  display: flex;
   flex-direction: column;
   opacity: 0;
   &:nth-child(1) {
@@ -57,7 +59,7 @@ const Item = styled.li`
 `;
 
 const Texts = styled.section`
-  ${({ theme }) => theme.mixin.flex("normal", "normal")};
+  display: flex;
   flex-direction: column;
   width: 389px;
 `;
@@ -85,7 +87,7 @@ const Circle = styled.div`
 `;
 
 const Date = styled.span`
-  color: ${({ theme }) => theme.color.Main};
+  color: ${theme.color.main};
   font-weight: 500;
   font-size: 15px;
 `;
@@ -110,7 +112,7 @@ function HistoryListItem({
         <Date>{date}</Date>
         <Title>{title}</Title>
         <Desc
-          fontColor={handleThemeKey("Desc")}
+          fontColor={handleThemeKey("desc")}
           fontSize={14}
           fontWeight={400}
           lineHeight={1.7}
