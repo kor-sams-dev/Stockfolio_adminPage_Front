@@ -6,23 +6,14 @@ import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import MacbookSlide from "../UI/organisms/MacbookSlide";
 import IntroduceList from "../UI/organisms/IntroduceList";
-import theme from "../../styles/theme";
-
-const Background = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40%;
-  background: ${theme.color.bgLightGrey};
-  z-index: -1;
-`;
 
 function PdIntroduce(): JSX.Element {
   return (
     <ViewportBox>
-      <Background />
       <Inner size="wide">
-        <Heading2 fontWeight={700}>프로덕트 소개</Heading2>
+        <Heading2 fontWeight={700} fontSize={24}>
+          프로덕트 소개
+        </Heading2>
         <MacbookSlide />
         <IntroduceList />
       </Inner>

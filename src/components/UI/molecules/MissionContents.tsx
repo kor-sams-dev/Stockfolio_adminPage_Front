@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Desc from "../atoms/texts/Desc";
 import Heading4 from "../atoms/texts/Heading4";
 
-import handleThemeKey from "../../../utils/handleThemeKey";
+import theme from "../../../styles/theme";
 
 const List = styled.ul`
   width: 78%;
@@ -25,7 +25,7 @@ function MissionContents(): JSX.Element {
         <Heading4 fontSize={23} fontWeight={700}>
           회사 소개
         </Heading4>
-        <Desc fontColor={handleThemeKey("desc")} fontSize={14} lineHeight={1.7}>
+        <Desc fontColor={theme.color.descMedium} fontSize={14} lineHeight={1.7}>
           &lsquo;스톡폴리오&rsquo;는 공정성을 추구하는 크리에이터에게 편리한
           환경을 조성 및 제공해주는 스타트업입니다. 누구나 크리에이터가 될 수
           있도록 콘텐츠 템플릿을 제공하는 스톡폴리오는 공정한 콘텐츠의 선순환
@@ -38,7 +38,7 @@ function MissionContents(): JSX.Element {
         <Heading4 fontSize={23} fontWeight={700}>
           창업 동기
         </Heading4>
-        <Desc fontColor={handleThemeKey("desc")} fontSize={14} lineHeight={1.7}>
+        <Desc fontColor={theme.color.descMedium} fontSize={14} lineHeight={1.7}>
           스톡폴리오의 CEO인 오연우님은 과학 유튜브 채널을 운영하던 중 한국의
           저작권 문제에 대해 발견하게 됩니다. 타인의 저작물을 그대로
           복사/붙여넣기 하는 등 저작권을 위반하고도 정작 문제를 인식하지 못하는

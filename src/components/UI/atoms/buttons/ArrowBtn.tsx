@@ -1,8 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import theme from "../../../../styles/theme";
-
 import { ArrowBtnProps } from "../../../../models/landingInterfaces";
 
 import RootStore from "../../../../stores/RootStore";
@@ -11,20 +9,20 @@ const { SlideStore } = RootStore();
 
 const Box = styled.div`
   position: absolute;
-  width: 45px;
-  height: 45px;
-  background: ${theme.color.desc};
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
+  border: 1px solid #eeeeee;
   opacity: 0.7;
   cursor: pointer;
   ${({ direction }: ArrowBtnProps) =>
     (direction === "prev" &&
       css`
-        left: 15px;
+        left: 100px;
       `) ||
     (direction === "next" &&
       css`
-        right: 0;
+        right: 100px;
       `)}
 `;
 

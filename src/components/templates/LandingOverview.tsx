@@ -4,32 +4,33 @@ import styled from "styled-components";
 import ViewportBox from "../../styles/ViewportBox";
 import Inner from "../../styles/Inner";
 import Desc from "../UI/atoms/texts/Desc";
-import CoAgencies from "../UI/organisms/CoAgencies";
 import ProcessList from "../UI/organisms/ProcessList";
+
+import theme from "../../styles/theme";
 
 const Divider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 39px;
+  margin-top: 40px;
   text-align: center;
 `;
 
 const Title = styled.span`
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 40px;
 `;
 
 function Overview(): JSX.Element {
   return (
-    <ViewportBox>
+    <ViewportBox bgColor={theme.color.bgLight}>
       <Inner size="wide">
         <Divider>
-          <Title>몇 년 전 찍은 영상, 이제 깨우러 가자</Title>
+          <Title>짧은 영상부터 긴 영상까지.</Title>
           <Desc
-            fontColor="black"
+            fontColor={theme.color.descMedium}
             fontSize={16}
             fontWeight={500}
             lineHeight={1.5}
@@ -44,7 +45,6 @@ function Overview(): JSX.Element {
           </Desc>
         </Divider>
         <ProcessList />
-        <CoAgencies />
       </Inner>
     </ViewportBox>
   );
