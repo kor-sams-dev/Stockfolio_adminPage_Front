@@ -2,24 +2,31 @@ import React from "react";
 import styled from "styled-components";
 
 import Inner from "../../styles/Inner";
+import theme from "../../styles/theme";
 import Desc from "../UI/atoms/texts/Desc";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import Heading3 from "../UI/atoms/texts/Heading3";
 
 const TeamIntroBox = styled.div`
-  ${({ theme }) => theme.mixin.flex("center", "center")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;
 
 const UnderLineBox = styled.div`
-  ${({ theme }) => theme.mixin.flex("center", "center")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 100px;
   width: 100%;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color.LightGrey}`};
+  border-bottom: 1px solid ${theme.color.BgGrey};
 `;
 
 const RecruitMenuList = styled.ul`
-  ${({ theme }) => theme.mixin.flex("space-between", "center")};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const RecruitMenu = styled.li`
@@ -29,14 +36,15 @@ const RecruitMenu = styled.li`
 
   &:hover {
     padding-bottom: 15px;
-    color: ${({ theme }) => `${theme.color.Main}`};
-    border-bottom: ${({ theme }) => `4px solid ${theme.color.Main}`};
+    color: ${theme.color.Main};
+    border-bottom: 4px solid ${theme.color.Main};
     cursor: pointer;
   }
 `;
 
 const OverViewBox = styled.div`
-  ${({ theme }) => theme.mixin.flex("space-between", "normal")};
+  display: flex;
+  justify-content: space-between;
   flex-direction: column;
   padding: 60px 0;
   height: 230px;
@@ -53,12 +61,16 @@ const DepartmentBox = styled.li`
 `;
 
 const MemberList = styled.ul`
-  ${({ theme }) => theme.mixin.flex("flex-start", "center")};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   padding: 30px 0;
 `;
 
 const MemberCard = styled.li`
-  ${({ theme }) => theme.mixin.flex("space-between", "center")};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: column;
 
   & + li {
@@ -66,35 +78,57 @@ const MemberCard = styled.li`
   }
 `;
 
+const MemberMoto = styled.span`
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 160px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  z-index: 9999;
+`;
+
 const MemberImgBox = styled.div`
-  ${({ theme }) => theme.mixin.flex("space-between", "center")};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: column;
   position: relative;
   margin-bottom: 25px;
   width: 200px;
   height: 200px;
-  border: 1px solid #4f2ce0;
   border-radius: 50%;
+  overflow: hidden;
+
+  &:hover ${MemberMoto} {
+    display: block;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: background 0.2s ease-in-out;
+  }
+  &:hover::before {
+    background: rgba(79, 44, 224, 0.7);
+  }
 
   img {
     object-fit: cover;
+    z-index: -1;
   }
-
-  &:hover {
-    background-color: #4f2ce0;
-  }
-`;
-
-const MemberMoto = styled.span`
-  position: absolute;
-  top: 50%;
-  color: white;
-  font-size: 14px;
-  font-weight: 700;
 `;
 
 const MemberInfo = styled.div`
-  ${({ theme }) => theme.mixin.flex("space-between", "center")};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-direction: column;
   height: 50px;
 `;
@@ -140,7 +174,7 @@ function TeamIntro(): JSX.Element {
             <MemberList>
               <MemberCard>
                 <MemberImgBox>
-                  <img alt="CEO" src="../../assets/images/CEO.png" />
+                  <img alt="CEO" src="./images/teamImg/CEO.png" />
                   <MemberMoto>I don’t jump, I dive in it</MemberMoto>
                 </MemberImgBox>
                 <MemberInfo>
@@ -177,7 +211,7 @@ function TeamIntro(): JSX.Element {
                 <MemberImgBox>
                   <img
                     alt="Front-end Developer"
-                    src="./images/teamImg/CEO.png"
+                    src="./images/teamImg/FE.png"
                   />
                   <MemberMoto>2D는 사랑이야</MemberMoto>
                 </MemberImgBox>
@@ -188,7 +222,10 @@ function TeamIntro(): JSX.Element {
               </MemberCard>
               <MemberCard>
                 <MemberImgBox>
-                  <img alt="UI/UX Designer" src="./images/teamImg/COO.png" />
+                  <img
+                    alt="UI/UX Designer"
+                    src="./images/teamImg/Designer.png"
+                  />
                   <MemberMoto>인생은 한번뿐이니까</MemberMoto>
                 </MemberImgBox>
                 <MemberInfo>
@@ -198,7 +235,7 @@ function TeamIntro(): JSX.Element {
               </MemberCard>
               <MemberCard>
                 <MemberImgBox>
-                  <img alt="Design Intern" src="./images/teamImg/CTO.png" />
+                  <img alt="Design Intern" src="./images/teamImg/Intern.png" />
                   <MemberMoto>저질러버려따</MemberMoto>
                 </MemberImgBox>
                 <MemberInfo>
@@ -215,7 +252,7 @@ function TeamIntro(): JSX.Element {
                 <MemberImgBox>
                   <img
                     alt="Performance Marketer"
-                    src="./images/teamImg/CEO.png"
+                    src="./images/teamImg/PM.png"
                   />
                   <MemberMoto>
                     cuando cree que es muy tarde, ya había demaciado tarde
@@ -228,7 +265,7 @@ function TeamIntro(): JSX.Element {
               </MemberCard>
               <MemberCard>
                 <MemberImgBox>
-                  <img alt="Content Marketer" src="./images/teamImg/COO.png" />
+                  <img alt="Content Marketer" src="./images/teamImg/CM.png" />
                   <MemberMoto>이 구역의 개복치</MemberMoto>
                 </MemberImgBox>
                 <MemberInfo>
@@ -243,7 +280,7 @@ function TeamIntro(): JSX.Element {
             <MemberList>
               <MemberCard>
                 <MemberImgBox>
-                  <img alt="Video Editor" src="./images/teamImg/CEO.png" />
+                  <img alt="Video Editor" src="./images/teamImg/Editor.png" />
                   <MemberMoto>커피 중독자</MemberMoto>
                 </MemberImgBox>
                 <MemberInfo>
