@@ -51,7 +51,7 @@ const PlusBtn = styled.img`
 `;
 
 const handleMouseOver = () => {
-  MissionStore.isActive = !MissionStore.isActive;
+  MissionStore.setIsActive();
 };
 
 const Mission = observer(() => {

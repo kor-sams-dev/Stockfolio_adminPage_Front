@@ -16,7 +16,7 @@ const settings = {
   prevArrow: <ArrowBtn direction="prev" />,
   nextArrow: <ArrowBtn direction="next" />,
   beforeChange: (_current: any, next: any) => {
-    SlideStore.slideSpot = next;
+    SlideStore.setSlideSpot(next);
   },
 };
 

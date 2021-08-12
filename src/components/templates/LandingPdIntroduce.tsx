@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import ViewportBox from "../../styles/ViewportBox";
 import Inner from "../../styles/Inner";

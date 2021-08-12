@@ -18,8 +18,8 @@ const Dots = styled.div`
 function ScrollNavigator(): JSX.Element {
   return (
     <Dots>
-      {[...Array(5)].map((dot, idx) => (
-        <DotBtn key={dot} idx={idx} />
+      {[...Array(5)].map((_, idx) => (
+        <DotBtn key={Math.random()} idx={idx} />
       ))}
     </Dots>
   );
