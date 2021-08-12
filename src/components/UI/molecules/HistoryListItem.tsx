@@ -2,12 +2,11 @@ import React from "react";
 import styled, { css, keyframes } from "styled-components";
 
 import Desc from "../atoms/texts/Desc";
+
 import theme from "../../../styles/theme";
 
 import { HistoryProps } from "../../../models/landingInterfaces";
 import RootStore from "../../../stores/RootStore";
-
-import handleThemeKey from "../../../utils/handleThemeKey";
 
 const { ScrollStore } = RootStore();
 
@@ -27,22 +26,18 @@ const Item = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
-  opacity: 0;
+  /* opacity: 0; */
   &:nth-child(1) {
-    margin-top: -5px;
-  }
-  &:nth-child(2) {
-    margin-top: 76px;
+    margin-top: 0px;
   }
   ${({ isEven }: StyleProps) =>
     (isEven &&
       css`
-        margin-top: -17px;
         padding-left: 60px;
       `) ||
     (!isEven &&
       css`
-        margin-top: 80px;
+        margin-top: 180px;
         padding-left: 140px;
       `)}
   ${({ itemId, idx }: StyleProps) =>
@@ -54,7 +49,9 @@ const Item = styled.li`
   ${({ idx }: StyleProps) =>
     ScrollStore.viewingSectionIdx === -4 &&
     css`
-      animation: ${fadeIn} 0.4s ${`${Number(idx) * 2}s`} 1 ease-in forwards;
+      /* animation: ${fadeIn} 0.4s ${`${
+        Number(idx) * 2
+      }s`} 1 ease-in forwards; */
     `}
 `;
 
@@ -112,7 +109,7 @@ function HistoryListItem({
         <Date>{date}</Date>
         <Title>{title}</Title>
         <Desc
-          fontColor={handleThemeKey("desc")}
+          fontColor={theme.color.descDark}
           fontSize={14}
           fontWeight={400}
           lineHeight={1.7}

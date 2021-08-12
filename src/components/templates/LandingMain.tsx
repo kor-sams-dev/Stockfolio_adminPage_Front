@@ -7,78 +7,42 @@ import Desc from "../UI/atoms/texts/Desc";
 import Heading1 from "../UI/atoms/texts/Heading1";
 import theme from "../../styles/theme";
 
-const FlexBox = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: -90px;
-`;
-
-const ImgContainer = styled.div`
-  position: relative;
-  height: 874px;
-  width: 675px;
-
-  img {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-`;
-
 const ContentContainer = styled.div`
-  position: relative;
-  padding-bottom: 101px;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 68px;
-    left: 0;
-    width: 60px;
-    border: 2px solid ${theme.color.main};
-  }
+  padding-top: 4%;
 `;
 
 const Sub = styled.span`
   font-size: 24px;
+  color: ${theme.color.descDark};
 `;
 
 function LandingMain(): JSX.Element {
   return (
-    <ViewportBox>
+    <ViewportBox bgColor={`no-repeat url("./images/landingMain.png")`}>
       <Inner size="wide">
-        <FlexBox>
-          <ImgContainer>
-            <img src="./images/mainFrame.png" alt="frame" />
-            <img src="./images/mainImage.png" alt="main" />
-          </ImgContainer>
-          <ContentContainer>
-            <Sub>센스쟁이 크리에이터를 위한</Sub>
-            <Heading1 fontWeight={700}>
-              <>
-                저작권 걱정 없는
-                <br /> 한국형 영상 저장소
-              </>
-            </Heading1>
-            <Desc
-              fontColor="black"
-              fontSize={18}
-              fontWeight={400}
-              lineHeight={1.7}
-            >
-              <>
-                해외 스톡 사이트에서 한국영상 찾아
-                <br />
-                헤매이던 지난 날은 안녕!
-                <br />
-                한국인의, 한국인에 의한, 한국인을 위한
-                <br />
-                올인원 스톡 저장소 스톡폴리오입니다.
-              </>
-            </Desc>
-          </ContentContainer>
-        </FlexBox>
+        <ContentContainer>
+          <Sub>모두가 크리에이터가 될 수 있도록</Sub>
+          <Heading1 fontSize={48} fontWeight={700}>
+            <>
+              누구나 쉽게 영상을
+              <br /> 만들 수 있는 세상을 만듭니다.
+            </>
+          </Heading1>
+          <Desc
+            fontColor={theme.color.descDark}
+            fontSize={16}
+            fontWeight={400}
+            lineHeight={1.7}
+          >
+            <>
+              영상컨텐츠를 만드는데 드는 시간. 평균 00시간
+              <br />
+              영상 제작 프로세스를 간소화하여
+              <br />
+              간편하게 영상제작을 할 수 있도록 도와드립니다.
+            </>
+          </Desc>
+        </ContentContainer>
       </Inner>
     </ViewportBox>
   );

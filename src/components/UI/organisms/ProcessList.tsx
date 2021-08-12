@@ -9,7 +9,7 @@ const List = styled.ol`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 43px 0 108px;
+  margin: 116px 0 0;
 `;
 
 function ProcessList(): JSX.Element {

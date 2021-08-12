@@ -5,8 +5,13 @@ declare module "styled-components" {
     color: {
       main: string;
       red: string;
-      desc: string;
+      black: string;
+      descDark: string;
+      descMedium: string;
+      descLight: string;
       lightGrey: string;
+      bgFooter: string;
+      bgLight: string;
       bgGrey: string;
       bgLightGrey: string;
       bgLightBlue: string;
