@@ -104,7 +104,7 @@ function TeamIntroListBox(): JSX.Element {
     <TeamIntroList>
       {teamInfo.map(data => (
         <DepartmentBox key={data.departmentId}>
-          <Heading3 fontWeight={700} fontColor={`${theme.color.black}`}>
+          <Heading3 fontWeight={700} fontColor={theme.color.black}>
             {data.departmentName}
           </Heading3>
           <MemberList>
