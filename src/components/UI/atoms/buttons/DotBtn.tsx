@@ -29,7 +29,9 @@ const DotBtn = observer(({ idx }: IdxProps) => {
 
   return (
     <Dot
-      onClick={() => ScrollStore.changeViewingSectionIdx(idx * -1)}
+      onClick={() => {
+        ScrollStore.viewingSectionIdx = idx;
+      }}
       isActive={isActive}
     />
   );
