@@ -6,8 +6,6 @@ import Inner from "../../styles/Inner";
 import OverViewCard from "../UI/molecules/OverViewCard";
 import TeamIntroListBox from "../UI/organisms/TeamIntroListBox";
 
-import teamInfo from "../../assets/data/teamInfo";
-
 const TeamIntroBox = styled.div`
   display: flex;
   justify-content: center;
@@ -21,7 +19,7 @@ function TeamIntro(): JSX.Element {
       <RecruitMenuBar />
       <Inner size="narrow">
         <OverViewCard />
-        <TeamIntroListBox teamInfo={teamInfo} />
+        <TeamIntroListBox />
       </Inner>
     </TeamIntroBox>
   );

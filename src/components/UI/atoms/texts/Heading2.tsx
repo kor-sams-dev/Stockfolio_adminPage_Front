@@ -6,7 +6,7 @@ import { TextProps } from "../../../../models/commonInterfaces";
 const H2 = styled.h2`
   color: ${({ fontColor }: TextProps) => fontColor};
   font-size: ${({ fontSize }: TextProps) =>
-    fontSize ? `${fontSize}px` : "36px"};
+    fontSize ? `${fontSize}px` : "32px"};
   font-weight: ${({ fontWeight }: TextProps) => fontWeight};
 `;
 

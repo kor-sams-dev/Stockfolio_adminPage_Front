@@ -62,7 +62,7 @@ const teamInfo = [
         name: "홍탁의",
         role: "Performance Marketer",
         moto: "cuando cree que es muy tarde, ya había demaciado tarde",
-        memberImg: "../images/teamImg/PM-cutout.png",
+        memberImg: "../images/teamImg/PM.png",
       },
       {
         memberId: 8,
