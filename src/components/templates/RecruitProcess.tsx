@@ -14,28 +14,80 @@ const ProcessBox = styled.div`
   border-bottom: 1px solid ${theme.color.greyLight2};
 `;
 
-const ProcessBtnList = styled.ul`
+const ProcessOrderList = styled.ul`
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 55px;
+  align-items: flex-start;
 `;
 
-const ProcessBtn = styled.li`
+const ProcessBar = styled.div`
+  visibility: hidden;
+  position: relative;
+  margin-bottom: 24px;
+  width: 80px;
+  height: 8px;
+  background-color: #d8d8d8;
+  border-radius: 4px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: ${theme.color.main};
+    border-radius: 4px;
+    transition: ease-in;
+  }
+`;
+
+const ProcessTitle = styled.span`
+  color: ${theme.color.white};
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+const ProcessCircle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 23px;
   width: 68px;
   height: 68px;
   background-color: #d8d8d8;
-  border-radius: 50%;
-  color: ${theme.color.white};
-  text-align: center;
-  font-size: 14px;
-  font-weight: 400;
+  border-radius: 34px;
+  transition: width 0.5s;
+`;
+
+const ProcessOrder = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   & + li {
     margin-left: 16px;
+  }
+
+  &:hover ${ProcessBar} {
+    visibility: visible;
+    &::before {
+      content: "";
+      width: calc(100% - 1px);
+      transition: width 2s ease-out;
+    }
+  }
+
+  &:hover ${ProcessTitle} {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &:hover ${ProcessCircle} {
+    width: 200px;
+    background-color: ${theme.color.main};
+    transition: width 0.5s;
   }
 `;
 
@@ -45,7 +97,7 @@ const ProcessDesc = styled.span`
 `;
 
 const InfoBox = styled.ul`
-  padding-top: 32px;
+  padding: 32px 0 126px 0;
 `;
 
 const ProcessInfoList = styled.li`
@@ -62,7 +114,7 @@ const InfoList = styled.ul``;
 
 const Info = styled.li`
   margin-bottom: 7px;
-  list-style: disc;
+  list-style: disc inside;
   font-size: 16px;
   font-weight: 400;
 `;
@@ -72,12 +124,16 @@ function RecruitProcess(): JSX.Element {
     <Inner size="wide">
       <OverViewCard />
       <ProcessBox>
-        <ProcessBtnList>
-          <ProcessBtn>서류전형</ProcessBtn>
-          <ProcessBtn>1차면접</ProcessBtn>
-          <ProcessBtn>2차면접</ProcessBtn>
-          <ProcessBtn>최종합격</ProcessBtn>
-        </ProcessBtnList>
+        <ProcessOrderList>
+          {RecruitProcessData.map(data => (
+            <ProcessOrder key={data.processId}>
+              <ProcessCircle>
+                <ProcessTitle>{data.processName}</ProcessTitle>
+              </ProcessCircle>
+              <ProcessBar />
+            </ProcessOrder>
+          ))}
+        </ProcessOrderList>
         <ProcessDesc>
           이력서 혹은 포트폴리오를 토대로 지원 자격을 검토합니다.
         </ProcessDesc>
