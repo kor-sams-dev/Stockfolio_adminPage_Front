@@ -1,61 +1,107 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import { observer } from "mobx-react";
 import MacbookSlideItem from "../molecules/MacbookSlideItem";
-import ArrowBtn from "../atoms/buttons/ArrowBtn";
 
-import RootStore from "../../../stores/RootStore";
+import theme from "../../../styles/theme";
 
-interface EventProps {
-  slideSpot: number;
-}
+import slides from "../../../assets/data/slides";
+import settings from "../../../assets/data/carouselSetting";
 
 const Box = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  margin: 58px 0 35px;
+  margin: 58px 0 40px;
 `;
 
-const ViewingSection = styled.div`
+const Macbook = styled.img`
   position: absolute;
-  width: 600px;
-  height: 395px;
-  overflow: hidden;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
-const SlideBox = styled.ul`
-  display: flex;
-  justify-content: start;
-  align-items: flex-start;
-  position: absolute;
-  top: 0;
-  left: ${({ slideSpot }: EventProps) => `${slideSpot}px`};
-  padding-left: 4px;
-  transition: left 0.7s ease-out;
+const progressing = keyframes`
+  from{
+    width: 0%
+  }
+  to{
+    width: 100%
+  }
+`;
+
+const SlideBox = styled(Slider)`
+  margin: 0 auto;
+  padding-top: 20px;
+  width: 579px;
+
+  .slick-dots {
+    bottom: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 204px;
+
+    li {
+      position: relative;
+      display: inline-block;
+      margin: 0;
+      width: 60px;
+      height: 6px;
+      border-radius: 8px;
+      background: #eee;
+
+      &.slick-active {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          border-radius: 8px;
+          background: ${theme.color.main};
+          animation: ${progressing} 5s linear;
+        }
+      }
+
+      & + li {
+        margin-left: 12px;
+      }
+
+      button {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+
+        &::before {
+          content: "";
+          position: static;
+          width: 0;
+          height: 0;
+          font-size: 0;
+          line-height: 0;
+        }
+      }
+    }
+  }
 `;
 
 const MacbookSlide = observer(() => {
-  const { SlideStore } = RootStore();
-
   return (
     <Box>
-      <ArrowBtn direction="prev" />
-      <img src="./images/macbookProDisplay.png" alt="macbook pro" />
-      <ViewingSection>
-        <SlideBox slideSpot={SlideStore.slideSpot}>
-          {[...Array(3)].map((_, i) => (
-            <MacbookSlideItem
-              key={`introduceDisplay${i + 1}`}
-              imgSrc={`./images/introduceDisplay${i + 1}.png`}
-              imgAlt={`introduceDisplay${i + 1}`}
-            />
-          ))}
-        </SlideBox>
-      </ViewingSection>
-      <ArrowBtn direction="next" />
+      <Macbook src="./images/macbookProDisplay.png" alt="macbook pro" />
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <SlideBox {...settings}>
+        {slides.map(item => (
+          <MacbookSlideItem
+            key={item.imgAlt}
+            imgSrc={item.imgSrc}
+            imgAlt={item.imgAlt}
+          />
+        ))}
+      </SlideBox>
     </Box>
   );
 });

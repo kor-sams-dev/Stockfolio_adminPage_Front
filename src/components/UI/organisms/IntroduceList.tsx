@@ -9,6 +9,7 @@ const List = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
+  margin-top: 180px;
 `;
 
 function IntroduceList(): JSX.Element {

@@ -6,8 +6,8 @@ import DotBtn from "../atoms/buttons/DotBtn";
 const Dots = styled.div`
   position: fixed;
   top: 50%;
-  right: 39px;
-  transform: translateY(5%);
+  right: 54px;
+  transform: translateY(-50%);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
