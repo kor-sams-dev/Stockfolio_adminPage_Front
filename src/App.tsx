@@ -1,14 +1,14 @@
 import React from "react";
 
 import Nav from "./components/templates/Nav";
-import TeamIntro from "./components/pages/TeamIntro";
+import Recruit from "./components/pages/Recruit";
 // import Landing from "./components/pages/Landing";
 
 function App(): JSX.Element {
   return (
     <div className="App">
       <Nav />
-      <TeamIntro />
+      <Recruit />
       {/* <Landing /> */}
     </div>
   );
