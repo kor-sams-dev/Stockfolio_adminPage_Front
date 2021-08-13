@@ -4,10 +4,13 @@ import styled, { css } from "styled-components";
 import { SquareBtnProps } from "../../../../models/commonInterfaces";
 
 const Button = styled.button`
+  padding: 16px 0;
   width: ${({ btnWidth }: SquareBtnProps) => `${btnWidth}px`};
   color: ${({ fontColor }: SquareBtnProps) => fontColor};
+  border-radius: 8px;
   font-size: ${({ fontSize }: SquareBtnProps) => `${fontSize}px`};
   font-weight: ${({ fontWeight }: SquareBtnProps) => fontWeight};
+  cursor: pointer;
   ${({ isFilled }: SquareBtnProps) =>
     (isFilled &&
       css`

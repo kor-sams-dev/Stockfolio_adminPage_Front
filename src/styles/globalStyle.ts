@@ -10,29 +10,63 @@ const GlobalStyle = createGlobalStyle`
   body *{
     color: black;
       /* font-family: 'Noto Sans KR', sans-serif; */
-   }
+  }
 
    a {
       color: inherit;
       text-decoration: none;
-   }
+  }
 
-   button:focus {
-      outline: none;
-   }
+   button {
+     padding: 0;
+     background: none;
+     border: none;
+    
+    &:focus {
+    outline: none;
+    }
+  }
 
    li {
      list-style: none;
    }
 
    input{
-     border: none;
-     padding: 0;
+    border: none;
+    padding: 0;
 
-     &:focus {
-       outline: none;
-     }
+    &:focus {
+      outline: none;
+    }
    }
+
+  select {
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  option {
+    appearance: none;
+  }
+
+  textarea {
+    resize: none;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 export default GlobalStyle;

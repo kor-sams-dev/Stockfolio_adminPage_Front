@@ -16,6 +16,10 @@ interface SquareBtnProps extends TextProps {
   btnColor: string;
 }
 
+interface AddBtnProps extends ChildrenProps {
+  sort: string;
+}
+
 interface LabelProps {
   stance: "senior" | "junior";
 }
@@ -35,6 +39,7 @@ interface IdxProps {
 
 interface CheckBoxProps {
   name: string;
+  title: string;
 }
 
 interface InputProps {
@@ -52,8 +57,10 @@ interface InnerProps {
 }
 
 export type {
+  ChildrenProps,
   TextProps,
   SquareBtnProps,
+  AddBtnProps,
   LabelProps,
   DescProps,
   ImgProps,

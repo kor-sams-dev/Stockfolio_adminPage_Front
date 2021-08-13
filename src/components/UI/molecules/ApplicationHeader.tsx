@@ -1,16 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import Inner from "../../../styles/Inner";
 import theme from "../../../styles/theme";
 import Label from "../atoms/Labels/Label";
 
 import Heading2 from "../atoms/texts/Heading2";
 
 const Box = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding: 35px 0 86px;
+`;
+
+const LabelBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const Sort = styled.span`
@@ -35,7 +41,9 @@ const Sort = styled.span`
 const ApplicationHeader = (): JSX.Element => {
   return (
     <Box>
-      <Label>경력</Label>
+      <LabelBox>
+        <Label stance="junior" />
+      </LabelBox>
       <Heading2 fontSize={48} fontWeight={700}>
         UI/UX 디자이너
       </Heading2>
