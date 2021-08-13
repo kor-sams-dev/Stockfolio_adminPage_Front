@@ -24,7 +24,7 @@ const ProcessBar = styled.div`
   visibility: hidden;
   position: relative;
   margin-bottom: 24px;
-  width: 80px;
+  width: 68px;
   height: 8px;
   background-color: #d8d8d8;
   border-radius: 4px;
@@ -62,7 +62,7 @@ const ProcessCircle = styled.div`
 
 const ProcessOrder = styled.li`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 
@@ -106,11 +106,11 @@ const ProcessInfoList = styled.li`
   }
 `;
 
-const Box = styled.div`
+const Box = styled.div``;
+
+const InfoList = styled.ul`
   padding-top: 24px;
 `;
-
-const InfoList = styled.ul``;
 
 const Info = styled.li`
   margin-bottom: 7px;
