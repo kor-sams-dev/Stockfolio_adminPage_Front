@@ -2,36 +2,31 @@ import React from "react";
 import styled from "styled-components";
 
 import { LabelProps } from "../../../../models/commonInterfaces";
+import theme from "../../../../styles/theme";
 
 const Box = styled.div`
-  border: ${({ labelColor }: LabelProps) => `1px solid ${labelColor}`};
-  width: ${({ labelWidth }: LabelProps) => `${labelWidth}px`};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
+  width: 40px;
+  background: ${({ stance }: LabelProps) =>
+    (stance === "junior" && theme.color.blueLight) ||
+    (stance === "senior" && theme.color.lilac)};
+  border-radius: 12px;
 `;
 
 const Text = styled.span`
-  font-size: ${({ fontSize }: LabelProps) => `${fontSize}px`};
-  color: ${({ fontColor }: LabelProps) => fontColor};
-  font-weight: ${({ fontWeight }: LabelProps) => fontWeight};
+  font-size: 12px;
+  font-weight: 700;
+  color: ${theme.color.white};
 `;
 
-function Label({
-  children,
-  labelColor,
-  labelWidth,
-  fontColor,
-  fontSize,
-  fontWeight,
-}: LabelProps): JSX.Element {
+function Label({ stance }: LabelProps): JSX.Element {
   return (
-    <Box labelColor={labelColor} labelWidth={labelWidth}>
-      <Text
-        labelColor={labelColor}
-        labelWidth={labelWidth}
-        fontColor={fontColor}
-        fontSize={fontSize}
-        fontWeight={fontWeight}
-      >
-        {children}
+    <Box stance={stance}>
+      <Text>
+        {(stance === "junior" && "신입") || (stance === "senior" && "경력")}
       </Text>
     </Box>
   );
