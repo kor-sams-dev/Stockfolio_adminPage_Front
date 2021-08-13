@@ -24,6 +24,15 @@ const GlobalStyle = createGlobalStyle`
    li {
      list-style: none;
    }
+
+   input{
+     border: none;
+     padding: 0;
+
+     &:focus {
+       outline: none;
+     }
+   }
 `;
 
 export default GlobalStyle;
