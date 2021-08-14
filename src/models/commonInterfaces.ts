@@ -20,6 +20,10 @@ interface LabelProps {
   stance: "senior" | "junior";
 }
 
+interface QuantityLabelProps {
+  quantity?: number;
+}
+
 interface DescProps extends TextProps {
   lineHeight?: number;
 }
@@ -55,6 +59,7 @@ export type {
   TextProps,
   SquareBtnProps,
   LabelProps,
+  QuantityLabelProps,
   DescProps,
   ImgProps,
   IdxProps,
