@@ -15,18 +15,6 @@ const { ScrollStore } = RootStore();
 
 const handleScroll = () => {
   console.log("scrolled");
-  // if (window.scrollY < ScrollStore.prevScrollY) {
-  //   if (ScrollStore.viewingSectionIdx === 0) return;
-  //   ScrollStore.setViewingSectionIdx(-1);
-  // } else if (window.scrollY > ScrollStore.prevScrollY) {
-  //   if (ScrollStore.viewingSectionIdx === 4) return;
-  //   ScrollStore.setViewingSectionIdx(1);
-  // }
-  // window.scrollTo({
-  //   top: ScrollStore.viewingSectionIdx * window.innerHeight,
-  //   behavior: "smooth",
-  // });
-  // ScrollStore.setPrevScrollY(window.scrollY);
 };
 
 const Landing = observer(() => {

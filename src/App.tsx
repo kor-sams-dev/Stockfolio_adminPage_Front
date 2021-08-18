@@ -8,7 +8,7 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Nav />
-      <Landing />
+      {/* <Landing /> */}
       <Footer />
     </div>
   );
