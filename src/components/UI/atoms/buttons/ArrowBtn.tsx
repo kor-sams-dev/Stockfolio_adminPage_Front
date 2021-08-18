@@ -3,26 +3,24 @@ import styled, { css } from "styled-components";
 
 import { ArrowBtnProps } from "../../../../models/landingInterfaces";
 
-import RootStore from "../../../../stores/RootStore";
-
-const { SlideStore } = RootStore();
-
 const Box = styled.div`
   position: absolute;
+  top: 50%;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   border: 1px solid #eeeeee;
   opacity: 0.7;
+  z-index: 999;
   cursor: pointer;
   ${({ direction }: ArrowBtnProps) =>
     (direction === "prev" &&
       css`
-        left: 100px;
+        left: -200px;
       `) ||
     (direction === "next" &&
       css`
-        right: 100px;
+        right: -200px;
       `)}
 `;
 
@@ -42,21 +40,9 @@ const Img = styled.img`
       `)}
 `;
 
-const handleClickSlide = (direction: string) => {
-  if (direction === "prev") {
-    if (SlideStore.slideSpot === 0) return;
-    SlideStore.setSlideSpot(SlideStore.movingUnit);
-  }
-
-  if (direction === "next") {
-    if (SlideStore.slideSpot === SlideStore.movingUnit * -2) return;
-    SlideStore.setSlideSpot(-SlideStore.movingUnit);
-  }
-};
-
-function ArrowBtn({ direction }: ArrowBtnProps): JSX.Element {
+function ArrowBtn({ direction, onClick }: ArrowBtnProps): JSX.Element {
   return (
-    <Box onClick={() => handleClickSlide(direction)} direction={direction}>
+    <Box onClick={onClick} direction={direction}>
       <Img
         src={`./images/${direction}Arrow.png`}
         alt={`${direction} button`}
