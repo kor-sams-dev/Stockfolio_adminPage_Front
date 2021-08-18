@@ -16,9 +16,8 @@ interface SquareBtnProps extends TextProps {
   btnColor: string;
 }
 
-interface LabelProps extends TextProps {
-  labelColor?: string;
-  labelWidth?: number;
+interface LabelProps {
+  stance: "senior" | "junior";
 }
 
 interface DescProps extends TextProps {
