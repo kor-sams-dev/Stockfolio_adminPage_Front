@@ -31,7 +31,6 @@ const Text = styled.span`
 
 const handleAddList = (sort: any) => {
   const { ApplicationStore } = RootStore();
-  ApplicationStore.setUnit(sort);
 };
 
 const AddListBtn = ({ children, sort }: AddBtnProps): JSX.Element => {

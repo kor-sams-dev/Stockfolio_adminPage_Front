@@ -53,6 +53,7 @@ const OptionList = styled.ul`
   height: 268px;
   border-radius: 8px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 999;
   display: none;
 `;
 
@@ -62,10 +63,17 @@ const Option = styled.li`
   padding-left: 20px;
   height: ${({ quantity }: StyleProps) => `${100 / quantity}%`};
   background: ${theme.color.white};
-  border-radius: 8px;
   font-size: 12px;
   color: ${theme.color.black};
   cursor: pointer;
+  &:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
 `;
 
 const StyledSelect = ({

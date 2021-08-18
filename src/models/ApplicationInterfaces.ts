@@ -2,6 +2,16 @@ interface FormCategoryProps {
   category: ApplicationProps;
 }
 
+interface IFormCategory {
+  category:
+    | "basicInfo"
+    | "career"
+    | "project"
+    | "introduction"
+    | "portfolio"
+    | "education";
+}
+
 interface ApplicationProps {
   sort: string;
   data: ApplicationDataProps;
@@ -17,6 +27,8 @@ interface ApplicationDataProps {
 }
 
 interface DataItemProps {
+  onChange?: () => void;
+  sort?: string;
   name: string;
   type?: string;
   placeholder: string;
@@ -29,4 +41,19 @@ interface InputWidthProps {
   itemWidth: number;
 }
 
-export type { FormCategoryProps, DataItemProps, InputWidthProps };
+interface ISort {
+  basicInfo: string;
+  career: string;
+  project: string;
+  introduction: string;
+  portfolio: string;
+  education: string;
+}
+
+export type {
+  IFormCategory,
+  FormCategoryProps,
+  DataItemProps,
+  InputWidthProps,
+  ISort,
+};

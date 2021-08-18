@@ -5,8 +5,14 @@ import applicationForm from "../../assets/data/applicationForm";
 import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
+
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
-import ApplicationItem from "../UI/molecules/ApplicationItem";
+import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
+import ApplicationCareer from "../UI/organisms/ApplicationCareer";
+import ApplicationEducation from "../UI/organisms/ApplicationEducation";
+import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
+import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
+import ApplicationProject from "../UI/organisms/ApplicationProject";
 
 const Box = styled.div`
   display: flex;
@@ -26,14 +32,23 @@ const BtnBox = styled.div`
 `;
 
 const Application = (): JSX.Element => {
+  const [basicInfo, career, project, introduction, portfolio, education] =
+    applicationForm;
+
   return (
     <Box>
       <Inner size="wide">
         <Content>
           <ApplicationHeader />
-          {applicationForm.map(item => (
+          <ApplicationBasicInfo category={basicInfo} />
+          <ApplicationCareer category={career} />
+          <ApplicationProject category={project} />
+          <ApplicationIntroduction category={introduction} />
+          <ApplicationPortfolio category={portfolio} />
+          <ApplicationEducation category={education} />
+          {/* {applicationForm.map(item => (
             <ApplicationItem category={item} key={item.sort} />
-          ))}
+          ))} */}
         </Content>
         <BtnBox>
           <SquareBtn

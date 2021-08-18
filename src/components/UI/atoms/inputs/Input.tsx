@@ -1,11 +1,17 @@
 import React from "react";
+import { observer } from "mobx-react";
 import styled, { css } from "styled-components";
+
 import {
   DataItemProps,
   InputWidthProps,
 } from "../../../../models/ApplicationInterfaces";
 
+import RootStore from "../../../../stores/RootStore";
+
 import theme from "../../../../styles/theme";
+
+const { ApplicationStore } = RootStore();
 
 const Box = styled.div`
   display: flex;
@@ -88,26 +94,56 @@ const Label = styled.label`
   }
 `;
 
-const Input = ({
-  name,
-  type,
-  placeholder,
-  title,
-  itemWidth,
-}: DataItemProps): JSX.Element => {
-  return (
-    <Box itemWidth={itemWidth}>
-      <Title>{title}</Title>
-      {type === "file" ? (
-        <Label>
-          {placeholder}
-          <InputSection type={type} placeholder={placeholder} name={name} />
-        </Label>
-      ) : (
-        <InputSection type={type} placeholder={placeholder} name={name} />
-      )}
-    </Box>
-  );
-};
+const UploadedFile = styled.input`
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
+  font-size: 14px;
+  z-index: 9;
+  color: ${({ value }) =>
+    value === "첨부파일을 업로드해주세요."
+      ? theme.color.grey1
+      : theme.color.black};
+`;
+
+const Input = observer(
+  ({
+    name,
+    sort,
+    type,
+    placeholder,
+    title,
+    itemWidth,
+  }: DataItemProps): JSX.Element => {
+    return (
+      <Box itemWidth={itemWidth}>
+        <Title>{title}</Title>
+        {type === "file" ? (
+          <>
+            <UploadedFile
+              disabled
+              value={ApplicationStore.portfolio.portfolioFile || placeholder}
+            />
+            <Label>
+              <InputSection
+                onChange={ApplicationStore.setPortfolioFile}
+                type={type}
+                placeholder={placeholder}
+                name={name}
+              />
+            </Label>
+          </>
+        ) : (
+          <InputSection
+            onChange={e => ApplicationStore.setInput(e)}
+            type={type}
+            placeholder={placeholder}
+            name={name}
+          />
+        )}
+      </Box>
+    );
+  }
+);
 
 export default Input;
