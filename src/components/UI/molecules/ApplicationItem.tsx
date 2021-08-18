@@ -9,7 +9,10 @@ import Textarea from "../atoms/inputs/Textarea";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
+import {
+  FormCategoryProps,
+  ApplicationProps,
+} from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
 import ApplicationFormStore from "../../../stores/ApplicationFormStore";
 
@@ -48,8 +51,6 @@ const InputBox = styled.div`
 `;
 
 const ApplicationItem = ({ category }: FormCategoryProps): JSX.Element => {
-  console.log(category.sort);
-  const categoryName = category.sort;
   return (
     <Box>
       {(category.data.hasCheckBox && (
@@ -70,43 +71,7 @@ const ApplicationItem = ({ category }: FormCategoryProps): JSX.Element => {
         {category.data.desc}
       </Desc>
       <InputBox>
-        {ApplicationFormStore[categoryName].map(item => {
-          return (
-            (item.type === "select" && (
-              <StyledSelect
-                sort={category.sort}
-                name={item.name}
-                placeholder={item.placeholder}
-                title={item.title}
-                options={item.options}
-                itemWidth={item.itemWidth}
-                key={item.name}
-              />
-            )) ||
-            (item.type === "textarea" && (
-              <Textarea
-                sort={category.sort}
-                name={item.name}
-                type={item.type}
-                placeholder={item.placeholder}
-                title={item.title}
-                itemWidth={item.itemWidth}
-                key={item.name}
-              />
-            )) || (
-              <Input
-                sort={category.sort}
-                name={item.name}
-                type={item.type}
-                placeholder={item.placeholder}
-                title={item.title}
-                itemWidth={item.itemWidth}
-                key={item.name}
-              />
-            )
-          );
-        })}
-        {/* {category.data.item.map(item => {
+        {/* {ApplicationFormStore[category.sort].map(item => {
           return (
             (item.type === "select" && (
               <StyledSelect
@@ -142,6 +107,42 @@ const ApplicationItem = ({ category }: FormCategoryProps): JSX.Element => {
             )
           );
         })} */}
+        {category.data.item.map(item => {
+          return (
+            (item.type === "select" && (
+              <StyledSelect
+                sort={category.sort}
+                name={item.name}
+                placeholder={item.placeholder}
+                title={item.title}
+                options={item.options}
+                itemWidth={item.itemWidth}
+                key={item.name}
+              />
+            )) ||
+            (item.type === "textarea" && (
+              <Textarea
+                sort={category.sort}
+                name={item.name}
+                type={item.type}
+                placeholder={item.placeholder}
+                title={item.title}
+                itemWidth={item.itemWidth}
+                key={item.name}
+              />
+            )) || (
+              <Input
+                sort={category.sort}
+                name={item.name}
+                type={item.type}
+                placeholder={item.placeholder}
+                title={item.title}
+                itemWidth={item.itemWidth}
+                key={item.name}
+              />
+            )
+          );
+        })}
       </InputBox>
       {category.data.isListed && (
         <AddListBtn sort={category.sort}>{category.data.title}</AddListBtn>

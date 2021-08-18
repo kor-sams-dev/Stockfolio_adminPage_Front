@@ -8,16 +8,16 @@ import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
 import ApplicationItem from "../UI/molecules/ApplicationItem";
-import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
-import ApplicationCareer from "../UI/organisms/ApplicationCareer";
-import ApplicationEducation from "../UI/organisms/ApplicationEducation";
-import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
-import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
-import ApplicationProject from "../UI/organisms/ApplicationProject";
+// import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
+// import ApplicationCareer from "../UI/organisms/ApplicationCareer";
+// import ApplicationEducation from "../UI/organisms/ApplicationEducation";
+// import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
+// import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
+// import ApplicationProject from "../UI/organisms/ApplicationProject";
 
 import RootStore from "../../stores/RootStore";
 
-const { ApplicationFormStore } = RootStore();
+// const { ApplicationFormStore } = RootStore();
 
 const Box = styled.div`
   display: flex;
@@ -37,8 +37,8 @@ const BtnBox = styled.div`
 `;
 
 const Application = (): JSX.Element => {
-  const [basicInfo, career, project, introduction, portfolio, education] =
-    applicationForm;
+  // const [basicInfo, career, project, introduction, portfolio, education] =
+  //   applicationForm;
 
   return (
     <Box>

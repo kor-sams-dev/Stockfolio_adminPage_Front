@@ -82,9 +82,15 @@ interface IEducationAttrs {
   graduateState: string | null;
 }
 
+interface IIndexable {
+  [key: string]: unknown;
+}
+
 export type {
   FormCategoryProps,
+  ApplicationProps,
   DataItemProps,
   InputWidthProps,
   IApplicationForm,
+  IIndexable,
 };
