@@ -11,7 +11,7 @@ import RootStore from "../../../../stores/RootStore";
 
 import theme from "../../../../styles/theme";
 
-const { ApplicationStore } = RootStore();
+const { ApplicationStore, ApplicationActions } = RootStore();
 
 const Box = styled.div`
   display: flex;
@@ -126,7 +126,7 @@ const Input = observer(
             />
             <Label>
               <InputSection
-                onChange={ApplicationStore.setPortfolioFile}
+                onChange={ApplicationActions.setPortfolioFile}
                 type={type}
                 placeholder={placeholder}
                 name={name}
@@ -135,7 +135,7 @@ const Input = observer(
           </>
         ) : (
           <InputSection
-            onChange={e => ApplicationStore.setInput(e)}
+            // onChange={e => ApplicationActions.setInput(e, sort)}
             type={type}
             placeholder={placeholder}
             name={name}

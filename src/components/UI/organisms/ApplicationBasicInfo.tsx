@@ -5,10 +5,7 @@ import Input from "../atoms/inputs/Input";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import {
-  FormCategoryProps,
-  IFormCategory,
-} from "../../../models/ApplicationInterfaces";
+import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
 import RootStore from "../../../stores/RootStore";
 

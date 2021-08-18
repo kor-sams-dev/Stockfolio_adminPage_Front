@@ -1,44 +1,48 @@
 import { action, observable } from "mobx";
+import { IApplicationForm } from "../models/ApplicationInterfaces";
 
-const ApplicationStore = observable({
+const ApplicationStore: IApplicationForm = observable({
   basicInfo: {
-    userName: "",
-    email: "",
-    phoneNumber: "",
+    userName: null,
+    email: null,
+    phoneNumber: null,
   },
   career: {
-    companyName: "",
-    rank: "",
-    joinDate: "",
-    leavingDate: "",
-    businessTask: "",
+    companyName: null,
+    rank: null,
+    joinDate: null,
+    leavingDate: null,
+    businessTask: null,
   },
   project: {
-    projectName: "",
-    association: "",
-    startDate: "",
-    endDate: "",
-    mainStack: "",
-    projectInfo: "",
+    projectName: null,
+    association: null,
+    startDate: null,
+    endDate: null,
+    mainStack: null,
+    projectInfo: null,
   },
   introduction: {
-    aboutMe: "",
+    aboutMe: null,
   },
   portfolio: {
-    portfolioFile: "",
-    portfolioUrl: "",
+    portfolioFile: null,
+    portfolioUrl: null,
   },
   education: {
-    background: "",
-    schoolName: "",
-    major: "",
-    grade: "",
-    enrollDate: "",
-    graduateDate: "",
-    graduateState: "",
+    background: null,
+    schoolName: null,
+    major: null,
+    grade: null,
+    enrollDate: null,
+    graduateDate: null,
+    graduateState: null,
   },
+});
+
+const ApplicationActions = observable({
   setInput: action((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    // const { name, value } = e.target;
     // ApplicationStore[sort][name] = value;
   }),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,4 +52,4 @@ const ApplicationStore = observable({
   }),
 });
 
-export default ApplicationStore;
+export { ApplicationStore, ApplicationActions };

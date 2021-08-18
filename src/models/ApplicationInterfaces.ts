@@ -2,16 +2,6 @@ interface FormCategoryProps {
   category: ApplicationProps;
 }
 
-interface IFormCategory {
-  category:
-    | "basicInfo"
-    | "career"
-    | "project"
-    | "introduction"
-    | "portfolio"
-    | "education";
-}
-
 interface ApplicationProps {
   sort: string;
   data: ApplicationDataProps;
@@ -41,19 +31,60 @@ interface InputWidthProps {
   itemWidth: number;
 }
 
-interface ISort {
-  basicInfo: string;
-  career: string;
-  project: string;
-  introduction: string;
-  portfolio: string;
-  education: string;
+interface IApplicationForm {
+  basicInfo: IBasicInfoAttrs;
+  career: ICareerAttrs;
+  project: IProjectAttrs;
+  introduction: IIntroductionAttrs;
+  portfolio: IPortfolioAttrs;
+  education: IEducationAttrs;
+}
+
+interface IBasicInfoAttrs {
+  userName: string | null;
+  email: string | null;
+  phoneNumber: string | null;
+}
+
+interface ICareerAttrs {
+  companyName: string | null;
+  rank: string | null;
+  joinDate: string | null;
+  leavingDate: string | null;
+  businessTask: string | null;
+}
+
+interface IProjectAttrs {
+  projectName: string | null;
+  association: string | null;
+  startDate: string | null;
+  endDate: string | null;
+  mainStack: string | null;
+  projectInfo: string | null;
+}
+
+interface IIntroductionAttrs {
+  aboutMe: string | null;
+}
+
+interface IPortfolioAttrs {
+  portfolioFile: string | null;
+  portfolioUrl: string | null;
+}
+
+interface IEducationAttrs {
+  background: string | null;
+  schoolName: string | null;
+  major: string | null;
+  grade: string | null;
+  enrollDate: string | null;
+  graduateDate: string | null;
+  graduateState: string | null;
 }
 
 export type {
-  IFormCategory,
   FormCategoryProps,
   DataItemProps,
   InputWidthProps,
-  ISort,
+  IApplicationForm,
 };

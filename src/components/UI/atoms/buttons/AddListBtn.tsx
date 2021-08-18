@@ -29,8 +29,9 @@ const Text = styled.span`
   color: ${theme.color.blue};
 `;
 
-const handleAddList = (sort: any) => {
-  const { ApplicationStore } = RootStore();
+const handleAddList = (sort: string) => {
+  const { ApplicationFormStore } = RootStore();
+  // ApplicationFormStore.setUnits(sort);
 };
 
 const AddListBtn = ({ children, sort }: AddBtnProps): JSX.Element => {
