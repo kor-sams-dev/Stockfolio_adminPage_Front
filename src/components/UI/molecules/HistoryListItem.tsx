@@ -26,7 +26,6 @@ const Item = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
-  /* opacity: 0; */
   &:nth-child(1) {
     margin-top: 0px;
   }
@@ -38,20 +37,13 @@ const Item = styled.li`
     (!isEven &&
       css`
         margin-top: 180px;
-        padding-left: 140px;
+        padding-left: 120px;
       `)}
   ${({ itemId, idx }: StyleProps) =>
     css`
       &:nth-child(${Number(idx) + 1}) {
         order: ${Number(itemId)};
       }
-    `}
-  ${({ idx }: StyleProps) =>
-    ScrollStore.viewingSectionIdx === -4 &&
-    css`
-      /* animation: ${fadeIn} 0.4s ${`${
-        Number(idx) * 2
-      }s`} 1 ease-in forwards; */
     `}
 `;
 

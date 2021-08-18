@@ -20,10 +20,12 @@ const Next = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 121px 0 152px;
-  height: 180px;
+  margin: 121px auto 152px;
+  padding: 20px 106px;
+  width: 360px;
   background: ${theme.color.main};
-  font-size: 48px;
+  border-radius: 100px;
+  font-size: 24px;
   font-weight: 700;
   color: white;
 `;

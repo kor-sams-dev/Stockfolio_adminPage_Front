@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Inner from "../../styles/Inner";
+import theme from "../../styles/theme";
 
 const NavHeader = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const NavHeader = styled.div`
   top: 0;
   width: 100%;
   height: 80px;
-  background-color: transparent;
+  background-color: ${theme.color.white};
   z-index: 99999;
 `;
 
@@ -19,30 +20,28 @@ const AlignBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 `;
 
 const LogoBox = styled.div`
-  position: absolute;
-  left: 50%;
-  top: -20px;
-  transform: translateX(-50%);
   width: 161px;
   height: 32px;
 `;
 
 const NavMenuList = styled.ul`
   display: flex;
+  justify-content: flex-end;
   align-items: center;
-  position: absolute;
-  right: 0;
 `;
 
 const NavMenu = styled.li`
-  margin: 0 20px;
+  color: ${theme.color.black};
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
+
+  & + li {
+    margin-left: 57px;
+  }
 
   &:hover {
     font-weight: 900;

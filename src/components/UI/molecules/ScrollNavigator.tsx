@@ -6,8 +6,8 @@ import DotBtn from "../atoms/buttons/DotBtn";
 const Dots = styled.div`
   position: fixed;
   top: 50%;
-  right: 39px;
-  transform: translateY(5%);
+  right: 54px;
+  transform: translateY(-50%);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -18,8 +18,8 @@ const Dots = styled.div`
 function ScrollNavigator(): JSX.Element {
   return (
     <Dots>
-      {[...Array(5)].map((dot, idx) => (
-        <DotBtn key={dot} idx={idx} />
+      {[...Array(5)].map((_, idx) => (
+        <DotBtn key={Math.random()} idx={idx} />
       ))}
     </Dots>
   );

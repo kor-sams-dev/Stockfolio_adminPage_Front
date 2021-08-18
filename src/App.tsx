@@ -1,6 +1,8 @@
 import React from "react";
 
 import Nav from "./components/templates/Nav";
+import Landing from "./components/pages/Landing";
+import Footer from "./components/templates/Footer";
 import TeamIntro from "./components/pages/TeamIntro";
 import Label from "./components/UI/atoms/Labels/Label";
 import ApplyList from "./components/templates/ApplyList";
@@ -13,6 +15,7 @@ function App(): JSX.Element {
       {/* <TeamIntro /> */}
       <ApplyList />
       {/* <Landing /> */}
+      <Footer />
     </div>
   );
 }
