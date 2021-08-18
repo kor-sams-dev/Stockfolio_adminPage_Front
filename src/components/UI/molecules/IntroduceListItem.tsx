@@ -39,8 +39,7 @@ const Title = styled.em`
 
 const IntroduceListItem = observer(({ title, desc, idx }: IntroduceProps) => {
   const { SlideStore } = RootStore();
-  const isActive =
-    Math.abs(SlideStore.slideSpot / SlideStore.movingUnit) === idx;
+  const isActive = SlideStore.slideSpot === idx;
 
   return (
     <Item>

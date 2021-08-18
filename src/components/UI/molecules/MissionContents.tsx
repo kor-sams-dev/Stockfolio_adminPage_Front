@@ -1,15 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
+import { observer } from "mobx-react";
 import Desc from "../atoms/texts/Desc";
 import Heading4 from "../atoms/texts/Heading4";
 
 import theme from "../../../styles/theme";
+import RootStore from "../../../stores/RootStore";
+
+const { MissionStore } = RootStore();
+
+interface EventProps {
+  isActive: boolean;
+}
 
 const List = styled.ul`
-  width: 78%;
-  padding: 25px 10% 0 0;
-  border-top: 1px solid black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 40px 40px 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: ${({ isActive }: EventProps) => (isActive ? 1 : 0)};
+  transition: opacity 1.5s ease-out;
 `;
 
 const Item = styled.li`
@@ -18,14 +32,14 @@ const Item = styled.li`
   }
 `;
 
-function MissionContents(): JSX.Element {
+const MissionContents = observer(() => {
   return (
-    <List>
+    <List isActive={MissionStore.isActive}>
       <Item>
-        <Heading4 fontSize={23} fontWeight={700}>
-          회사 소개
+        <Heading4 fontColor="#ffffff" fontSize={24} fontWeight={700}>
+          스톡폴리오는?
         </Heading4>
-        <Desc fontColor={theme.color.descMedium} fontSize={14} lineHeight={1.7}>
+        <Desc fontColor={theme.color.lightGrey} fontSize={14} lineHeight={1.7}>
           &lsquo;스톡폴리오&rsquo;는 공정성을 추구하는 크리에이터에게 편리한
           환경을 조성 및 제공해주는 스타트업입니다. 누구나 크리에이터가 될 수
           있도록 콘텐츠 템플릿을 제공하는 스톡폴리오는 공정한 콘텐츠의 선순환
@@ -35,10 +49,10 @@ function MissionContents(): JSX.Element {
         </Desc>
       </Item>
       <Item>
-        <Heading4 fontSize={23} fontWeight={700}>
-          창업 동기
+        <Heading4 fontColor="#ffffff" fontSize={24} fontWeight={700}>
+          창업의 시작
         </Heading4>
-        <Desc fontColor={theme.color.descMedium} fontSize={14} lineHeight={1.7}>
+        <Desc fontColor={theme.color.lightGrey} fontSize={14} lineHeight={1.7}>
           스톡폴리오의 CEO인 오연우님은 과학 유튜브 채널을 운영하던 중 한국의
           저작권 문제에 대해 발견하게 됩니다. 타인의 저작물을 그대로
           복사/붙여넣기 하는 등 저작권을 위반하고도 정작 문제를 인식하지 못하는
@@ -54,6 +68,6 @@ function MissionContents(): JSX.Element {
       </Item>
     </List>
   );
-}
+});
 
 export default MissionContents;

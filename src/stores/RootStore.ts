@@ -3,6 +3,7 @@ import ScrollStore from "./ScrollStore";
 import { ApplicationStore, ApplicationActions } from "./ApplicationStore";
 import ApplicationFormStore from "./ApplicationFormStore";
 import BasicInfoStore from "./BasicInfoStore";
+import MissionStore from "./MissionStore";
 
 const RootStore = () => {
   return {
@@ -12,6 +13,7 @@ const RootStore = () => {
     ApplicationActions,
     ApplicationFormStore,
     BasicInfoStore,
+    MissionStore,
   };
 };
 

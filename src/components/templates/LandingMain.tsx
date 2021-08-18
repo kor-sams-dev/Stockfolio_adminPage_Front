@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import ViewportBox from "../../styles/ViewportBox";
 import Inner from "../../styles/Inner";
@@ -14,6 +14,26 @@ const ContentContainer = styled.div`
 const Sub = styled.span`
   font-size: 24px;
   color: ${theme.color.descDark};
+`;
+
+const arrowMoving = keyframes`
+  0% {
+    bottom: 60px
+  }
+  50% {
+    bottom: 40px
+  }
+  100% {
+    bottom: 60px
+  }
+`;
+
+const DownArrow = styled.div`
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: ${arrowMoving} 2.5s ease-in-out infinite;
 `;
 
 function LandingMain(): JSX.Element {
@@ -43,6 +63,9 @@ function LandingMain(): JSX.Element {
             </>
           </Desc>
         </ContentContainer>
+        <DownArrow>
+          <img src="./images/downArrow.png" alt="go down" />
+        </DownArrow>
       </Inner>
     </ViewportBox>
   );

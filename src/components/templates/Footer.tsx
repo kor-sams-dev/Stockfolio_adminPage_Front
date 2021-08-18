@@ -5,7 +5,7 @@ import Inner from "../../styles/Inner";
 
 import theme from "../../styles/theme";
 
-const Footer = styled.footer`
+const Box = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,9 +33,9 @@ const Rights = styled(Item)`
   margin-bottom: 20px;
 `;
 
-const LandingFooter = (): JSX.Element => {
+const Footer = (): JSX.Element => {
   return (
-    <Footer>
+    <Box>
       <Inner size="wide">
         <FlexBox>
           <img src="./images/Logo_Stockfolio_white.png" alt="스톡폴리오" />
@@ -48,8 +48,8 @@ const LandingFooter = (): JSX.Element => {
           </List>
         </FlexBox>
       </Inner>
-    </Footer>
+    </Box>
   );
 };
 
-export default LandingFooter;
+export default Footer;
