@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import styled, { css } from "styled-components";
 
 import Inner from "../../styles/Inner";
 import OverViewCard from "../UI/molecules/OverViewCard";
@@ -119,14 +119,27 @@ const Info = styled.li`
   font-weight: 400;
 `;
 
+// hover event set timeout / click evnet
+
 function RecruitProcess(): JSX.Element {
+  const [processContent, setProcessContent] = useState(
+    "이력서 혹은 포트폴리오를 토대로 지원 자격을 검토합니다."
+  );
+
+  useEffect(() => {
+    setInterval(() => {}, 3000);
+  }, []);
+
   return (
     <Inner size="wide">
       <OverViewCard />
       <ProcessBox>
         <ProcessOrderList>
           {RecruitProcessData.map(data => (
-            <ProcessOrder key={data.processId}>
+            <ProcessOrder
+              key={data.processId}
+              onClick={() => setProcessContent(data.content)}
+            >
               <ProcessCircle>
                 <ProcessTitle>{data.processName}</ProcessTitle>
               </ProcessCircle>
@@ -134,9 +147,7 @@ function RecruitProcess(): JSX.Element {
             </ProcessOrder>
           ))}
         </ProcessOrderList>
-        <ProcessDesc>
-          이력서 혹은 포트폴리오를 토대로 지원 자격을 검토합니다.
-        </ProcessDesc>
+        <ProcessDesc>{processContent}</ProcessDesc>
       </ProcessBox>
       <InfoBox>
         {RecruitInfoData.map(data => (
