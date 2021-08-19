@@ -4,6 +4,8 @@ import styled from "styled-components";
 import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
 
+import recruitListItemData from "../../../assets/data/mockData/recruitListItemData";
+
 const ApplyNav = styled.ul`
   display: flex;
   justify-content: flex-start;
@@ -44,7 +46,13 @@ const PositionList = styled.li`
 function ApplyNavBar(): JSX.Element {
   return (
     <ApplyNav>
-      <PositionList>
+      {recruitListItemData.map(data => (
+        <PositionList key={data.id}>
+          <PositionName>{data.department}</PositionName>
+          <QuantityLabel quantity={data.recruitList.length} />
+        </PositionList>
+      ))}
+      {/* <PositionList>
         <PositionName>개발</PositionName>
         <QuantityLabel quantity={20} />
       </PositionList>
@@ -55,7 +63,7 @@ function ApplyNavBar(): JSX.Element {
       <PositionList>
         <PositionName>마케팅</PositionName>
         <QuantityLabel quantity={3} />
-      </PositionList>
+      </PositionList> */}
     </ApplyNav>
   );
 }
