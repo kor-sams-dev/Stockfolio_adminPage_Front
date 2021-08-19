@@ -22,7 +22,8 @@ interface LabelProps {
 }
 
 interface QuantityLabelProps {
-  quantity?: number;
+  quantity?: number | 0;
+  className?: string;
 }
 
 interface DescProps extends TextProps {

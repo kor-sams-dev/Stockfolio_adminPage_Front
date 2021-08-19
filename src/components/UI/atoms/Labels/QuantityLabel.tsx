@@ -4,13 +4,14 @@ import styled from "styled-components";
 import { QuantityLabelProps } from "../../../../models/commonInterfaces";
 import theme from "../../../../styles/theme";
 
-const Text = styled.span`
+export const Text = styled.span`
   color: ${theme.color.black};
   font-size: 14px;
   font-weight: 700;
+  transition: color 0.3s;
 `;
 
-const Box = styled.div`
+export const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,19 +19,15 @@ const Box = styled.div`
   height: 22px;
   background-color: ${theme.color.greyLight2};
   border-radius: 11px;
-
-  &:hover {
-    background-color: ${theme.color.mainDeep};
-  }
-
-  &:hover ${Text} {
-    color: ${theme.color.white};
-  }
+  transition: background-color 0.3s;
 `;
 
-function QuantityLabel({ quantity }: QuantityLabelProps): JSX.Element {
+function QuantityLabel({
+  quantity,
+  className,
+}: QuantityLabelProps): JSX.Element {
   return (
-    <Box>
+    <Box className={className}>
       <Text>{quantity || 0}</Text>
     </Box>
   );

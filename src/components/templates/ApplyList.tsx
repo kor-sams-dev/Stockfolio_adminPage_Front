@@ -8,10 +8,12 @@ import Label from "../UI/atoms/Labels/Label";
 import DeadlineBox from "../UI/molecules/DeadlineBox";
 
 const Container = styled.div`
-  height: calc(100vh - 353px);
+  min-height: calc(100vh - 353px);
 `;
 
-const RecruitListBox = styled.ul``;
+const RecruitListBox = styled.ul`
+  margin-bottom: 60px;
+`;
 
 const RecruitList = styled.li`
   display: flex;

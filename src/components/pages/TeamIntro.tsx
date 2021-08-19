@@ -21,9 +21,9 @@ function TeamIntro(): JSX.Element {
     <TeamIntroBox>
       <RecruitMenuBar />
       <Inner size="narrow">
-        {/* <ApplyList /> */}
+        <ApplyList />
         {/* <ApplyDesc /> */}
-        <ApplyForm />
+        {/* <ApplyForm /> */}
         {/* <OverViewCard /> */}
         {/* <TeamIntroListBox /> */}
       </Inner>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import QuantityLabel from "../atoms/Labels/QuantityLabel";
+import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
 
 const ApplyNav = styled.ul`
@@ -27,6 +27,17 @@ const PositionList = styled.li`
 
   &:hover ${PositionName} {
     color: ${theme.color.mainDeep};
+    transition: color 0.3s;
+  }
+
+  &:hover ${Box} {
+    background-color: ${theme.color.mainDeep};
+    transition: background-color 0.3s;
+  }
+
+  &:hover ${Text} {
+    color: ${theme.color.white};
+    transition: color 0.3s;
   }
 `;
 
