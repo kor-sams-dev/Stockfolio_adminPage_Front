@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 import RecruitMenuBar from "../UI/organisms/RecruitMenuBar";
 import Inner from "../../styles/Inner";
+import ApplyList from "../templates/ApplyList";
+import ApplyDesc from "../templates/ApplyDesc";
+import ApplyForm from "../templates/ApplyForm";
 import OverViewCard from "../UI/molecules/OverViewCard";
 import TeamIntroListBox from "../UI/organisms/TeamIntroListBox";
 
@@ -18,8 +21,11 @@ function TeamIntro(): JSX.Element {
     <TeamIntroBox>
       <RecruitMenuBar />
       <Inner size="narrow">
-        <OverViewCard />
-        <TeamIntroListBox />
+        {/* <ApplyList /> */}
+        {/* <ApplyDesc /> */}
+        <ApplyForm />
+        {/* <OverViewCard /> */}
+        {/* <TeamIntroListBox /> */}
       </Inner>
     </TeamIntroBox>
   );

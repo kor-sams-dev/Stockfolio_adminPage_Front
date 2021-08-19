@@ -14,6 +14,7 @@ interface SquareBtnProps extends TextProps {
   btnWidth: number;
   isFilled: boolean;
   btnColor: string;
+  className?: string;
 }
 
 interface LabelProps {
@@ -26,6 +27,7 @@ interface QuantityLabelProps {
 
 interface DescProps extends TextProps {
   lineHeight?: number;
+  className?: string;
 }
 
 interface ImgProps {
@@ -47,6 +49,13 @@ interface InputProps {
   name: string;
 }
 
+interface ApplyInputProps {
+  type: string;
+  placeholder: string;
+  name: string;
+  className?: string;
+}
+
 interface SelectProps {
   name: string;
 }
@@ -65,6 +74,7 @@ export type {
   IdxProps,
   CheckBoxProps,
   InputProps,
+  ApplyInputProps,
   SelectProps,
   InnerProps,
 };
