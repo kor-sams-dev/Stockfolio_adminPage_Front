@@ -20,7 +20,7 @@ const RecruitMenuList = styled.ul`
 
 const RecruitMenu = styled.li`
   position: relative;
-  margin-left: 60px;
+  margin: 0 30px;
   padding: 15px;
   color: ${theme.color.lilac};
   font-weight: 400;

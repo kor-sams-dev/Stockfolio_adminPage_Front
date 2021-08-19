@@ -9,7 +9,7 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Nav />
-      {/* <TeamIntro /> */}
+      <TeamIntro />
       {/* <Landing /> */}
       <Footer />
     </div>
