@@ -1,7 +1,11 @@
+import { observer } from "mobx-react";
 import React from "react";
 import styled from "styled-components";
 import { IItemProps } from "../../../../models/ApplicationInterfaces";
+import RootStore from "../../../../stores/RootStore";
 import theme from "../../../../styles/theme";
+
+const { SelectStore } = RootStore();
 
 interface StyleProps {
   quantity?: number;
@@ -52,7 +56,6 @@ const OptionList = styled.ul`
   border-radius: 8px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
   z-index: 999;
-  display: none;
 `;
 
 const Option = styled.li`
@@ -77,23 +80,25 @@ interface IAddProps {
   item: IItemProps;
 }
 
-const StyledSelect = ({ item }: IAddProps): JSX.Element => {
+const StyledSelect = observer(({ item }: IAddProps): JSX.Element => {
   return (
     <Box itemWidth={item.itemWidth}>
       <Title>{item.title}</Title>
-      <SelectSection data-name={item.name}>
+      <SelectSection data-name={item.name} onClick={SelectStore.setIsListOn}>
         <DefaultOption>{item.placeholder}</DefaultOption>
-        <OptionList>
-          {item.options &&
-            item.options.map(option => (
-              <Option key={option} value={option}>
-                {option}
-              </Option>
-            ))}
-        </OptionList>
+        {SelectStore.isListOn && (
+          <OptionList>
+            {item.options &&
+              item.options.map(option => (
+                <Option key={option} value={option}>
+                  {option}
+                </Option>
+              ))}
+          </OptionList>
+        )}
       </SelectSection>
     </Box>
   );
-};
+});
 
 export default StyledSelect;

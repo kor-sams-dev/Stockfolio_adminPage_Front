@@ -1,8 +1,8 @@
 import SlideStore from "./SlideStore";
 import ScrollStore from "./ScrollStore";
 import { ApplicationStore, ApplicationActions } from "./ApplicationStore";
-import BasicInfoStore from "./BasicInfoStore";
 import MissionStore from "./MissionStore";
+import SelectStore from "./SelectStore";
 
 const RootStore = () => {
   return {
@@ -10,8 +10,8 @@ const RootStore = () => {
     ScrollStore,
     ApplicationStore,
     ApplicationActions,
-    BasicInfoStore,
     MissionStore,
+    SelectStore,
   };
 };
 
