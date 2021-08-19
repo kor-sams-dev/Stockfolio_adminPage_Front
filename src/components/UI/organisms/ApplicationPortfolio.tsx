@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import Input from "../atoms/inputs/Input";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
+import { ApplicationActions } from "../../../stores/ApplicationStore";
+import { IPortfolioAttrs } from "../../../models/ApplicationInterfaces";
 
 const Box = styled.section`
   position: relative;
@@ -42,7 +44,7 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationPortfolio = ({ category }: FormCategoryProps): JSX.Element => {
+const ApplicationPortfolio = (): JSX.Element => {
   return (
     <Box>
       <Required>
@@ -50,24 +52,26 @@ const ApplicationPortfolio = ({ category }: FormCategoryProps): JSX.Element => {
       </Required>
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
-          {category.data.title}
+          {applicationForm.portfolio.title}
         </Heading2>
-        {category.data.isRequired && <Asterisk>*</Asterisk>}
+        {applicationForm.portfolio.isRequired && <Asterisk>*</Asterisk>}
       </HeaderBox>
       <Desc fontSize={14} fontColor={theme.color.descMedium}>
-        {category.data.desc}
+        {applicationForm.portfolio.desc}
       </Desc>
       <InputBox>
-        {category.data.item.map(item => {
+        {applicationForm.portfolio.item.map(item => {
           return (
-            <Input
-              sort={category.sort}
-              name={item.name}
-              type={item.type}
-              placeholder={item.placeholder}
-              title={item.title}
-              itemWidth={item.itemWidth}
+            <ApplicationInput
               key={item.name}
+              item={item}
+              onChange={e =>
+                ApplicationActions.setInput(
+                  "portfolio",
+                  item.name as keyof IPortfolioAttrs,
+                  e.target.value
+                )
+              }
             />
           );
         })}

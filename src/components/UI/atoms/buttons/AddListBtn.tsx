@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { AddBtnProps } from "../../../../models/commonInterfaces";
-import RootStore from "../../../../stores/RootStore";
+import { ChildrenProps } from "../../../../models/commonInterfaces";
 
 import theme from "../../../../styles/theme";
 
@@ -29,15 +28,12 @@ const Text = styled.span`
   color: ${theme.color.blue};
 `;
 
-const handleAddList = (sort: string) => {
-  const { ApplicationFormStore } = RootStore();
-  // ApplicationFormStore.setUnits(sort);
-};
+const handleAddList = () => {};
 
-const AddListBtn = ({ children, sort }: AddBtnProps): JSX.Element => {
+const AddListBtn = ({ children }: ChildrenProps): JSX.Element => {
   return (
     <Box>
-      <Button onClick={() => handleAddList(sort)}>
+      <Button onClick={handleAddList}>
         <Img src="./images/addList.png" alt="추가하기" />
         <Text>{children} 추가</Text>
       </Button>

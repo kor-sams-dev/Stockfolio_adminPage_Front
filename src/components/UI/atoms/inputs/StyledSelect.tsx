@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  DataItemProps,
-  InputWidthProps,
-} from "../../../../models/ApplicationInterfaces";
+import { IItemProps } from "../../../../models/ApplicationInterfaces";
 import theme from "../../../../styles/theme";
 
 interface StyleProps {
-  quantity: number;
+  quantity?: number;
+  itemWidth?: number;
 }
 
 const Box = styled.div`
@@ -15,7 +13,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 24px;
-  width: ${({ itemWidth }: InputWidthProps) => `${itemWidth}%`};
+  width: ${({ itemWidth }: StyleProps) => `${itemWidth}%`};
 `;
 
 const Title = styled.span`
@@ -61,7 +59,6 @@ const Option = styled.li`
   display: flex;
   align-items: center;
   padding-left: 20px;
-  height: ${({ quantity }: StyleProps) => `${100 / quantity}%`};
   background: ${theme.color.white};
   font-size: 12px;
   color: ${theme.color.black};
@@ -76,22 +73,20 @@ const Option = styled.li`
   }
 `;
 
-const StyledSelect = ({
-  name,
-  placeholder,
-  title,
-  options,
-  itemWidth,
-}: DataItemProps): JSX.Element => {
+interface IAddProps {
+  item: IItemProps;
+}
+
+const StyledSelect = ({ item }: IAddProps): JSX.Element => {
   return (
-    <Box itemWidth={itemWidth}>
-      <Title>{title}</Title>
-      <SelectSection data-name={name}>
-        <DefaultOption>{placeholder}</DefaultOption>
+    <Box itemWidth={item.itemWidth}>
+      <Title>{item.title}</Title>
+      <SelectSection data-name={item.name}>
+        <DefaultOption>{item.placeholder}</DefaultOption>
         <OptionList>
-          {options &&
-            options.map(option => (
-              <Option quantity={options.length} key={option} value={option}>
+          {item.options &&
+            item.options.map(option => (
+              <Option key={option} value={option}>
                 {option}
               </Option>
             ))}

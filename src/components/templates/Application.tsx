@@ -7,17 +7,13 @@ import theme from "../../styles/theme";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
-import ApplicationItem from "../UI/molecules/ApplicationItem";
-// import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
-// import ApplicationCareer from "../UI/organisms/ApplicationCareer";
-// import ApplicationEducation from "../UI/organisms/ApplicationEducation";
-// import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
-// import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
-// import ApplicationProject from "../UI/organisms/ApplicationProject";
-
-import RootStore from "../../stores/RootStore";
-
-// const { ApplicationFormStore } = RootStore();
+// import ApplicationItem from "../UI/molecules/ApplicationItem";
+import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
+import ApplicationCareer from "../UI/organisms/ApplicationCareer";
+import ApplicationEducation from "../UI/organisms/ApplicationEducation";
+import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
+import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
+import ApplicationProject from "../UI/organisms/ApplicationProject";
 
 const Box = styled.div`
   display: flex;
@@ -37,23 +33,17 @@ const BtnBox = styled.div`
 `;
 
 const Application = (): JSX.Element => {
-  // const [basicInfo, career, project, introduction, portfolio, education] =
-  //   applicationForm;
-
   return (
     <Box>
       <Inner size="wide">
         <Content>
           <ApplicationHeader />
-          {/* <ApplicationItem category={basicInfo} />
-          <ApplicationItem category={career} />
-          <ApplicationItem category={project} />
-          <ApplicationItem category={introduction} />
-          <ApplicationItem category={portfolio} />
-          <ApplicationItem category={education} /> */}
-          {applicationForm.map(item => (
-            <ApplicationItem category={item} key={item.sort} />
-          ))}
+          <ApplicationBasicInfo />
+          <ApplicationCareer />
+          <ApplicationProject />
+          <ApplicationIntroduction />
+          <ApplicationPortfolio />
+          <ApplicationEducation />
         </Content>
         <BtnBox>
           <SquareBtn

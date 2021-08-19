@@ -1,52 +1,10 @@
-interface FormCategoryProps {
-  category: ApplicationProps;
-}
-
-interface ApplicationProps {
-  sort: string;
-  data: ApplicationDataProps;
-}
-
-interface ApplicationDataProps {
-  isRequired: boolean;
-  isListed: boolean;
-  hasCheckBox: boolean;
-  title: string;
-  desc: string;
-  item: DataItemProps[];
-}
-
-interface DataItemProps {
-  onChange?: () => void;
-  sort?: string;
-  name: string;
-  type?: string;
-  placeholder: string;
-  title: string;
-  options?: string[];
-  itemWidth: number;
-}
-
-interface InputWidthProps {
-  itemWidth: number;
-}
-
-interface IApplicationForm {
-  basicInfo: IBasicInfoAttrs;
-  career: ICareerAttrs;
-  project: IProjectAttrs;
-  introduction: IIntroductionAttrs;
-  portfolio: IPortfolioAttrs;
-  education: IEducationAttrs;
-}
-
-interface IBasicInfoAttrs {
+export interface IBasicInfoAttrs {
   userName: string | null;
   email: string | null;
   phoneNumber: string | null;
 }
 
-interface ICareerAttrs {
+export interface ICareerAttrs {
   companyName: string | null;
   rank: string | null;
   joinDate: string | null;
@@ -54,7 +12,7 @@ interface ICareerAttrs {
   businessTask: string | null;
 }
 
-interface IProjectAttrs {
+export interface IProjectAttrs {
   projectName: string | null;
   association: string | null;
   startDate: string | null;
@@ -63,16 +21,16 @@ interface IProjectAttrs {
   projectInfo: string | null;
 }
 
-interface IIntroductionAttrs {
+export interface IIntroductionAttrs {
   aboutMe: string | null;
 }
 
-interface IPortfolioAttrs {
+export interface IPortfolioAttrs {
   portfolioFile: string | null;
   portfolioUrl: string | null;
 }
 
-interface IEducationAttrs {
+export interface IEducationAttrs {
   background: string | null;
   schoolName: string | null;
   major: string | null;
@@ -82,15 +40,20 @@ interface IEducationAttrs {
   graduateState: string | null;
 }
 
-interface IIndexable {
-  [key: string]: unknown;
+export interface IApplicationForm {
+  basicInfo: IBasicInfoAttrs;
+  career: ICareerAttrs;
+  project: IProjectAttrs;
+  introduction: IIntroductionAttrs;
+  portfolio: IPortfolioAttrs;
+  education: IEducationAttrs;
 }
 
-export type {
-  FormCategoryProps,
-  ApplicationProps,
-  DataItemProps,
-  InputWidthProps,
-  IApplicationForm,
-  IIndexable,
-};
+export interface IItemProps {
+  name: string;
+  type: string;
+  placeholder: string;
+  title: string;
+  options?: string[];
+  itemWidth: number;
+}

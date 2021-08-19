@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  DataItemProps,
-  InputWidthProps,
-} from "../../../../models/ApplicationInterfaces";
+import { IItemProps } from "../../../../models/ApplicationInterfaces";
 import theme from "../../../../styles/theme";
+
+interface StyleProps {
+  itemWidth?: number;
+}
 
 const Box = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   padding-top: 24px;
-  width: ${({ itemWidth }: InputWidthProps) => `${itemWidth}%`};
+  width: ${({ itemWidth }: StyleProps) => `${itemWidth}%`};
 `;
 
 const TextSection = styled.textarea`
@@ -36,19 +37,22 @@ const LetterLength = styled.span`
   color: ${theme.color.grey2};
 `;
 
+interface IAddProps {
+  item: IItemProps;
+}
+
 function Textarea({
-  name,
-  placeholder,
-  title,
-  itemWidth,
-}: DataItemProps): JSX.Element {
+  item,
+  onChange,
+}: React.TextareaHTMLAttributes<HTMLTextAreaElement> & IAddProps): JSX.Element {
   return (
-    <Box itemWidth={itemWidth}>
+    <Box itemWidth={item.itemWidth}>
       <TextSection
-        maxLength={2000}
-        title={title}
-        name={name}
-        placeholder={placeholder}
+        maxLength={2200}
+        title={item.title}
+        name={item.name}
+        placeholder={item.placeholder}
+        onChange={onChange}
       />
       <LetterLength>(0/2000자)</LetterLength>
     </Box>

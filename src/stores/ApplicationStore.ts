@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, observable, toJS } from "mobx";
 import { IApplicationForm } from "../models/ApplicationInterfaces";
 
 const ApplicationStore: IApplicationForm = observable({
@@ -41,10 +41,16 @@ const ApplicationStore: IApplicationForm = observable({
 });
 
 const ApplicationActions = observable({
-  setInput: action((e: React.ChangeEvent<HTMLInputElement>) => {
-    // const { name, value } = e.target;
-    // ApplicationStore[sort][name] = value;
-  }),
+  setInput: action(
+    <T extends keyof IApplicationForm>(
+      sort: T,
+      name: keyof IApplicationForm[T],
+      value: IApplicationForm[T][keyof IApplicationForm[T]]
+    ) => {
+      ApplicationStore[sort][name] = value;
+      console.log(toJS(ApplicationStore));
+    }
+  ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       ApplicationStore.portfolio.portfolioFile = e.target.files[0].name;

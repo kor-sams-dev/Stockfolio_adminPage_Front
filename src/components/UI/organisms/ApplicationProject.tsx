@@ -3,12 +3,14 @@ import styled from "styled-components";
 
 import AddListBtn from "../atoms/buttons/AddListBtn";
 import CheckBox from "../atoms/inputs/CheckBox";
-import Input from "../atoms/inputs/Input";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
+import { ApplicationActions } from "../../../stores/ApplicationStore";
+import { IProjectAttrs } from "../../../models/ApplicationInterfaces";
 
 const Box = styled.section`
   position: relative;
@@ -33,35 +35,37 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationProject = ({ category }: FormCategoryProps): JSX.Element => {
+const ApplicationProject = (): JSX.Element => {
   return (
     <Box>
-      <CheckBox title={category.data.title} name={category.sort} />
+      <CheckBox title={applicationForm.project.title} />
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
-          {category.data.title}
+          {applicationForm.project.title}
         </Heading2>
-        {category.data.isRequired && <Asterisk>*</Asterisk>}
+        {applicationForm.project.isRequired && <Asterisk>*</Asterisk>}
       </HeaderBox>
       <Desc fontSize={14} fontColor={theme.color.descMedium}>
-        {category.data.desc}
+        {applicationForm.project.desc}
       </Desc>
       <InputBox>
-        {category.data.item.map(item => {
+        {applicationForm.project.item.map(item => {
           return (
-            <Input
-              sort={category.sort}
-              name={item.name}
-              type={item.type}
-              placeholder={item.placeholder}
-              title={item.title}
-              itemWidth={item.itemWidth}
+            <ApplicationInput
               key={item.name}
+              item={item}
+              onChange={e =>
+                ApplicationActions.setInput(
+                  "project",
+                  item.name as keyof IProjectAttrs,
+                  e.target.value
+                )
+              }
             />
           );
         })}
       </InputBox>
-      <AddListBtn sort={category.sort}>{category.data.title}</AddListBtn>
+      <AddListBtn>{applicationForm.project.title}</AddListBtn>
     </Box>
   );
 };

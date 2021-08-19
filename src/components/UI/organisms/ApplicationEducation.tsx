@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import Input from "../atoms/inputs/Input";
 import StyledSelect from "../atoms/inputs/StyledSelect";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
+import { ApplicationActions } from "../../../stores/ApplicationStore";
+import { IEducationAttrs } from "../../../models/ApplicationInterfaces";
 
 const Box = styled.section`
   position: relative;
@@ -32,40 +34,34 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationEducation = ({ category }: FormCategoryProps): JSX.Element => {
+const ApplicationEducation = (): JSX.Element => {
   return (
     <Box>
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
-          {category.data.title}
+          {applicationForm.education.title}
         </Heading2>
-        {category.data.isRequired && <Asterisk>*</Asterisk>}
+        {applicationForm.education.isRequired && <Asterisk>*</Asterisk>}
       </HeaderBox>
       <Desc fontSize={14} fontColor={theme.color.descMedium}>
-        {category.data.desc}
+        {applicationForm.education.desc}
       </Desc>
       <InputBox>
-        {category.data.item.map(item => {
+        {applicationForm.education.item.map(item => {
           return (
             (item.type === "select" && (
-              <StyledSelect
-                sort={category.sort}
-                name={item.name}
-                placeholder={item.placeholder}
-                title={item.title}
-                options={item.options}
-                itemWidth={item.itemWidth}
-                key={item.name}
-              />
+              <StyledSelect key={item.name} item={item} />
             )) || (
-              <Input
-                sort={category.sort}
-                name={item.name}
-                type={item.type}
-                placeholder={item.placeholder}
-                title={item.title}
-                itemWidth={item.itemWidth}
+              <ApplicationInput
                 key={item.name}
+                item={item}
+                onChange={e =>
+                  ApplicationActions.setInput(
+                    "education",
+                    item.name as keyof IEducationAttrs,
+                    e.target.value
+                  )
+                }
               />
             )
           );

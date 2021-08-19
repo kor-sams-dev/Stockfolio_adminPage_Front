@@ -2,22 +2,26 @@ import React from "react";
 import { observer } from "mobx-react";
 import styled, { css } from "styled-components";
 
-import {
-  DataItemProps,
-  InputWidthProps,
-} from "../../../../models/ApplicationInterfaces";
-
 import RootStore from "../../../../stores/RootStore";
 
 import theme from "../../../../styles/theme";
+import {
+  IApplicationForm,
+  IBasicInfoAttrs,
+  IItemProps,
+} from "../../../../models/ApplicationInterfaces";
 
 const { ApplicationStore, ApplicationActions } = RootStore();
+
+interface StyleProps {
+  itemWidth: number;
+}
 
 const Box = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 24px;
-  width: ${({ itemWidth }: InputWidthProps) => `${itemWidth}%`};
+  width: ${({ itemWidth }: StyleProps) => `${itemWidth}%`};
 `;
 
 const Title = styled.span`
@@ -106,44 +110,39 @@ const UploadedFile = styled.input`
       : theme.color.black};
 `;
 
-const Input = observer(
+interface IAddProps {
+  item: IItemProps;
+}
+
+const ApplicationInput = observer(
   ({
-    name,
-    sort,
-    type,
-    placeholder,
-    title,
-    itemWidth,
-  }: DataItemProps): JSX.Element => {
+    onChange,
+    item,
+  }: React.InputHTMLAttributes<HTMLInputElement> & IAddProps): JSX.Element => {
     return (
-      <Box itemWidth={itemWidth}>
-        <Title>{title}</Title>
-        {type === "file" ? (
+      <Box itemWidth={item.itemWidth}>
+        <Title>{item.title}</Title>
+        {item.type === "file" ? (
           <>
             <UploadedFile
               disabled
-              value={ApplicationStore.portfolio.portfolioFile || placeholder}
+              value={
+                ApplicationStore.portfolio.portfolioFile || item.placeholder
+              }
             />
             <Label>
               <InputSection
                 onChange={ApplicationActions.setPortfolioFile}
-                type={type}
-                placeholder={placeholder}
-                name={name}
+                type="file"
               />
             </Label>
           </>
         ) : (
-          <InputSection
-            // onChange={e => ApplicationActions.setInput(e, sort)}
-            type={type}
-            placeholder={placeholder}
-            name={name}
-          />
+          <InputSection type={item.type} onChange={onChange} />
         )}
       </Box>
     );
   }
 );
 
-export default Input;
+export default ApplicationInput;

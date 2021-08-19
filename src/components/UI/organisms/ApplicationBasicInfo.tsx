@@ -1,15 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-import Input from "../atoms/inputs/Input";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
-import RootStore from "../../../stores/RootStore";
 
-const { BasicInfoStore } = RootStore();
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
+import RootStore from "../../../stores/RootStore";
+import {
+  IApplicationForm,
+  IBasicInfoAttrs,
+} from "../../../models/ApplicationInterfaces";
+
+const { ApplicationActions } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -45,7 +50,7 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationBasicInfo = ({ category }: FormCategoryProps): JSX.Element => {
+const ApplicationBasicInfo = (): JSX.Element => {
   return (
     <Box>
       <Required>
@@ -53,24 +58,26 @@ const ApplicationBasicInfo = ({ category }: FormCategoryProps): JSX.Element => {
       </Required>
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
-          {category.data.title}
+          {applicationForm.basicInfo.title}
         </Heading2>
         <Asterisk>*</Asterisk>
       </HeaderBox>
       <Desc fontSize={14} fontColor={theme.color.descMedium}>
-        {category.data.desc}
+        {applicationForm.basicInfo.desc}
       </Desc>
       <InputBox>
-        {category.data.item.map(item => {
+        {applicationForm.basicInfo.item.map(item => {
           return (
-            <Input
-              sort={category.sort}
-              name={item.name}
-              type={item.type}
-              placeholder={item.placeholder}
-              title={item.title}
-              itemWidth={item.itemWidth}
+            <ApplicationInput
               key={item.name}
+              item={item}
+              onChange={e =>
+                ApplicationActions.setInput(
+                  "basicInfo",
+                  item.name as keyof IBasicInfoAttrs,
+                  e.target.value
+                )
+              }
             />
           );
         })}

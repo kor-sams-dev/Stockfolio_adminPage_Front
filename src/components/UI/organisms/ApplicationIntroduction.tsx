@@ -5,8 +5,10 @@ import Textarea from "../atoms/inputs/Textarea";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
+import applicationForm from "../../../assets/data/applicationForm";
+import { ApplicationActions } from "../../../stores/ApplicationStore";
+import { IIntroductionAttrs } from "../../../models/ApplicationInterfaces";
 
 const Box = styled.section`
   position: relative;
@@ -31,31 +33,31 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationIntroduction = ({
-  category,
-}: FormCategoryProps): JSX.Element => {
+const ApplicationIntroduction = (): JSX.Element => {
   return (
     <Box>
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
-          {category.data.title}
+          {applicationForm.introduction.title}
         </Heading2>
-        {category.data.isRequired && <Asterisk>*</Asterisk>}
+        {applicationForm.introduction.isRequired && <Asterisk>*</Asterisk>}
       </HeaderBox>
       <Desc fontSize={14} fontColor={theme.color.descMedium}>
-        {category.data.desc}
+        {applicationForm.introduction.desc}
       </Desc>
       <InputBox>
-        {category.data.item.map(item => {
+        {applicationForm.introduction.item.map(item => {
           return (
             <Textarea
-              sort={category.sort}
-              name={item.name}
-              type={item.type}
-              placeholder={item.placeholder}
-              title={item.title}
-              itemWidth={item.itemWidth}
               key={item.name}
+              item={item}
+              onChange={e =>
+                ApplicationActions.setInput(
+                  "introduction",
+                  item.name as keyof IIntroductionAttrs,
+                  e.target.value
+                )
+              }
             />
           );
         })}

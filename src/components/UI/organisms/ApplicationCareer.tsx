@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 import AddListBtn from "../atoms/buttons/AddListBtn";
 import CheckBox from "../atoms/inputs/CheckBox";
-import Input from "../atoms/inputs/Input";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
-import { FormCategoryProps } from "../../../models/ApplicationInterfaces";
 import theme from "../../../styles/theme";
+
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
+import { ApplicationActions } from "../../../stores/ApplicationStore";
+import { ICareerAttrs } from "../../../models/ApplicationInterfaces";
 
 const Box = styled.section`
   position: relative;
@@ -33,35 +36,37 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationCareer = ({ category }: FormCategoryProps): JSX.Element => {
+const ApplicationCareer = (): JSX.Element => {
   return (
     <Box>
-      <CheckBox title={category.data.title} name={category.sort} />
+      <CheckBox title={applicationForm.career.title} />
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
-          {category.data.title}
+          {applicationForm.career.title}
         </Heading2>
-        {category.data.isRequired && <Asterisk>*</Asterisk>}
+        {applicationForm.career.isRequired && <Asterisk>*</Asterisk>}
       </HeaderBox>
       <Desc fontSize={14} fontColor={theme.color.descMedium}>
-        {category.data.desc}
+        {applicationForm.career.desc}
       </Desc>
       <InputBox>
-        {category.data.item.map(item => {
+        {applicationForm.career.item.map(item => {
           return (
-            <Input
-              sort={category.sort}
-              name={item.name}
-              type={item.type}
-              placeholder={item.placeholder}
-              title={item.title}
-              itemWidth={item.itemWidth}
+            <ApplicationInput
               key={item.name}
+              item={item}
+              onChange={e =>
+                ApplicationActions.setInput(
+                  "career",
+                  item.name as keyof ICareerAttrs,
+                  e.target.value
+                )
+              }
             />
           );
         })}
       </InputBox>
-      <AddListBtn sort={category.sort}>{category.data.title}</AddListBtn>
+      <AddListBtn>{applicationForm.career.title}</AddListBtn>
     </Box>
   );
 };
