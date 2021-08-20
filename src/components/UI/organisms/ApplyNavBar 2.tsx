@@ -1,16 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { observer } from "mobx-react";
 
 import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
 
 import recruitListItemData from "../../../assets/data/mockData/recruitListItemData";
-import RootStore from "../../../stores/RootStore";
-
-interface ClickProps {
-  isActive: boolean;
-}
 
 const ApplyNav = styled.ul`
   display: flex;
@@ -49,17 +43,11 @@ const PositionList = styled.li`
   }
 `;
 
-const ApplyNavBar = observer((): JSX.Element => {
-  const { ApplyMenuStore } = RootStore();
-  console.log(ApplyMenuStore.clicked);
-
+function ApplyNavBar(): JSX.Element {
   return (
     <ApplyNav>
       {recruitListItemData.map(data => (
-        <PositionList
-          key={data.id}
-          onClick={() => ApplyMenuStore.setClicked(data.id)}
-        >
+        <PositionList key={data.id}>
           <PositionName>{data.department}</PositionName>
           <QuantityLabel quantity={data.recruitList.length} />
         </PositionList>
@@ -78,6 +66,6 @@ const ApplyNavBar = observer((): JSX.Element => {
       </PositionList> */}
     </ApplyNav>
   );
-});
+}
 
 export default ApplyNavBar;

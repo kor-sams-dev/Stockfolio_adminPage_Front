@@ -6,7 +6,6 @@ import theme from "../../../styles/theme";
 import Label from "../atoms/Labels/Label";
 
 import recruitListItemData from "../../../assets/data/mockData/recruitListItemData";
-import RootStore from "../../../stores/RootStore";
 
 const ListItem = styled.li`
   display: flex;
@@ -55,12 +54,9 @@ const Deadline = styled.span`
 `;
 
 function RecruitListItem(): JSX.Element {
-  const { ApplyMenuStore } = RootStore();
-  // console.log(ApplyMenuStore.clicked);
-
   return (
     <>
-      {recruitListItemData[ApplyMenuStore.clicked].recruitList.map(data => (
+      {recruitListItemData[0].recruitList.map(data => (
         <ListItem key={data.itemId}>
           <Box>
             <Label stance="senior" />
