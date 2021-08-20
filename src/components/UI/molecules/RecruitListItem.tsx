@@ -11,7 +11,6 @@ const ListItem = styled.li`
   display: flex;
   justify-content: space-between;
   padding: 24px 32px;
-  width: 980px;
   height: 74px;
   border-radius: 16px;
 

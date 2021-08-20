@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import ApplyNavBar from "../UI/organisms/ApplyNavBar";
@@ -8,10 +8,12 @@ const Container = styled.div`
   min-height: calc(100vh - 353px);
 `;
 
+const [clicked, setClicked] = useState(0);
+
 function ApplyList(): JSX.Element {
   return (
     <Container>
-      <ApplyNavBar />
+      <ApplyNavBar clicked={clicked} setClicked={setClicked} />
       <RecruitList />
     </Container>
   );
