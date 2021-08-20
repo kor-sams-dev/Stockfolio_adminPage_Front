@@ -1,7 +1,12 @@
+import { observer } from "mobx-react";
 import React from "react";
 import styled from "styled-components";
 import { IItemProps } from "../../../../models/ApplicationInterfaces";
+
+import RootStore from "../../../../stores/RootStore";
 import theme from "../../../../styles/theme";
+
+const { ApplicationStore } = RootStore();
 
 interface StyleProps {
   itemWidth?: number;
@@ -41,22 +46,31 @@ interface IAddProps {
   item: IItemProps;
 }
 
-function Textarea({
-  item,
-  onChange,
-}: React.TextareaHTMLAttributes<HTMLTextAreaElement> & IAddProps): JSX.Element {
-  return (
-    <Box itemWidth={item.itemWidth}>
-      <TextSection
-        maxLength={2200}
-        title={item.title}
-        name={item.name}
-        placeholder={item.placeholder}
-        onChange={onChange}
-      />
-      <LetterLength>(0/2000자)</LetterLength>
-    </Box>
-  );
-}
+const Textarea = observer(
+  ({
+    item,
+    onChange,
+  }: React.TextareaHTMLAttributes<HTMLTextAreaElement> &
+    IAddProps): JSX.Element => {
+    return (
+      <Box itemWidth={item.itemWidth}>
+        <TextSection
+          maxLength={2100}
+          title={item.title}
+          name={item.name}
+          placeholder={item.placeholder}
+          onChange={onChange}
+        />
+        <LetterLength>
+          {`(${
+            ApplicationStore.introduction.aboutMe
+              ? ApplicationStore.introduction.aboutMe.length
+              : 0
+          }/2000자)`}
+        </LetterLength>
+      </Box>
+    );
+  }
+);
 
 export default Textarea;

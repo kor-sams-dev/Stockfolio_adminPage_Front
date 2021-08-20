@@ -20,16 +20,19 @@ const Input = styled.input`
 `;
 
 interface CheckBoxProps {
-  // name: string;
   title: string;
 }
 
-function CheckBox({ title }: CheckBoxProps): JSX.Element {
+function CheckBox({
+  title,
+  checked,
+  onChange,
+}: React.InputHTMLAttributes<HTMLInputElement> & CheckBoxProps): JSX.Element {
   return (
     <Label>
-      <Img alt="체크" src="./images/checkBox_false.png" />
+      <Img alt="체크" src={`./images/checkBox_${checked}.png`} />
       {title} 없음
-      <Input type="checkbox" />
+      <Input onChange={onChange} checked={checked} type="checkbox" />
     </Label>
   );
 }

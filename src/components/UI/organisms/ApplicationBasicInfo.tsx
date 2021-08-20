@@ -9,10 +9,7 @@ import theme from "../../../styles/theme";
 import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import RootStore from "../../../stores/RootStore";
-import {
-  IApplicationForm,
-  IBasicInfoAttrs,
-} from "../../../models/ApplicationInterfaces";
+import { IBasicInfoAttrs } from "../../../models/ApplicationInterfaces";
 
 const { ApplicationActions } = RootStore();
 

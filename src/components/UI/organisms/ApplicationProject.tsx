@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { observer } from "mobx-react";
 import AddListBtn from "../atoms/buttons/AddListBtn";
 import CheckBox from "../atoms/inputs/CheckBox";
 import Desc from "../atoms/texts/Desc";
@@ -11,6 +12,9 @@ import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { IProjectAttrs } from "../../../models/ApplicationInterfaces";
+import RootStore from "../../../stores/RootStore";
+
+const { CheckboxStore, CheckboxActions } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -35,10 +39,14 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationProject = (): JSX.Element => {
+const ApplicationProject = observer((): JSX.Element => {
   return (
     <Box>
-      <CheckBox title={applicationForm.project.title} />
+      <CheckBox
+        onChange={() => CheckboxActions.setIsChecked("project")}
+        checked={CheckboxStore.isChecked.project}
+        title={applicationForm.project.title}
+      />
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
           {applicationForm.project.title}
@@ -68,6 +76,6 @@ const ApplicationProject = (): JSX.Element => {
       <AddListBtn>{applicationForm.project.title}</AddListBtn>
     </Box>
   );
-};
+});
 
 export default ApplicationProject;

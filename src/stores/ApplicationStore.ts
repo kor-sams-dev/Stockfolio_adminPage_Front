@@ -1,5 +1,8 @@
 import { action, observable } from "mobx";
-import { IApplicationForm } from "../models/ApplicationInterfaces";
+import {
+  IApplicationForm,
+  IEducationAttrs,
+} from "../models/ApplicationInterfaces";
 
 const ApplicationStore: IApplicationForm = observable({
   basicInfo: {
@@ -54,6 +57,9 @@ const ApplicationActions = observable({
     if (e.target.files?.length) {
       ApplicationStore.portfolio.portfolioFile = e.target.files[0].name;
     }
+  }),
+  setSelectValue: action((name: keyof IEducationAttrs, option: string) => {
+    ApplicationStore.education[name] = option;
   }),
 });
 

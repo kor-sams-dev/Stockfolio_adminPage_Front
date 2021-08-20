@@ -1,15 +1,22 @@
 import { observer } from "mobx-react";
 import React from "react";
 import styled from "styled-components";
-import { IItemProps } from "../../../../models/ApplicationInterfaces";
+import {
+  IEducationAttrs,
+  IItemProps,
+} from "../../../../models/ApplicationInterfaces";
+import { ISelectListItem } from "../../../../models/InputsInterfaces";
+import { ApplicationActions } from "../../../../stores/ApplicationStore";
 import RootStore from "../../../../stores/RootStore";
+import { SelectActions } from "../../../../stores/SelectStore";
 import theme from "../../../../styles/theme";
 
-const { SelectStore } = RootStore();
+const { SelectStore, ApplicationStore } = RootStore();
 
 interface StyleProps {
   quantity?: number;
   itemWidth?: number;
+  isSelected?: string | null;
 }
 
 const Box = styled.div`
@@ -41,10 +48,11 @@ const SelectSection = styled.div`
   cursor: pointer;
 `;
 
-const DefaultOption = styled.span`
+const SelectedOption = styled.span`
   display: inline-block;
   margin-top: 3px;
-  color: ${theme.color.grey1};
+  color: ${({ isSelected }: StyleProps) =>
+    isSelected ? theme.color.black : theme.color.grey1};
 `;
 
 const OptionList = styled.ul`
@@ -52,7 +60,6 @@ const OptionList = styled.ul`
   top: 0;
   left: 0;
   width: 100%;
-  height: 268px;
   border-radius: 8px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
   z-index: 999;
@@ -61,7 +68,7 @@ const OptionList = styled.ul`
 const Option = styled.li`
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  padding: 15px 20px;
   background: ${theme.color.white};
   font-size: 12px;
   color: ${theme.color.black};
@@ -84,13 +91,33 @@ const StyledSelect = observer(({ item }: IAddProps): JSX.Element => {
   return (
     <Box itemWidth={item.itemWidth}>
       <Title>{item.title}</Title>
-      <SelectSection data-name={item.name} onClick={SelectStore.setIsListOn}>
-        <DefaultOption>{item.placeholder}</DefaultOption>
-        {SelectStore.isListOn && (
+      <SelectSection
+        data-name={item.name}
+        onClick={() =>
+          SelectActions.setIsListOn(item.name as keyof ISelectListItem)
+        }
+      >
+        <SelectedOption
+          isSelected={
+            ApplicationStore.education[item.name as keyof IEducationAttrs]
+          }
+        >
+          {ApplicationStore.education[item.name as keyof IEducationAttrs] ||
+            item.placeholder}
+        </SelectedOption>
+        {SelectStore.isListOn[item.name as keyof ISelectListItem] && (
           <OptionList>
             {item.options &&
               item.options.map(option => (
-                <Option key={option} value={option}>
+                <Option
+                  onClick={() =>
+                    ApplicationActions.setSelectValue(
+                      item.name as keyof IEducationAttrs,
+                      option
+                    )
+                  }
+                  key={option}
+                >
                   {option}
                 </Option>
               ))}

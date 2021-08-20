@@ -5,11 +5,7 @@ import styled, { css } from "styled-components";
 import RootStore from "../../../../stores/RootStore";
 
 import theme from "../../../../styles/theme";
-import {
-  IApplicationForm,
-  IBasicInfoAttrs,
-  IItemProps,
-} from "../../../../models/ApplicationInterfaces";
+import { IItemProps } from "../../../../models/ApplicationInterfaces";
 
 const { ApplicationStore, ApplicationActions } = RootStore();
 

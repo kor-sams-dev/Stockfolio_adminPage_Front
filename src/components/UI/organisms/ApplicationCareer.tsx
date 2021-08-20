@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 
 import AddListBtn from "../atoms/buttons/AddListBtn";
 import CheckBox from "../atoms/inputs/CheckBox";
@@ -12,6 +13,10 @@ import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { ICareerAttrs } from "../../../models/ApplicationInterfaces";
+import RootStore from "../../../stores/RootStore";
+import { ICheckboxItem } from "../../../models/InputsInterfaces";
+
+const { CheckboxActions, CheckboxStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -36,10 +41,14 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationCareer = (): JSX.Element => {
+const ApplicationCareer = observer((): JSX.Element => {
   return (
     <Box>
-      <CheckBox title={applicationForm.career.title} />
+      <CheckBox
+        onChange={() => CheckboxActions.setIsChecked("career")}
+        checked={CheckboxStore.isChecked.career}
+        title={applicationForm.career.title}
+      />
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
           {applicationForm.career.title}
@@ -69,6 +78,6 @@ const ApplicationCareer = (): JSX.Element => {
       <AddListBtn>{applicationForm.career.title}</AddListBtn>
     </Box>
   );
-};
+});
 
 export default ApplicationCareer;

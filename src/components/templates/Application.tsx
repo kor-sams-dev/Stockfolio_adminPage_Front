@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import applicationForm from "../../assets/data/applicationForm";
 
 import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
-// import ApplicationItem from "../UI/molecules/ApplicationItem";
 import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
 import ApplicationCareer from "../UI/organisms/ApplicationCareer";
 import ApplicationEducation from "../UI/organisms/ApplicationEducation";
