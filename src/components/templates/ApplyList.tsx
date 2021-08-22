@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { toJS } from "mobx";
 import styled from "styled-components";
 
 import ApplyNavBar from "../UI/organisms/ApplyNavBar";
@@ -25,7 +24,6 @@ function ApplyList(): JSX.Element {
     };
 
     ApplyMenuStore.setViewContent(ApplyMenuStore.totalContent.filter(isDev));
-    const devs = toJS(ApplyMenuStore.viewContent);
   }, []);
 
   return (

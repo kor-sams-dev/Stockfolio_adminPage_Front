@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -7,10 +7,6 @@ import theme from "../../../styles/theme";
 
 import RootStore from "../../../stores/RootStore";
 import { MenuProps } from "../../../models/applyInterfaces";
-
-interface ClickProps {
-  isActive: boolean;
-}
 
 const ApplyNav = styled.ul`
   display: flex;
@@ -28,48 +24,66 @@ const PositionName = styled.span`
 const PositionList = styled.li`
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   & + li {
     padding-left: 24px;
   }
 
-  &:hover ${PositionName} {
+  ${PositionName} {
     color: ${theme.color.mainDeep};
     transition: color 0.3s;
   }
 
-  &:hover ${Box} {
+  ${Box} {
     background-color: ${theme.color.mainDeep};
     transition: background-color 0.3s;
   }
 
-  &:hover ${Text} {
+  ${Text} {
     color: ${theme.color.white};
     transition: color 0.3s;
+  }
+`;
+
+const NonePositionList = styled.li`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  & + li {
+    padding-left: 24px;
   }
 `;
 
 const ApplyNavBar = observer((): JSX.Element => {
   const department = ["개발", "디자인", "마케팅"];
   const { ApplyMenuStore } = RootStore();
+  const [activeId, setActiveId] = useState("개발");
 
   return (
     <ApplyNav>
-      {department.map(item => (
-        <PositionList
-          key={item}
-          onClick={() => ApplyMenuStore.setClicked(item)}
-        >
-          <PositionName>{item}</PositionName>
-          <QuantityLabel
-            quantity={
-              ApplyMenuStore.totalContent.filter(function (el: MenuProps) {
-                return el.position === item;
-              }).length
-            }
-          />
-        </PositionList>
-      ))}
+      {department.map(item => {
+        const IsActive = item === activeId ? PositionList : NonePositionList;
+        return (
+          <IsActive
+            key={item}
+            onClick={() => {
+              setActiveId(item);
+              ApplyMenuStore.setClicked(item);
+            }}
+          >
+            <PositionName>{item}</PositionName>
+            <QuantityLabel
+              quantity={
+                ApplyMenuStore.totalContent.filter(function (el: MenuProps) {
+                  return el.position === item;
+                }).length
+              }
+            />
+          </IsActive>
+        );
+      })}
     </ApplyNav>
   );
 });

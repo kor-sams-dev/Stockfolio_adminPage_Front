@@ -69,7 +69,6 @@ const RecruitListItem = observer((): any => {
     };
 
     ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
-    const department = toJS(viewContent);
   }, [ApplyMenuStore.clicked]);
 
   return (
