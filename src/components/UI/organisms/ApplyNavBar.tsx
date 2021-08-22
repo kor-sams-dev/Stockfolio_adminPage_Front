@@ -5,8 +5,8 @@ import { observer } from "mobx-react";
 import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
 
-import recruitListItemData from "../../../assets/data/mockData/recruitListItemData";
 import RootStore from "../../../stores/RootStore";
+import { MenuProps } from "../../../models/applyInterfaces";
 
 interface ClickProps {
   isActive: boolean;
@@ -50,32 +50,26 @@ const PositionList = styled.li`
 `;
 
 const ApplyNavBar = observer((): JSX.Element => {
+  const department = ["개발", "디자인", "마케팅"];
   const { ApplyMenuStore } = RootStore();
-  console.log(ApplyMenuStore.clicked);
 
   return (
     <ApplyNav>
-      {recruitListItemData.map(data => (
+      {department.map(item => (
         <PositionList
-          key={data.id}
-          onClick={() => ApplyMenuStore.setClicked(data.id)}
+          key={item}
+          onClick={() => ApplyMenuStore.setClicked(item)}
         >
-          <PositionName>{data.department}</PositionName>
-          <QuantityLabel quantity={data.recruitList.length} />
+          <PositionName>{item}</PositionName>
+          <QuantityLabel
+            quantity={
+              ApplyMenuStore.totalContent.filter(function (el: MenuProps) {
+                return el.position === item;
+              }).length
+            }
+          />
         </PositionList>
       ))}
-      {/* <PositionList>
-        <PositionName>개발</PositionName>
-        <QuantityLabel quantity={20} />
-      </PositionList>
-      <PositionList>
-        <PositionName>디자인</PositionName>
-        <QuantityLabel quantity={14} />
-      </PositionList>
-      <PositionList>
-        <PositionName>마케팅</PositionName>
-        <QuantityLabel quantity={3} />
-      </PositionList> */}
     </ApplyNav>
   );
 });

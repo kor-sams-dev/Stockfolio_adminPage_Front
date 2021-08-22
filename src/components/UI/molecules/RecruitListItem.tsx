@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
 
 import Heading2 from "../atoms/texts/Heading2";
 import theme from "../../../styles/theme";
 import Label from "../atoms/Labels/Label";
 
-import recruitListItemData from "../../../assets/data/mockData/recruitListItemData";
 import RootStore from "../../../stores/RootStore";
+import { MenuProps } from "../../../models/applyInterfaces";
 
 const ListItem = styled.li`
   display: flex;
@@ -54,17 +56,28 @@ const Deadline = styled.span`
   }
 `;
 
-function RecruitListItem(): JSX.Element {
+const RecruitListItem = observer((): any => {
   const { ApplyMenuStore } = RootStore();
-  // console.log(ApplyMenuStore.clicked);
+  const { clicked, totalContent, viewContent } = ApplyMenuStore;
+
+  useEffect(() => {
+    const setDepartment = (arr: any) => {
+      if (arr.position === clicked) {
+        return true;
+      }
+      return false;
+    };
+
+    ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
+    const department = toJS(viewContent);
+  }, [ApplyMenuStore.clicked]);
 
   return (
     <>
-      {recruitListItemData[ApplyMenuStore.clicked].recruitList.map(data => (
-        <ListItem key={data.itemId}>
+      {toJS(viewContent).map((data: MenuProps) => (
+        <ListItem key={data.title}>
           <Box>
-            <Label stance="senior" />
-            {/* <Label stance={data.stance} /> */}
+            <Label stance={data.stance as "senior" | "junior"} />
             <PaddingBox>
               <Heading2 fontSize={18} fontWeight={700}>
                 {data.title}
@@ -77,41 +90,8 @@ function RecruitListItem(): JSX.Element {
           </DeadlineBox>
         </ListItem>
       ))}
-      {/* <ListItem>
-        <Box>
-          <Label stance="senior" />
-          <PaddingBox>
-            <Heading2 fontSize={18} fontWeight={700}>
-              Front-end Developer
-            </Heading2>
-          </PaddingBox>
-        </Box>
-        <DeadlineBox />
-      </ListItem>
-      <ListItem>
-        <Box>
-          <Label stance="junior" />
-          <PaddingBox>
-            <Heading2 fontSize={18} fontWeight={700}>
-              Software Engineer
-            </Heading2>
-          </PaddingBox>
-        </Box>
-        <DeadlineBox />
-      </ListItem>
-      <ListItem>
-        <Box>
-          <Label stance="senior" />
-          <PaddingBox>
-            <Heading2 fontSize={18} fontWeight={700}>
-              Back-end Developer
-            </Heading2>
-          </PaddingBox>
-        </Box>
-        <DeadlineBox />
-      </ListItem> */}
     </>
   );
-}
+});
 
 export default RecruitListItem;
