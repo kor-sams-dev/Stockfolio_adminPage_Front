@@ -14,7 +14,6 @@ import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { ICareerAttrs } from "../../../models/ApplicationInterfaces";
 import RootStore from "../../../stores/RootStore";
-import { ICheckboxItem } from "../../../models/InputsInterfaces";
 
 const { CheckboxActions, CheckboxStore } = RootStore();
 
@@ -40,6 +39,10 @@ const InputBox = styled.div`
   align-items: center;
   flex-wrap: wrap;
 `;
+
+const handleAddList = () => {
+  console.log("경력사항 추가");
+};
 
 const ApplicationCareer = observer((): JSX.Element => {
   return (
@@ -75,7 +78,9 @@ const ApplicationCareer = observer((): JSX.Element => {
           );
         })}
       </InputBox>
-      <AddListBtn>{applicationForm.career.title}</AddListBtn>
+      <AddListBtn onClick={handleAddList}>
+        {applicationForm.career.title}
+      </AddListBtn>
     </Box>
   );
 });

@@ -39,6 +39,10 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
+const handleAddList = () => {
+  console.log("프로젝트 추가");
+};
+
 const ApplicationProject = observer((): JSX.Element => {
   return (
     <Box>
@@ -73,7 +77,9 @@ const ApplicationProject = observer((): JSX.Element => {
           );
         })}
       </InputBox>
-      <AddListBtn>{applicationForm.project.title}</AddListBtn>
+      <AddListBtn onClick={handleAddList}>
+        {applicationForm.project.title}
+      </AddListBtn>
     </Box>
   );
 });

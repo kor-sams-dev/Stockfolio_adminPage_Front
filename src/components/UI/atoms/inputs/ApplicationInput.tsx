@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 import styled, { css } from "styled-components";
 
@@ -10,10 +10,12 @@ import { IItemProps } from "../../../../models/ApplicationInterfaces";
 const { ApplicationStore, ApplicationActions } = RootStore();
 
 interface StyleProps {
-  itemWidth: number;
+  itemWidth?: number;
+  isAlertOn?: boolean;
 }
 
 const Box = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   padding-top: 24px;
@@ -37,33 +39,23 @@ const InputSection = styled.input`
   font-size: 14px;
   color: ${theme.color.black};
   ${({ type }) =>
-    (type === "file" &&
-      css`
-        display: none;
-      `) ||
-    (type === "date" &&
-      css`
-        &::before {
-          content: "";
-          position: absolute;
-          color: ${theme.color.grey1};
-          letter-spacing: 0.7px;
-          pointer-events: all;
-        }
-        &::-webkit-calendar-picker-indicator {
-          opacity: 0.2;
-        }
-        &::-webkit-datetime-edit-year-field,
-        &::-webkit-datetime-edit-month-field,
-        &::-webkit-datetime-edit-day-field,
-        &::-webkit-datetime-edit-text {
-          color: ${theme.color.grey1};
-        }
-      `)}
-
+    type === "file" &&
+    css`
+      display: none;
+    `}
   &::placeholder {
     color: ${theme.color.grey1};
   }
+`;
+
+const Alert = styled.span`
+  position: absolute;
+  bottom: -20px;
+  left: 5px;
+  font-size: 12px;
+  color: ${theme.color.blue};
+  opacity: ${({ isAlertOn }: StyleProps) => (isAlertOn ? 1 : 0)};
+  transition: opacity 0.2s ease-out;
 `;
 
 const Label = styled.label`
@@ -115,12 +107,14 @@ const ApplicationInput = observer(
     onChange,
     item,
   }: React.InputHTMLAttributes<HTMLInputElement> & IAddProps): JSX.Element => {
+    const [isAlertOn, setIsAlertOn] = useState(false);
     return (
       <Box itemWidth={item.itemWidth}>
         <Title>{item.title}</Title>
-        {item.type === "file" ? (
+        {(item.type === "file" && (
           <>
             <UploadedFile
+              required
               disabled
               value={
                 ApplicationStore.portfolio.portfolioFile || item.placeholder
@@ -133,9 +127,33 @@ const ApplicationInput = observer(
               />
             </Label>
           </>
-        ) : (
-          <InputSection type={item.type} onChange={onChange} />
-        )}
+        )) ||
+          (item.type === "date" && (
+            <>
+              <InputSection
+                required
+                placeholder={item.placeholder}
+                type="text"
+                onChange={onChange}
+                onFocus={() => {
+                  setIsAlertOn(true);
+                }}
+                onBlur={() => {
+                  setIsAlertOn(false);
+                }}
+              />
+              <Alert isAlertOn={isAlertOn}>
+                연도/월/일 형식으로 입력해주세요
+              </Alert>
+            </>
+          )) || (
+            <InputSection
+              required
+              placeholder={item.placeholder}
+              type={item.type}
+              onChange={onChange}
+            />
+          )}
       </Box>
     );
   }

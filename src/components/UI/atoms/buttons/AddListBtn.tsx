@@ -28,12 +28,14 @@ const Text = styled.span`
   color: ${theme.color.blue};
 `;
 
-const handleAddList = () => {};
-
-const AddListBtn = ({ children }: ChildrenProps): JSX.Element => {
+const AddListBtn = ({
+  children,
+  onClick,
+}: React.ButtonHTMLAttributes<HTMLButtonElement> &
+  ChildrenProps): JSX.Element => {
   return (
     <Box>
-      <Button onClick={handleAddList}>
+      <Button onClick={onClick}>
         <Img src="./images/addList.png" alt="추가하기" />
         <Text>{children} 추가</Text>
       </Button>

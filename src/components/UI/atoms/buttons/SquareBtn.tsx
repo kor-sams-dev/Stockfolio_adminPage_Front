@@ -24,16 +24,19 @@ const Button = styled.button`
 
 function SquareBtn({
   children,
+  onClick,
   isFilled,
   btnWidth,
   btnColor,
   fontSize,
   fontColor,
   fontWeight,
-}: SquareBtnProps): JSX.Element {
+}: React.ButtonHTMLAttributes<HTMLButtonElement> &
+  SquareBtnProps): JSX.Element {
   return (
     <Button
       type="button"
+      onClick={onClick}
       isFilled={isFilled}
       btnWidth={btnWidth}
       btnColor={btnColor}
