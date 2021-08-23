@@ -27,6 +27,7 @@ function SquareBtn({
   fontSize,
   fontColor,
   fontWeight,
+  className,
 }: SquareBtnProps): JSX.Element {
   return (
     <Button
@@ -37,6 +38,7 @@ function SquareBtn({
       fontSize={fontSize}
       fontColor={fontColor}
       fontWeight={fontWeight}
+      className={className}
     >
       {children}
     </Button>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 
 import theme from "../../../styles/theme";
 
@@ -7,7 +8,7 @@ const UnderLineBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 130px;
   width: 100%;
   border-bottom: 1px solid ${theme.color.greyLight2};
 `;
@@ -20,7 +21,7 @@ const RecruitMenuList = styled.ul`
 
 const RecruitMenu = styled.li`
   position: relative;
-  margin-left: 60px;
+  margin: 0 30px;
   padding: 15px;
   color: ${theme.color.lilac};
   font-weight: 400;
@@ -62,16 +63,17 @@ const RecruitMenu = styled.li`
   }
 `;
 
-function RecruitMenuBar(): JSX.Element {
+const RecruitMenuBar = observer((): JSX.Element => {
+  const menu = ["지원하기", "채용 과정", "스폴러 소개"];
   return (
     <UnderLineBox>
       <RecruitMenuList>
-        <RecruitMenu>지원하기</RecruitMenu>
-        <RecruitMenu>채용 과정</RecruitMenu>
-        <RecruitMenu>스폴러 소개</RecruitMenu>
+        {menu.map(li => {
+          return <RecruitMenu key={li}>{li}</RecruitMenu>;
+        })}
       </RecruitMenuList>
     </UnderLineBox>
   );
-}
+});
 
 export default RecruitMenuBar;
