@@ -14,14 +14,21 @@ interface SquareBtnProps extends TextProps {
   btnWidth: number;
   isFilled: boolean;
   btnColor: string;
+  className?: string;
 }
 
 interface LabelProps {
   stance: "senior" | "junior";
 }
 
+interface QuantityLabelProps {
+  quantity?: number | 0;
+  className?: string;
+}
+
 interface DescProps extends TextProps {
   lineHeight?: number;
+  className?: string;
 }
 
 interface ImgProps {
@@ -43,6 +50,13 @@ interface InputProps {
   name: string;
 }
 
+interface ApplyInputProps {
+  type: string;
+  placeholder: string;
+  name: string;
+  className?: string;
+}
+
 interface SelectProps {
   name: string;
 }
@@ -55,11 +69,13 @@ export type {
   TextProps,
   SquareBtnProps,
   LabelProps,
+  QuantityLabelProps,
   DescProps,
   ImgProps,
   IdxProps,
   CheckBoxProps,
   InputProps,
+  ApplyInputProps,
   SelectProps,
   InnerProps,
 };

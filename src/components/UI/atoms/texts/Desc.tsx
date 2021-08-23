@@ -16,6 +16,7 @@ function Desc({
   fontSize,
   fontWeight,
   lineHeight,
+  className,
 }: DescProps): JSX.Element {
   return (
     <Text
@@ -23,6 +24,7 @@ function Desc({
       fontSize={fontSize}
       fontWeight={fontWeight}
       lineHeight={lineHeight}
+      className={className}
     >
       {children}
     </Text>
