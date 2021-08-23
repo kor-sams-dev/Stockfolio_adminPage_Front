@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { observer } from "mobx-react";
@@ -39,11 +39,12 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const handleAddList = () => {
-  console.log("프로젝트 추가");
-};
-
 const ApplicationProject = observer((): JSX.Element => {
+  const [listUnit, setListUnit] = useState(applicationForm.project.item);
+
+  const handleAddList = () => {
+    setListUnit(prev => [...prev, ...applicationForm.project.item]);
+  };
   return (
     <Box>
       <CheckBox
@@ -61,10 +62,10 @@ const ApplicationProject = observer((): JSX.Element => {
         {applicationForm.project.desc}
       </Desc>
       <InputBox>
-        {applicationForm.project.item.map(item => {
+        {listUnit.map((item, idx, arr) => {
           return (
             <ApplicationInput
-              key={item.name}
+              key={`${item.name}_${arr.length - idx}`}
               item={item}
               onChange={e =>
                 ApplicationActions.setInput(

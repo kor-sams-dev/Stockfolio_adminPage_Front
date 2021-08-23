@@ -24,7 +24,7 @@ const TextSection = styled.textarea`
   margin-top: 6px;
   padding: 16px;
   height: 206px;
-  background: ${theme.color.lilacLight};
+  background: ${theme.color.greyLight1};
   border-radius: 8px;
   font-size: 14px;
   color: ${theme.color.black};

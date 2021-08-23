@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -15,7 +15,7 @@ import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { ICareerAttrs } from "../../../models/ApplicationInterfaces";
 import RootStore from "../../../stores/RootStore";
 
-const { CheckboxActions, CheckboxStore } = RootStore();
+const { CheckboxActions, CheckboxStore, ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -40,11 +40,13 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const handleAddList = () => {
-  console.log("경력사항 추가");
-};
-
 const ApplicationCareer = observer((): JSX.Element => {
+  const [listUnit, setListUnit] = useState(applicationForm.career.item);
+
+  const handleAddList = () => {
+    setListUnit(prev => prev.concat(applicationForm.career.item));
+  };
+
   return (
     <Box>
       <CheckBox
@@ -62,10 +64,10 @@ const ApplicationCareer = observer((): JSX.Element => {
         {applicationForm.career.desc}
       </Desc>
       <InputBox>
-        {applicationForm.career.item.map(item => {
+        {listUnit.map((item, idx, arr) => {
           return (
             <ApplicationInput
-              key={item.name}
+              key={`${item.name}_${arr.length - idx}`}
               item={item}
               onChange={e =>
                 ApplicationActions.setInput(

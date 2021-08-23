@@ -1,7 +1,9 @@
 import { action, observable } from "mobx";
 import {
   IApplicationForm,
+  ICareerAttrs,
   IEducationAttrs,
+  IProjectAttrs,
 } from "../models/ApplicationInterfaces";
 
 const ApplicationStore: IApplicationForm = observable({

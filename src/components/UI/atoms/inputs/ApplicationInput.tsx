@@ -34,7 +34,7 @@ const InputSection = styled.input`
   margin-top: 6px;
   padding: 16px;
   height: 54px;
-  background: ${theme.color.lilacLight};
+  background: ${theme.color.greyLight1};
   border-radius: 8px;
   font-size: 14px;
   color: ${theme.color.black};
@@ -45,6 +45,10 @@ const InputSection = styled.input`
     `}
   &::placeholder {
     color: ${theme.color.grey1};
+  }
+
+  &.notFilled {
+    border: 1px solid ${theme.color.red};
   }
 `;
 
@@ -63,7 +67,7 @@ const Label = styled.label`
   margin-top: 6px;
   padding: 19px 16px 15px;
   height: 54px;
-  background: ${theme.color.lilacLight};
+  background: ${theme.color.greyLight1};
   border-radius: 8px;
   font-size: 14px;
   color: ${theme.color.grey1};
@@ -114,7 +118,6 @@ const ApplicationInput = observer(
         {(item.type === "file" && (
           <>
             <UploadedFile
-              required
               disabled
               value={
                 ApplicationStore.portfolio.portfolioFile || item.placeholder
@@ -131,7 +134,6 @@ const ApplicationInput = observer(
           (item.type === "date" && (
             <>
               <InputSection
-                required
                 placeholder={item.placeholder}
                 type="text"
                 onChange={onChange}
@@ -148,7 +150,6 @@ const ApplicationInput = observer(
             </>
           )) || (
             <InputSection
-              required
               placeholder={item.placeholder}
               type={item.type}
               onChange={onChange}

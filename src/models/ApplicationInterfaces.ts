@@ -10,6 +10,11 @@ export interface ICareerAttrs {
   joinDate: string | null;
   leavingDate: string | null;
   businessTask: string | null;
+  // companyName: string[];
+  // rank: string[];
+  // joinDate: string[];
+  // leavingDate: string[];
+  // businessTask: string[];
 }
 
 export interface IProjectAttrs {

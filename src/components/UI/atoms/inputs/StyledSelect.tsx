@@ -40,7 +40,7 @@ const SelectSection = styled.div`
   padding: 16px;
   height: 54px;
   background: url("./images/selectArrow.png") no-repeat,
-    ${theme.color.lilacLight};
+    ${theme.color.greyLight1};
   background-position: 90% 50%;
   border-radius: 8px;
   font-size: 14px;
