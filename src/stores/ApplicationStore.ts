@@ -55,7 +55,6 @@ const ApplicationActions = observable({
   ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      // ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
       ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
     }
   }),

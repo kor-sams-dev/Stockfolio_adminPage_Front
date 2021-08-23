@@ -113,8 +113,10 @@ const ApplicationInput = observer(
   ({
     onChange,
     item,
+    value,
   }: React.InputHTMLAttributes<HTMLInputElement> & IAddProps): JSX.Element => {
     const [isAlertOn, setIsAlertOn] = useState(false);
+
     return (
       <Box itemWidth={item.itemWidth}>
         <Title>{item.title}</Title>
@@ -157,6 +159,7 @@ const ApplicationInput = observer(
               placeholder={item.placeholder}
               type={item.type}
               onChange={onChange}
+              value={value}
             />
           )}
       </Box>

@@ -1,8 +1,12 @@
+import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import applicationForm from "../../assets/data/applicationForm";
-import { IApplicationForm } from "../../models/ApplicationInterfaces";
+import {
+  IApplicationForm,
+  IBasicInfoAttrs,
+} from "../../models/ApplicationInterfaces";
 import RootStore from "../../stores/RootStore";
 
 import Inner from "../../styles/Inner";
@@ -18,7 +22,7 @@ import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
 import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
 import ApplicationProject from "../UI/organisms/ApplicationProject";
 
-const { ApplicationStore } = RootStore();
+const { ApplicationStore, ApplicationActions } = RootStore();
 
 const Box = styled.div`
   display: flex;
@@ -61,7 +65,7 @@ const handleSubmit = () => {
   }
   formData.append("content", JSON.stringify({ ...ApplicationStore }));
 
-  fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
+  fetch(`http://192.168.35.119:8000/recruits/2/applications`, {
     method: "POST",
     headers: {
       Authorization:
@@ -77,22 +81,50 @@ const handleSubmit = () => {
   });
 };
 
-const Application = (): JSX.Element => {
-  const location = useLocation();
+const Application = observer(() => {
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   const queryObj = stringToQbj(location.pathname);
+  //   const applyState = queryObj.apply;
+
+  //   if (applyState === "register") return;
+  //   if (applyState === "modify") {
+  //     fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
+  //       headers: {
+  //         Authorization:
+  //           "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+  //       },
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
-    const queryObj = stringToQbj(location.pathname);
-    const applyState = queryObj.apply;
+    fetch(`https://api-we.stockfolio.ai/recruits/2/applications`, {
+      headers: {
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        const content = JSON.parse(res.result.content);
+        // ApplicationActions.setInput(
+        //   "basicInfo",
+        //   "userName",
+        //   content.basicInfo.userName
+        // );
 
-    if (applyState === "register") return;
-    if (applyState === "modify") {
-      fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
-        headers: {
-          Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-        },
+        Object.keys(content).forEach(sort => {
+          Object.keys(content[sort]).forEach(name =>
+            ApplicationActions.setInput(
+              "basicInfo",
+              name as keyof IBasicInfoAttrs,
+              content[sort][name]
+            )
+          );
+        });
       });
-    }
   }, []);
 
   return (
@@ -123,6 +155,6 @@ const Application = (): JSX.Element => {
       </Inner>
     </Box>
   );
-};
+});
 
 export default Application;

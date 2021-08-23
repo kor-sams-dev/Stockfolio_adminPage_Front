@@ -40,22 +40,13 @@ export interface IEducationAttrs {
   graduateState: string | null;
 }
 
-// export interface IApplicationForm {
-//   basicInfo: IBasicInfoAttrs;
-//   career: ICareerAttrs;
-//   project: IProjectAttrs;
-//   introduction: IIntroductionAttrs;
-//   portfolio: IPortfolioAttrs;
-//   education: IEducationAttrs;
-// }
-
 export interface IApplicationForm {
-  basicInfo: IBasicInfoAttrs[];
-  career: ICareerAttrs[];
-  project: IProjectAttrs[];
-  introduction: IIntroductionAttrs[];
-  portfolio: IPortfolioAttrs[];
-  education: IEducationAttrs[];
+  basicInfo: IBasicInfoAttrs;
+  career: ICareerAttrs;
+  project: IProjectAttrs;
+  introduction: IIntroductionAttrs;
+  portfolio: IPortfolioAttrs;
+  education: IEducationAttrs;
 }
 
 export interface IItemProps {

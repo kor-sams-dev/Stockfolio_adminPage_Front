@@ -11,7 +11,7 @@ import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import RootStore from "../../../stores/RootStore";
 import { IBasicInfoAttrs } from "../../../models/ApplicationInterfaces";
 
-const { ApplicationActions } = RootStore();
+const { ApplicationActions, ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -68,6 +68,9 @@ const ApplicationBasicInfo = (): JSX.Element => {
             <ApplicationInput
               key={item.name}
               item={item}
+              value={
+                ApplicationStore.basicInfo[item.name as keyof IBasicInfoAttrs]
+              }
               onChange={e =>
                 ApplicationActions.setInput(
                   "basicInfo",
