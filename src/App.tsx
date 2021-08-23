@@ -12,7 +12,24 @@ function App(): JSX.Element {
       <Nav />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/recruit" component={Recruit} />
+        <Route exact path="/recruit/dev" component={Recruit} />
+        <Route exact path="/recruit/:department" component={Recruit} />
+        <Route exact path="/recruit/:department/:id" component={Recruit} />
+        <Route
+          exact
+          path="/recruit/:department/:id/register"
+          component={Recruit}
+        />
+        <Route
+          exact
+          path="/recruit/:department/:id/modify"
+          component={Recruit}
+        />
+        <Route
+          exact
+          path="/recruit/:department/:id/resume"
+          component={Recruit}
+        />
       </Switch>
       <Footer />
     </BrowserRouter>

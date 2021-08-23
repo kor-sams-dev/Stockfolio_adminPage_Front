@@ -9,7 +9,7 @@ import ApplyForm from "../templates/ApplyForm";
 import OverViewCard from "../UI/molecules/OverViewCard";
 import TeamIntroListBox from "../UI/organisms/TeamIntroListBox";
 
-const TeamIntroBox = styled.div`
+const Box = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ const TeamIntroBox = styled.div`
 
 function Recruit(): JSX.Element {
   return (
-    <TeamIntroBox>
+    <Box>
       <RecruitMenuBar />
       <Inner size="narrow">
         <ApplyList />
@@ -27,7 +27,7 @@ function Recruit(): JSX.Element {
         {/* <OverViewCard /> */}
         {/* <TeamIntroListBox /> */}
       </Inner>
-    </TeamIntroBox>
+    </Box>
   );
 }
 
