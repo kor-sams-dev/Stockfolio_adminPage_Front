@@ -10,11 +10,6 @@ export interface ICareerAttrs {
   joinDate: string | null;
   leavingDate: string | null;
   businessTask: string | null;
-  // companyName: string[];
-  // rank: string[];
-  // joinDate: string[];
-  // leavingDate: string[];
-  // businessTask: string[];
 }
 
 export interface IProjectAttrs {
@@ -31,7 +26,7 @@ export interface IIntroductionAttrs {
 }
 
 export interface IPortfolioAttrs {
-  portfolioFile: string | null;
+  portfolioFile: File | null;
   portfolioUrl: string | null;
 }
 
@@ -45,13 +40,22 @@ export interface IEducationAttrs {
   graduateState: string | null;
 }
 
+// export interface IApplicationForm {
+//   basicInfo: IBasicInfoAttrs;
+//   career: ICareerAttrs;
+//   project: IProjectAttrs;
+//   introduction: IIntroductionAttrs;
+//   portfolio: IPortfolioAttrs;
+//   education: IEducationAttrs;
+// }
+
 export interface IApplicationForm {
-  basicInfo: IBasicInfoAttrs;
-  career: ICareerAttrs;
-  project: IProjectAttrs;
-  introduction: IIntroductionAttrs;
-  portfolio: IPortfolioAttrs;
-  education: IEducationAttrs;
+  basicInfo: IBasicInfoAttrs[];
+  career: ICareerAttrs[];
+  project: IProjectAttrs[];
+  introduction: IIntroductionAttrs[];
+  portfolio: IPortfolioAttrs[];
+  education: IEducationAttrs[];
 }
 
 export interface IItemProps {

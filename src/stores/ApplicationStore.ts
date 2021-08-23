@@ -1,9 +1,7 @@
 import { action, observable } from "mobx";
 import {
   IApplicationForm,
-  ICareerAttrs,
   IEducationAttrs,
-  IProjectAttrs,
 } from "../models/ApplicationInterfaces";
 
 const ApplicationStore: IApplicationForm = observable({
@@ -57,7 +55,8 @@ const ApplicationActions = observable({
   ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      ApplicationStore.portfolio.portfolioFile = e.target.files[0].name;
+      // ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
+      ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
     }
   }),
   setSelectValue: action((name: keyof IEducationAttrs, option: string) => {

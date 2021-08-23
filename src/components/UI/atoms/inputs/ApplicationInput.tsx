@@ -94,8 +94,11 @@ const UploadedFile = styled.input`
   position: absolute;
   bottom: 20px;
   left: 15px;
+  width: calc(100% - 95px);
+  background: transparent;
   font-size: 14px;
   z-index: 9;
+  overflow: hidden;
   color: ${({ value }) =>
     value === "첨부파일을 업로드해주세요."
       ? theme.color.grey1
@@ -120,7 +123,8 @@ const ApplicationInput = observer(
             <UploadedFile
               disabled
               value={
-                ApplicationStore.portfolio.portfolioFile || item.placeholder
+                ApplicationStore.portfolio.portfolioFile?.name ||
+                item.placeholder
               }
             />
             <Label>

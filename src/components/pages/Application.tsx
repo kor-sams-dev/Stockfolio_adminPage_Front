@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import applicationForm from "../../assets/data/applicationForm";
 import { IApplicationForm } from "../../models/ApplicationInterfaces";
@@ -52,40 +52,47 @@ const handleCheckRequired = () => {
   });
 };
 
-// 리스트 추가, required 검사
-
 const handleSubmit = () => {
   // const isAllRequiredFilled = handleCheckRequired();
-  console.log("submitted");
 
-  // const formData = new FormData();
-  // if (ApplicationStore.portfolio.portfolioFile) {
-  //   formData.append("portfolio", ApplicationStore.portfolio.portfolioFile);
-  // }
-  // formData.append("content", JSON.stringify({ ...ApplicationStore }));
-  // fetch("http://192.168.35.13:8000/recruits/2/applications", {
-  //   method: "POST",
-  //   headers: {
-  //     Authorization:
-  //       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-  //   },
-  //   body: formData,
-  // }).then(res => {
-  //   if (res.status === 200 || res.status === 201) {
-  //     alert("제출완료!");
-  //   } else if (res.status > 399) {
-  //     alert("오류가 발생했음...");
-  //   }
-  // });
+  const formData = new FormData();
+  if (ApplicationStore.portfolio.portfolioFile) {
+    formData.append("portfolio", ApplicationStore.portfolio.portfolioFile);
+  }
+  formData.append("content", JSON.stringify({ ...ApplicationStore }));
+
+  fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
+    method: "POST",
+    headers: {
+      Authorization:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+    },
+    body: formData,
+  }).then(res => {
+    if (res.status === 200 || res.status === 201) {
+      alert("제출완료!");
+    } else if (res.status > 399) {
+      alert("오류가 발생했음...");
+    }
+  });
 };
 
 const Application = (): JSX.Element => {
   const location = useLocation();
-  const history = useHistory();
-  console.log(location, history);
+
   useEffect(() => {
-    console.log("didMount!");
-    // const queryObj = stringToQbj()
+    const queryObj = stringToQbj(location.pathname);
+    const applyState = queryObj.apply;
+
+    if (applyState === "register") return;
+    if (applyState === "modify") {
+      fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
+        headers: {
+          Authorization:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+        },
+      });
+    }
   }, []);
 
   return (
