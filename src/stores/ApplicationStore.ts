@@ -6,40 +6,40 @@ import {
 
 const ApplicationStore: IApplicationForm = observable({
   basicInfo: {
-    userName: null,
-    email: null,
-    phoneNumber: null,
+    userName: "",
+    email: "",
+    phoneNumber: "",
   },
   career: {
-    companyName: null,
-    rank: null,
-    joinDate: null,
-    leavingDate: null,
-    businessTask: null,
+    companyName: "",
+    rank: "",
+    joinDate: "",
+    leavingDate: "",
+    businessTask: "",
   },
   project: {
-    projectName: null,
-    association: null,
-    startDate: null,
-    endDate: null,
-    mainStack: null,
-    projectInfo: null,
+    projectName: "",
+    association: "",
+    startDate: "",
+    endDate: "",
+    mainStack: "",
+    projectInfo: "",
   },
   introduction: {
-    aboutMe: null,
+    aboutMe: "",
   },
   portfolio: {
-    portfolioFile: null,
-    portfolioUrl: null,
+    portfolioFile: "",
+    portfolioUrl: "",
   },
   education: {
-    background: null,
-    schoolName: null,
-    major: null,
-    grade: null,
-    enrollDate: null,
-    graduateDate: null,
-    graduateState: null,
+    background: "",
+    schoolName: "",
+    major: "",
+    grade: "",
+    enrollDate: "",
+    graduateDate: "",
+    graduateState: "",
   },
 });
 
@@ -54,9 +54,9 @@ const ApplicationActions = observable({
     }
   ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.length) {
-      ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
-    }
+    // if (e.target.files?.length) {
+    //   ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
+    // }
   }),
   setSelectValue: action((name: keyof IEducationAttrs, option: string) => {
     ApplicationStore.education[name] = option;

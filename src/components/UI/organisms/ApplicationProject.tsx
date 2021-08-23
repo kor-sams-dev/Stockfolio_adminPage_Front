@@ -14,7 +14,7 @@ import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { IProjectAttrs } from "../../../models/ApplicationInterfaces";
 import RootStore from "../../../stores/RootStore";
 
-const { CheckboxStore, CheckboxActions } = RootStore();
+const { CheckboxStore, CheckboxActions, ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -67,6 +67,7 @@ const ApplicationProject = observer((): JSX.Element => {
             <ApplicationInput
               key={`${item.name}_${arr.length - idx}`}
               item={item}
+              value={ApplicationStore.project[item.name as keyof IProjectAttrs]}
               onChange={e =>
                 ApplicationActions.setInput(
                   "project",

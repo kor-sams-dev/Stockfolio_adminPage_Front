@@ -1,43 +1,44 @@
 export interface IBasicInfoAttrs {
-  userName: string | null;
-  email: string | null;
-  phoneNumber: string | null;
+  userName: string;
+  email: string;
+  phoneNumber: string;
 }
 
 export interface ICareerAttrs {
-  companyName: string | null;
-  rank: string | null;
-  joinDate: string | null;
-  leavingDate: string | null;
-  businessTask: string | null;
+  companyName: string;
+  rank: string;
+  joinDate: string;
+  leavingDate: string;
+  businessTask: string;
 }
 
 export interface IProjectAttrs {
-  projectName: string | null;
-  association: string | null;
-  startDate: string | null;
-  endDate: string | null;
-  mainStack: string | null;
-  projectInfo: string | null;
+  projectName: string;
+  association: string;
+  startDate: string;
+  endDate: string;
+  mainStack: string;
+  projectInfo: string;
 }
 
 export interface IIntroductionAttrs {
-  aboutMe: string | null;
+  aboutMe: string;
 }
 
 export interface IPortfolioAttrs {
-  portfolioFile: File | null;
-  portfolioUrl: string | null;
+  // portfolioFile: File | undefined;
+  portfolioFile: string;
+  portfolioUrl: string;
 }
 
 export interface IEducationAttrs {
-  background: string | null;
-  schoolName: string | null;
-  major: string | null;
-  grade: string | null;
-  enrollDate: string | null;
-  graduateDate: string | null;
-  graduateState: string | null;
+  background: string;
+  schoolName: string;
+  major: string;
+  grade: string;
+  enrollDate: string;
+  graduateDate: string;
+  graduateState: string;
 }
 
 export interface IApplicationForm {

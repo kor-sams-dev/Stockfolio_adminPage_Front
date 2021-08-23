@@ -6,6 +6,11 @@ import applicationForm from "../../assets/data/applicationForm";
 import {
   IApplicationForm,
   IBasicInfoAttrs,
+  ICareerAttrs,
+  IEducationAttrs,
+  IIntroductionAttrs,
+  IPortfolioAttrs,
+  IProjectAttrs,
 } from "../../models/ApplicationInterfaces";
 import RootStore from "../../stores/RootStore";
 
@@ -109,20 +114,49 @@ const Application = observer(() => {
       .then(res => res.json())
       .then(res => {
         const content = JSON.parse(res.result.content);
-        // ApplicationActions.setInput(
-        //   "basicInfo",
-        //   "userName",
-        //   content.basicInfo.userName
-        // );
-
+        console.log(content);
+        // Object.keys(content).forEach(sort => {
+        //   Object.keys(content[sort]).forEach(name =>
+        //     ApplicationActions.setInput(
+        //       sort as keyof IApplicationForm,
+        //       name as keyof IApplicationForm[typeof sort],
+        //       content[sort][name]
+        //     )
+        //   );
+        // });
         Object.keys(content).forEach(sort => {
-          Object.keys(content[sort]).forEach(name =>
+          Object.keys(content[sort]).forEach(name => {
             ApplicationActions.setInput(
               "basicInfo",
               name as keyof IBasicInfoAttrs,
               content[sort][name]
-            )
-          );
+            );
+            ApplicationActions.setInput(
+              "career",
+              name as keyof ICareerAttrs,
+              content[sort][name]
+            );
+            ApplicationActions.setInput(
+              "project",
+              name as keyof IProjectAttrs,
+              content[sort][name]
+            );
+            ApplicationActions.setInput(
+              "introduction",
+              name as keyof IIntroductionAttrs,
+              content[sort][name]
+            );
+            ApplicationActions.setInput(
+              "portfolio",
+              name as keyof IPortfolioAttrs,
+              content[sort][name]
+            );
+            ApplicationActions.setInput(
+              "education",
+              name as keyof IEducationAttrs,
+              content[sort][name]
+            );
+          });
         });
       });
   }, []);

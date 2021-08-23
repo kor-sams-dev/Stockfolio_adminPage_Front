@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { observer } from "mobx-react";
 import Textarea from "../atoms/inputs/Textarea";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
@@ -9,6 +10,9 @@ import theme from "../../../styles/theme";
 import applicationForm from "../../../assets/data/applicationForm";
 import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { IIntroductionAttrs } from "../../../models/ApplicationInterfaces";
+import RootStore from "../../../stores/RootStore";
+
+const { ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -33,7 +37,7 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationIntroduction = (): JSX.Element => {
+const ApplicationIntroduction = observer((): JSX.Element => {
   return (
     <Box>
       <HeaderBox>
@@ -51,6 +55,7 @@ const ApplicationIntroduction = (): JSX.Element => {
             <Textarea
               key={item.name}
               item={item}
+              value={ApplicationStore.introduction.aboutMe}
               onChange={e =>
                 ApplicationActions.setInput(
                   "introduction",
@@ -64,6 +69,6 @@ const ApplicationIntroduction = (): JSX.Element => {
       </InputBox>
     </Box>
   );
-};
+});
 
 export default ApplicationIntroduction;

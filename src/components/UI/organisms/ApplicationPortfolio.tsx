@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { observer } from "mobx-react";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
@@ -9,6 +10,9 @@ import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import { ApplicationActions } from "../../../stores/ApplicationStore";
 import { IPortfolioAttrs } from "../../../models/ApplicationInterfaces";
+import RootStore from "../../../stores/RootStore";
+
+const { ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -44,7 +48,7 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationPortfolio = (): JSX.Element => {
+const ApplicationPortfolio = observer((): JSX.Element => {
   return (
     <Box>
       <Required>
@@ -65,6 +69,9 @@ const ApplicationPortfolio = (): JSX.Element => {
             <ApplicationInput
               key={item.name}
               item={item}
+              value={
+                ApplicationStore.portfolio[item.name as keyof IPortfolioAttrs]
+              }
               onChange={e =>
                 ApplicationActions.setInput(
                   "portfolio",
@@ -78,6 +85,6 @@ const ApplicationPortfolio = (): JSX.Element => {
       </InputBox>
     </Box>
   );
-};
+});
 
 export default ApplicationPortfolio;

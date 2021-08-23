@@ -125,9 +125,12 @@ const ApplicationInput = observer(
             <UploadedFile
               disabled
               value={
-                ApplicationStore.portfolio.portfolioFile?.name ||
-                item.placeholder
+                ApplicationStore.portfolio.portfolioFile || item.placeholder
               }
+              // value={
+              //   ApplicationStore.portfolio.portfolioFile?.name ||
+              //   item.placeholder
+              // }
             />
             <Label>
               <InputSection
@@ -142,6 +145,7 @@ const ApplicationInput = observer(
               <InputSection
                 placeholder={item.placeholder}
                 type="text"
+                value={value}
                 onChange={onChange}
                 onFocus={() => {
                   setIsAlertOn(true);
