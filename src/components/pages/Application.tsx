@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import applicationForm from "../../assets/data/applicationForm";
 import { IApplicationForm } from "../../models/ApplicationInterfaces";
@@ -6,6 +7,7 @@ import RootStore from "../../stores/RootStore";
 
 import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
+import { stringToQbj } from "../../utils/query";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
@@ -78,8 +80,12 @@ const handleSubmit = () => {
 };
 
 const Application = (): JSX.Element => {
+  const location = useLocation();
+  const history = useHistory();
+  console.log(location, history);
   useEffect(() => {
     console.log("didMount!");
+    // const queryObj = stringToQbj()
   }, []);
 
   return (
