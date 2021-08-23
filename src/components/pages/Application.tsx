@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import applicationForm from "../../assets/data/applicationForm";
 import { IApplicationForm } from "../../models/ApplicationInterfaces";
@@ -78,6 +78,10 @@ const handleSubmit = () => {
 };
 
 const Application = (): JSX.Element => {
+  useEffect(() => {
+    console.log("didMount!");
+  }, []);
+
   return (
     <Box>
       <Inner size="wide">
