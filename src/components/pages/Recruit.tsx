@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import RecruitProcess from "../templates/RecruitProcess";
-import TeamIntro from "../templates/TeamIntro";
-
 import RecruitMenuBar from "../UI/organisms/RecruitMenuBar";
+import Inner from "../../styles/Inner";
+import ApplyList from "../templates/ApplyList";
+import ApplyDesc from "../templates/ApplyDesc";
+import ApplyForm from "../templates/ApplyForm";
+import OverViewCard from "../UI/molecules/OverViewCard";
+import TeamIntroListBox from "../UI/organisms/TeamIntroListBox";
 
-const RecruitBox = styled.div`
+const TeamIntroBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,11 +18,16 @@ const RecruitBox = styled.div`
 
 function Recruit(): JSX.Element {
   return (
-    <RecruitBox>
+    <TeamIntroBox>
       <RecruitMenuBar />
-      <RecruitProcess />
-      {/* <TeamIntro /> */}
-    </RecruitBox>
+      <Inner size="narrow">
+        <ApplyList />
+        {/* <ApplyDesc /> */}
+        {/* <ApplyForm /> */}
+        {/* <OverViewCard /> */}
+        {/* <TeamIntroListBox /> */}
+      </Inner>
+    </TeamIntroBox>
   );
 }
 
