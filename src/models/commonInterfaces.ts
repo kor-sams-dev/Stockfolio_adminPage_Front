@@ -40,10 +40,6 @@ interface IdxProps {
   idx: number;
 }
 
-interface CheckBoxProps {
-  name: string;
-}
-
 interface InputProps {
   type: string;
   placeholder: string;
@@ -66,6 +62,7 @@ interface InnerProps {
 }
 
 export type {
+  ChildrenProps,
   TextProps,
   SquareBtnProps,
   LabelProps,
@@ -73,7 +70,6 @@ export type {
   DescProps,
   ImgProps,
   IdxProps,
-  CheckBoxProps,
   InputProps,
   ApplyInputProps,
   SelectProps,
