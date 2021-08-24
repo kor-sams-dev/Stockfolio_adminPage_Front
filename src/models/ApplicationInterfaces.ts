@@ -26,7 +26,6 @@ export interface IIntroductionAttrs {
 }
 
 export interface IPortfolioAttrs {
-  portfolioFile: string;
   portfolioUrl: string;
 }
 
@@ -44,7 +43,7 @@ export interface IFileAttrs {
   portfolio: File | undefined;
 }
 
-export interface IResumeForm {
+export interface IApplicationForm {
   basicInfo: IBasicInfoAttrs;
   introduction: IIntroductionAttrs;
   portfolio: IPortfolioAttrs;
@@ -52,20 +51,20 @@ export interface IResumeForm {
   file: IFileAttrs;
 }
 
-export interface IResumeListForm {
+export interface IApplicationListForm {
   career: ICareerAttrs[];
   project: IProjectAttrs[];
 }
 
-export interface IApplicationForm {
-  basicInfo: IBasicInfoAttrs;
-  career: ICareerAttrs[];
-  project: IProjectAttrs;
-  introduction: IIntroductionAttrs;
-  portfolio: IPortfolioAttrs;
-  education: IEducationAttrs;
-  file: IFileAttrs;
-}
+// export interface IApplicationForm {
+//   basicInfo: IBasicInfoAttrs;
+//   career: ICareerAttrs[];
+//   project: IProjectAttrs;
+//   introduction: IIntroductionAttrs;
+//   portfolio: IPortfolioAttrs;
+//   education: IEducationAttrs;
+//   file: IFileAttrs;
+// }
 
 export interface IItemProps {
   name: string;

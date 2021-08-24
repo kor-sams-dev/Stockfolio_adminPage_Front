@@ -1,11 +1,13 @@
 import { action, observable } from "mobx";
 import {
   IApplicationForm,
+  IApplicationListForm,
   ICareerAttrs,
   IEducationAttrs,
+  IProjectAttrs,
 } from "../models/ApplicationInterfaces";
 
-const ResumeStore = observable({
+const ApplicationStore: IApplicationForm = observable({
   basicInfo: {
     userName: "",
     email: "",
@@ -15,7 +17,6 @@ const ResumeStore = observable({
     aboutMe: "",
   },
   portfolio: {
-    portfolioFile: "",
     portfolioUrl: "",
   },
   education: {
@@ -32,7 +33,25 @@ const ResumeStore = observable({
   },
 });
 
-const ResumeListStore = observable({
+const listDefaultFormat = {
+  career: {
+    companyName: "",
+    rank: "",
+    joinDate: "",
+    leavingDate: "",
+    businessTask: "",
+  },
+  project: {
+    projectName: "",
+    association: "",
+    startDate: "",
+    endDate: "",
+    mainStack: "",
+    projectInfo: "",
+  },
+};
+
+const ApplicationListStore: IApplicationListForm = observable({
   career: [
     {
       companyName: "",
@@ -54,57 +73,6 @@ const ResumeListStore = observable({
   ],
 });
 
-const ApplicationStore: IApplicationForm = observable({
-  basicInfo: {
-    userName: "",
-    email: "",
-    phoneNumber: "",
-  },
-  career: [
-    {
-      companyName: "",
-      rank: "",
-      joinDate: "",
-      leavingDate: "",
-      businessTask: "",
-    },
-  ],
-  // career: {
-  //   companyName: "",
-  //   rank: "",
-  //   joinDate: "",
-  //   leavingDate: "",
-  //   businessTask: "",
-  // },
-  project: {
-    projectName: "",
-    association: "",
-    startDate: "",
-    endDate: "",
-    mainStack: "",
-    projectInfo: "",
-  },
-  introduction: {
-    aboutMe: "",
-  },
-  portfolio: {
-    portfolioFile: "",
-    portfolioUrl: "",
-  },
-  education: {
-    background: "",
-    schoolName: "",
-    major: "",
-    grade: "",
-    enrollDate: "",
-    graduateDate: "",
-    graduateState: "",
-  },
-  file: {
-    portfolio: undefined,
-  },
-});
-
 const ApplicationActions = observable({
   setInput: action(
     <T extends keyof IApplicationForm>(
@@ -115,13 +83,6 @@ const ApplicationActions = observable({
       ApplicationStore[sort][name] = value;
     }
   ),
-  setListInput: action(
-    (chunkIdx: number, name: keyof ICareerAttrs, value: any) => {
-      ApplicationStore.career[chunkIdx][name] = value;
-      console.log(ApplicationStore.career[0].companyName);
-      console.log(ApplicationStore.career[1].companyName);
-    }
-  ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       ApplicationStore.file.portfolio = e.target.files[0] as File;
@@ -130,11 +91,27 @@ const ApplicationActions = observable({
   setSelectValue: action((name: keyof IEducationAttrs, option: string) => {
     ApplicationStore.education[name] = option;
   }),
-  setAddCareerList: action(() => {
-    ApplicationStore.career = ApplicationStore.career.concat(
-      ApplicationStore.career
-    );
+  setCareerListInput: action(
+    (chunkIdx: number, name: keyof ICareerAttrs, value: string) => {
+      ApplicationListStore.career[chunkIdx][name] = value;
+    }
+  ),
+  setProjectListInput: action(
+    (chunkIdx: number, name: keyof IProjectAttrs, value: string) => {
+      ApplicationListStore.project[chunkIdx][name] = value;
+    }
+  ),
+  setAddList: action((sort: keyof IApplicationListForm) => {
+    if (sort === "career") {
+      ApplicationListStore.career = ApplicationListStore.career.concat(
+        listDefaultFormat.career
+      );
+    } else if (sort === "project") {
+      ApplicationListStore.project = ApplicationListStore.project.concat(
+        listDefaultFormat.project
+      );
+    }
   }),
 });
 
-export { ApplicationStore, ApplicationActions, ResumeStore, ResumeListStore };
+export { ApplicationActions, ApplicationStore, ApplicationListStore };

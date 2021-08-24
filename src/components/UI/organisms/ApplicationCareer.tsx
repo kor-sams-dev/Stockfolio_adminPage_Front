@@ -11,7 +11,10 @@ import theme from "../../../styles/theme";
 
 import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
-import { ApplicationActions } from "../../../stores/ApplicationStore";
+import {
+  ApplicationActions,
+  ApplicationListStore,
+} from "../../../stores/ApplicationStore";
 import {
   IApplicationForm,
   ICareerAttrs,
@@ -47,8 +50,8 @@ const ApplicationCareer = observer((): JSX.Element => {
   const [listUnit, setListUnit] = useState([applicationForm.career.item]);
 
   const handleAddList = () => {
+    ApplicationActions.setAddList("career");
     setListUnit(prev => [...prev, applicationForm.career.item]);
-    ApplicationActions.setAddCareerList();
   };
 
   return (
@@ -74,12 +77,12 @@ const ApplicationCareer = observer((): JSX.Element => {
               key={`${chunk}${chunkIdx - itemIdx}`}
               item={item}
               value={
-                ApplicationStore.career[chunkIdx][
+                ApplicationListStore.career[chunkIdx][
                   item.name as keyof ICareerAttrs
                 ] || ""
               }
               onChange={e =>
-                ApplicationActions.setListInput(
+                ApplicationActions.setCareerListInput(
                   chunkIdx,
                   item.name as keyof ICareerAttrs,
                   e.target.value
@@ -88,33 +91,6 @@ const ApplicationCareer = observer((): JSX.Element => {
             />
           ));
         })}
-        {/* {listUnit.map((item, idx, arr) => {
-          return (
-            <ApplicationInput
-              key={`${item.name}_${arr.length - idx}`}
-              item={item}
-              value={
-                ApplicationStore.career[idx][item.name as keyof ICareerAttrs] ||
-                ""
-              }
-              onChange={e =>
-                ApplicationActions.setListInput(
-                  "career",
-                  idx,
-                  item.name as keyof ICareerAttrs[],
-                  e.target.value
-                )
-              }
-              // onChange={e =>
-              //   ApplicationActions.setInput(
-              //     "career",
-              //     item.name as keyof ICareerAttrs,
-              //     e.target.value
-              //   )
-              // }
-            />
-          );
-        })} */}
       </InputBox>
       <AddListBtn onClick={handleAddList}>
         {applicationForm.career.title}

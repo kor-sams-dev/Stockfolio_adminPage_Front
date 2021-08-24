@@ -124,9 +124,7 @@ const ApplicationInput = observer(
           <>
             <UploadedFile
               disabled
-              value={
-                ApplicationStore.portfolio.portfolioFile || item.placeholder
-              }
+              value={ApplicationStore.file.portfolio?.name || item.placeholder}
             />
             <Label>
               <InputSection

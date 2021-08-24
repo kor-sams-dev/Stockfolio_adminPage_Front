@@ -27,6 +27,7 @@ import ApplicationProject from "../UI/organisms/ApplicationProject";
 
 import theme from "../../styles/theme";
 import { stringToQbj } from "../../utils/query";
+import { ApplicationListStore } from "../../stores/ApplicationStore";
 
 const { ApplicationStore, ApplicationActions } = RootStore();
 
@@ -69,9 +70,12 @@ const handleSubmit = () => {
   if (ApplicationStore.file.portfolio) {
     formData.append("portfolio", ApplicationStore.file.portfolio);
   }
-  formData.append("content", JSON.stringify({ ...ApplicationStore }));
+  formData.append(
+    "content",
+    JSON.stringify({ ...ApplicationStore, ...ApplicationListStore })
+  );
 
-  fetch(`http://192.168.35.119:8000/recruits/2/applications`, {
+  fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
     method: "POST",
     headers: {
       Authorization:
@@ -105,84 +109,84 @@ const Application = observer(() => {
   //   }
   // }, []);
 
-  // useEffect(() => {
-  //   fetch(`https://api-we.stockfolio.ai/recruits/2/applications`, {
-  //     headers: {
-  //       Authorization:
-  //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       const content = JSON.parse(res.result.content);
-  //       console.log(content);
-  //       // const portfolioFile = JSON.parse(res.result.portfolioFile);
-  //       // console.log(portfolioFile);
-  //       // console.log(content);
-  //       // Object.keys(content).forEach(sort => {
-  //       //   Object.keys(content[sort]).forEach(name =>
-  //       //     ApplicationActions.setInput(
-  //       //       sort as keyof IApplicationForm,
-  //       //       name as keyof IApplicationForm[typeof sort],
-  //       //       content[sort][name]
-  //       //     )
-  //       //   );
-  //       // });
-  //       Object.keys(content).forEach(sort => {
-  //         Object.keys(content[sort]).forEach((name, idx) => {
-  //           // ApplicationActions.setInput(
-  //           //   sort as keyof IApplicationForm,
-  //           //   name,
-  //           //   content[sort][name]
-  //           // );
-  //           switch (sort) {
-  //             case "career":
-  //               ApplicationActions.setListInput(
-  //                 "career",
-  //                 idx,
-  //                 name as keyof ICareerAttrs[],
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "project":
-  //               ApplicationActions.setInput(
-  //                 "project",
-  //                 name as keyof IProjectAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "introduction":
-  //               ApplicationActions.setInput(
-  //                 "introduction",
-  //                 name as keyof IIntroductionAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "portfolio":
-  //               ApplicationActions.setInput(
-  //                 "portfolio",
-  //                 name as keyof IPortfolioAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "education":
-  //               ApplicationActions.setInput(
-  //                 "education",
-  //                 name as keyof IEducationAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             default:
-  //               ApplicationActions.setInput(
-  //                 "basicInfo",
-  //                 name as keyof IBasicInfoAttrs,
-  //                 content[sort][name]
-  //               );
-  //           }
-  //         });
-  //       });
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
+      headers: {
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        const content = JSON.parse(res.result.content);
+        const { portfolioFile } = res.result;
+        // const portfolioFile = JSON.parse(res.result.portfolioFile);
+        // console.log(portfolioFile);
+        // console.log(content);
+        // Object.keys(content).forEach(sort => {
+        //   Object.keys(content[sort]).forEach(name =>
+        //     ApplicationActions.setInput(
+        //       sort as keyof IApplicationForm,
+        //       name as keyof IApplicationForm[typeof sort],
+        //       content[sort][name]
+        //     )
+        //   );
+        // });
+        Object.keys(content).forEach(sort => {
+          Object.keys(content[sort]).forEach((name, idx) => {
+            // ApplicationActions.setInput(
+            //   sort as keyof IApplicationForm,
+            //   name,
+            //   content[sort][name]
+            // );
+            switch (sort) {
+              // case "career":
+              //   ApplicationActions.setCareerListInput(
+              //     "career",
+              //     idx,
+              //     name as keyof ICareerAttrs[],
+              //     content[sort][name]
+              //   );
+              //   break;
+              // case "project":
+              //   ApplicationActions.setInput(
+              //     "project",
+              //     name as keyof IProjectAttrs,
+              //     content[sort][name]
+              //   );
+              //   break;
+              case "introduction":
+                ApplicationActions.setInput(
+                  "introduction",
+                  name as keyof IIntroductionAttrs,
+                  content[sort][name]
+                );
+                break;
+              case "portfolio":
+                ApplicationActions.setInput(
+                  "portfolio",
+                  name as keyof IPortfolioAttrs,
+                  content[sort][name]
+                );
+                break;
+              case "education":
+                ApplicationActions.setInput(
+                  "education",
+                  name as keyof IEducationAttrs,
+                  content[sort][name]
+                );
+                break;
+              default:
+                ApplicationActions.setInput(
+                  "basicInfo",
+                  name as keyof IBasicInfoAttrs,
+                  content[sort][name]
+                );
+            }
+          });
+        });
+      });
+  }, []);
 
   return (
     <Box>
