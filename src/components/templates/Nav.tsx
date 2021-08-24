@@ -69,13 +69,13 @@ function Nav(): JSX.Element {
       <Inner size="wide">
         <AlignBox>
           <LogoBox onClick={GoToMain}>
-            <img alt="Stockfolio" src="./images/Logo_Stockfolio.png" />
+            <img alt="Stockfolio" src="/images/Logo_Stockfolio.png" />
           </LogoBox>
           <NavMenuList>
             <NavMenu to="/" isActive={pathname === "/"}>
               회사 소개
             </NavMenu>
-            <NavMenu to="/recruit/dev" isActive={pathname === "/recruit/dev"}>
+            <NavMenu to="/recruit" isActive={pathname === "/recruit"}>
               채용 공고
             </NavMenu>
           </NavMenuList>

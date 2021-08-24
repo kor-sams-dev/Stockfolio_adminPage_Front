@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RecruitProcess from "../templates/RecruitProcess";
-
-import RecruitMenuBar from "../UI/organisms/RecruitMenuBar";
+import RecruitProcess from "./RecruitProcess";
 
 const RecruitBox = styled.div`
   display: flex;
@@ -15,7 +13,6 @@ const RecruitBox = styled.div`
 function RecruitInfo(): JSX.Element {
   return (
     <RecruitBox>
-      <RecruitMenuBar />
       <RecruitProcess />
     </RecruitBox>
   );

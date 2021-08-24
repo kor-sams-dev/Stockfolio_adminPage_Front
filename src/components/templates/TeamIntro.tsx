@@ -8,7 +8,7 @@ import TeamIntroListBox from "../UI/organisms/TeamIntroListBox";
 function TeamIntro(): JSX.Element {
   return (
     <Inner size="narrow">
-      <OverViewCard />
+      <OverViewCard itemId="스폴러 소개" />
       <TeamIntroListBox />
     </Inner>
   );

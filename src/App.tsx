@@ -12,7 +12,9 @@ function App(): JSX.Element {
       <Nav />
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/recruit/dev" component={Recruit} />
+        <Route exact path="/recruit" component={Recruit} />
+        {/* <Route exact path="/recruit/apply" component={Recruit} />
+        <Route exact path="/recruit/apply/dev" component={Recruit} />
         <Route exact path="/recruit/:department" component={Recruit} />
         <Route exact path="/recruit/:department/:id" component={Recruit} />
         <Route
@@ -30,6 +32,8 @@ function App(): JSX.Element {
           path="/recruit/:department/:id/resume"
           component={Recruit}
         />
+        <Route exact path="/recruit/process" component={Recruit} />
+        <Route exact path="/recruit/team" component={Recruit} /> */}
       </Switch>
       <Footer />
     </BrowserRouter>

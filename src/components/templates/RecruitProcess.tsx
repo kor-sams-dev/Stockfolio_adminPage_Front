@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
-import Inner from "../../styles/Inner";
 import OverViewCard from "../UI/molecules/OverViewCard";
 import theme from "../../styles/theme";
 
@@ -119,8 +118,6 @@ const Info = styled.li`
   font-weight: 400;
 `;
 
-// hover event set timeout / click evnet
-
 function RecruitProcess(): JSX.Element {
   const [processContent, setProcessContent] = useState(
     "이력서 혹은 포트폴리오를 토대로 지원 자격을 검토합니다."
@@ -131,8 +128,8 @@ function RecruitProcess(): JSX.Element {
   }, []);
 
   return (
-    <Inner size="wide">
-      <OverViewCard />
+    <>
+      <OverViewCard itemId="채용 과정" />
       <ProcessBox>
         <ProcessOrderList>
           {RecruitProcessData.map(data => (
@@ -165,7 +162,7 @@ function RecruitProcess(): JSX.Element {
           </ProcessInfoList>
         ))}
       </InfoBox>
-    </Inner>
+    </>
   );
 }
 
