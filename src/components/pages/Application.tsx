@@ -1,6 +1,6 @@
-import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { observer } from "mobx-react";
 import styled from "styled-components";
 
 import applicationForm from "../../assets/data/applicationForm";
@@ -16,10 +16,7 @@ import {
 import RootStore from "../../stores/RootStore";
 
 import Inner from "../../styles/Inner";
-import theme from "../../styles/theme";
-import { stringToQbj } from "../../utils/query";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
-
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
 import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
 import ApplicationCareer from "../UI/organisms/ApplicationCareer";
@@ -27,6 +24,9 @@ import ApplicationEducation from "../UI/organisms/ApplicationEducation";
 import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
 import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
 import ApplicationProject from "../UI/organisms/ApplicationProject";
+
+import theme from "../../styles/theme";
+import { stringToQbj } from "../../utils/query";
 
 const { ApplicationStore, ApplicationActions } = RootStore();
 
@@ -37,7 +37,7 @@ const Box = styled.div`
   padding: 176px 74px 0;
 `;
 
-const Form = styled.section`
+const Content = styled.section`
   padding: 0 42px 120px;
 `;
 
@@ -105,70 +105,89 @@ const Application = observer(() => {
   //   }
   // }, []);
 
-  useEffect(() => {
-    fetch(`https://api-we.stockfolio.ai/recruits/2/applications`, {
-      headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        const content = JSON.parse(res.result.content);
-        console.log(res);
-        // const portfolioFile = JSON.parse(res.result.portfolioFile);
-        // console.log(portfolioFile);
-        // console.log(content);
-        // Object.keys(content).forEach(sort => {
-        //   Object.keys(content[sort]).forEach(name =>
-        //     ApplicationActions.setInput(
-        //       sort as keyof IApplicationForm,
-        //       name as keyof IApplicationForm[typeof sort],
-        //       content[sort][name]
-        //     )
-        //   );
-        // });
-        Object.keys(content).forEach(sort => {
-          Object.keys(content[sort]).forEach(name => {
-            ApplicationActions.setInput(
-              "basicInfo",
-              name as keyof IBasicInfoAttrs,
-              content[sort][name]
-            );
-            ApplicationActions.setInput(
-              "career",
-              name as keyof ICareerAttrs,
-              content[sort][name]
-            );
-            ApplicationActions.setInput(
-              "project",
-              name as keyof IProjectAttrs,
-              content[sort][name]
-            );
-            ApplicationActions.setInput(
-              "introduction",
-              name as keyof IIntroductionAttrs,
-              content[sort][name]
-            );
-            ApplicationActions.setInput(
-              "portfolio",
-              name as keyof IPortfolioAttrs,
-              content[sort][name]
-            );
-            ApplicationActions.setInput(
-              "education",
-              name as keyof IEducationAttrs,
-              content[sort][name]
-            );
-          });
-        });
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`https://api-we.stockfolio.ai/recruits/2/applications`, {
+  //     headers: {
+  //       Authorization:
+  //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+  //     },
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       const content = JSON.parse(res.result.content);
+  //       console.log(content);
+  //       // const portfolioFile = JSON.parse(res.result.portfolioFile);
+  //       // console.log(portfolioFile);
+  //       // console.log(content);
+  //       // Object.keys(content).forEach(sort => {
+  //       //   Object.keys(content[sort]).forEach(name =>
+  //       //     ApplicationActions.setInput(
+  //       //       sort as keyof IApplicationForm,
+  //       //       name as keyof IApplicationForm[typeof sort],
+  //       //       content[sort][name]
+  //       //     )
+  //       //   );
+  //       // });
+  //       Object.keys(content).forEach(sort => {
+  //         Object.keys(content[sort]).forEach((name, idx) => {
+  //           // ApplicationActions.setInput(
+  //           //   sort as keyof IApplicationForm,
+  //           //   name,
+  //           //   content[sort][name]
+  //           // );
+  //           switch (sort) {
+  //             case "career":
+  //               ApplicationActions.setListInput(
+  //                 "career",
+  //                 idx,
+  //                 name as keyof ICareerAttrs[],
+  //                 content[sort][name]
+  //               );
+  //               break;
+  //             case "project":
+  //               ApplicationActions.setInput(
+  //                 "project",
+  //                 name as keyof IProjectAttrs,
+  //                 content[sort][name]
+  //               );
+  //               break;
+  //             case "introduction":
+  //               ApplicationActions.setInput(
+  //                 "introduction",
+  //                 name as keyof IIntroductionAttrs,
+  //                 content[sort][name]
+  //               );
+  //               break;
+  //             case "portfolio":
+  //               ApplicationActions.setInput(
+  //                 "portfolio",
+  //                 name as keyof IPortfolioAttrs,
+  //                 content[sort][name]
+  //               );
+  //               break;
+  //             case "education":
+  //               ApplicationActions.setInput(
+  //                 "education",
+  //                 name as keyof IEducationAttrs,
+  //                 content[sort][name]
+  //               );
+  //               break;
+  //             default:
+  //               ApplicationActions.setInput(
+  //                 "basicInfo",
+  //                 name as keyof IBasicInfoAttrs,
+  //                 content[sort][name]
+  //               );
+  //           }
+  //         });
+  //       });
+  //     });
+  // }, []);
 
   return (
     <Box>
       <Inner size="wide">
-        <Form>
+        <Content>
           <ApplicationHeader />
           <ApplicationBasicInfo />
           <ApplicationCareer />
@@ -176,7 +195,7 @@ const Application = observer(() => {
           <ApplicationIntroduction />
           <ApplicationPortfolio />
           <ApplicationEducation />
-        </Form>
+        </Content>
         <BtnBox>
           <SquareBtn
             isFilled

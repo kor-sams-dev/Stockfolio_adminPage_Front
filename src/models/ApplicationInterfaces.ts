@@ -44,9 +44,22 @@ export interface IFileAttrs {
   portfolio: File | undefined;
 }
 
+export interface IResumeForm {
+  basicInfo: IBasicInfoAttrs;
+  introduction: IIntroductionAttrs;
+  portfolio: IPortfolioAttrs;
+  education: IEducationAttrs;
+  file: IFileAttrs;
+}
+
+export interface IResumeListForm {
+  career: ICareerAttrs[];
+  project: IProjectAttrs[];
+}
+
 export interface IApplicationForm {
   basicInfo: IBasicInfoAttrs;
-  career: ICareerAttrs;
+  career: ICareerAttrs[];
   project: IProjectAttrs;
   introduction: IIntroductionAttrs;
   portfolio: IPortfolioAttrs;
