@@ -41,6 +41,9 @@ const ApplicationStore: IApplicationForm = observable({
     graduateDate: "",
     graduateState: "",
   },
+  file: {
+    portfolio: undefined,
+  },
 });
 
 const ApplicationActions = observable({
@@ -54,9 +57,9 @@ const ApplicationActions = observable({
     }
   ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
-    // if (e.target.files?.length) {
-    //   ApplicationStore.portfolio.portfolioFile = e.target.files[0] as File;
-    // }
+    if (e.target.files?.length) {
+      ApplicationStore.file.portfolio = e.target.files[0] as File;
+    }
   }),
   setSelectValue: action((name: keyof IEducationAttrs, option: string) => {
     ApplicationStore.education[name] = option;

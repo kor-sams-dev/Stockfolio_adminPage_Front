@@ -70,7 +70,9 @@ const ApplicationPortfolio = observer((): JSX.Element => {
               key={item.name}
               item={item}
               value={
-                ApplicationStore.portfolio[item.name as keyof IPortfolioAttrs]
+                ApplicationStore.portfolio[
+                  item.name as keyof IPortfolioAttrs
+                ] || ""
               }
               onChange={e =>
                 ApplicationActions.setInput(

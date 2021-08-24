@@ -67,7 +67,9 @@ const ApplicationProject = observer((): JSX.Element => {
             <ApplicationInput
               key={`${item.name}_${arr.length - idx}`}
               item={item}
-              value={ApplicationStore.project[item.name as keyof IProjectAttrs]}
+              value={
+                ApplicationStore.project[item.name as keyof IProjectAttrs] || ""
+              }
               onChange={e =>
                 ApplicationActions.setInput(
                   "project",

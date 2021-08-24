@@ -69,7 +69,9 @@ const ApplicationCareer = observer((): JSX.Element => {
             <ApplicationInput
               key={`${item.name}_${arr.length - idx}`}
               item={item}
-              value={ApplicationStore.career[item.name as keyof ICareerAttrs]}
+              value={
+                ApplicationStore.career[item.name as keyof ICareerAttrs] || ""
+              }
               onChange={e =>
                 ApplicationActions.setInput(
                   "career",

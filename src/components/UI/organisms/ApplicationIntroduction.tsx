@@ -55,7 +55,7 @@ const ApplicationIntroduction = observer((): JSX.Element => {
             <Textarea
               key={item.name}
               item={item}
-              value={ApplicationStore.introduction.aboutMe}
+              value={ApplicationStore.introduction.aboutMe || ""}
               onChange={e =>
                 ApplicationActions.setInput(
                   "introduction",

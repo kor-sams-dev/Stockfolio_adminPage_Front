@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+
 import applicationForm from "../../assets/data/applicationForm";
 import {
   IApplicationForm,
@@ -57,7 +58,7 @@ const handleCheckRequired = () => {
   return requiredArr.forEach((el, idx) => {
     const requiredEl =
       ApplicationStore[requiredArr[idx] as keyof IApplicationForm];
-    return Object.values(requiredEl).filter(item => item === null).length === 0;
+    return Object.values(requiredEl).filter(item => item === "").length === 0;
   });
 };
 
@@ -65,8 +66,8 @@ const handleSubmit = () => {
   // const isAllRequiredFilled = handleCheckRequired();
 
   const formData = new FormData();
-  if (ApplicationStore.portfolio.portfolioFile) {
-    formData.append("portfolio", ApplicationStore.portfolio.portfolioFile);
+  if (ApplicationStore.file.portfolio) {
+    formData.append("portfolio", ApplicationStore.file.portfolio);
   }
   formData.append("content", JSON.stringify({ ...ApplicationStore }));
 
@@ -114,7 +115,10 @@ const Application = observer(() => {
       .then(res => res.json())
       .then(res => {
         const content = JSON.parse(res.result.content);
-        console.log(content);
+        console.log(res);
+        // const portfolioFile = JSON.parse(res.result.portfolioFile);
+        // console.log(portfolioFile);
+        // console.log(content);
         // Object.keys(content).forEach(sort => {
         //   Object.keys(content[sort]).forEach(name =>
         //     ApplicationActions.setInput(

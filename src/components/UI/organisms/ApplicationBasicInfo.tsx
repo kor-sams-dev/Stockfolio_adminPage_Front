@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { observer } from "mobx-react";
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
 
@@ -47,7 +48,7 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationBasicInfo = (): JSX.Element => {
+const ApplicationBasicInfo = observer((): JSX.Element => {
   return (
     <Box>
       <Required>
@@ -69,7 +70,9 @@ const ApplicationBasicInfo = (): JSX.Element => {
               key={item.name}
               item={item}
               value={
-                ApplicationStore.basicInfo[item.name as keyof IBasicInfoAttrs]
+                ApplicationStore.basicInfo[
+                  item.name as keyof IBasicInfoAttrs
+                ] || ""
               }
               onChange={e =>
                 ApplicationActions.setInput(
@@ -84,6 +87,6 @@ const ApplicationBasicInfo = (): JSX.Element => {
       </InputBox>
     </Box>
   );
-};
+});
 
 export default ApplicationBasicInfo;

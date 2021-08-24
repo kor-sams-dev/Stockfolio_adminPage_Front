@@ -127,10 +127,6 @@ const ApplicationInput = observer(
               value={
                 ApplicationStore.portfolio.portfolioFile || item.placeholder
               }
-              // value={
-              //   ApplicationStore.portfolio.portfolioFile?.name ||
-              //   item.placeholder
-              // }
             />
             <Label>
               <InputSection

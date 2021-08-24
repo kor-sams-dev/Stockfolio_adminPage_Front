@@ -60,7 +60,9 @@ const ApplicationEducation = observer((): JSX.Element => {
                 key={item.name}
                 item={item}
                 value={
-                  ApplicationStore.education[item.name as keyof IEducationAttrs]
+                  ApplicationStore.education[
+                    item.name as keyof IEducationAttrs
+                  ] || ""
                 }
                 onChange={e =>
                   ApplicationActions.setInput(

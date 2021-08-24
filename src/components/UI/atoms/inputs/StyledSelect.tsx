@@ -16,7 +16,7 @@ const { SelectStore, ApplicationStore } = RootStore();
 interface StyleProps {
   quantity?: number;
   itemWidth?: number;
-  isSelected?: string | null;
+  isSelected?: string;
 }
 
 const Box = styled.div`
