@@ -5,72 +5,17 @@ import {
   ICareerAttrs,
   IEducationAttrs,
   IProjectAttrs,
+  applicationDefaultForm,
+  applicationListDefaultForm,
+  applicationListDefaultFormat,
 } from "../models/ApplicationInterfaces";
 
-const ApplicationStore: IApplicationForm = observable({
-  basicInfo: {
-    userName: "",
-    email: "",
-    phoneNumber: "",
-  },
-  introduction: {
-    aboutMe: "",
-  },
-  portfolio: {
-    portfolioUrl: "",
-  },
-  education: {
-    background: "",
-    schoolName: "",
-    major: "",
-    grade: "",
-    enrollDate: "",
-    graduateDate: "",
-    graduateState: "",
-  },
-  file: {
-    portfolio: undefined,
-  },
+const ApplicationStore = observable({
+  ...applicationDefaultForm,
 });
 
-const listDefaultFormat = {
-  career: {
-    companyName: "",
-    rank: "",
-    joinDate: "",
-    leavingDate: "",
-    businessTask: "",
-  },
-  project: {
-    projectName: "",
-    association: "",
-    startDate: "",
-    endDate: "",
-    mainStack: "",
-    projectInfo: "",
-  },
-};
-
-const ApplicationListStore: IApplicationListForm = observable({
-  career: [
-    {
-      companyName: "",
-      rank: "",
-      joinDate: "",
-      leavingDate: "",
-      businessTask: "",
-    },
-  ],
-  project: [
-    {
-      projectName: "",
-      association: "",
-      startDate: "",
-      endDate: "",
-      mainStack: "",
-      projectInfo: "",
-    },
-  ],
+const ApplicationListStore = observable({
+  ...applicationListDefaultForm,
 });
 
 const ApplicationActions = observable({
@@ -104,11 +49,11 @@ const ApplicationActions = observable({
   setAddList: action((sort: keyof IApplicationListForm) => {
     if (sort === "career") {
       ApplicationListStore.career = ApplicationListStore.career.concat(
-        listDefaultFormat.career
+        applicationListDefaultFormat.career
       );
     } else if (sort === "project") {
       ApplicationListStore.project = ApplicationListStore.project.concat(
-        listDefaultFormat.project
+        applicationListDefaultFormat.project
       );
     }
   }),

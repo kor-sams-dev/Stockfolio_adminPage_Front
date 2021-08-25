@@ -56,16 +56,6 @@ export interface IApplicationListForm {
   project: IProjectAttrs[];
 }
 
-// export interface IApplicationForm {
-//   basicInfo: IBasicInfoAttrs;
-//   career: ICareerAttrs[];
-//   project: IProjectAttrs;
-//   introduction: IIntroductionAttrs;
-//   portfolio: IPortfolioAttrs;
-//   education: IEducationAttrs;
-//   file: IFileAttrs;
-// }
-
 export interface IItemProps {
   name: string;
   type: string;
@@ -74,3 +64,69 @@ export interface IItemProps {
   options?: string[];
   itemWidth: number;
 }
+
+export const applicationDefaultForm: IApplicationForm = {
+  basicInfo: {
+    userName: "",
+    email: "",
+    phoneNumber: "",
+  },
+  introduction: {
+    aboutMe: "",
+  },
+  portfolio: {
+    portfolioUrl: "",
+  },
+  education: {
+    background: "",
+    schoolName: "",
+    major: "",
+    grade: "",
+    enrollDate: "",
+    graduateDate: "",
+    graduateState: "",
+  },
+  file: {
+    portfolio: undefined,
+  },
+};
+
+export const applicationListDefaultFormat = {
+  career: {
+    companyName: "",
+    rank: "",
+    joinDate: "",
+    leavingDate: "",
+    businessTask: "",
+  },
+  project: {
+    projectName: "",
+    association: "",
+    startDate: "",
+    endDate: "",
+    mainStack: "",
+    projectInfo: "",
+  },
+};
+
+export const applicationListDefaultForm: IApplicationListForm = {
+  career: [
+    {
+      companyName: "",
+      rank: "",
+      joinDate: "",
+      leavingDate: "",
+      businessTask: "",
+    },
+  ],
+  project: [
+    {
+      projectName: "",
+      association: "",
+      startDate: "",
+      endDate: "",
+      mainStack: "",
+      projectInfo: "",
+    },
+  ],
+};
