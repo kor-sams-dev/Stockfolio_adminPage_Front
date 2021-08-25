@@ -24,7 +24,6 @@ function ApplyList(): JSX.Element {
       }
       return false;
     };
-
     fetch("http://192.168.35.119:8000/recruits")
       .then(res => res.json())
       .then(data => {
@@ -41,7 +40,7 @@ function ApplyList(): JSX.Element {
         <Switch>
           <Route exact path="/recruit" component={RecruitList} />
           <Route exact path="/recruit/apply" component={RecruitList} />
-          <Route exact path="/recruit/apply/:id" component={ApplyDesc} />
+          <Route path="/recruit/apply/:id" component={ApplyDesc} />
         </Switch>
       </Container>
     </BrowserRouter>

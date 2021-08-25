@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
+import { toJS } from "mobx";
 
 import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
@@ -63,15 +64,11 @@ const ApplyNavBar = observer((): JSX.Element => {
 
   useEffect(() => {
     const setDepartment = (arr: any) => {
-      if (arr.position === clicked) {
-        return true;
-      }
-      return false;
+      return arr.position === clicked;
     };
 
     ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
   }, [ApplyMenuStore.clicked]);
-
   return (
     <ApplyNav>
       {department.map(item => {

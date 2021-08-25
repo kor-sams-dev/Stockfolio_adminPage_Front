@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useLocation, useHistory, useParams } from "react-router-dom";
+import { toJS } from "mobx";
 
+import { observer } from "mobx-react";
 import Heading2 from "../atoms/texts/Heading2";
 import Label from "../atoms/Labels/Label";
 import Desc from "../atoms/texts/Desc";
@@ -119,7 +121,7 @@ interface IDProp {
   id: string;
 }
 
-function ApplyDescMain(): JSX.Element {
+const ApplyDescMain = observer((): JSX.Element => {
   const { ApplyMenuStore, SelectedContent } = RootStore();
   const { setSelectedContent } = ApplyMenuStore;
   const location = useLocation();
@@ -130,9 +132,9 @@ function ApplyDescMain(): JSX.Element {
     fetch(`http://192.168.35.119:8000/recruits/${params.id}`)
       .then(res => res.json())
       .then(data => {
-        return setSelectedContent(data);
+        setSelectedContent(data.result);
       });
-  }, [SelectedContent]);
+  }, []);
 
   return (
     <ApplyMain>
@@ -193,6 +195,6 @@ function ApplyDescMain(): JSX.Element {
       </DescriptionBox>
     </ApplyMain>
   );
-}
+});
 
 export default ApplyDescMain;

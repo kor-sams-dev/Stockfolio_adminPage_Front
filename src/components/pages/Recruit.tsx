@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -25,7 +25,7 @@ function Recruit(): JSX.Element {
           <Switch>
             <Route exact path="/recruit" component={ApplyList} />
             <Route exact path="/recruit/apply" component={ApplyList} />
-            <Route exact path="/recruit/apply/:id" component={ApplyDesc} />
+            <Route exact path="/recruit/apply/:id" component={ApplyList} />
             <Route exact path="/recruit/process" component={RecruitProcess} />
             <Route exact path="/recruit/team" component={TeamIntro} />
           </Switch>

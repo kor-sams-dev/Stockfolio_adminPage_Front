@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import ApplyDescMain from "../UI/organisms/ApplyDescMain";
 import theme from "../../styles/theme";
@@ -57,9 +57,14 @@ const RecruitCard = styled(Link)`
   }
 `;
 
+interface ParamProp {
+  id: string;
+}
+
 const ApplyDesc = observer((): any => {
   const { ApplyMenuStore } = RootStore();
   const { viewContent, setSelectedContent } = ApplyMenuStore;
+  const params: ParamProp = useParams();
 
   return (
     <>

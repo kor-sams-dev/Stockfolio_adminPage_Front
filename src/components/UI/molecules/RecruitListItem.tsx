@@ -58,12 +58,13 @@ const Deadline = styled.span`
 `;
 
 const RecruitListItem = observer(() => {
-  const { ApplyMenuStore } = RootStore();
+  const { ApplyMenuStore, SelectedContent } = RootStore();
   const { setSelectedContent, viewContent } = ApplyMenuStore;
   const history = useHistory();
 
   const GoToDetail = (data: MenuProps) => {
     setSelectedContent(data);
+
     return history.push(`/recruit/apply/${data.id}`);
   };
 
