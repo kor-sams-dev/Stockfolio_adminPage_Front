@@ -14,15 +14,20 @@ import RootStore from "../../stores/RootStore";
 const { ScrollStore } = RootStore();
 
 const handleScroll = () => {
-  console.log("scrolled");
+  const scrollTop = window.scrollY || window.pageYOffset;
+  // const currentPos = scrollTop + window.innerHeight / 2;
+  console.log(scrollTop / window.innerHeight);
+  // console.log(Math.round(scrollTop / window.innerHeight));
+  ScrollStore.setViewingSectionIdx(Math.floor(scrollTop / window.innerHeight));
 };
 
 const Landing = observer(() => {
   useEffect(() => {
-    window.addEventListener(
-      "scroll",
-      _.debounce(handleScroll, 300, { trailing: false, leading: true })
-    );
+    // window.addEventListener(
+    //   "scroll",
+    //   _.debounce(handleScroll, 300, { trailing: false, leading: true })
+    // );
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);

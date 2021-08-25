@@ -9,10 +9,13 @@ import theme from "../../styles/theme";
 import CoAgencyList from "../UI/organisms/CoAgencyList";
 
 const Box = styled.section`
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  background: ${theme.color.white};
   padding-top: 80px;
 `;
 
