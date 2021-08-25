@@ -106,119 +106,119 @@ const handleSubmit = () => {
     alert("통과");
   }
 
-  // const formData = new FormData();
-  // if (ApplicationStore.file.portfolio) {
-  //   formData.append("portfolio", ApplicationStore.file.portfolio);
-  // }
-  // formData.append(
-  //   "content",
-  //   JSON.stringify({ ...ApplicationStore, ...ApplicationListStore })
-  // );
-  // fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
-  //   method: "POST",
-  //   headers: {
-  //     Authorization:
-  //       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-  //   },
-  //   body: formData,
-  // }).then(res => {
-  //   if (res.status === 200 || res.status === 201) {
-  //     alert("제출완료!");
-  //   } else if (res.status > 399) {
-  //     alert("오류가 발생했음...");
-  //   }
-  // });
+  const formData = new FormData();
+  if (ApplicationStore.file.portfolio) {
+    formData.append("portfolio", ApplicationStore.file.portfolio);
+  }
+  formData.append(
+    "content",
+    JSON.stringify({ ...ApplicationStore, ...ApplicationListStore })
+  );
+  fetch(`http://192.168.35.13:8000/recruits/1/applications`, {
+    method: "PATCH",
+    headers: {
+      Authorization:
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+    },
+    body: formData,
+  }).then(res => {
+    if (res.status === 200 || res.status === 201) {
+      alert("제출완료!");
+    } else if (res.status > 399) {
+      alert("오류가 발생했음...");
+    }
+  });
 };
 
 const Application = observer(() => {
   // const location = useLocation();
 
-  // useEffect(() => {
-  //   // const queryObj = stringToQbj(location.pathname);
-  //   // const applyState = queryObj.apply;
+  useEffect(() => {
+    // const queryObj = stringToQbj(location.pathname);
+    // const applyState = queryObj.apply;
 
-  //   // const inputKeys = Object.keys(applicationDefaultForm);
-  //   // const listInputKeys = Object.keys(applicationListDefaultForm);
+    // const inputKeys = Object.keys(applicationDefaultForm);
+    // const listInputKeys = Object.keys(applicationListDefaultForm);
 
-  //   // if (applyState === "register") return;
-  //   // if (applyState === "modify") {}
-  //   fetch(`http://192.168.35.119:8000/recruits/1/applications`, {
-  //     headers: {
-  //       Authorization:
-  //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       const content = JSON.parse(res.result.content);
+    // if (applyState === "register") return;
+    // if (applyState === "modify") {}
+    fetch(`http://192.168.35.13:8000/recruits/1/applications`, {
+      headers: {
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        const { content } = res.result;
 
-  //       // Object.keys(content).forEach(sort => {
-  //       //   Object.keys(content[sort]).forEach((name, idx) => {
-  //       //     if (inputKeys.includes(sort)) {
-  //       //       ApplicationActions.setInput(
-  //       //         sort as keyof IApplicationForm,
-  //       //         name,
-  //       //         content[sort][name]
-  //       //       );
-  //       //     } else if (listInputKeys.includes(sort)) {
-  //       //       console.log("a");
-  //       //     }
-  //       //   });
-  //       // });
+        // Object.keys(content).forEach(sort => {
+        //   Object.keys(content[sort]).forEach((name, idx) => {
+        //     if (inputKeys.includes(sort)) {
+        //       ApplicationActions.setInput(
+        //         sort as keyof IApplicationForm,
+        //         name,
+        //         content[sort][name]
+        //       );
+        //     } else if (listInputKeys.includes(sort)) {
+        //       console.log("a");
+        //     }
+        //   });
+        // });
 
-  //       Object.keys(content).forEach(sort => {
-  //         Object.keys(content[sort]).forEach(name => {
-  //           switch (sort) {
-  //             case "career":
-  //               content.career.forEach((_: unknown, idx: number) => {
-  //                 ApplicationActions.setCareerListInput(
-  //                   idx,
-  //                   name as keyof ICareerAttrs,
-  //                   content[sort][name]
-  //                 );
-  //               });
-  //               break;
-  //             case "project":
-  //               content.project.forEach((_: unknown, idx: number) => {
-  //                 ApplicationActions.setProjectListInput(
-  //                   idx,
-  //                   name as keyof IProjectAttrs,
-  //                   content[sort][name]
-  //                 );
-  //               });
-  //               break;
-  //             case "introduction":
-  //               ApplicationActions.setInput(
-  //                 "introduction",
-  //                 name as keyof IIntroductionAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "portfolio":
-  //               ApplicationActions.setInput(
-  //                 "portfolio",
-  //                 name as keyof IPortfolioAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "education":
-  //               ApplicationActions.setInput(
-  //                 "education",
-  //                 name as keyof IEducationAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             default:
-  //               ApplicationActions.setInput(
-  //                 "basicInfo",
-  //                 name as keyof IBasicInfoAttrs,
-  //                 content[sort][name]
-  //               );
-  //           }
-  //         });
-  //       });
-  //     });
-  // }, []);
+        Object.keys(content).forEach(sort => {
+          Object.keys(content[sort]).forEach(name => {
+            switch (sort) {
+              case "career":
+                content.career.forEach((_: unknown, idx: number) => {
+                  ApplicationActions.setCareerListInput(
+                    idx,
+                    name as keyof ICareerAttrs,
+                    content[sort][name]
+                  );
+                });
+                break;
+              case "project":
+                content.project.forEach((_: unknown, idx: number) => {
+                  ApplicationActions.setProjectListInput(
+                    idx,
+                    name as keyof IProjectAttrs,
+                    content[sort][name]
+                  );
+                });
+                break;
+              case "introduction":
+                ApplicationActions.setInput(
+                  "introduction",
+                  name as keyof IIntroductionAttrs,
+                  content[sort][name]
+                );
+                break;
+              case "portfolio":
+                ApplicationActions.setInput(
+                  "portfolio",
+                  name as keyof IPortfolioAttrs,
+                  content[sort][name]
+                );
+                break;
+              case "education":
+                ApplicationActions.setInput(
+                  "education",
+                  name as keyof IEducationAttrs,
+                  content[sort][name]
+                );
+                break;
+              default:
+                ApplicationActions.setInput(
+                  "basicInfo",
+                  name as keyof IBasicInfoAttrs,
+                  content[sort][name]
+                );
+            }
+          });
+        });
+      });
+  }, []);
 
   return (
     <Box>

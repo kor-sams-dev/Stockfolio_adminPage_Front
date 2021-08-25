@@ -43,6 +43,7 @@ const InputSection = styled.input`
     css`
       display: none;
     `}
+
   &::placeholder {
     color: ${theme.color.grey1};
   }
