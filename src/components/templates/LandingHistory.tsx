@@ -19,20 +19,6 @@ const Box = styled.section`
   padding-top: 80px;
 `;
 
-const Next = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 121px auto 152px;
-  padding: 20px 106px;
-  width: 360px;
-  background: ${theme.color.main};
-  border-radius: 100px;
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
-`;
-
 function History(): JSX.Element {
   return (
     <Box>
@@ -41,7 +27,6 @@ function History(): JSX.Element {
           스폴이 걸어온 길
         </Heading2>
         <HistoryList />
-        <Next>what&apos;s next?</Next>
         <CoAgencyList />
       </Inner>
     </Box>

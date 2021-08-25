@@ -4,7 +4,6 @@ import { ViewportBoxProps } from "../models/landingInterfaces";
 import theme from "./theme";
 
 const ViewportBox = styled.section`
-  border: 1px solid red;
   position: sticky;
   top: 0;
   display: flex;

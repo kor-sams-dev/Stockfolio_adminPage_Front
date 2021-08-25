@@ -15,10 +15,13 @@ const { ScrollStore } = RootStore();
 
 const handleScroll = () => {
   const scrollTop = window.scrollY || window.pageYOffset;
-  // const currentPos = scrollTop + window.innerHeight / 2;
-  console.log(scrollTop / window.innerHeight);
-  // console.log(Math.round(scrollTop / window.innerHeight));
-  ScrollStore.setViewingSectionIdx(Math.floor(scrollTop / window.innerHeight));
+  const crrPositionIdx = Math.round(scrollTop / window.innerHeight);
+
+  if (crrPositionIdx > 3) {
+    ScrollStore.setViewingSectionIdx(4);
+  } else {
+    ScrollStore.setViewingSectionIdx(crrPositionIdx);
+  }
 };
 
 const Landing = observer(() => {

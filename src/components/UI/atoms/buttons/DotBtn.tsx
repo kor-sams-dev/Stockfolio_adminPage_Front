@@ -24,15 +24,16 @@ const Dot = styled.div`
   cursor: pointer;
 `;
 
-const DotBtn = observer(({ idx }: IdxProps) => {
-  const isActive = Math.abs(ScrollStore.viewingSectionIdx) === idx;
+const handleViewingSection = (idx: number) => {
+  ScrollStore.setViewingSectionIdx(idx);
+  window.scrollTo({ top: idx * window.innerHeight, behavior: "smooth" });
+};
 
+const DotBtn = observer(({ idx }: IdxProps) => {
   return (
     <Dot
-      onClick={() => {
-        ScrollStore.viewingSectionIdx = idx;
-      }}
-      isActive={isActive}
+      onClick={() => handleViewingSection(idx)}
+      isActive={ScrollStore.viewingSectionIdx === idx}
     />
   );
 });
