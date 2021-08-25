@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import RecruitMenuBar from "../UI/organisms/RecruitMenuBar";
 import Inner from "../../styles/Inner";
 import ApplyList from "../templates/ApplyList";
+import ApplyDesc from "../templates/ApplyDesc";
 import RecruitProcess from "../templates/RecruitProcess";
 import TeamIntro from "../templates/TeamIntro";
 
@@ -22,8 +23,9 @@ function Recruit(): JSX.Element {
         <RecruitMenuBar />
         <Inner size="narrow">
           <Switch>
-            <Route exact path="/recruit/" component={ApplyList} />
+            <Route exact path="/recruit" component={ApplyList} />
             <Route exact path="/recruit/apply" component={ApplyList} />
+            <Route exact path="/recruit/apply/:id" component={ApplyDesc} />
             <Route exact path="/recruit/process" component={RecruitProcess} />
             <Route exact path="/recruit/team" component={TeamIntro} />
           </Switch>

@@ -18,7 +18,8 @@ interface SquareBtnProps extends TextProps {
 }
 
 interface LabelProps {
-  stance: "senior" | "junior";
+  stance: "경력" | "신입";
+  // stance: "senior" | "junior";
 }
 
 interface QuantityLabelProps {

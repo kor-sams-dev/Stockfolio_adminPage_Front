@@ -6,6 +6,7 @@ import Desc from "../atoms/texts/Desc";
 import theme from "../../../styles/theme";
 
 import overviewCardData from "../../../assets/data/overviewCardData";
+import Inner from "../../../styles/Inner";
 
 interface OverviewProps {
   itemId: string;
@@ -24,21 +25,23 @@ const HeadingBox = styled.div`
 
 function OverViewCard({ itemId }: OverviewProps): JSX.Element {
   return (
-    <OverViewBox>
-      <HeadingBox>
-        <Heading2 fontWeight={700}>
-          {overviewCardData[itemId as keyof typeof overviewCardData].title}
-        </Heading2>
-      </HeadingBox>
-      <Desc
-        fontColor={theme.color.black}
-        fontSize={14}
-        fontWeight={400}
-        lineHeight={1.5}
-      >
-        {overviewCardData[itemId as keyof typeof overviewCardData].desc}
-      </Desc>
-    </OverViewBox>
+    <Inner size="narrow">
+      <OverViewBox>
+        <HeadingBox>
+          <Heading2 fontWeight={700}>
+            {overviewCardData[itemId as keyof typeof overviewCardData].title}
+          </Heading2>
+        </HeadingBox>
+        <Desc
+          fontColor={theme.color.black}
+          fontSize={14}
+          fontWeight={400}
+          lineHeight={1.5}
+        >
+          {overviewCardData[itemId as keyof typeof overviewCardData].desc}
+        </Desc>
+      </OverViewBox>
+    </Inner>
   );
 }
 

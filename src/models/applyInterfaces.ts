@@ -1,9 +1,11 @@
 interface MenuProps {
+  id: number;
   position: string;
-  title: string;
-  stance: string;
-  employment: string;
+  position_title: string;
+  career_type: string;
+  work_type: string;
   deadline: string;
+  description: string;
 }
 
 interface ClickProps {

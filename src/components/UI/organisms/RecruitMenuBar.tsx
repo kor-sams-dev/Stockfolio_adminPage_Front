@@ -4,10 +4,7 @@ import { observer } from "mobx-react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import theme from "../../../styles/theme";
-
-interface ClickProps {
-  isSelected: boolean;
-}
+import { ClickProps } from "../../../models/applyInterfaces";
 
 const UnderLineBox = styled.div`
   display: flex;
@@ -31,8 +28,8 @@ const RecruitMenu = styled.li`
   color: ${theme.color.lilac};
   font-weight: 400;
   transition: color 0.5s;
-  ${({ isSelected }: ClickProps) =>
-    isSelected
+  ${({ isActive }: ClickProps) =>
+    isActive
       ? css`
           border-bottom: 2px solid ${theme.color.mainDeep};
           color: ${theme.color.main};
@@ -108,7 +105,10 @@ function RecruitMenuBar(): JSX.Element {
           return (
             <RecruitMenu
               key={li.menuId}
-              isSelected={location.pathname === `/recruit/${li.addr}`}
+              isActive={
+                location.pathname === `/recruit/${li.addr}` ||
+                (location.pathname === "/recruit" && `${li.addr}` === "apply")
+              }
               onClick={() => GoToMenu(li.addr)}
             >
               {li.name}

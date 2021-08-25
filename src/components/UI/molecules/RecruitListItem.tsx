@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 
@@ -56,35 +57,30 @@ const Deadline = styled.span`
   }
 `;
 
-const RecruitListItem = observer((): any => {
+const RecruitListItem = observer(() => {
   const { ApplyMenuStore } = RootStore();
-  const { clicked, totalContent, viewContent } = ApplyMenuStore;
+  const { setSelectedContent, viewContent } = ApplyMenuStore;
+  const history = useHistory();
 
-  useEffect(() => {
-    const setDepartment = (arr: any) => {
-      if (arr.position === clicked) {
-        return true;
-      }
-      return false;
-    };
-
-    ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
-  }, [ApplyMenuStore.clicked]);
+  const GoToDetail = (data: MenuProps) => {
+    setSelectedContent(data);
+    return history.push(`/recruit/apply/${data.id}`);
+  };
 
   return (
     <>
       {toJS(viewContent).map((data: MenuProps) => (
-        <ListItem key={data.title}>
+        <ListItem key={data.id} onClick={() => GoToDetail(data)}>
           <Box>
-            <Label stance={data.stance as "senior" | "junior"} />
+            <Label stance={data.career_type as "신입" | "경력"} />
             <PaddingBox>
               <Heading2 fontSize={18} fontWeight={700}>
-                {data.title}
+                {data.position_title}
               </Heading2>
             </PaddingBox>
           </Box>
           <DeadlineBox>
-            <Employment>{data.employment}</Employment>
+            <Employment>{data.work_type}</Employment>
             <Deadline>{data.deadline} 마감</Deadline>
           </DeadlineBox>
         </ListItem>

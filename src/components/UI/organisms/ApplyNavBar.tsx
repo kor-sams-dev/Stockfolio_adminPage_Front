@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -59,17 +59,27 @@ const NonePositionList = styled.li`
 const ApplyNavBar = observer((): JSX.Element => {
   const department = ["개발", "디자인", "마케팅"];
   const { ApplyMenuStore } = RootStore();
-  const [activeId, setActiveId] = useState("개발");
+  const { clicked, totalContent } = ApplyMenuStore;
+
+  useEffect(() => {
+    const setDepartment = (arr: any) => {
+      if (arr.position === clicked) {
+        return true;
+      }
+      return false;
+    };
+
+    ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
+  }, [ApplyMenuStore.clicked]);
 
   return (
     <ApplyNav>
       {department.map(item => {
-        const IsActive = item === activeId ? PositionList : NonePositionList;
+        const IsActive = item === clicked ? PositionList : NonePositionList;
         return (
           <IsActive
             key={item}
             onClick={() => {
-              setActiveId(item);
               ApplyMenuStore.setClicked(item);
             }}
           >

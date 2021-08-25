@@ -42,7 +42,7 @@ const ApplicationHeader = (): JSX.Element => {
   return (
     <Box>
       <LabelBox>
-        <Label stance="junior" />
+        <Label stance="신입" />
       </LabelBox>
       <Heading2 fontSize={48} fontWeight={700}>
         UI/UX 디자이너
