@@ -11,11 +11,11 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Nav />
-      <Application />
-      {/* <Switch>
+      <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/recruit" component={Recruit} />
-      </Switch> */}
+        <Route exact path="/recruit/apply/:id/resume" component={Application} />
+      </Switch>
       <Footer />
     </BrowserRouter>
   );

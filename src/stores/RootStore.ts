@@ -5,6 +5,7 @@ import MissionStore from "./MissionStore";
 import { SelectStore, SelectActions } from "./SelectStore";
 import { CheckboxStore, CheckboxActions } from "./CheckboxStore";
 import ApplyMenuStore from "./ApplyMenuStore";
+import ApplyLabelStore from "./ApplyLabelStore";
 
 const RootStore = () => {
   return {
@@ -18,6 +19,7 @@ const RootStore = () => {
     CheckboxStore,
     CheckboxActions,
     ApplyMenuStore,
+    ApplyLabelStore,
   };
 };
 
