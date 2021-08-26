@@ -1,7 +1,7 @@
 import { ImgProps } from "./commonInterfaces";
 
 interface ViewportBoxProps {
-  bgColor?: string | "white";
+  bgColor?: string;
 }
 
 interface IntroduceProps {
