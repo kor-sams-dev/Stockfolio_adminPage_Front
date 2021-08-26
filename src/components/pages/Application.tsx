@@ -176,7 +176,7 @@ const Application = observer(() => {
   }
 
   useEffect(() => {
-    const queryObj = stringToQbj(location.pathname);
+    const queryObj = stringToQbj(location.search);
 
     if (queryObj.apply === "register") return;
     if (queryObj.apply === "modify") {
