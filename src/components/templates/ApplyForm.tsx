@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useLocation, useHistory, useParams } from "react-router-dom";
+import { observer } from "mobx-react";
 import { SignIn } from "../../config";
 
 import Heading2 from "../UI/atoms/texts/Heading2";
@@ -14,6 +15,7 @@ import applyFormData from "../../assets/data/applyFormData";
 import { IDProp } from "../../models/applyInterfaces";
 
 import RootStore from "../../stores/RootStore";
+import { UserTokenStore } from "../../stores/UserTokenStore";
 
 const Container = styled.section`
   display: flex;
@@ -69,7 +71,7 @@ const ConfirmBtn = styled(SquareBtn)`
   cursor: pointer;
 `;
 
-function ApplyForm(): JSX.Element {
+const ApplyForm = observer((): JSX.Element => {
   const params: IDProp = useParams();
   const history = useHistory();
   const location = useLocation();
@@ -81,7 +83,9 @@ function ApplyForm(): JSX.Element {
   });
 
   const GoToResume = () => {
-    return location.pathname === `/recruit/apply/${params.id}/register`
+    console.log(UserTokenStore.is_applied);
+
+    return !UserTokenStore.is_applied
       ? history.push(`/recruit/apply/${params.id}/resume?apply=register`)
       : history.push(`/recruit/apply/${params.id}/resume?apply=modify`);
   };
@@ -186,6 +190,6 @@ function ApplyForm(): JSX.Element {
       </ApplyFormBox>
     </Container>
   );
-}
+});
 
 export default ApplyForm;
