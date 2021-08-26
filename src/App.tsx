@@ -7,7 +7,6 @@ import Footer from "./components/templates/Footer";
 import Recruit from "./components/pages/Recruit";
 
 function App(): JSX.Element {
-  const path = [];
   return (
     <BrowserRouter>
       <Nav />
@@ -19,10 +18,6 @@ function App(): JSX.Element {
         <Route exact path="/recruit/apply/:id/register" component={Recruit} />
         <Route exact path="/recruit/apply/:id/modify" component={Recruit} />
         <Route exact path="/recruit/apply/:id/resume" component={Recruit} />
-        {/* <Route exact path="/recruit/apply/:id/resume" component={Recruit} /> */}
-        {/* <Route exact path="/recruit/apply/:id/register/resume" component={Recruit} />
-        <Route exact path="/recruit/apply/:id/modify" component={Recruit} />
-        <Route exact path="/recruit/apply/:id/modify/resume" component={Recruit} /> */}
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
       </Switch>

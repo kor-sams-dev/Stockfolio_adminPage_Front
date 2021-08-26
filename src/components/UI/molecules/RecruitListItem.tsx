@@ -17,6 +17,7 @@ const ListItem = styled.li`
   padding: 24px 32px;
   height: 74px;
   border-radius: 16px;
+  cursor: pointer;
 
   & + li {
     margin-top: 16px;

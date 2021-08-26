@@ -1,14 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import ApplyDescMain from "../UI/organisms/ApplyDescMain";
 import theme from "../../styles/theme";
 
 import RootStore from "../../stores/RootStore";
-import { MenuProps } from "../../models/applyInterfaces";
+import { MenuProps, ClickProps } from "../../models/applyInterfaces";
 
 const DescWrapper = styled.div`
   display: flex;
@@ -44,6 +44,21 @@ const RecruitCard = styled(Link)`
   background-color: ${theme.color.greyLight1};
   cursor: pointer;
 
+  ${({ isActive }: ClickProps) =>
+    isActive
+      ? css`
+          background-color: ${theme.color.lilacLight};
+
+          ${RecruitHeadline} {
+            color: ${theme.color.main};
+          }
+
+          ${RecruitDeadline} {
+            color: ${theme.color.lilac};
+          }
+        `
+      : ""}
+
   &:hover {
     background-color: ${theme.color.lilacLight};
   }
@@ -60,6 +75,7 @@ const RecruitCard = styled(Link)`
 const ApplyDesc = observer((): any => {
   const { ApplyMenuStore } = RootStore();
   const { viewContent, setSelectedContent } = ApplyMenuStore;
+  const location = useLocation();
 
   return (
     <>
@@ -71,6 +87,7 @@ const ApplyDesc = observer((): any => {
                 to={`/recruit/apply/${li.id}`}
                 key={li.id}
                 onClick={() => setSelectedContent(li)}
+                isActive={location.pathname === `/recruit/apply/${li.id}`}
               >
                 <RecruitHeadline>{li.position_title}</RecruitHeadline>
                 <RecruitDeadline>{li.deadline}까지</RecruitDeadline>

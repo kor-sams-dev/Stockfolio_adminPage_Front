@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Recruits } from "../../config";
 
 import ApplyNavBar from "../UI/organisms/ApplyNavBar";
 import RecruitList from "../UI/organisms/RecruitList";
 import ApplyDesc from "./ApplyDesc";
 
-import recruitListItemData from "../../assets/data/mockData/recruitListItemData";
 import RootStore from "../../stores/RootStore";
 import ApplyForm from "./ApplyForm";
 import Application from "../pages/Application";
@@ -26,7 +26,7 @@ function ApplyList(): JSX.Element {
       }
       return false;
     };
-    fetch("https://api-we.stockfolio.ai/recruits")
+    fetch(Recruits)
       .then(res => res.json())
       .then(data => {
         setTotalContent(data.results);
