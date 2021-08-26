@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useLocation, useHistory, useParams } from "react-router-dom";
+import { SignIn } from "../../config";
 
 import Heading2 from "../UI/atoms/texts/Heading2";
 import Heading3 from "../UI/atoms/texts/Heading3";
@@ -68,16 +69,11 @@ const ConfirmBtn = styled(SquareBtn)`
   cursor: pointer;
 `;
 
-interface InputProps {
-  email: string;
-  password: string;
-}
-
 function ApplyForm(): JSX.Element {
   const params: IDProp = useParams();
   const history = useHistory();
   const location = useLocation();
-  const { UserTokenStore, HandleToken } = RootStore();
+  const { HandleToken } = RootStore();
 
   const [userInput, setUserInput] = useState({
     email: "",
@@ -97,7 +93,7 @@ function ApplyForm(): JSX.Element {
   };
 
   const fetchLogin = () => {
-    return fetch("https://api-we.stockfolio.ai/users/signin", {
+    return fetch(SignIn, {
       method: "POST",
       body: JSON.stringify({
         email: userInput.email,

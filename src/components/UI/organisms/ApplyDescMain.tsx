@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-
 import { observer } from "mobx-react";
+import { Recruits } from "../../../config";
+
 import Heading2 from "../atoms/texts/Heading2";
 import Label from "../atoms/Labels/Label";
 import Desc from "../atoms/texts/Desc";
@@ -126,7 +127,7 @@ const ApplyDescMain = observer((): JSX.Element => {
   const GoToModify = () => history.push(`/recruit/apply/${params.id}/modify`);
 
   useEffect(() => {
-    fetch(`https://api-we.stockfolio.ai/recruits/${params.id}`)
+    fetch(`${Recruits}/${params.id}`)
       .then(res => res.json())
       .then(data => {
         setSelectedContent(data.result);
