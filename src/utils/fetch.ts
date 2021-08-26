@@ -5,12 +5,17 @@ async function fetchData(endPoint: string, options = {}): Promise<any> {
     ...options,
   };
 
-  const response = await fetch(endPoint, opts);
+  const response = await fetch(endPoint, opts).catch(error =>
+    console.error(error)
+  );
 
-  const { status } = response;
-  const result = await response.json();
+  if (response) {
+    const { status } = response;
+    const result = await response.json();
+    return [status, result];
+  }
 
-  return [status, result];
+  return ["err", "eee"];
 }
 
 export default fetchData;
