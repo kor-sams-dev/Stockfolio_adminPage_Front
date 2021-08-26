@@ -45,6 +45,7 @@ const StyledAlert = (): JSX.Element => {
     setIsAlertOn();
     if (alertType === "applySuccess") {
       history.push("/recruit/process");
+      history.go(0);
       HandleToken.setUserToken({ access_token: "", is_applied: false });
     }
   };
