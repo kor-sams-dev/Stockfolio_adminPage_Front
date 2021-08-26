@@ -10,11 +10,14 @@ import Heading2 from "../atoms/texts/Heading2";
 import theme from "../../../styles/theme";
 import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
-import { ApplicationActions } from "../../../stores/ApplicationStore";
+import {
+  ApplicationActions,
+  ApplicationListStore,
+} from "../../../stores/ApplicationStore";
 import { IProjectAttrs } from "../../../models/ApplicationInterfaces";
 import RootStore from "../../../stores/RootStore";
 
-const { CheckboxStore, CheckboxActions } = RootStore();
+const { CheckboxStore, CheckboxActions, ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -40,11 +43,13 @@ const InputBox = styled.div`
 `;
 
 const ApplicationProject = observer((): JSX.Element => {
-  const [listUnit, setListUnit] = useState(applicationForm.project.item);
+  const [listUnit, setListUnit] = useState([applicationForm.project.item]);
 
   const handleAddList = () => {
-    setListUnit(prev => [...prev, ...applicationForm.project.item]);
+    ApplicationActions.setAddList("project");
+    setListUnit(prev => [...prev, applicationForm.project.item]);
   };
+
   return (
     <Box>
       <CheckBox
@@ -62,20 +67,25 @@ const ApplicationProject = observer((): JSX.Element => {
         {applicationForm.project.desc}
       </Desc>
       <InputBox>
-        {listUnit.map((item, idx, arr) => {
-          return (
+        {listUnit.map((chunk, chunkIdx) => {
+          return chunk.map((item, itemIdx) => (
             <ApplicationInput
-              key={`${item.name}_${arr.length - idx}`}
+              key={`${chunk}${chunkIdx - itemIdx}`}
               item={item}
+              value={
+                ApplicationListStore.project[chunkIdx][
+                  item.name as keyof IProjectAttrs
+                ] || ""
+              }
               onChange={e =>
-                ApplicationActions.setInput(
-                  "project",
+                ApplicationActions.setProjectListInput(
+                  chunkIdx,
                   item.name as keyof IProjectAttrs,
                   e.target.value
                 )
               }
             />
-          );
+          ));
         })}
       </InputBox>
       <AddListBtn onClick={handleAddList}>

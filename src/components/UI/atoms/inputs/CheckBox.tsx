@@ -30,7 +30,7 @@ function CheckBox({
 }: React.InputHTMLAttributes<HTMLInputElement> & CheckBoxProps): JSX.Element {
   return (
     <Label>
-      <Img alt="체크" src={`./images/checkBox_${checked}.png`} />
+      <Img alt="체크" src={`/images/checkBox_${checked}.png`} />
       {title} 없음
       <Input onChange={onChange} checked={checked} type="checkbox" />
     </Label>

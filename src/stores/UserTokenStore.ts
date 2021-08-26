@@ -11,4 +11,7 @@ export const HandleToken = observable({
     UserTokenStore.access_token = data.access_token;
     UserTokenStore.is_applied = data.is_applied;
   }),
+  getUerToken: action(() => {
+    return UserTokenStore.access_token;
+  }),
 });

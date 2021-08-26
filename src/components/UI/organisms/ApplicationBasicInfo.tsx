@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { observer } from "mobx-react";
 
 import Desc from "../atoms/texts/Desc";
 import Heading2 from "../atoms/texts/Heading2";
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
 
 import theme from "../../../styles/theme";
 
-import applicationForm from "../../../assets/data/applicationForm";
-import ApplicationInput from "../atoms/inputs/ApplicationInput";
 import RootStore from "../../../stores/RootStore";
 import { IBasicInfoAttrs } from "../../../models/ApplicationInterfaces";
 
-const { ApplicationActions } = RootStore();
+const { ApplicationActions, ApplicationStore } = RootStore();
 
 const Box = styled.section`
   position: relative;
@@ -47,7 +48,7 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const ApplicationBasicInfo = (): JSX.Element => {
+const ApplicationBasicInfo = observer((): JSX.Element => {
   return (
     <Box>
       <Required>
@@ -68,6 +69,11 @@ const ApplicationBasicInfo = (): JSX.Element => {
             <ApplicationInput
               key={item.name}
               item={item}
+              value={
+                ApplicationStore.basicInfo[
+                  item.name as keyof IBasicInfoAttrs
+                ] || ""
+              }
               onChange={e =>
                 ApplicationActions.setInput(
                   "basicInfo",
@@ -81,6 +87,6 @@ const ApplicationBasicInfo = (): JSX.Element => {
       </InputBox>
     </Box>
   );
-};
+});
 
 export default ApplicationBasicInfo;

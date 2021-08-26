@@ -1,48 +1,21 @@
 import { action, observable } from "mobx";
 import {
   IApplicationForm,
+  IApplicationListForm,
   ICareerAttrs,
   IEducationAttrs,
   IProjectAttrs,
+  applicationDefaultForm,
+  applicationListDefaultForm,
+  applicationListDefaultFormat,
 } from "../models/ApplicationInterfaces";
 
-const ApplicationStore: IApplicationForm = observable({
-  basicInfo: {
-    userName: null,
-    email: null,
-    phoneNumber: null,
-  },
-  career: {
-    companyName: null,
-    rank: null,
-    joinDate: null,
-    leavingDate: null,
-    businessTask: null,
-  },
-  project: {
-    projectName: null,
-    association: null,
-    startDate: null,
-    endDate: null,
-    mainStack: null,
-    projectInfo: null,
-  },
-  introduction: {
-    aboutMe: null,
-  },
-  portfolio: {
-    portfolioFile: null,
-    portfolioUrl: null,
-  },
-  education: {
-    background: null,
-    schoolName: null,
-    major: null,
-    grade: null,
-    enrollDate: null,
-    graduateDate: null,
-    graduateState: null,
-  },
+const ApplicationStore = observable({
+  ...applicationDefaultForm,
+});
+
+const ApplicationListStore = observable({
+  ...applicationListDefaultForm,
 });
 
 const ApplicationActions = observable({
@@ -57,12 +30,33 @@ const ApplicationActions = observable({
   ),
   setPortfolioFile: action((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      ApplicationStore.portfolio.portfolioFile = e.target.files[0].name;
+      ApplicationStore.file.portfolio = e.target.files[0] as File;
     }
   }),
   setSelectValue: action((name: keyof IEducationAttrs, option: string) => {
     ApplicationStore.education[name] = option;
   }),
+  setCareerListInput: action(
+    (chunkIdx: number, name: keyof ICareerAttrs, value: string) => {
+      ApplicationListStore.career[chunkIdx][name] = value;
+    }
+  ),
+  setProjectListInput: action(
+    (chunkIdx: number, name: keyof IProjectAttrs, value: string) => {
+      ApplicationListStore.project[chunkIdx][name] = value;
+    }
+  ),
+  setAddList: action((sort: keyof IApplicationListForm) => {
+    if (sort === "career") {
+      ApplicationListStore.career = ApplicationListStore.career.concat(
+        applicationListDefaultFormat.career
+      );
+    } else if (sort === "project") {
+      ApplicationListStore.project = ApplicationListStore.project.concat(
+        applicationListDefaultFormat.project
+      );
+    }
+  }),
 });
 
-export { ApplicationStore, ApplicationActions };
+export { ApplicationActions, ApplicationStore, ApplicationListStore };
