@@ -50,6 +50,7 @@ const Textarea = observer(
   ({
     item,
     onChange,
+    value,
   }: React.TextareaHTMLAttributes<HTMLTextAreaElement> &
     IAddProps): JSX.Element => {
     return (
@@ -59,6 +60,7 @@ const Textarea = observer(
           title={item.title}
           name={item.name}
           placeholder={item.placeholder}
+          value={value}
           onChange={onChange}
         />
         <LetterLength>

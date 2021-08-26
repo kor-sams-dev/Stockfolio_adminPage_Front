@@ -11,8 +11,10 @@ const Box = styled.div`
   padding: 6px 0;
   width: 40px;
   background: ${({ stance }: LabelProps) =>
-    (stance === "junior" && theme.color.blueLight) ||
-    (stance === "senior" && theme.color.lilac)};
+    (stance === "신입" && theme.color.blueLight) ||
+    (stance === "경력" && theme.color.lilac)};
+  /* (stance === "junior" && theme.color.blueLight) ||
+    (stance === "senior" && theme.color.lilac)}; */
   border-radius: 12px;
 `;
 
@@ -26,7 +28,8 @@ function Label({ stance }: LabelProps): JSX.Element {
   return (
     <Box stance={stance}>
       <Text>
-        {(stance === "junior" && "신입") || (stance === "senior" && "경력")}
+        {(stance === "신입" && "신입") || (stance === "경력" && "경력")}
+        {/* {(stance === "junior" && "신입") || (stance === "senior" && "경력")} */}
       </Text>
     </Box>
   );

@@ -38,7 +38,7 @@ const Footer = (): JSX.Element => {
     <Box>
       <Inner size="wide">
         <FlexBox>
-          <img src="./images/Logo_Stockfolio_white.png" alt="스톡폴리오" />
+          <img src="/images/Logo_Stockfolio_white.png" alt="스톡폴리오" />
           <List>
             <Rights>(주)스톡폴리오 © All Rights Reserved.</Rights>
             <Item>대표이사: 오연우, 조기영</Item>

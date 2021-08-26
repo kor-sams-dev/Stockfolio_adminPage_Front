@@ -11,8 +11,14 @@ import theme from "../../../styles/theme";
 
 import applicationForm from "../../../assets/data/applicationForm";
 import ApplicationInput from "../atoms/inputs/ApplicationInput";
-import { ApplicationActions } from "../../../stores/ApplicationStore";
-import { ICareerAttrs } from "../../../models/ApplicationInterfaces";
+import {
+  ApplicationActions,
+  ApplicationListStore,
+} from "../../../stores/ApplicationStore";
+import {
+  IApplicationForm,
+  ICareerAttrs,
+} from "../../../models/ApplicationInterfaces";
 import RootStore from "../../../stores/RootStore";
 
 const { CheckboxActions, CheckboxStore, ApplicationStore } = RootStore();
@@ -41,10 +47,11 @@ const InputBox = styled.div`
 `;
 
 const ApplicationCareer = observer((): JSX.Element => {
-  const [listUnit, setListUnit] = useState(applicationForm.career.item);
+  const [listUnit, setListUnit] = useState([applicationForm.career.item]);
 
   const handleAddList = () => {
-    setListUnit(prev => prev.concat(applicationForm.career.item));
+    ApplicationActions.setAddList("career");
+    setListUnit(prev => [...prev, applicationForm.career.item]);
   };
 
   return (
@@ -64,20 +71,25 @@ const ApplicationCareer = observer((): JSX.Element => {
         {applicationForm.career.desc}
       </Desc>
       <InputBox>
-        {listUnit.map((item, idx, arr) => {
-          return (
+        {listUnit.map((chunk, chunkIdx) => {
+          return chunk.map((item, itemIdx) => (
             <ApplicationInput
-              key={`${item.name}_${arr.length - idx}`}
+              key={`${chunk}${chunkIdx - itemIdx}`}
               item={item}
+              value={
+                ApplicationListStore.career[chunkIdx][
+                  item.name as keyof ICareerAttrs
+                ] || ""
+              }
               onChange={e =>
-                ApplicationActions.setInput(
-                  "career",
+                ApplicationActions.setCareerListInput(
+                  chunkIdx,
                   item.name as keyof ICareerAttrs,
                   e.target.value
                 )
               }
             />
-          );
+          ));
         })}
       </InputBox>
       <AddListBtn onClick={handleAddList}>
