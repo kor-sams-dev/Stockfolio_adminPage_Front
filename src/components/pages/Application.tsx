@@ -60,14 +60,14 @@ const Application = observer(() => {
   const params: IParams = useParams();
   const location = useLocation();
 
-  async function postData() {
+  async function postData(methodType: string) {
     const formData = handleAppendForm();
     const [status, response] = await fetchData(
       `${Recruits}/${params.id}/applications`,
       {
-        method: "POST",
+        method: methodType,
         headers: {
-          Authorization: HandleToken.getUerToken,
+          Authorization: HandleToken.getUserToken(),
         },
         body: formData,
       }
@@ -88,9 +88,15 @@ const Application = observer(() => {
     if (!isAllRequiredFilled) {
       StyledAlertStore.setAlertType("requiredNotFilled");
       StyledAlertStore.setIsAlertOn();
+      return;
     }
 
-    postData();
+    const queryObj = stringToQbj(location.pathname);
+    if (queryObj.apply === "register") {
+      postData("POST");
+    } else if (queryObj.apply === "modify") {
+      postData("PATCH");
+    }
   };
 
   async function getData() {
@@ -99,7 +105,7 @@ const Application = observer(() => {
       `${Recruits}/${params.id}/applications`,
       {
         headers: {
-          Authorization: HandleToken.getUerToken,
+          Authorization: HandleToken.getUserToken(),
         },
       }
     );
