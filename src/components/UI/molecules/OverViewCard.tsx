@@ -17,6 +17,7 @@ const OverViewBox = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   padding: 40px 0 20px 0;
+  width: 58%;
 `;
 
 const HeadingBox = styled.div`
@@ -25,23 +26,21 @@ const HeadingBox = styled.div`
 
 function OverViewCard({ itemId }: OverviewProps): JSX.Element {
   return (
-    <Inner size="narrow">
-      <OverViewBox>
-        <HeadingBox>
-          <Heading2 fontWeight={700}>
-            {overviewCardData[itemId as keyof typeof overviewCardData].title}
-          </Heading2>
-        </HeadingBox>
-        <Desc
-          fontColor={theme.color.black}
-          fontSize={14}
-          fontWeight={400}
-          lineHeight={1.5}
-        >
-          {overviewCardData[itemId as keyof typeof overviewCardData].desc}
-        </Desc>
-      </OverViewBox>
-    </Inner>
+    <OverViewBox>
+      <HeadingBox>
+        <Heading2 fontWeight={700}>
+          {overviewCardData[itemId as keyof typeof overviewCardData].title}
+        </Heading2>
+      </HeadingBox>
+      <Desc
+        fontColor={theme.color.black}
+        fontSize={14}
+        fontWeight={400}
+        lineHeight={1.5}
+      >
+        {overviewCardData[itemId as keyof typeof overviewCardData].desc}
+      </Desc>
+    </OverViewBox>
   );
 }
 
