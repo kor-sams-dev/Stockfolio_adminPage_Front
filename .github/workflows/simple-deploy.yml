@@ -1,0 +1,80 @@
+name: Simple-Deploy
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-2
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ github.repository }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        export LOWERCASE=${ECR_REPOSITORY,,}
+        docker build -t $ECR_REGISTRY/$LOWERCASE:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$LOWERCASE:$IMAGE_TAG
+        
+        docker tag $ECR_REGISTRY/$LOWERCASE:$IMAGE_TAG $ECR_REGISTRY/$LOWERCASE:latest
+        docker push $ECR_REGISTRY/$LOWERCASE:latest
+        
+        echo "::set-output name=image_target::$ECR_REGISTRY/$LOWERCASE:$IMAGE_TAG"
+        echo "::set-output name=image_latest::$ECR_REGISTRY/$LOWERCASE:latest"
+        echo "::set-output name=image_name::$ECR_REGISTRY/$LOWERCASE"
+        
+    - name: Pull Image, Run Container
+      uses: appleboy/ssh-action@v0.1.4
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ap-northeast-2
+        
+        IMAGE_LATEST: ${{ steps.build-image.outputs.image_latest }}
+        REPOSITORY_NAME: ${{ github.repository }}
+        
+        DST_PORT: ${{ secrets.DST_PORT }}
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        port: ${{ secrets.SSH_PORT }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        envs: AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,AWS_DEFAULT_REGION,IMAGE_LATEST,REPOSITORY_NAME,DST_PORT
+        script: |
+          export CONTAINER_NAME=${REPOSITORY_NAME,,}-container
+          export CONTAINER_NAME=${CONTAINER_NAME#*/}
+          export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+          export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+          export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+          export AWS_REGION=$AWS_DEFAULT_REGION
+          env
+          eval $(aws ecr get-login-password)
+          docker stop $CONTAINER_NAME 2>/dev/null
+          docker rm $CONTAINER_NAME 2>/dev/null
+          docker rmi $IMAGE_LATEST
+          docker pull $IMAGE_LATEST
+          docker run -d --name=$CONTAINER_NAME -p $DST_PORT:80 $IMAGE_LATEST
