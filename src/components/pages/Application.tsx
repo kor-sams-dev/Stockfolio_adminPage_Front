@@ -91,7 +91,7 @@ const Application = observer(() => {
       return;
     }
 
-    const queryObj = stringToQbj(location.pathname);
+    const queryObj = stringToQbj(location.search);
     if (queryObj.apply === "register") {
       postData("POST");
     } else if (queryObj.apply === "modify") {
