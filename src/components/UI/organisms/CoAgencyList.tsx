@@ -7,7 +7,7 @@ import Heading2 from "../atoms/texts/Heading2";
 import coAgencies from "../../../assets/data/coAgencies";
 
 const Box = styled.section`
-  margin-bottom: 240px;
+  margin: 400px 0;
   text-align: center;
 `;
 

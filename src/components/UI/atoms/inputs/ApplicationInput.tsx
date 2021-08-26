@@ -43,6 +43,7 @@ const InputSection = styled.input`
     css`
       display: none;
     `}
+
   &::placeholder {
     color: ${theme.color.grey1};
   }
@@ -94,8 +95,11 @@ const UploadedFile = styled.input`
   position: absolute;
   bottom: 20px;
   left: 15px;
+  width: calc(100% - 95px);
+  background: transparent;
   font-size: 14px;
   z-index: 9;
+  overflow: hidden;
   color: ${({ value }) =>
     value === "첨부파일을 업로드해주세요."
       ? theme.color.grey1
@@ -110,8 +114,10 @@ const ApplicationInput = observer(
   ({
     onChange,
     item,
+    value,
   }: React.InputHTMLAttributes<HTMLInputElement> & IAddProps): JSX.Element => {
     const [isAlertOn, setIsAlertOn] = useState(false);
+
     return (
       <Box itemWidth={item.itemWidth}>
         <Title>{item.title}</Title>
@@ -119,9 +125,7 @@ const ApplicationInput = observer(
           <>
             <UploadedFile
               disabled
-              value={
-                ApplicationStore.portfolio.portfolioFile || item.placeholder
-              }
+              value={ApplicationStore.file.portfolio?.name || item.placeholder}
             />
             <Label>
               <InputSection
@@ -136,6 +140,7 @@ const ApplicationInput = observer(
               <InputSection
                 placeholder={item.placeholder}
                 type="text"
+                value={value}
                 onChange={onChange}
                 onFocus={() => {
                   setIsAlertOn(true);
@@ -153,6 +158,7 @@ const ApplicationInput = observer(
               placeholder={item.placeholder}
               type={item.type}
               onChange={onChange}
+              value={value}
             />
           )}
       </Box>

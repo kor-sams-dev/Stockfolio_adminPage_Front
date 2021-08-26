@@ -226,7 +226,7 @@ const applicationForm = {
         type: "select",
         placeholder: "졸업상태",
         title: "졸업상태",
-        options: ["졸업", "중태", "휴학", "졸업예정", "재학", "수료"],
+        options: ["졸업", "중퇴", "휴학", "졸업예정", "재학", "수료"],
         itemWidth: 21.224,
       },
     ],

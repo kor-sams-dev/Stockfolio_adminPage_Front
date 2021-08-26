@@ -36,7 +36,7 @@ const AddListBtn = ({
   return (
     <Box>
       <Button onClick={onClick}>
-        <Img src="./images/addList.png" alt="추가하기" />
+        <Img src="/images/addList.png" alt="추가하기" />
         <Text>{children} 추가</Text>
       </Button>
     </Box>
