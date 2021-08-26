@@ -6,6 +6,7 @@ import Landing from "./components/pages/Landing";
 import Footer from "./components/templates/Footer";
 import Recruit from "./components/pages/Recruit";
 import Application from "./components/pages/Application";
+import NotFound from "./components/pages/NotFound";
 
 function App(): JSX.Element {
   return (

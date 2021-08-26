@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { observer } from "mobx-react";
-import { toJS } from "mobx";
 import styled from "styled-components";
 
 import {
@@ -24,12 +23,15 @@ import ApplicationEducation from "../UI/organisms/ApplicationEducation";
 import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
 import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
 import ApplicationProject from "../UI/organisms/ApplicationProject";
+import StyledAlert from "../UI/molecules/StyledAlert";
 
 import theme from "../../styles/theme";
-import { stringToQbj } from "../../utils/query";
-import handleAppendForm from "../../utils/handleAppendForm";
-import StyledAlert from "../UI/molecules/StyledAlert";
+import { Recruits } from "../../config";
+
 import handleCheckRequired from "../../utils/handleCheckRequired";
+import handleAppendForm from "../../utils/handleAppendForm";
+import { stringToQbj } from "../../utils/query";
+import fetchData from "../../utils/fetch";
 
 const { ApplicationActions, StyledAlertStore } = RootStore();
 
@@ -57,144 +59,154 @@ interface IParams {
 const Application = observer(() => {
   const params: IParams = useParams();
 
+  async function postData() {
+    const formData = handleAppendForm();
+    const [status, response] = await fetchData(
+      `${Recruits}/${params.id}/applications`,
+      {
+        method: "POST",
+        headers: {
+          Authorization:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+        },
+        body: formData,
+      }
+    );
+
+    if (status === 200 || status === 201) {
+      StyledAlertStore.setAlertType("applySuccess");
+      StyledAlertStore.setIsAlertOn();
+    } else if (status > 399) {
+      StyledAlertStore.setAlertType("applyReject");
+      StyledAlertStore.setIsAlertOn();
+    }
+  }
+
   const handleSubmit = () => {
     const isAllRequiredFilled = handleCheckRequired();
 
     if (!isAllRequiredFilled) {
       StyledAlertStore.setAlertType("requiredNotFilled");
       StyledAlertStore.setIsAlertOn();
-      return;
     }
 
-    const formData = handleAppendForm();
-
-    fetch(`http://192.168.35.119:8000/recruits/${params.id}/applications`, {
-      method: "POST",
-      headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-      },
-      body: formData,
-    }).then(res => {
-      if (res.status === 200 || res.status === 201) {
-        StyledAlertStore.setAlertType("applySuccess");
-        StyledAlertStore.setIsAlertOn();
-      } else if (res.status > 399) {
-        StyledAlertStore.setAlertType("applyReject");
-        StyledAlertStore.setIsAlertOn();
-      }
-    });
+    postData();
   };
 
-  useEffect(() => {
-    // const queryObj = stringToQbj(location.pathname);
-    // const applyState = queryObj.apply;
-
+  async function getData() {
     const listInputKeys = Object.keys(applicationListDefaultForm);
+    const [status, response] = await fetchData(
+      `${Recruits}/${params.id}/applications`,
+      {
+        headers: {
+          Authorization:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+        },
+      }
+    );
 
-    // if (applyState === "register") return;
-    // if (applyState === "modify") {}
-    fetch(`http://192.168.35.119:8000/recruits/${params.id}/applications`, {
-      headers: {
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        const { content } = res.result;
+    const { content } = response.result;
 
-        Object.keys(content).forEach(sort => {
-          if (listInputKeys.includes(sort)) {
-            Object.keys(content[sort]).forEach(chunkIdx => {
-              Object.keys(content[sort][chunkIdx]).forEach(name => {
-                switch (sort) {
-                  case "career":
-                    ApplicationActions.setCareerListInput(
-                      Number(chunkIdx),
-                      name as keyof ICareerAttrs,
-                      content[sort][chunkIdx][name]
-                    );
-                    break;
-                  case "project":
-                    ApplicationActions.setProjectListInput(
-                      Number(chunkIdx),
-                      name as keyof IProjectAttrs,
-                      content[sort][chunkIdx][name]
-                    );
-                    break;
-                  default:
-                    break;
-                }
-              });
-            });
-          } else {
-            Object.keys(content[sort]).forEach(name => {
-              switch (sort) {
-                case "basicInfo":
-                  ApplicationActions.setInput(
-                    "basicInfo",
-                    name as keyof IBasicInfoAttrs,
-                    content.basicInfo[name]
-                  );
-                  break;
-                case "introduction":
-                  ApplicationActions.setInput(
-                    "introduction",
-                    name as keyof IIntroductionAttrs,
-                    content.introduction[name]
-                  );
-                  break;
-                case "portfolio":
-                  ApplicationActions.setInput(
-                    "portfolio",
-                    name as keyof IPortfolioAttrs,
-                    content.portfolio[name]
-                  );
-                  break;
-                case "education":
-                  ApplicationActions.setInput(
-                    "education",
-                    name as keyof IEducationAttrs,
-                    content.education[name]
-                  );
-                  break;
-                default:
-                  break;
-              }
-            });
+    Object.keys(content).forEach(sort => {
+      if (listInputKeys.includes(sort)) {
+        Object.keys(content[sort]).forEach(chunkIdx => {
+          Object.keys(content[sort][chunkIdx]).forEach(name => {
+            switch (sort) {
+              case "career":
+                ApplicationActions.setCareerListInput(
+                  Number(chunkIdx),
+                  name as keyof ICareerAttrs,
+                  content[sort][chunkIdx][name]
+                );
+                break;
+              case "project":
+                ApplicationActions.setProjectListInput(
+                  Number(chunkIdx),
+                  name as keyof IProjectAttrs,
+                  content[sort][chunkIdx][name]
+                );
+                break;
+              default:
+                break;
+            }
+          });
+        });
+      } else {
+        Object.keys(content[sort]).forEach(name => {
+          switch (sort) {
+            case "basicInfo":
+              ApplicationActions.setInput(
+                "basicInfo",
+                name as keyof IBasicInfoAttrs,
+                content.basicInfo[name]
+              );
+              break;
+            case "introduction":
+              ApplicationActions.setInput(
+                "introduction",
+                name as keyof IIntroductionAttrs,
+                content.introduction[name]
+              );
+              break;
+            case "portfolio":
+              ApplicationActions.setInput(
+                "portfolio",
+                name as keyof IPortfolioAttrs,
+                content.portfolio[name]
+              );
+              break;
+            case "education":
+              ApplicationActions.setInput(
+                "education",
+                name as keyof IEducationAttrs,
+                content.education[name]
+              );
+              break;
+            default:
+              break;
           }
         });
-      });
+      }
+    });
+  }
+
+  useEffect(() => {
+    const location = useLocation();
+    const queryObj = stringToQbj(location.pathname);
+
+    if (queryObj.apply === "register") return;
+    if (queryObj.apply === "modify") {
+      getData();
+    }
   }, []);
 
   return (
     <>
       <Box>
-        <Inner size="wide">
-          <Content>
-            <ApplicationHeader />
-            <ApplicationBasicInfo />
-            <ApplicationCareer />
-            <ApplicationProject />
-            <ApplicationIntroduction />
-            <ApplicationPortfolio />
-            <ApplicationEducation />
-          </Content>
-          <BtnBox>
-            <SquareBtn
-              isFilled
-              onClick={handleSubmit}
-              btnWidth={328}
-              btnColor={theme.color.main}
-              fontColor={theme.color.white}
-              fontSize={14}
-              fontWeight={700}
-            >
-              지원서 제출하기
-            </SquareBtn>
-          </BtnBox>
-        </Inner>
+        {/* <Inner size="wide"> */}
+        <Content>
+          <ApplicationHeader />
+          <ApplicationBasicInfo />
+          <ApplicationCareer />
+          <ApplicationProject />
+          <ApplicationIntroduction />
+          <ApplicationPortfolio />
+          <ApplicationEducation />
+        </Content>
+        <BtnBox>
+          <SquareBtn
+            isFilled
+            onClick={handleSubmit}
+            btnWidth={328}
+            btnColor={theme.color.main}
+            fontColor={theme.color.white}
+            fontSize={14}
+            fontWeight={700}
+          >
+            지원서 제출하기
+          </SquareBtn>
+        </BtnBox>
+        {/* </Inner> */}
       </Box>
       {StyledAlertStore.isAlertOn && <StyledAlert />}
     </>
