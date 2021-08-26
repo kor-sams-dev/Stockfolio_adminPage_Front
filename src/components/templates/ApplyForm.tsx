@@ -82,18 +82,16 @@ const ApplyForm = observer((): JSX.Element => {
     password: "",
   });
 
-  const GoToResume = () => {
-    console.log(UserTokenStore.is_applied);
-
-    return !UserTokenStore.is_applied
-      ? history.push(`/recruit/apply/${params.id}/resume?apply=register`)
-      : history.push(`/recruit/apply/${params.id}/resume?apply=modify`);
-  };
-
   const handleInputValue = (e: any) => {
     const { name, value } = e.target;
 
     setUserInput(prev => ({ ...prev, [name]: value }));
+  };
+
+  const GoToResume = () => {
+    return !UserTokenStore.is_applied
+      ? history.push(`/recruit/apply/${params.id}/resume?apply=register`)
+      : history.push(`/recruit/apply/${params.id}/resume?apply=modify`);
   };
 
   const fetchLogin = () => {
@@ -106,7 +104,11 @@ const ApplyForm = observer((): JSX.Element => {
       }),
     })
       .then(res => res.json())
-      .then(data => HandleToken.setUserToken(data));
+      .then(data => {
+        HandleToken.setUserToken(data);
+        setUserInput({ email: "", password: "" });
+        GoToResume();
+      });
   };
 
   const checkValidation = () => {
@@ -127,8 +129,6 @@ const ApplyForm = observer((): JSX.Element => {
 
     if (isValid) {
       fetchLogin();
-      setUserInput({ email: "", password: "" });
-      GoToResume();
     } else {
       alert("작성하신 내용을 확인해주세요");
     }
