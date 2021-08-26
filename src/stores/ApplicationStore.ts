@@ -57,9 +57,6 @@ const ApplicationActions = observable({
       );
     }
   }),
-  setAddClassName: action(() => {
-    console.log("a");
-  }),
 });
 
 export { ApplicationActions, ApplicationStore, ApplicationListStore };

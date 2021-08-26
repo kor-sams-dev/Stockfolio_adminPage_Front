@@ -4,11 +4,8 @@ import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import styled from "styled-components";
 
-import applicationForm from "../../assets/data/applicationForm";
 import {
-  applicationDefaultForm,
   applicationListDefaultForm,
-  IApplicationForm,
   IBasicInfoAttrs,
   ICareerAttrs,
   IEducationAttrs,
@@ -27,15 +24,14 @@ import ApplicationEducation from "../UI/organisms/ApplicationEducation";
 import ApplicationIntroduction from "../UI/organisms/ApplicationIntroduction";
 import ApplicationPortfolio from "../UI/organisms/ApplicationPortfolio";
 import ApplicationProject from "../UI/organisms/ApplicationProject";
-import ApplyLabel from "../UI/atoms/Labels/ApplyLabel";
 
 import theme from "../../styles/theme";
 import { stringToQbj } from "../../utils/query";
-import { ApplicationListStore } from "../../stores/ApplicationStore";
 import handleAppendForm from "../../utils/handleAppendForm";
+import StyledAlert from "../UI/molecules/StyledAlert";
+import handleCheckRequired from "../../utils/handleCheckRequired";
 
-const { ApplicationStore, ApplicationActions, CheckboxStore, ApplyLabelStore } =
-  RootStore();
+const { ApplicationActions, StyledAlertStore } = RootStore();
 
 const Box = styled.div`
   display: flex;
@@ -54,86 +50,25 @@ const BtnBox = styled.div`
   align-items: center;
 `;
 
-const handleCheckRequired = (): boolean => {
-  const requiredInput = ["basicInfo"];
-
-  const convertedStore = toJS(ApplicationStore);
-  const convertedListStore = toJS(ApplicationListStore);
-
-  let careerValueState = false;
-  let projectValueState = false;
-  let portfolioValueState = false;
-
-  const inputValues = Object.entries(convertedStore)
-    .filter(el => requiredInput.includes(el[0]))
-    .flatMap(el => el[1])
-    .flatMap(value => Object.values(value));
-
-  if (CheckboxStore.isChecked.career) {
-    careerValueState = true;
-  } else {
-    careerValueState = convertedListStore.career
-      .flatMap(el => Object.values(el))
-      .every(value => value !== "");
-  }
-
-  if (CheckboxStore.isChecked.project) {
-    projectValueState = true;
-  } else {
-    projectValueState = convertedListStore.project
-      .flatMap(el => Object.values(el))
-      .every(value => value !== "");
-  }
-
-  if (
-    ApplicationStore.portfolio.portfolioUrl ||
-    ApplicationStore.file.portfolio
-  ) {
-    portfolioValueState = true;
-  }
-
-  return (
-    inputValues.every(value => value !== "") &&
-    careerValueState &&
-    projectValueState &&
-    portfolioValueState
-  );
-};
-
 interface IParams {
   id: string;
 }
 
 const Application = observer(() => {
-  let isSuccess = false;
-  const history = useHistory();
   const params: IParams = useParams();
-
-  const goToMain = () => {
-    history.push("/");
-  };
 
   const handleSubmit = () => {
     const isAllRequiredFilled = handleCheckRequired();
 
     if (!isAllRequiredFilled) {
-      alert("필수 사항을 모두 입력해주세요");
-    } else {
-      alert("통과");
+      StyledAlertStore.setAlertType("requiredNotFilled");
+      StyledAlertStore.setIsAlertOn();
+      return;
     }
 
     const formData = handleAppendForm();
 
-    // const formData = new FormData();
-    // if (ApplicationStore.file.portfolio) {
-    //   formData.append("portfolio", ApplicationStore.file.portfolio);
-    // }
-    // formData.append(
-    //   "content",
-    //   JSON.stringify({ ...ApplicationStore, ...ApplicationListStore })
-    // );
-
-    fetch(`http://192.168.35.13:8000/recruits/${params.id}/applications`, {
+    fetch(`http://192.168.35.119:8000/recruits/${params.id}/applications`, {
       method: "POST",
       headers: {
         Authorization:
@@ -142,103 +77,96 @@ const Application = observer(() => {
       body: formData,
     }).then(res => {
       if (res.status === 200 || res.status === 201) {
-        isSuccess = true;
-        ApplyLabelStore.setIsApplyLabelOn();
-        setTimeout(ApplyLabelStore.setIsApplyLabelOn, 1500);
-        setTimeout(goToMain, 1600);
+        StyledAlertStore.setAlertType("applySuccess");
+        StyledAlertStore.setIsAlertOn();
       } else if (res.status > 399) {
-        isSuccess = false;
-        setTimeout(ApplyLabelStore.setIsApplyLabelOn, 1500);
+        StyledAlertStore.setAlertType("applyReject");
+        StyledAlertStore.setIsAlertOn();
       }
     });
   };
 
-  // useEffect(() => {
-  //   // const queryObj = stringToQbj(location.pathname);
-  //   // const applyState = queryObj.apply;
+  useEffect(() => {
+    // const queryObj = stringToQbj(location.pathname);
+    // const applyState = queryObj.apply;
 
-  //   // const inputKeys = Object.keys(applicationDefaultForm);
-  //   // const listInputKeys = Object.keys(applicationListDefaultForm);
+    const listInputKeys = Object.keys(applicationListDefaultForm);
 
-  //   // if (applyState === "register") return;
-  //   // if (applyState === "modify") {}
-  //   fetch(`http://192.168.35.13:8000/recruits/${params.id}/applications`, {
-  //     headers: {
-  //       Authorization:
-  //         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       const { content } = res.result;
+    // if (applyState === "register") return;
+    // if (applyState === "modify") {}
+    fetch(`http://192.168.35.119:8000/recruits/${params.id}/applications`, {
+      headers: {
+        Authorization:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        const { content } = res.result;
 
-  //       // Object.keys(content).forEach(sort => {
-  //       //   Object.keys(content[sort]).forEach((name, idx) => {
-  //       //     if (inputKeys.includes(sort)) {
-  //       //       ApplicationActions.setInput(
-  //       //         sort as keyof IApplicationForm,
-  //       //         name,
-  //       //         content[sort][name]
-  //       //       );
-  //       //     } else if (listInputKeys.includes(sort)) {
-  //       //       console.log("a");
-  //       //     }
-  //       //   });
-  //       // });
-
-  //       Object.keys(content).forEach(sort => {
-  //         Object.keys(content[sort]).forEach(name => {
-  //           switch (sort) {
-  //             case "career":
-  //               content.career.forEach((_: unknown, idx: number) => {
-  //                 ApplicationActions.setCareerListInput(
-  //                   idx,
-  //                   name as keyof ICareerAttrs,
-  //                   content[sort][name]
-  //                 );
-  //               });
-  //               break;
-  //             case "project":
-  //               content.project.forEach((_: unknown, idx: number) => {
-  //                 ApplicationActions.setProjectListInput(
-  //                   idx,
-  //                   name as keyof IProjectAttrs,
-  //                   content[sort][name]
-  //                 );
-  //               });
-  //               break;
-  //             case "introduction":
-  //               ApplicationActions.setInput(
-  //                 "introduction",
-  //                 name as keyof IIntroductionAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "portfolio":
-  //               ApplicationActions.setInput(
-  //                 "portfolio",
-  //                 name as keyof IPortfolioAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             case "education":
-  //               ApplicationActions.setInput(
-  //                 "education",
-  //                 name as keyof IEducationAttrs,
-  //                 content[sort][name]
-  //               );
-  //               break;
-  //             default:
-  //               ApplicationActions.setInput(
-  //                 "basicInfo",
-  //                 name as keyof IBasicInfoAttrs,
-  //                 content[sort][name]
-  //               );
-  //           }
-  //         });
-  //       });
-  //     });
-  // }, []);
+        Object.keys(content).forEach(sort => {
+          if (listInputKeys.includes(sort)) {
+            Object.keys(content[sort]).forEach(chunkIdx => {
+              Object.keys(content[sort][chunkIdx]).forEach(name => {
+                switch (sort) {
+                  case "career":
+                    ApplicationActions.setCareerListInput(
+                      Number(chunkIdx),
+                      name as keyof ICareerAttrs,
+                      content[sort][chunkIdx][name]
+                    );
+                    break;
+                  case "project":
+                    ApplicationActions.setProjectListInput(
+                      Number(chunkIdx),
+                      name as keyof IProjectAttrs,
+                      content[sort][chunkIdx][name]
+                    );
+                    break;
+                  default:
+                    break;
+                }
+              });
+            });
+          } else {
+            Object.keys(content[sort]).forEach(name => {
+              switch (sort) {
+                case "basicInfo":
+                  ApplicationActions.setInput(
+                    "basicInfo",
+                    name as keyof IBasicInfoAttrs,
+                    content.basicInfo[name]
+                  );
+                  break;
+                case "introduction":
+                  ApplicationActions.setInput(
+                    "introduction",
+                    name as keyof IIntroductionAttrs,
+                    content.introduction[name]
+                  );
+                  break;
+                case "portfolio":
+                  ApplicationActions.setInput(
+                    "portfolio",
+                    name as keyof IPortfolioAttrs,
+                    content.portfolio[name]
+                  );
+                  break;
+                case "education":
+                  ApplicationActions.setInput(
+                    "education",
+                    name as keyof IEducationAttrs,
+                    content.education[name]
+                  );
+                  break;
+                default:
+                  break;
+              }
+            });
+          }
+        });
+      });
+  }, []);
 
   return (
     <>
@@ -268,7 +196,7 @@ const Application = observer(() => {
           </BtnBox>
         </Inner>
       </Box>
-      {ApplyLabelStore.isApplyLabelOn && <ApplyLabel isSuccess={isSuccess} />}
+      {StyledAlertStore.isAlertOn && <StyledAlert />}
     </>
   );
 });
