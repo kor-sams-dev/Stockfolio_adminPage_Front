@@ -14,7 +14,6 @@ import {
 } from "../../models/ApplicationInterfaces";
 import RootStore from "../../stores/RootStore";
 
-import Inner from "../../styles/Inner";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 import ApplicationHeader from "../UI/molecules/ApplicationHeader";
 import ApplicationBasicInfo from "../UI/organisms/ApplicationBasicInfo";
@@ -33,17 +32,18 @@ import handleAppendForm from "../../utils/handleAppendForm";
 import { stringToQbj } from "../../utils/query";
 import fetchData from "../../utils/fetch";
 
-const { ApplicationActions, StyledAlertStore } = RootStore();
+const { ApplicationActions, StyledAlertStore, HandleToken } = RootStore();
 
 const Box = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 200px;
-  padding: 176px 74px 0;
+  padding-top: 30px;
 `;
 
 const Content = styled.section`
-  padding: 0 42px 120px;
+  padding-bottom: 120px;
 `;
 
 const BtnBox = styled.div`
@@ -58,6 +58,7 @@ interface IParams {
 
 const Application = observer(() => {
   const params: IParams = useParams();
+  const location = useLocation();
 
   async function postData() {
     const formData = handleAppendForm();
@@ -66,8 +67,7 @@ const Application = observer(() => {
       {
         method: "POST",
         headers: {
-          Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+          Authorization: HandleToken.getUerToken,
         },
         body: formData,
       }
@@ -99,8 +99,7 @@ const Application = observer(() => {
       `${Recruits}/${params.id}/applications`,
       {
         headers: {
-          Authorization:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4",
+          Authorization: HandleToken.getUerToken,
         },
       }
     );
@@ -171,7 +170,6 @@ const Application = observer(() => {
   }
 
   useEffect(() => {
-    const location = useLocation();
     const queryObj = stringToQbj(location.pathname);
 
     if (queryObj.apply === "register") return;
@@ -183,7 +181,6 @@ const Application = observer(() => {
   return (
     <>
       <Box>
-        {/* <Inner size="wide"> */}
         <Content>
           <ApplicationHeader />
           <ApplicationBasicInfo />
@@ -206,7 +203,6 @@ const Application = observer(() => {
             지원서 제출하기
           </SquareBtn>
         </BtnBox>
-        {/* </Inner> */}
       </Box>
       {StyledAlertStore.isAlertOn && <StyledAlert />}
     </>
