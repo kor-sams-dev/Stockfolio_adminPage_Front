@@ -7,11 +7,10 @@ const Box = styled.div`
   display: flex;
   transform: translateX(-50%);
   width: 2px;
-  height: 1155px;
+  height: calc(100% + 200px);
 `;
 
 const Bar = styled.div`
-  position: relative;
   width: 2px;
   height: 100%;
   background: #7f6fc1;

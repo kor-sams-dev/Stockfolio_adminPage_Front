@@ -26,19 +26,16 @@ const Item = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
+  padding: 0 18%;
+  z-index: 9;
   &:nth-child(1) {
     margin-top: 0px;
   }
   ${({ isEven }: StyleProps) =>
-    (isEven &&
-      css`
-        padding-left: 60px;
-      `) ||
-    (!isEven &&
-      css`
-        margin-top: 180px;
-        padding-left: 120px;
-      `)}
+    !isEven &&
+    css`
+      margin-top: 180px;
+    `}
   ${({ itemId, idx }: StyleProps) =>
     css`
       &:nth-child(${Number(idx) + 1}) {
@@ -50,7 +47,7 @@ const Item = styled.li`
 const Texts = styled.section`
   display: flex;
   flex-direction: column;
-  width: 389px;
+  max-width: 389px;
 `;
 
 const Circle = styled.div`

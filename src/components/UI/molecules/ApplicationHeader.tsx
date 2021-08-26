@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import theme from "../../../styles/theme";
-import Label from "../atoms/Labels/Label";
 
+import { useHistory } from "react-router-dom";
+import Label from "../atoms/Labels/Label";
 import Heading2 from "../atoms/texts/Heading2";
+
+import theme from "../../../styles/theme";
+
+import RootStore from "../../../stores/RootStore";
+
+const { SelectedContent } = RootStore();
 
 const Box = styled.div`
   position: relative;
@@ -39,17 +45,25 @@ const Sort = styled.span`
 `;
 
 const ApplicationHeader = (): JSX.Element => {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (SelectedContent.position_title === "") {
+      history.push("/recruit");
+    }
+  });
+
   return (
     <Box>
       <LabelBox>
-        <Label stance="junior" />
+        <Label stance={SelectedContent.career_type as "경력" | "신입"} />
       </LabelBox>
       <Heading2 fontSize={48} fontWeight={700}>
-        UI/UX 디자이너
+        {SelectedContent.position_title}
       </Heading2>
       <div>
-        <Sort>정규직</Sort>
-        <Sort>2021-09-19까지</Sort>
+        <Sort>{SelectedContent.work_type}</Sort>
+        <Sort>{SelectedContent.deadline}까지</Sort>
       </div>
     </Box>
   );

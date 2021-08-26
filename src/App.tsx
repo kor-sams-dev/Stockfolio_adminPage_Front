@@ -13,6 +13,13 @@ function App(): JSX.Element {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/recruit" component={Recruit} />
+        <Route exact path="/recruit/apply" component={Recruit} />
+        <Route exact path="/recruit/apply/:id" component={Recruit} />
+        <Route exact path="/recruit/apply/:id/register" component={Recruit} />
+        <Route exact path="/recruit/apply/:id/modify" component={Recruit} />
+        <Route exact path="/recruit/apply/:id/resume" component={Recruit} />
+        <Route exact path="/recruit/process" component={Recruit} />
+        <Route exact path="/recruit/team" component={Recruit} />
       </Switch>
       <Footer />
     </BrowserRouter>

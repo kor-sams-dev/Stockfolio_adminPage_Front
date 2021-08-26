@@ -10,6 +10,9 @@ function ApplyInput({
   type,
   placeholder,
   name,
+  value,
+  onChange,
+  autoComplete,
   className,
 }: ApplyInputProps): JSX.Element {
   return (
@@ -18,6 +21,8 @@ function ApplyInput({
       type={`${type}`}
       placeholder={`${placeholder}`}
       name={`${name}`}
+      onChange={onChange}
+      autoComplete={`${autoComplete}`}
     />
   );
 }
