@@ -7,7 +7,7 @@ import RootStore from "../../../stores/RootStore";
 import SquareBtn from "../atoms/buttons/SquareBtn";
 import theme from "../../../styles/theme";
 
-const { StyledAlertStore } = RootStore();
+const { StyledAlertStore, HandleToken } = RootStore();
 
 const Deemer = styled.div`
   position: fixed;
@@ -44,7 +44,8 @@ const StyledAlert = (): JSX.Element => {
   const handleClickBtn = () => {
     setIsAlertOn();
     if (alertType === "applySuccess") {
-      history.push("/");
+      history.push("/recruit/process");
+      HandleToken.setUserToken({ access_token: "", is_applied: false });
     }
   };
 
