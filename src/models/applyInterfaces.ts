@@ -12,4 +12,13 @@ interface ClickProps {
   isActive: boolean;
 }
 
-export type { MenuProps, ClickProps };
+interface IDProp {
+  id: string;
+}
+
+interface TokenProps {
+  access_token: string;
+  is_applied: boolean;
+}
+
+export type { MenuProps, ClickProps, IDProp, TokenProps };

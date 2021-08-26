@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useHistory, useParams } from "react-router-dom";
-import { toJS } from "mobx";
+import { useParams, useHistory } from "react-router-dom";
 
 import { observer } from "mobx-react";
 import Heading2 from "../atoms/texts/Heading2";
@@ -10,8 +9,7 @@ import Desc from "../atoms/texts/Desc";
 import theme from "../../../styles/theme";
 
 import RootStore from "../../../stores/RootStore";
-
-import { MenuProps } from "../../../models/applyInterfaces";
+import { IDProp } from "../../../models/applyInterfaces";
 
 const ApplyMain = styled.section`
   display: flex;
@@ -117,19 +115,18 @@ const DescList = styled.ul`
   }
 `;
 
-interface IDProp {
-  id: string;
-}
-
 const ApplyDescMain = observer((): JSX.Element => {
   const { ApplyMenuStore, SelectedContent } = RootStore();
   const { setSelectedContent } = ApplyMenuStore;
-  const location = useLocation();
-  const history = useHistory();
   const params: IDProp = useParams();
+  const history = useHistory();
+  const GoToRegister = () =>
+    history.push(`/recruit/apply/${params.id}/register`);
+
+  const GoToModify = () => history.push(`/recruit/apply/${params.id}/modify`);
 
   useEffect(() => {
-    fetch(`http://192.168.35.119:8000/recruits/${params.id}`)
+    fetch(`https://api-we.stockfolio.ai/recruits/${params.id}`)
       .then(res => res.json())
       .then(data => {
         setSelectedContent(data.result);
@@ -154,8 +151,8 @@ const ApplyDescMain = observer((): JSX.Element => {
           </DeadlineWrapper>
         </HeadBox>
         <BtnBox>
-          <RecruitBtn>지원하기</RecruitBtn>
-          <ModRecruitBtn>이미 지원하셨나요?</ModRecruitBtn>
+          <RecruitBtn onClick={GoToRegister}>지원하기</RecruitBtn>
+          <ModRecruitBtn onClick={GoToModify}>이미 지원하셨나요?</ModRecruitBtn>
         </BtnBox>
       </InfoBox>
       <DescriptionBox>

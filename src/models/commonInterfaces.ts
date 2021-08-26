@@ -51,6 +51,9 @@ interface ApplyInputProps {
   type: string;
   placeholder: string;
   name: string;
+  value?: string;
+  onChange?: (e: any) => void;
+  autoComplete?: string;
   className?: string;
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
@@ -58,7 +58,7 @@ const Deadline = styled.span`
 `;
 
 const RecruitListItem = observer(() => {
-  const { ApplyMenuStore, SelectedContent } = RootStore();
+  const { ApplyMenuStore } = RootStore();
   const { setSelectedContent, viewContent } = ApplyMenuStore;
   const history = useHistory();
 

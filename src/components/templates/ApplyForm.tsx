@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useLocation, useHistory, useParams } from "react-router-dom";
 
 import Heading2 from "../UI/atoms/texts/Heading2";
 import Heading3 from "../UI/atoms/texts/Heading3";
@@ -7,6 +8,11 @@ import ApplyInput from "../UI/atoms/inputs/ApplyInput";
 import Desc from "../UI/atoms/texts/Desc";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 import theme from "../../styles/theme";
+
+import applyFormData from "../../assets/data/applyFormData";
+import { IDProp } from "../../models/applyInterfaces";
+
+import RootStore from "../../stores/RootStore";
 
 const Container = styled.section`
   display: flex;
@@ -62,7 +68,72 @@ const ConfirmBtn = styled(SquareBtn)`
   cursor: pointer;
 `;
 
+interface InputProps {
+  email: string;
+  password: string;
+}
+
 function ApplyForm(): JSX.Element {
+  const params: IDProp = useParams();
+  const history = useHistory();
+  const location = useLocation();
+  const { UserTokenStore, HandleToken } = RootStore();
+
+  const [userInput, setUserInput] = useState({
+    email: "",
+    password: "",
+  });
+
+  const GoToResume = () => {
+    return location.pathname === `/recruit/apply/${params.id}/register`
+      ? history.push(`/recruit/apply/${params.id}/resume?apply=register`)
+      : history.push(`/recruit/apply/${params.id}/resume?apply=modify`);
+  };
+
+  const handleInputValue = (e: any) => {
+    const { name, value } = e.target;
+
+    setUserInput(prev => ({ ...prev, [name]: value }));
+  };
+
+  const fetchLogin = () => {
+    return fetch("https://api-we.stockfolio.ai/users/signin", {
+      method: "POST",
+      body: JSON.stringify({
+        email: userInput.email,
+        password: userInput.password,
+        recruit_id: params.id,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => HandleToken.setUserToken(data));
+  };
+
+  const checkValidation = () => {
+    const EMAIL_VALID_REGEX =
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    const PW_VALID_REGEX =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,\-./:;<=>?@\\[＼\]^_`{|}~\\])[A-Za-z\d!"#$%&'()*+,\-./:;<=>?@\\[＼\]^_`{|}~\\]{8,32}$/;
+
+    const emailValid = EMAIL_VALID_REGEX.test(userInput.email);
+    const pwValid = PW_VALID_REGEX.test(userInput.password);
+
+    return emailValid && pwValid;
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const isValid = checkValidation();
+
+    if (isValid) {
+      fetchLogin();
+      setUserInput({ email: "", password: "" });
+      GoToResume();
+    } else {
+      alert("작성하신 내용을 확인해주세요");
+    }
+  };
+
   return (
     <Container>
       <ApplyFormBox>
@@ -72,37 +143,29 @@ function ApplyForm(): JSX.Element {
             fontSize={24}
             fontWeight={700}
           >
-            지원하기
+            {location.pathname === `/recruit/apply/${params.id}/register`
+              ? "지원하기"
+              : "수정하기"}
           </Heading2>
         </HeaderBox>
-        <InputBox>
-          <Heading3
-            fontColor={theme.color.descMedium}
-            fontSize={14}
-            fontWeight={700}
-          >
-            이메일
-          </Heading3>
-          <InputInfo
-            name="email"
-            type="email"
-            placeholder="이메일을 입력해주세요."
-          />
-        </InputBox>
-        <InputBox>
-          <Heading3
-            fontColor={theme.color.descMedium}
-            fontSize={14}
-            fontWeight={700}
-          >
-            비밀번호
-          </Heading3>
-          <InputInfo
-            name="password"
-            type="password"
-            placeholder="4자리 숫자를 입력해주세요."
-          />
-        </InputBox>
+        {applyFormData.map(data => (
+          <InputBox key={data.id}>
+            <Heading3
+              fontColor={theme.color.descMedium}
+              fontSize={14}
+              fontWeight={700}
+            >
+              {data.title}
+            </Heading3>
+            <InputInfo
+              name={data.name}
+              type={data.type}
+              placeholder={data.placeholder}
+              autoComplete="off"
+              onChange={handleInputValue}
+            />
+          </InputBox>
+        ))}
         <Description
           fontColor={theme.color.descMedium}
           fontSize={14}
@@ -111,14 +174,18 @@ function ApplyForm(): JSX.Element {
           *본 이메일과 비밀번호를 이용해 언제든 지원서를 수정할 수 있습니다.
         </Description>
         <ConfirmBtn
+          type="submit"
           isFilled
           btnWidth={328}
           btnColor={theme.color.main}
           fontSize={14}
           fontColor={theme.color.white}
           fontWeight={700}
+          onClick={handleSubmit}
         >
-          지원서 작성하기
+          {location.pathname === `/recruit/apply/${params.id}/register`
+            ? "지원서 작성하기"
+            : "지원서 수정하기"}
         </ConfirmBtn>
       </ApplyFormBox>
     </Container>

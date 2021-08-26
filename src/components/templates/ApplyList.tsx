@@ -8,6 +8,8 @@ import ApplyDesc from "./ApplyDesc";
 
 import recruitListItemData from "../../assets/data/mockData/recruitListItemData";
 import RootStore from "../../stores/RootStore";
+import ApplyForm from "./ApplyForm";
+import Application from "../pages/Application";
 
 const Container = styled.div`
   min-height: calc(100vh - 353px);
@@ -24,7 +26,7 @@ function ApplyList(): JSX.Element {
       }
       return false;
     };
-    fetch("http://192.168.35.119:8000/recruits")
+    fetch("https://api-we.stockfolio.ai/recruits")
       .then(res => res.json())
       .then(data => {
         setTotalContent(data.results);
@@ -32,15 +34,31 @@ function ApplyList(): JSX.Element {
         setClicked("개발");
       });
   }, []);
-
   return (
     <BrowserRouter>
       <Container>
-        <ApplyNavBar />
+        <Switch>
+          <Route
+            exact
+            path={["/recruit", "/recruit/apply", "/recruit/apply/:id"]}
+            component={ApplyNavBar}
+          />
+        </Switch>
         <Switch>
           <Route exact path="/recruit" component={RecruitList} />
           <Route exact path="/recruit/apply" component={RecruitList} />
-          <Route path="/recruit/apply/:id" component={ApplyDesc} />
+          <Route exact path="/recruit/apply/:id" component={ApplyDesc} />
+          <Route
+            exact
+            path="/recruit/apply/:id/register"
+            component={ApplyForm}
+          />
+          <Route exact path="/recruit/apply/:id/modify" component={ApplyForm} />
+          <Route
+            exact
+            path="/recruit/apply/:id/resume"
+            component={Application}
+          />
         </Switch>
       </Container>
     </BrowserRouter>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
-import { toJS } from "mobx";
 
 import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
