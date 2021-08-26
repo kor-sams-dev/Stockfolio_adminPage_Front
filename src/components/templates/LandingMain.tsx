@@ -38,7 +38,7 @@ const DownArrow = styled.div`
 
 function LandingMain(): JSX.Element {
   return (
-    <ViewportBox bgColor={`no-repeat url("./images/landingMain.png")`}>
+    <ViewportBox bgColor={`no-repeat url("/images/landingMain.png")`}>
       <Inner size="wide">
         <ContentContainer>
           <Sub>모두가 크리에이터가 될 수 있도록</Sub>
@@ -64,7 +64,7 @@ function LandingMain(): JSX.Element {
           </Desc>
         </ContentContainer>
         <DownArrow>
-          <img src="./images/downArrow.png" alt="go down" />
+          <img src="/images/downArrow.png" alt="go down" />
         </DownArrow>
       </Inner>
     </ViewportBox>

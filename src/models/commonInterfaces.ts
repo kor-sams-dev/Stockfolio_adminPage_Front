@@ -18,7 +18,8 @@ interface SquareBtnProps extends TextProps {
 }
 
 interface LabelProps {
-  stance: "senior" | "junior";
+  stance: "경력" | "신입";
+  // stance: "senior" | "junior";
 }
 
 interface QuantityLabelProps {
@@ -50,6 +51,9 @@ interface ApplyInputProps {
   type: string;
   placeholder: string;
   name: string;
+  value?: string;
+  onChange?: (e: any) => void;
+  autoComplete?: string;
   className?: string;
 }
 

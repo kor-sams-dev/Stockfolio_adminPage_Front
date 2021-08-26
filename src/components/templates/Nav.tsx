@@ -1,8 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  Link as ReactRouterDomLink,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 
 import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
+
+interface ClickProps {
+  isActive: boolean;
+  children: string;
+  to: string;
+}
 
 const NavHeader = styled.div`
   display: flex;
@@ -25,6 +36,7 @@ const AlignBox = styled.div`
 const LogoBox = styled.div`
   width: 161px;
   height: 32px;
+  cursor: pointer;
 `;
 
 const NavMenuList = styled.ul`
@@ -33,32 +45,39 @@ const NavMenuList = styled.ul`
   align-items: center;
 `;
 
-const NavMenu = styled.li`
+const Link = ({ isActive, children, ...props }: ClickProps) => {
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <ReactRouterDomLink {...props}>{children}</ReactRouterDomLink>;
+};
+
+const NavMenu = styled(Link)`
+  margin: 0 30px;
   color: ${theme.color.black};
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
-
-  & + li {
-    margin-left: 57px;
-  }
-
-  &:hover {
-    font-weight: 900;
-  }
+  font-weight: ${props => (props.isActive ? 900 : 400)};
 `;
 
 function Nav(): JSX.Element {
+  const { pathname } = useLocation();
+  const history = useHistory();
+  const GoToMain = () => history.push("/");
+
   return (
     <NavHeader>
       <Inner size="wide">
         <AlignBox>
-          <LogoBox>
-            <img alt="Stockfolio" src="./images/Logo_Stockfolio.png" />
+          <LogoBox onClick={GoToMain}>
+            <img alt="Stockfolio" src="/images/Logo_Stockfolio.png" />
           </LogoBox>
           <NavMenuList>
-            <NavMenu>회사 소개</NavMenu>
-            <NavMenu>채용 공고</NavMenu>
+            <NavMenu to="/" isActive={pathname === "/"}>
+              회사 소개
+            </NavMenu>
+            <NavMenu to="/recruit" isActive={pathname === "/recruit"}>
+              채용 공고
+            </NavMenu>
           </NavMenuList>
         </AlignBox>
       </Inner>

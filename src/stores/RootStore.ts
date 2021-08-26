@@ -8,8 +8,10 @@ import {
 import MissionStore from "./MissionStore";
 import { SelectStore, SelectActions } from "./SelectStore";
 import { CheckboxStore, CheckboxActions } from "./CheckboxStore";
-import ApplyMenuStore from "./ApplyMenuStore";
+import { ApplyMenuStore, SelectedContent } from "./ApplyMenuStore";
 import StyledAlertStore from "./StyledAlertStore";
+
+import { UserTokenStore, HandleToken } from "./UserTokenStore";
 
 const RootStore = () => {
   return {
@@ -25,6 +27,9 @@ const RootStore = () => {
     CheckboxActions,
     ApplyMenuStore,
     StyledAlertStore,
+    SelectedContent,
+    UserTokenStore,
+    HandleToken,
   };
 };
 
