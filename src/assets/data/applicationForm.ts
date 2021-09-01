@@ -176,6 +176,7 @@ const applicationForm = {
         placeholder: "최종학력",
         title: "학력",
         options: [
+          "없음",
           "고등학교",
           "검정고시",
           "사이버대학",
@@ -226,7 +227,7 @@ const applicationForm = {
         type: "select",
         placeholder: "졸업상태",
         title: "졸업상태",
-        options: ["졸업", "중퇴", "휴학", "졸업예정", "재학", "수료"],
+        options: ["없음", "졸업", "중퇴", "휴학", "졸업예정", "재학", "수료"],
         itemWidth: 21.224,
       },
     ],
