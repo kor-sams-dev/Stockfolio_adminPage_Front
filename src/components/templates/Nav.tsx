@@ -70,7 +70,7 @@ function Nav(): JSX.Element {
       <Inner size="wide">
         <AlignBox>
           <LogoBox onClick={GoToMain}>
-            <img alt="Stockfolio" src="/images/Logo_Stockfolio.png" />
+            <img alt="Stockfolio" src="/images/Logo_Stockfolio2.png" />
           </LogoBox>
           <NavMenuList>
             <NavMenu to="/" isActive={pathname === "/"}>
