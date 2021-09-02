@@ -44,7 +44,7 @@ const Footer = (): JSX.Element => {
             <Item>대표이사: 오연우, 조기영</Item>
             <Item>사업자등록번호: 229-88-01608</Item>
             <Item>주소: 서울특별시 성동구 아차산로 126 802호</Item>
-            <Item>전화번호: 010-8373-3820</Item>
+            <Item>전화번호: 070-8755-4848</Item>
           </List>
         </FlexBox>
       </Inner>

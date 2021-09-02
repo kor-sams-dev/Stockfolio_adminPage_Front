@@ -23,7 +23,8 @@ const NavHeader = styled.div`
   top: 0;
   width: 100%;
   height: 80px;
-  background-color: ${theme.color.white};
+  /* background-color: ${theme.color.white}; */
+  backdrop-filter: blur(5px);
   z-index: 99999;
 `;
 
@@ -69,7 +70,7 @@ function Nav(): JSX.Element {
       <Inner size="wide">
         <AlignBox>
           <LogoBox onClick={GoToMain}>
-            <img alt="Stockfolio" src="/images/Logo_Stockfolio.png" />
+            <img alt="Stockfolio" src="/images/Logo_Stockfolio2.png" />
           </LogoBox>
           <NavMenuList>
             <NavMenu to="/" isActive={pathname === "/"}>

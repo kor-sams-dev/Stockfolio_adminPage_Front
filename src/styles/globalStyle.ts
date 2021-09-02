@@ -8,11 +8,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body *{
-    color: black;
-      /* font-family: 'Noto Sans KR', sans-serif; */
-  }
+    color: black;    
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 
-   a {
+  a {
       color: inherit;
       text-decoration: none;
   }
