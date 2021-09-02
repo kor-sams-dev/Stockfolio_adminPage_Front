@@ -8,7 +8,12 @@ import coAgencies from "../../../assets/data/coAgencies";
 
 const Box = styled.section`
   margin: 400px 0;
+  padding: 50px 0;
   text-align: center;
+  background-color: #fbfbfb;
+  width: 200%;
+  height: 300px;
+  transform: translate(-25%);
 `;
 
 const List = styled.ul`

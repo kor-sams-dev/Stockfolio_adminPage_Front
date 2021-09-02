@@ -10,7 +10,7 @@ const H1 = styled.h1`
     fontSize ? `${fontSize}px` : "60px"};
   font-weight: ${({ fontWeight }: TextProps) => fontWeight};
   font-weight: 700;
-  line-height: 75px;
+  line-height: 60px;
 `;
 
 function Heading1({

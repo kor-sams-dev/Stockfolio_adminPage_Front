@@ -20,7 +20,7 @@ const Item = styled.li`
 
 const CircleArrow = styled.img`
   position: absolute;
-  top: 0;
+  top: -3px;
   left: 0;
   opacity: ${({ isActive }: EventProps) => (isActive ? 1 : 0)};
   transition: opacity 0.4s ease-out;
