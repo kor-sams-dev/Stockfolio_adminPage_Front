@@ -125,7 +125,7 @@ const applicationForm = {
     ],
   },
   introduction: {
-    isRequired: false,
+    isRequired: true,
     isListed: false,
     hasCheckBox: false,
     title: "자기소개",
@@ -141,7 +141,7 @@ const applicationForm = {
     ],
   },
   portfolio: {
-    isRequired: true,
+    isRequired: false,
     isListed: false,
     hasCheckBox: false,
     title: "포트폴리오",
@@ -164,7 +164,7 @@ const applicationForm = {
     ],
   },
   education: {
-    isRequired: false,
+    isRequired: true,
     isListed: false,
     hasCheckBox: false,
     title: "학력정보",

@@ -51,9 +51,6 @@ const InputBox = styled.div`
 const ApplicationPortfolio = observer((): JSX.Element => {
   return (
     <Box>
-      <Required>
-        <i>*</i>는 필수입력사항입니다.
-      </Required>
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
           {applicationForm.portfolio.title}
