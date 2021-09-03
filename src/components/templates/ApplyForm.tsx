@@ -130,7 +130,7 @@ const ApplyForm = observer((): JSX.Element => {
     if (isValid) {
       fetchLogin();
     } else {
-      alert("작성하신 내용을 확인해주세요");
+      alert("형식을 체크해주세요");
     }
   };
 

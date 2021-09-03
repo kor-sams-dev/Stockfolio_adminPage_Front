@@ -12,7 +12,7 @@ export const SelectedContent: MenuProps = observable({
 });
 
 export const ApplyMenuStore = observable({
-  clicked: "개발",
+  clicked: "전체",
   viewContent: [],
   totalContent: [],
   setClicked: action((value: string) => {
