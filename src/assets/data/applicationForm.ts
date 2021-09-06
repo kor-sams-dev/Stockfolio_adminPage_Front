@@ -125,7 +125,7 @@ const applicationForm = {
     ],
   },
   introduction: {
-    isRequired: false,
+    isRequired: true,
     isListed: false,
     hasCheckBox: false,
     title: "자기소개",
@@ -141,7 +141,7 @@ const applicationForm = {
     ],
   },
   portfolio: {
-    isRequired: true,
+    isRequired: false,
     isListed: false,
     hasCheckBox: false,
     title: "포트폴리오",
@@ -164,7 +164,7 @@ const applicationForm = {
     ],
   },
   education: {
-    isRequired: false,
+    isRequired: true,
     isListed: false,
     hasCheckBox: false,
     title: "학력정보",
@@ -176,6 +176,7 @@ const applicationForm = {
         placeholder: "최종학력",
         title: "학력",
         options: [
+          "없음",
           "고등학교",
           "검정고시",
           "사이버대학",
@@ -226,7 +227,7 @@ const applicationForm = {
         type: "select",
         placeholder: "졸업상태",
         title: "졸업상태",
-        options: ["졸업", "중퇴", "휴학", "졸업예정", "재학", "수료"],
+        options: ["없음", "졸업", "중퇴", "휴학", "졸업예정", "재학", "수료"],
         itemWidth: 21.224,
       },
     ],
