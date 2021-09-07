@@ -78,7 +78,7 @@ const AdminLogin = () => {
         <Heading3 fontColor={theme.color.grey2} fontSize={14} fontWeight={700}>
           비밀번호
         </Heading3>
-        <InputInfo type="password" placeholder="아이디를 입력해주세요" />
+        <InputInfo type="password" placeholder="비밀번호를 입력해주세요" />
       </InputBox1>
       <ConfirmBtn
         type="submit"
