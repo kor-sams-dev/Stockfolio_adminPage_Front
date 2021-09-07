@@ -5,6 +5,7 @@ import Nav from "./components/templates/Nav";
 import Landing from "./components/pages/Landing";
 import Footer from "./components/templates/Footer";
 import Recruit from "./components/pages/Recruit";
+import AdminLogin from "./components/pages/AdminLogin";
 
 function App(): JSX.Element {
   return (
@@ -20,6 +21,7 @@ function App(): JSX.Element {
         <Route exact path="/recruit/apply/:id/resume" component={Recruit} />
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
+        <Route exact path="/login" component={AdminLogin} />
       </Switch>
       <Footer />
     </BrowserRouter>
