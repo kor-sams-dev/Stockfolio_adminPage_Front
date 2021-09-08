@@ -1,7 +1,12 @@
+import React, { useState } from "react";
+import { observer } from "mobx-react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import theme from "../../styles/theme";
 import Heading3 from "../UI/atoms/texts/Heading3";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
+import { SignIn } from "../../config";
+
+import theme from "../../styles/theme";
 
 const Container = styled.div`
   display: flex;
@@ -61,7 +66,41 @@ const InputBox1 = styled.div`
   flex-direction: column;
 `;
 
-const AdminLogin = () => {
+const AdminLogin = observer((): JSX.Element => {
+  const [userInput, setUserInput] = useState({ email: "", password: "" });
+  const history = useHistory();
+
+  const handleInputValue = (e: any) => {
+    const { name, value } = e.target;
+    setUserInput(prev => ({ ...prev, [name]: value }));
+  };
+
+  const GoToMain = () => {
+    history.push("/");
+  };
+
+  const fetchLogin = () => {
+    return fetch(SignIn, {
+      method: "POST",
+      body: JSON.stringify({
+        email: userInput.email,
+        password: userInput.password,
+        recruit_id: 1,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.access_token) {
+          sessionStorage.setItem("TOKEN", data.access_token);
+          GoToMain();
+        } else {
+          alert(
+            "아이디와 비밀번호를 확인해주세요!\n기타사항은 관리자에게 문의하세요"
+          );
+        }
+      });
+  };
+
   return (
     <Container>
       <Logobox>
@@ -72,13 +111,23 @@ const AdminLogin = () => {
         <Heading3 fontColor={theme.color.grey2} fontSize={14} fontWeight={700}>
           아이디
         </Heading3>
-        <InputInfo type="email" placeholder="아이디를 입력해주세요" />
+        <InputInfo
+          name="email"
+          type="email"
+          placeholder="아이디를 입력해주세요"
+          onChange={handleInputValue}
+        />
       </InputBox>
       <InputBox1>
         <Heading3 fontColor={theme.color.grey2} fontSize={14} fontWeight={700}>
           비밀번호
         </Heading3>
-        <InputInfo type="password" placeholder="비밀번호를 입력해주세요" />
+        <InputInfo
+          name="password"
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+          onChange={handleInputValue}
+        />
       </InputBox1>
       <ConfirmBtn
         type="submit"
@@ -88,11 +137,12 @@ const AdminLogin = () => {
         fontSize={14}
         fontColor={theme.color.white}
         fontWeight={700}
+        onClick={fetchLogin}
       >
         로그인
       </ConfirmBtn>
     </Container>
   );
-};
+});
 
 export default AdminLogin;
