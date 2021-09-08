@@ -172,6 +172,7 @@ const Label2 = styled.div`
   justify-content: center;
   align-items: center;
   padding: 6px 0;
+
   span {
     font-size: 12px;
     font-weight: 700;
@@ -193,10 +194,24 @@ const AdminMain = (): JSX.Element => {
         <Admin>
           {adminMainMenu.data.menu.map((data: AdminMenu) => {
             return (
-              <AdminBox key={data.context}>
-                <StringSpan>{data.context}</StringSpan>
-                <NumberSpan>{data.number}</NumberSpan>
-              </AdminBox>
+              <>
+                <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][0]}>
+                  <StringSpan>오늘의 지원자</StringSpan>
+                  <NumberSpan>{data.number}</NumberSpan>
+                </AdminBox>
+                <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][1]}>
+                  <StringSpan>진행중인 공고</StringSpan>
+                  <NumberSpan>{data.Id}</NumberSpan>
+                </AdminBox>
+                <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][2]}>
+                  <StringSpan>새로 등록된 공고</StringSpan>
+                  <NumberSpan>{data.label}</NumberSpan>
+                </AdminBox>
+                <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][3]}>
+                  <StringSpan>곧 마감될 공고</StringSpan>
+                  <NumberSpan>{data.context}</NumberSpan>
+                </AdminBox>
+              </>
             );
           })}
         </Admin>
@@ -230,23 +245,29 @@ const AdminMain = (): JSX.Element => {
           <NavTitle>최근 지원자</NavTitle>
           <NavButton>전체보기</NavButton>
         </AdminNav>
-        <Applicant>
-          <TitleWrap>
-            <Title>Back-end Developer 채용</Title>
-            <Name>이재성</Name>
-            <Label2>
-              <span>new</span>
-            </Label2>
-          </TitleWrap>
-          <ContentWrap>
-            <Career>
-              경력 10년 <span>|</span> 2021-09-21
-            </Career>
-            <Email>
-              stock@naver.com <span>|</span> 010-1234-5685
-            </Email>
-          </ContentWrap>
-        </Applicant>
+        {adminMainMenu.data.notice.map(data => {
+          return (
+            <Applicant key={data.idx}>
+              <TitleWrap>
+                <Title>{data.developer} 채용</Title>
+                <Name>{data.name}</Name>
+                {data.label ? (
+                  <Label2>
+                    <span>new</span>
+                  </Label2>
+                ) : null}
+              </TitleWrap>
+              <ContentWrap>
+                <Career>
+                  {data.career} <span>|</span> {data.date}
+                </Career>
+                <Email>
+                  {data.email} <span>|</span> {data.number}
+                </Email>
+              </ContentWrap>
+            </Applicant>
+          );
+        })}
       </Inner>
     </Box>
   );

@@ -1,7 +1,8 @@
 export interface AdminMenu {
   Id: number;
-  context: string;
+  context: number;
   number: number;
+  label: number;
 }
 export interface AdminApplicant {
   idx: number;

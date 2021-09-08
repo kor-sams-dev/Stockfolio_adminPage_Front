@@ -2,24 +2,10 @@ const adminMainMenu = {
   data: {
     menu: [
       {
-        Id: 0,
-        context: "오늘의 지원자",
-        number: 5,
-      },
-      {
-        Id: 1,
-        context: "진행중인 공고",
-        number: 12,
-      },
-      {
-        Id: 2,
-        context: "새로 등록된 공고",
-        number: 4,
-      },
-      {
-        Id: 3,
-        context: "곧 마감 될 공고",
-        number: 7,
+        Id: 4,
+        context: 3,
+        number: 2,
+        label: 1,
       },
     ],
     applicant: [
@@ -41,8 +27,26 @@ const adminMainMenu = {
       },
     ],
     notice: [
-      { idx: 0, title: "김명성", Id: "sstaar91", password: "2%wpaae" },
-      { idx: 1, title: "고유영", Id: "goyuyoung", password: "2%wpaae" },
+      {
+        idx: 1,
+        label: true,
+        developer: "back-end developer",
+        name: "이재성",
+        career: "경력5년",
+        date: "2021-06-02",
+        email: "stock12335@naver.com",
+        number: "010-5455-2655",
+      },
+      {
+        idx: 2,
+        label: false,
+        developer: "front-end developer",
+        name: "문주영",
+        career: "경력10년",
+        date: "2021-06-31",
+        email: "stock@naver.com",
+        number: "010-1234-5678",
+      },
     ],
   },
 };
