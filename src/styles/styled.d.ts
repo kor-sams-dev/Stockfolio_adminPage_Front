@@ -28,6 +28,7 @@ declare module "styled-components" {
       bgGrey: string;
       bgLightGrey: string;
       bgLightBlue: string;
+      red2: string;
     };
   }
 }

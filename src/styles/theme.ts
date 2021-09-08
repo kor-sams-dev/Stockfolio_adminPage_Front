@@ -27,6 +27,7 @@ const theme: DefaultTheme = {
     bgGrey: "#DDDDDD",
     bgLightGrey: "#F5F5F5",
     bgLightBlue: "#F9FCFF",
+    red2: "#FF6359",
   },
 };
 export default theme;
