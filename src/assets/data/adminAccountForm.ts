@@ -24,8 +24,8 @@ const AdminDataForm = {
       },
     ],
     account: [
-      { idx: 0, title: "김명성", Id: "sstaar91", password: "2%wpaae" },
-      { idx: 1, title: "고유영", Id: "goyuyoung", password: "2%wpaae" },
+      { id: 0, name: "김명성", email: "sstaar91", password: "2%wpaae" },
+      { id: 1, name: "고유영", email: "goyuyoung", password: "2%wpaae" },
     ],
   },
   notificationInput: {

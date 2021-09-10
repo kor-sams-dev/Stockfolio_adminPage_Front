@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -8,6 +8,7 @@ import AdminInput from "../UI/atoms/inputs/AdminInput";
 
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
+import { IAccountItem } from "../../models/AdminAccountInterface";
 
 const Box = styled.section`
   position: sticky;
@@ -110,6 +111,28 @@ const AdminAccount = observer((): JSX.Element => {
     setAccountInfo(prev => ({ ...prev, [name]: value }));
   };
 
+  // const [accountData, setAccountData] = useState([]);
+
+  // const requestHeaders: HeadersInit = new Headers();
+  // requestHeaders.set("Content-Type", "application/json");
+  // requestHeaders.set(
+  //   "Authorization",
+  //   localStorage
+  //     ?.getItem("access_token")
+  //     ?.slice(1, localStorage.getItem("access_token")!.length - 1) || "no token"
+  // );
+
+  // useEffect(() => {
+  //   fetch("http://192.168.35.189:8000/users/admins", {
+  //     method: "GET",
+  //     headers: requestHeaders,
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setAccountData(data.result);
+  //     });
+  // }, []);
+
   return (
     <Box>
       <Inner size="wide">
@@ -132,9 +155,9 @@ const AdminAccount = observer((): JSX.Element => {
           </Sort>
           {AdminDataForm.accountInput.account.map(list => {
             return (
-              <AccountWrap key={list.idx}>
-                <AccountContentName>{list.title}</AccountContentName>
-                <AccountContent>{list.Id}</AccountContent>
+              <AccountWrap key={list.id}>
+                <AccountContentName>{list.name}</AccountContentName>
+                <AccountContent>{list.email}</AccountContent>
                 <AccountContent>{list.password}</AccountContent>
                 <ButtonWrap>
                   <AccountBtn>수정</AccountBtn>

@@ -28,6 +28,18 @@ const DownImg = styled.img`
   width: 14px;
 `;
 
+// const DropdownList = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 500px;
+//   border: 1px solid black;
+//   padding: 16px 0 0 16px;
+//   background-color: white;
+//   visibility: visible;
+// `;
+
 interface IAddNotiBtn {
   item: INotificationItem;
 }
@@ -45,6 +57,7 @@ const AdminInput = observer(
         <DropdownBtn width={item.itemWidth}>
           {item.title}
           <DownImg src="/../../images/downArrow.png" alt="dowm img" />
+          {/* <DropdownList>김명성</DropdownList> */}
         </DropdownBtn>
       </DropdownWrap>
     );

@@ -2,8 +2,10 @@ export interface IAccountItem {
   id: number;
   title: string;
   name: string;
-  placeholder: string;
-  itemWidth: number;
+  placeholder?: string;
+  itemWidth?: number;
+  email?: string;
+  password?: string;
 }
 
 export interface INotificationItem {

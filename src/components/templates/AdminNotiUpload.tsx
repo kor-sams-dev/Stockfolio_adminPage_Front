@@ -18,6 +18,7 @@ const Box = styled.section`
   align-items: flex-start;
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
   background: ${theme.color.white};
   padding-top: 100px;
 `;
@@ -36,6 +37,27 @@ const DropdownSection = styled.section`
   justify-content: flex-start;
 `;
 
+const WebEditor = styled.div`
+  width: 100%;
+  height: 500px;
+  border: 1px solid black;
+  margin: 16px 0 16px 16px;
+`;
+
+const BtnWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const SubmitBtn = styled.button`
+  margin: 40px 0;
+  padding: 16px;
+  background-color: ${theme.color.mainDeep};
+  color: white;
+  width: 312px;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
 const AdminNotiUpload = observer((): JSX.Element => {
   return (
     <Box>
@@ -51,6 +73,10 @@ const AdminNotiUpload = observer((): JSX.Element => {
             return <AdminBtn item={item} key={item.id} />;
           })}
         </DropdownSection>
+        <WebEditor>에디터 위치</WebEditor>
+        <BtnWrap>
+          <SubmitBtn>올리기</SubmitBtn>
+        </BtnWrap>
       </Inner>
     </Box>
   );

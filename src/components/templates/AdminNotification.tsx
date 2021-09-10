@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { observer } from "mobx-react";
+import { useHistory } from "react-router-dom";
 import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import Label from "../UI/atoms/Labels/Label";
@@ -90,6 +91,10 @@ const VolunteerListBtn = styled.button`
 `;
 
 const AdminNotification = observer((): JSX.Element => {
+  const history = useHistory();
+  const uploadNoti = () => {
+    history.push("/admin/notification/write");
+  };
   return (
     <Box>
       <Inner size="wide">
@@ -97,7 +102,9 @@ const AdminNotification = observer((): JSX.Element => {
           <Heading2 fontWeight={700} fontSize={24}>
             내가 올린 공고
           </Heading2>
-          <NewNorificationBtn>새로운 공고 올리기</NewNorificationBtn>
+          <NewNorificationBtn onClick={uploadNoti}>
+            새로운 공고 올리기
+          </NewNorificationBtn>
         </HeaderWrap>
         {AdminNotificationList.data.list.map(list => {
           return (
