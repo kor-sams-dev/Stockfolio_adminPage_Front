@@ -57,7 +57,7 @@ const NonePositionList = styled.li`
 `;
 
 const ApplyNavBar = observer((): JSX.Element => {
-  const department = ["개발", "디자인", "마케팅"];
+  const department = ["전체", "개발", "디자인", "마케팅"];
   const { ApplyMenuStore } = RootStore();
   const { clicked, totalContent } = ApplyMenuStore;
 
@@ -66,8 +66,13 @@ const ApplyNavBar = observer((): JSX.Element => {
       return arr.position === clicked;
     };
 
-    ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
+    if (ApplyMenuStore.clicked === "전체") {
+      ApplyMenuStore.setViewContent(totalContent);
+    } else {
+      ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
+    }
   }, [ApplyMenuStore.clicked]);
+
   return (
     <ApplyNav>
       {department.map(item => {
@@ -80,13 +85,17 @@ const ApplyNavBar = observer((): JSX.Element => {
             }}
           >
             <PositionName>{item}</PositionName>
-            <QuantityLabel
-              quantity={
-                ApplyMenuStore.totalContent.filter(function (el: MenuProps) {
-                  return el.position === item;
-                }).length
-              }
-            />
+            {item === "전체" ? (
+              <QuantityLabel quantity={ApplyMenuStore.totalContent.length} />
+            ) : (
+              <QuantityLabel
+                quantity={
+                  ApplyMenuStore.totalContent.filter(function (el: MenuProps) {
+                    return el.position === item;
+                  }).length
+                }
+              />
+            )}
           </IsActive>
         );
       })}
