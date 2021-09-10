@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
+
 import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
+import AdminInput from "../UI/atoms/inputs/AdminInput";
 
 import theme from "../../styles/theme";
-import Heading4 from "../UI/atoms/texts/Heading4";
-import AdminAccountForm from "../../assets/data/adminAccountForm";
+import AdminDataForm from "../../assets/data/adminAccountForm";
 
 const Box = styled.section`
   position: sticky;
@@ -27,25 +27,12 @@ const InputWrap = styled.div`
   justify-content: center;
 `;
 
-const NameWrap = styled.div`
-  margin-top: 60px;
-  margin-left: 10px;
-`;
-
-const NameInput = styled.input`
-  background-color: ${theme.color.greyLight1};
-  padding: 20px 0 20px 20px;
-  border-radius: 8px;
-  width: ${props => props.width}px;
-`;
-
 const AddAccountBtn = styled.button`
   background-color: ${theme.color.mainDeep};
   position: relative;
   bottom: 0;
   right: 0;
-  padding: 20px;
-  width: 150px;
+  padding: 16px 55px;
   border-radius: 8px;
   color: white;
   margin-top: 90px;
@@ -76,14 +63,13 @@ const AccountBtn = styled.button`
   margin: 0 5px;
   border-radius: 10px;
   font-size: 15px;
-  margin-left: 10px;
 `;
 
 const AccountWrap = styled.div`
   display: grid;
   grid-template-columns: 200px 200px 200px auto;
   width: 100%;
-  padding: 10px 0 10px 30px;
+  padding: 9px 0 9px 30px;
   border-radius: 10px;
   margin-top: 10px;
   align-items: center;
@@ -127,34 +113,24 @@ const AdminAccount = observer((): JSX.Element => {
   return (
     <Box>
       <Inner size="wide">
-        <Heading2 fontWeight={900} fontSize={24}>
+        <Heading2 fontWeight={700} fontSize={24}>
           어드민 계정 관리
         </Heading2>
         <InputWrap>
-          {AdminAccountForm.data.item.map(item => {
+          {AdminDataForm.accountInput.item.map(item => {
             return (
-              <NameWrap key={item.id}>
-                <Heading4 fontWeight={500} fontSize={15}>
-                  {item.title}
-                </Heading4>
-                <NameInput
-                  name={item.name}
-                  placeholder={item.placeHolder}
-                  width={item.itemWidth}
-                  onChange={writeAdminInfo}
-                />
-              </NameWrap>
+              <AdminInput item={item} key={item.id} onChange={writeAdminInfo} />
             );
           })}
           <AddAccountBtn>추가</AddAccountBtn>
         </InputWrap>
         <AdminWrap>
           <Sort>
-            {AdminAccountForm.data.item.map(text => {
+            {AdminDataForm.accountInput.item.map(text => {
               return <SortTitle key={text.id}>{text.title}</SortTitle>;
             })}
           </Sort>
-          {AdminAccountForm.data.account.map(list => {
+          {AdminDataForm.accountInput.account.map(list => {
             return (
               <AccountWrap key={list.idx}>
                 <AccountContentName>{list.title}</AccountContentName>
