@@ -80,7 +80,7 @@ const ModRecruitBtn = styled.button`
 `;
 
 const DescriptionBox = styled.div`
-  padding-top: 40px;
+  padding-top: 96px;
 `;
 
 const DescList = styled.ul`
