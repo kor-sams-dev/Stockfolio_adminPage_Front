@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -33,8 +33,7 @@ const HeaderWrap = styled.header`
 `;
 
 const DropdownSection = styled.section`
-  margin-top: 24px;
-  margin-left: 10px;
+  margin: 24px 0 24px 10px;
   display: flex;
   justify-content: flex-start;
 `;
@@ -68,7 +67,77 @@ const AdminNotiUpload = observer((): JSX.Element => {
             return <AdminBtn item={item} key={item.id} />;
           })}
         </DropdownSection>
-        <CKEditor editor={ClassicEditor} data="<p>Hello from CKEditor 5!</p>" />
+        <CKEditor
+          editor={ClassicEditor}
+          config={{
+            placeholder: "내용을 작성해 주세요",
+            toolbar: {
+              items: [
+                "heading",
+                "|",
+                "bold",
+                "italic",
+                "link",
+                "bulletedList",
+                "numberedList",
+                "imageUpload",
+                "blockQuote",
+                "insertTable",
+                "mediaEmbed",
+                "undo",
+                "redo",
+              ],
+            },
+            image: {
+              toolbar: [
+                "imageStyle:full",
+                "imageStyle:side",
+                "|",
+                "imageTextAlternative",
+              ],
+            },
+            heading: {
+              options: [
+                {
+                  model: "heading1",
+                  view: "h1",
+                  title: "헤더1",
+                  class: "ck-heading_heading1",
+                },
+                {
+                  model: "heading2",
+                  view: "h2",
+                  title: "헤더2",
+                  class: "ck-heading_heading2",
+                },
+                {
+                  model: "heading3",
+                  view: "h3",
+                  title: "헤더3",
+                  class: "ck-heading_heading3",
+                },
+                {
+                  model: "paragraph",
+                  title: "본문",
+                  class: "ck-heading_paragraph",
+                },
+              ],
+            },
+          }}
+          onChange={(event: any, editor: any) => {
+            const data = editor.getData();
+            console.log({ event, editor, data });
+          }}
+          onInit={(editor: any) => {
+            editor.editing.view.change((writer: any) => {
+              writer.setStyle(
+                "height",
+                "400px",
+                editor.editing.view.document.getRoot()
+              );
+            });
+          }}
+        />
         <BtnWrap>
           <SubmitBtn>올리기</SubmitBtn>
         </BtnWrap>
