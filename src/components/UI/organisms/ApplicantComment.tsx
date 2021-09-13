@@ -46,16 +46,13 @@ const GoodBtn = styled.button`
   padding: 4px 8px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
-  background-color: ${EvaluateButtonStore.isChecked.good
-    ? theme.color.blue
-    : "white"};
-  color: ${EvaluateButtonStore.isChecked.good ? "white" : "black"};
+  background-color: ${props => (props.isActive ? theme.color.blue : "white")};
+  color: ${props => (props.isActive ? "white" : "black")};
   cursor: pointer;
 
   &:hover {
-    background-color: ${EvaluateButtonStore.isChecked.good
-      ? theme.color.blue
-      : theme.color.blueLight};
+    background-color: ${props =>
+      props.isActive ? theme.color.blue : theme.color.blueLight};
     color: white;
   }
 `;
@@ -64,16 +61,14 @@ const SosoBtn = styled.button`
   padding: 5px 7px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
-  background-color: ${EvaluateButtonStore.isChecked.good
-    ? theme.color.descDark
-    : "white"};
-  color: ${EvaluateButtonStore.isChecked.good ? "white" : "black"};
+  background-color: ${props =>
+    props.isActive ? theme.color.descDark : "white"};
+  color: ${props => (props.isActive ? "white" : "black")};
   cursor: pointer;
 
   &:hover {
-    background-color: ${EvaluateButtonStore.isChecked.good
-      ? theme.color.descDark
-      : theme.color.grey2};
+    background-color: ${props =>
+      props.isActive ? theme.color.descDark : theme.color.grey2};
     color: white;
   }
 `;
@@ -82,16 +77,13 @@ const BadBtn = styled.button`
   padding: 5px 7px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
-  background-color: ${EvaluateButtonStore.isChecked.good
-    ? theme.color.red
-    : "white"};
-  color: ${EvaluateButtonStore.isChecked.good ? "white" : "black"};
+  background-color: ${props => (props.isActive ? theme.color.red : "white")};
+  color: ${props => (props.isActive ? "white" : "black")};
   cursor: pointer;
 
   &:hover {
-    background-color: ${EvaluateButtonStore.isChecked.good
-      ? theme.color.red
-      : theme.color.redLight};
+    background-color: ${props =>
+      props.isActive ? theme.color.red : theme.color.redLight};
     color: white;
   }
 `;
@@ -141,6 +133,7 @@ const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
   const TextLengthCheck = (e: any) => {
     setCommentLength(e.target.value);
   };
+
   return (
     <>
       <ListAlert>
@@ -163,21 +156,30 @@ const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
           <GoodBtn
             onClick={() => {
               EvaluateButtonStoreActions.setIsChecked("good");
+              EvaluateButtonStore.isChecked.soso = false;
+              EvaluateButtonStore.isChecked.bad = false;
             }}
+            isActive={EvaluateButtonStore.isChecked.good}
           >
             뽑아요👍
           </GoodBtn>
           <SosoBtn
             onClick={() => {
               EvaluateButtonStoreActions.setIsChecked("soso");
+              EvaluateButtonStore.isChecked.good = false;
+              EvaluateButtonStore.isChecked.bad = false;
             }}
+            isActive={EvaluateButtonStore.isChecked.soso}
           >
             그냥그래요🙄
           </SosoBtn>
           <BadBtn
             onClick={() => {
               EvaluateButtonStoreActions.setIsChecked("bad");
+              EvaluateButtonStore.isChecked.good = false;
+              EvaluateButtonStore.isChecked.soso = false;
             }}
+            isActive={EvaluateButtonStore.isChecked.bad}
           >
             안돼요👎
           </BadBtn>
