@@ -64,7 +64,7 @@ const ApplicationIntroduction = observer((): JSX.Element => {
         {applicationForm.introduction.desc}
       </Desc>
       <InputBox>
-        {applicationForm.introduction.item.map((item: any) => {
+        {applicationForm.introduction.item.map(item => {
           return (
             <Textarea
               key={item.name}
