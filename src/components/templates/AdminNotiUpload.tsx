@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import CKEditor from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { observer } from "mobx-react";
 import Inner from "../../styles/Inner";
@@ -37,13 +39,6 @@ const DropdownSection = styled.section`
   justify-content: flex-start;
 `;
 
-const WebEditor = styled.div`
-  width: 100%;
-  height: 500px;
-  border: 1px solid black;
-  margin: 16px 0 16px 16px;
-`;
-
 const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -73,7 +68,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
             return <AdminBtn item={item} key={item.id} />;
           })}
         </DropdownSection>
-        <WebEditor>에디터 위치</WebEditor>
+        <CKEditor editor={ClassicEditor} data="<p>Hello from CKEditor 5!</p>" />
         <BtnWrap>
           <SubmitBtn>올리기</SubmitBtn>
         </BtnWrap>
