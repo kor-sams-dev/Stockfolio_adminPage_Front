@@ -29,16 +29,16 @@ function App(): JSX.Element {
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
         <Route exact path="/login" component={AdminLogin} />
-        <Route exact path="/adminmain" component={AdminMain} />
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="/admin/:id" component={Admin} />
+        <Route exact path="/admin" component={AdminMain} />
+        <Route exact path="/admin/apply" component={Admin} />
+        <Route exact path="/admin/apply/:id" component={Admin} />
+        <Route exact path="/admin/applicant" component={AdminApplicant} />
         <Route exact path="/admin/notification" component={AdminNotification} />
         <Route
           exact
           path="/admin/notification/write"
           component={AdminNotiUpload}
         />
-        <Route exact path="/admin/applicant" component={AdminApplicant} />
         <Route exact path="/admin/account" component={AdminAccount} />
       </Switch>
       <Footer />
