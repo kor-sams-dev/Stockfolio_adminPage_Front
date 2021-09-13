@@ -5,6 +5,7 @@ import { TextProps } from "../../../../models/commonInterfaces";
 
 const H4 = styled.h4`
   margin-bottom: 16px;
+  margin-left: 10px;
   color: ${({ fontColor }: TextProps) => fontColor};
   font-size: ${({ fontSize }: TextProps) =>
     fontSize ? `${fontSize}px` : "20px"};
