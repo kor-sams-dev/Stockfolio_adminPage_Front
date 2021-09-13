@@ -5,6 +5,7 @@ import Nav from "./components/templates/Nav";
 import Landing from "./components/pages/Landing";
 import Footer from "./components/templates/Footer";
 import Recruit from "./components/pages/Recruit";
+import AdminLogin from "./components/pages/AdminLogin";
 import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
@@ -25,6 +26,7 @@ function App(): JSX.Element {
         <Route exact path="/recruit/apply/:id/resume" component={Recruit} />
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
+        <Route exact path="/login" component={AdminLogin} />
         <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/admin/:id" component={Admin} />
