@@ -10,13 +10,39 @@ import AdminLogin from "./components/pages/AdminLogin";
 import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
+import AdminNav from "./components/pages/AdminNav";
 
 import Admin from "./components/pages/Admin";
+
+const RecruitNav = [
+  "/recruit",
+  "/recruit/apply",
+  "/recruit/apply/:id",
+  "/",
+  "/recruit/apply/:id/register",
+  "/recruit/apply/:id/modify",
+  "/recruit/apply/:id/resume",
+  "/recruit/process",
+  "/recruit/team",
+];
+
+const AdminNavbar = [
+  "/admin/main",
+  "/admin/login",
+  "/admin/account",
+  "/admin",
+  "/admin/:id",
+  "/admin/notification",
+  "/admin/notification/write",
+];
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <Nav />
+      <Switch>
+        <Route exact path={RecruitNav} component={Nav} />
+        <Route exact path={AdminNavbar} component={AdminNav} />
+      </Switch>
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/recruit" component={Recruit} />
@@ -27,17 +53,20 @@ function App(): JSX.Element {
         <Route exact path="/recruit/apply/:id/resume" component={Recruit} />
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
-        <Route exact path="/main" component={AdminMain} />
+        <Route exact path="/admin" component={AdminMain} />
         <Route exact path="/login" component={AdminLogin} />
         <Route exact path="/admin/account" component={AdminAccount} />
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="/admin/:id" component={Admin} />
+        <Route exact path="/admin/apply" component={Admin} />
+        <Route exact path="/admin/apply/:id" component={Admin} />
         <Route exact path="/admin/notification" component={AdminNotification} />
         <Route
           exact
           path="/admin/notification/write"
           component={AdminNotiUpload}
         />
+      </Switch>
+      <Switch>
+        <Route exact path={RecruitNav} component={Footer} />
       </Switch>
       {/* <Footer /> */}
     </BrowserRouter>
