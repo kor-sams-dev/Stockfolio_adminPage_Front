@@ -10,6 +10,10 @@ import { SelectStore, SelectActions } from "./SelectStore";
 import { CheckboxStore, CheckboxActions } from "./CheckboxStore";
 import { ApplyMenuStore, SelectedContent } from "./ApplyMenuStore";
 import StyledAlertStore from "./StyledAlertStore";
+import {
+  EvaluateButtonStore,
+  EvaluateButtonStoreActions,
+} from "./EvaluateButtonStore";
 
 import { UserTokenStore, HandleToken } from "./UserTokenStore";
 
@@ -30,6 +34,8 @@ const RootStore = () => {
     SelectedContent,
     UserTokenStore,
     HandleToken,
+    EvaluateButtonStore,
+    EvaluateButtonStoreActions,
   };
 };
 
