@@ -70,7 +70,7 @@ const AdminLogin = observer((): JSX.Element => {
   const [userInput, setUserInput] = useState({ email: "", password: "" });
   const history = useHistory();
 
-  const handleInputValue = (e: any) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInput(prev => ({ ...prev, [name]: value }));
   };
