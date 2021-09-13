@@ -9,6 +9,8 @@ import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
 
+import Admin from "./components/pages/Admin";
+
 function App(): JSX.Element {
   return (
     <BrowserRouter>
@@ -24,6 +26,8 @@ function App(): JSX.Element {
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
         <Route exact path="/admin/account" component={AdminAccount} />
+        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/admin/:id" component={Admin} />
         <Route exact path="/admin/notification" component={AdminNotification} />
         <Route
           exact
@@ -31,7 +35,7 @@ function App(): JSX.Element {
           component={AdminNotiUpload}
         />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
