@@ -119,7 +119,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
                 },
                 {
                   model: "paragraph",
-                  title: "본문",
+                  title: "내용",
                   class: "ck-heading_paragraph",
                 },
               ],
