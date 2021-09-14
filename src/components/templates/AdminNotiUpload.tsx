@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -42,6 +42,7 @@ const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const SubmitBtn = styled.button`
   margin: 40px 0;
   padding: 16px;
@@ -63,7 +64,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
         </HeaderWrap>
         <AdminInput item={AdminDataForm.notificationInput.item[0]} />
         <DropdownSection>
-          {AdminDataForm.NotificationUploadBtn.data.map(item => {
+          {AdminDataForm.NotificationUploadDropdown.data.map(item => {
             return <AdminBtn item={item} key={item.id} />;
           })}
         </DropdownSection>
@@ -126,7 +127,6 @@ const AdminNotiUpload = observer((): JSX.Element => {
           }}
           onChange={(event: any, editor: any) => {
             const data = editor.getData();
-            console.log({ event, editor, data });
           }}
           onInit={(editor: any) => {
             editor.editing.view.change((writer: any) => {
