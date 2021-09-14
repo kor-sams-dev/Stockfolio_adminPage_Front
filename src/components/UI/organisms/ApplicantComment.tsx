@@ -3,10 +3,7 @@ import styled from "styled-components";
 import { observer } from "mobx-react";
 
 import theme from "../../../styles/theme";
-import RootStore from "../../../stores/RootStore";
 import { IApplicantBasicInfo } from "../../../models/AdminAccountInterface";
-
-const { EvaluateButtonStoreActions, EvaluateButtonStore } = RootStore();
 
 const ListAlert = styled.div`
   font-size: 14px;
@@ -134,6 +131,25 @@ const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
     setCommentLength(e.target.value);
   };
 
+  const [goodButton, setGoodButton] = useState(false);
+  const [sosoButton, setSosoButton] = useState(false);
+  const [badButton, setBadButton] = useState(false);
+
+  const handleGoodButton = () => {
+    setGoodButton(!goodButton);
+    setSosoButton(false);
+    setBadButton(false);
+  };
+  const handleSosoButton = () => {
+    setGoodButton(false);
+    setSosoButton(!sosoButton);
+    setBadButton(false);
+  };
+  const handleBadButton = () => {
+    setGoodButton(false);
+    setSosoButton(false);
+    setBadButton(!badButton);
+  };
   return (
     <>
       <ListAlert>
@@ -153,34 +169,13 @@ const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
           </TimeDate>
         </TitleWrap>
         <ButtonWrap>
-          <GoodBtn
-            onClick={() => {
-              EvaluateButtonStoreActions.setIsChecked("good");
-              EvaluateButtonStore.isChecked.soso = false;
-              EvaluateButtonStore.isChecked.bad = false;
-            }}
-            isActive={EvaluateButtonStore.isChecked.good}
-          >
+          <GoodBtn onClick={handleGoodButton} isActive={goodButton}>
             뽑아요👍
           </GoodBtn>
-          <SosoBtn
-            onClick={() => {
-              EvaluateButtonStoreActions.setIsChecked("soso");
-              EvaluateButtonStore.isChecked.good = false;
-              EvaluateButtonStore.isChecked.bad = false;
-            }}
-            isActive={EvaluateButtonStore.isChecked.soso}
-          >
+          <SosoBtn onClick={handleSosoButton} isActive={sosoButton}>
             그냥그래요🙄
           </SosoBtn>
-          <BadBtn
-            onClick={() => {
-              EvaluateButtonStoreActions.setIsChecked("bad");
-              EvaluateButtonStore.isChecked.good = false;
-              EvaluateButtonStore.isChecked.soso = false;
-            }}
-            isActive={EvaluateButtonStore.isChecked.bad}
-          >
+          <BadBtn onClick={handleBadButton} isActive={badButton}>
             안돼요👎
           </BadBtn>
         </ButtonWrap>
