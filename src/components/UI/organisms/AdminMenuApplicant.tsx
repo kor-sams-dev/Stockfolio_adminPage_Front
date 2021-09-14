@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import adminMainMenu from "../../../assets/data/adminMainMenu";
 import theme from "../../../styles/theme";
 
@@ -102,17 +103,22 @@ const Label2 = styled.div`
 `;
 
 const AdminMenuApplicant = (): JSX.Element => {
+  const { pathname } = useLocation();
   return (
     <>
-      <AdminNav>
-        <NavTitle>최근 지원자</NavTitle>
-        <NavButton>전체보기</NavButton>
-      </AdminNav>
+      {pathname === "/admin/main" && (
+        <AdminNav>
+          <NavTitle>최근 지원자</NavTitle>
+          <NavButton>전체보기</NavButton>
+        </AdminNav>
+      )}
       {adminMainMenu.data.notice.map(data => {
         return (
           <Applicant key={data.idx}>
             <TitleWrap>
-              <Title>{data.developer} 채용</Title>
+              {pathname === "/admincurrent" && (
+                <Title>{data.developer} 채용</Title>
+              )}
               <Name>{data.name}</Name>
               {data.label ? (
                 <Label2>

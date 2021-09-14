@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { useLocation } from "react-router-dom";
 import theme from "../../../styles/theme";
 import { AdminApplicant } from "../../../models/adminMainMenu";
 import adminMainMenu from "../../../assets/data/adminMainMenu";
@@ -89,12 +90,15 @@ const ListButton = styled.button`
 `;
 
 const AdminNotice = (): JSX.Element => {
+  const { pathname } = useLocation();
   return (
     <>
-      <AdminNav>
-        <NavTitle>채용 공고</NavTitle>
-        <NavButton>전체보기</NavButton>
-      </AdminNav>
+      {pathname === "/admin/main" && (
+        <AdminNav>
+          <NavTitle>최근 지원자</NavTitle>
+          <NavButton>전체보기</NavButton>
+        </AdminNav>
+      )}
       {adminMainMenu.data.applicant.map((data: AdminApplicant) => {
         return (
           <Applicant key={data.idx}>
