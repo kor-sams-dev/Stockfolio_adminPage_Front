@@ -13,3 +13,10 @@ export interface INotificationItem {
   title: string;
   itemWidth: number;
 }
+
+export interface IUserInfo {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}

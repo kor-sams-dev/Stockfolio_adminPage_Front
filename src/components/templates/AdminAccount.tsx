@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -8,7 +8,6 @@ import AdminInput from "../UI/atoms/inputs/AdminInput";
 
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
-import { IAccountItem } from "../../models/AdminAccountInterface";
 
 const Box = styled.section`
   position: sticky;
@@ -64,6 +63,21 @@ const AccountBtn = styled.button`
   margin: 0 5px;
   border-radius: 10px;
   font-size: 15px;
+  cursor: pointer;
+`;
+
+const AccountContentName = styled.input`
+  font-size: 15px;
+  font-weight: bold;
+  display: inline;
+  background-color: white;
+`;
+
+const AccountContent = styled.input`
+  font-size: 10px;
+  font-weight: 400;
+  display: inline;
+  background-color: white;
 `;
 
 const AccountWrap = styled.div`
@@ -82,17 +96,15 @@ const AccountWrap = styled.div`
       background-color: ${theme.color.mainDeep};
       color: white;
     }
+
+    ${AccountContentName} {
+      background-color: ${theme.color.greyLight1};
+    }
+
+    ${AccountContent} {
+      background-color: ${theme.color.greyLight1};
+    }
   }
-`;
-
-const AccountContentName = styled.span`
-  font-size: 15px;
-  font-weight: bold;
-`;
-
-const AccountContent = styled.span`
-  font-size: 10px;
-  font-weight: 400;
 `;
 
 const ButtonWrap = styled.div`
@@ -105,33 +117,27 @@ const AdminAccount = observer((): JSX.Element => {
     id: "",
     password: "",
   });
-
   const writeAdminInfo = (e: any) => {
     const { name, value } = e.target;
     setAccountInfo(prev => ({ ...prev, [name]: value }));
   };
 
-  // const [accountData, setAccountData] = useState([]);
+  const [textCheck, setTextCheck] = useState({
+    id: "",
+    userName: "",
+    email: "",
+    password: "",
+  });
 
-  // const requestHeaders: HeadersInit = new Headers();
-  // requestHeaders.set("Content-Type", "application/json");
-  // requestHeaders.set(
-  //   "Authorization",
-  //   localStorage
-  //     ?.getItem("access_token")
-  //     ?.slice(1, localStorage.getItem("access_token")!.length - 1) || "no token"
-  // );
+  const changeText = (e: any) => {
+    const { id, userName, email, password } = e.target;
+    setTextCheck(e.target.value);
+  };
 
-  // useEffect(() => {
-  //   fetch("http://192.168.35.189:8000/users/admins", {
-  //     method: "GET",
-  //     headers: requestHeaders,
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setAccountData(data.result);
-  //     });
-  // }, []);
+  const [handleEditButton, setHandleEditButton] = useState(true);
+  const editText = () => {
+    setHandleEditButton(!handleEditButton);
+  };
 
   return (
     <Box>
@@ -155,12 +161,34 @@ const AdminAccount = observer((): JSX.Element => {
           </Sort>
           {AdminDataForm.accountInput.account.map(list => {
             return (
-              <AccountWrap key={list.id}>
-                <AccountContentName>{list.name}</AccountContentName>
-                <AccountContent>{list.email}</AccountContent>
-                <AccountContent>{list.password}</AccountContent>
+              <AccountWrap key={list.id} onChange={changeText}>
+                <AccountContentName
+                  type="text"
+                  value={
+                    textCheck.userName === ""
+                      ? list.userName
+                      : textCheck.userName
+                  }
+                  disabled={handleEditButton}
+                />
+                <AccountContent
+                  type="text"
+                  value={textCheck.email === "" ? list.email : textCheck.email}
+                  disabled={handleEditButton}
+                />
+                <AccountContent
+                  type="text"
+                  value={
+                    textCheck.password === ""
+                      ? list.password
+                      : textCheck.password
+                  }
+                  disabled={handleEditButton}
+                />
                 <ButtonWrap>
-                  <AccountBtn>수정</AccountBtn>
+                  <AccountBtn onClick={editText}>
+                    {handleEditButton ? "수정" : "확인"}
+                  </AccountBtn>
                   <AccountBtn>삭제</AccountBtn>
                 </ButtonWrap>
               </AccountWrap>
