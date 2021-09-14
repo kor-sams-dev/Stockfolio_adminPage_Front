@@ -76,7 +76,7 @@ const AdminLogin = observer((): JSX.Element => {
   };
 
   const GoToMain = () => {
-    history.push("/");
+    history.push("/admin");
   };
 
   const fetchLogin = () => {
