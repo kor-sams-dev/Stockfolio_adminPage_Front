@@ -29,7 +29,7 @@ const Title = styled.div`
   line-height: 24px;
 `;
 
-const AdminApplicant = (): JSX.Element => {
+const AdminApplicantList = (): JSX.Element => {
   return (
     <AdminBox>
       <Inner size="narrow">
@@ -49,4 +49,4 @@ const AdminApplicant = (): JSX.Element => {
   );
 };
 
-export default AdminApplicant;
+export default AdminApplicantList;
