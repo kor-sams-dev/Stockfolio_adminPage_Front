@@ -5,6 +5,8 @@ import { observer } from "mobx-react";
 import theme from "../../../styles/theme";
 import { IApplicantBasicInfo } from "../../../models/AdminAccountInterface";
 
+import TimeForm from "../atoms/TimeForm";
+
 const ListAlert = styled.div`
   font-size: 14px;
   text-align: center;
@@ -27,12 +29,6 @@ const TitleText = styled.span`
   font-weight: 700;
 `;
 
-const TimeDate = styled.span`
-  color: ${theme.color.grey2};
-  font-size: 10px;
-  line-height: 1.5;
-`;
-
 const ButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
@@ -43,13 +39,14 @@ const GoodBtn = styled.button`
   padding: 4px 8px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
-  background-color: ${props => (props.isActive ? theme.color.blue : "white")};
-  color: ${props => (props.isActive ? "white" : "black")};
+  background-color: ${props =>
+    props.isActive === 1 ? theme.color.blue : "white"};
+  color: ${props => (props.isActive === 1 ? "white" : "black")};
   cursor: pointer;
 
   &:hover {
     background-color: ${props =>
-      props.isActive ? theme.color.blue : theme.color.blueLight};
+      props.isActive === 1 ? theme.color.blue : theme.color.blueLight};
     color: white;
   }
 `;
@@ -59,13 +56,13 @@ const SosoBtn = styled.button`
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
   background-color: ${props =>
-    props.isActive ? theme.color.descDark : "white"};
-  color: ${props => (props.isActive ? "white" : "black")};
+    props.isActive === 2 ? theme.color.descDark : "white"};
+  color: ${props => (props.isActive === 2 ? "white" : "black")};
   cursor: pointer;
 
   &:hover {
     background-color: ${props =>
-      props.isActive ? theme.color.descDark : theme.color.grey2};
+      props.isActive === 2 ? theme.color.descDark : theme.color.grey2};
     color: white;
   }
 `;
@@ -74,13 +71,14 @@ const BadBtn = styled.button`
   padding: 5px 7px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
-  background-color: ${props => (props.isActive ? theme.color.red : "white")};
-  color: ${props => (props.isActive ? "white" : "black")};
+  background-color: ${props =>
+    props.isActive === 3 ? theme.color.red : "white"};
+  color: ${props => (props.isActive === 3 ? "white" : "black")};
   cursor: pointer;
 
   &:hover {
     background-color: ${props =>
-      props.isActive ? theme.color.red : theme.color.redLight};
+      props.isActive === 3 ? theme.color.red : theme.color.redLight};
     color: white;
   }
 `;
@@ -123,7 +121,34 @@ interface IAddData {
 }
 
 const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
-  const presentDate = new Date();
+  const [activeBtn, setActiveBtn] = useState(0);
+  const handleGoodButton = () => {
+    if (activeBtn === 0) {
+      setActiveBtn(1);
+    } else if (activeBtn === 1) {
+      setActiveBtn(0);
+    } else {
+      setActiveBtn(1);
+    }
+  };
+  const handleSosoButton = () => {
+    if (activeBtn === 0) {
+      setActiveBtn(2);
+    } else if (activeBtn === 2) {
+      setActiveBtn(0);
+    } else {
+      setActiveBtn(2);
+    }
+  };
+  const handleBadButton = () => {
+    if (activeBtn === 0) {
+      setActiveBtn(3);
+    } else if (activeBtn === 3) {
+      setActiveBtn(0);
+    } else {
+      setActiveBtn(3);
+    }
+  };
 
   const [commentLength, setCommentLength] = useState("");
 
@@ -131,25 +156,6 @@ const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
     setCommentLength(e.target.value);
   };
 
-  const [goodButton, setGoodButton] = useState(false);
-  const [sosoButton, setSosoButton] = useState(false);
-  const [badButton, setBadButton] = useState(false);
-
-  const handleGoodButton = () => {
-    setGoodButton(!goodButton);
-    setSosoButton(false);
-    setBadButton(false);
-  };
-  const handleSosoButton = () => {
-    setGoodButton(false);
-    setSosoButton(!sosoButton);
-    setBadButton(false);
-  };
-  const handleBadButton = () => {
-    setGoodButton(false);
-    setSosoButton(false);
-    setBadButton(!badButton);
-  };
   return (
     <>
       <ListAlert>
@@ -158,24 +164,16 @@ const ApplicantComment = observer(({ data }: IAddData): JSX.Element => {
       <EvaluationBox>
         <TitleWrap>
           <TitleText>평가하기</TitleText>
-          <TimeDate>
-            {presentDate.getFullYear()}/{presentDate.getMonth()}/
-            {presentDate.getDate()}{" "}
-            {presentDate.getHours() >= 12 ? "오후" : "오전"}{" "}
-            {presentDate.getHours() >= 13
-              ? presentDate.getHours() - 12
-              : presentDate.getHours()}
-            :{presentDate.getMinutes()}
-          </TimeDate>
+          <TimeForm />
         </TitleWrap>
         <ButtonWrap>
-          <GoodBtn onClick={handleGoodButton} isActive={goodButton}>
+          <GoodBtn onClick={handleGoodButton} isActive={activeBtn}>
             뽑아요👍
           </GoodBtn>
-          <SosoBtn onClick={handleSosoButton} isActive={sosoButton}>
+          <SosoBtn onClick={handleSosoButton} isActive={activeBtn}>
             그냥그래요🙄
           </SosoBtn>
-          <BadBtn onClick={handleBadButton} isActive={badButton}>
+          <BadBtn onClick={handleBadButton} isActive={activeBtn}>
             안돼요👎
           </BadBtn>
         </ButtonWrap>

@@ -16,7 +16,6 @@ import AdminNav from "./components/pages/AdminNav";
 import Admin from "./components/pages/Admin";
 import AdminCurrent from "./components/pages/AdminCurrent";
 import AdminApplyNotice from "./components/pages/AdminApplyNotice";
-import AdminApplicantList from "./components/pages/AdminApplicantList";
 
 const RecruitNav = [
   "/recruit",

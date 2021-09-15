@@ -11,6 +11,7 @@ import ApplicantIntroduce from "../UI/organisms/ApplicantIntroduce";
 import ApplicantEducation from "../UI/organisms/ApplicantEducation";
 import ApplicantPortfolio from "../UI/organisms/ApplicantPortfolio";
 import ApplicantComment from "../UI/organisms/ApplicantComment";
+import TimeForm from "../UI/atoms/TimeForm";
 
 import theme from "../../styles/theme";
 import ApplicantData from "../../assets/data/adminApplicantData";
@@ -20,8 +21,8 @@ const Box = styled.section`
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  background: ${theme.color.white};
   padding-top: 100px;
+  background: ${theme.color.white};
 `;
 
 const ApplicantWrap = styled.div`
@@ -37,9 +38,9 @@ const ContentSection = styled.section`
 const CommentSection = styled.section`
   position: sticky;
   top: 100px;
+  margin-left: 40px;
   width: 300px;
   height: 100vh;
-  margin-left: 40px;
 `;
 
 const CommentBox = styled.div`
@@ -70,15 +71,9 @@ const AdminWrap = styled.div`
 `;
 
 const AdminAccount = styled.div`
+  margin-bottom: 5px;
   text-align: right;
   font-size: 6px;
-  margin-bottom: 5px;
-`;
-
-const TimeDate = styled.span`
-  color: ${theme.color.grey2};
-  font-size: 6px;
-  line-height: 1.5;
 `;
 
 const TextBox = styled.div`
@@ -94,8 +89,6 @@ const AdminApplicant = observer((): JSX.Element => {
   const introduceData = ApplicantData.result.content.introduction;
   const EducationData = ApplicantData.result.content.education;
   const PortfolioData = ApplicantData.result.content.portfolio;
-
-  const presentDate = new Date();
 
   return (
     <Box>
@@ -117,15 +110,7 @@ const AdminApplicant = observer((): JSX.Element => {
                 <TitleText>뽑아요👍</TitleText>
                 <AdminWrap>
                   <AdminAccount>조기영</AdminAccount>
-                  <TimeDate>
-                    {presentDate.getFullYear()}/{presentDate.getMonth()}/
-                    {presentDate.getDate()}{" "}
-                    {presentDate.getHours() >= 12 ? "오후" : "오전"}{" "}
-                    {presentDate.getHours() >= 13
-                      ? presentDate.getHours() - 12
-                      : presentDate.getHours()}
-                    :{presentDate.getMinutes()}
-                  </TimeDate>
+                  <TimeForm />
                 </AdminWrap>
               </TitleWrap>
               <TextBox>
