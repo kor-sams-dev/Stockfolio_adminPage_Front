@@ -10,11 +10,13 @@ import AdminLogin from "./components/pages/AdminLogin";
 import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
-import AdminApplicant from "./components/pages/AdminApplicant";
+import AdminApplicantList from "./components/pages/AdminApplicantList";
+import AdminApplicant from "./components/templates/AdminApplicant";
 import AdminNav from "./components/pages/AdminNav";
 import Admin from "./components/pages/Admin";
 import AdminCurrent from "./components/pages/AdminCurrent";
 import AdminApplyNotice from "./components/pages/AdminApplyNotice";
+import AdminApplicantList from "./components/pages/AdminApplicantList";
 
 const RecruitNav = [
   "/recruit",
@@ -55,26 +57,32 @@ function App(): JSX.Element {
         <Route exact path="/recruit/apply/:id/resume" component={Recruit} />
         <Route exact path="/recruit/process" component={Recruit} />
         <Route exact path="/recruit/team" component={Recruit} />
-        <Route exact path="/admin" component={AdminMain} />
         <Route exact path="/login" component={AdminLogin} />
+        <Route exact path="/admin" component={AdminMain} />
         <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/apply" component={Admin} />
         <Route exact path="/admin/apply/:id" component={Admin} />
+        <Route exact path="/admin/applicant" component={AdminApplicant} />
+        <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/notification" component={AdminNotification} />
-        <Route exact path="/adminapplynotice" component={AdminApplyNotice} />
-
+        <Route exact path="/admin/applynotice" component={AdminApplyNotice} />
         <Route
           exact
           path="/admin/notification/write"
           component={AdminNotiUpload}
         />
-        <Route exact path="/adminapplicant" component={AdminApplicant} />
-        <Route exact path="/admincurrent" component={AdminCurrent} />
+        <Route exact path="/admin/account" component={AdminAccount} />
+        <Route
+          exact
+          path="/admin/applicantlist"
+          component={AdminApplicantList}
+        />
+        <Route exact path="/admin/current" component={AdminCurrent} />
       </Switch>
       <Switch>
         <Route exact path={RecruitNav} component={Footer} />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

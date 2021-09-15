@@ -16,6 +16,45 @@ const GlobalStyle = createGlobalStyle`
       text-decoration: none;
   }
 
+  strong {
+    font-weight: 900;
+  }
+
+  i {
+    font-style: italic;
+  }
+
+  ul {
+    li { 
+     list-style: inside;
+     margin-left: 10px;
+     line-height: 1.5;
+    }
+  }
+  
+  ol {
+    li {
+     list-style: decimal;
+     margin-left: 30px;
+     line-height: 1.5;
+   }
+  }
+  
+h1 {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
    button {
      padding: 0;
      background: none;
@@ -25,10 +64,6 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     }
   }
-
-   li {
-     list-style: none;
-   }
 
    input{
     border: none;

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import CKEditor from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { observer } from "mobx-react";
 import Inner from "../../styles/Inner";
@@ -31,23 +33,16 @@ const HeaderWrap = styled.header`
 `;
 
 const DropdownSection = styled.section`
-  margin-top: 24px;
-  margin-left: 10px;
+  margin: 24px 0 24px 10px;
   display: flex;
   justify-content: flex-start;
-`;
-
-const WebEditor = styled.div`
-  width: 100%;
-  height: 500px;
-  border: 1px solid black;
-  margin: 16px 0 16px 16px;
 `;
 
 const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 const SubmitBtn = styled.button`
   margin: 40px 0;
   padding: 16px;
@@ -69,11 +64,80 @@ const AdminNotiUpload = observer((): JSX.Element => {
         </HeaderWrap>
         <AdminInput item={AdminDataForm.notificationInput.item[0]} />
         <DropdownSection>
-          {AdminDataForm.NotificationUploadBtn.data.map(item => {
+          {AdminDataForm.NotificationUploadDropdown.data.map(item => {
             return <AdminBtn item={item} key={item.id} />;
           })}
         </DropdownSection>
-        <WebEditor>에디터 위치</WebEditor>
+        <CKEditor
+          editor={ClassicEditor}
+          config={{
+            placeholder: "내용을 작성해 주세요",
+            toolbar: {
+              items: [
+                "heading",
+                "|",
+                "bold",
+                "italic",
+                "link",
+                "bulletedList",
+                "numberedList",
+                "imageUpload",
+                "blockQuote",
+                "insertTable",
+                "mediaEmbed",
+                "undo",
+                "redo",
+              ],
+            },
+            image: {
+              toolbar: [
+                "imageStyle:full",
+                "imageStyle:side",
+                "|",
+                "imageTextAlternative",
+              ],
+            },
+            heading: {
+              options: [
+                {
+                  model: "heading1",
+                  view: "h1",
+                  title: "헤더1",
+                  class: "ck-heading_heading1",
+                },
+                {
+                  model: "heading2",
+                  view: "h2",
+                  title: "헤더2",
+                  class: "ck-heading_heading2",
+                },
+                {
+                  model: "heading3",
+                  view: "h3",
+                  title: "헤더3",
+                  class: "ck-heading_heading3",
+                },
+                {
+                  model: "paragraph",
+                  title: "내용",
+                  class: "ck-heading_paragraph",
+                },
+              ],
+            },
+          }}
+          onChange={(event: any, editor: any) => {
+            const data = editor.getData();
+          }}
+          onInit={(editor: any) => {
+            editor.editing.view.change((writer: any) => {
+              writer.setStyle(
+                "height",
+                "400px",
+                editor.editing.view.document.getRoot()
+              );
+            });
+          }}
+        />
         <BtnWrap>
           <SubmitBtn>올리기</SubmitBtn>
         </BtnWrap>

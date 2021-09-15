@@ -65,8 +65,8 @@ function Admin(): JSX.Element {
             <ApplyNavBar />
           </NavWrap>
           <Switch>
-            <Route exact path="/admin" component={AdminDesc} />
-            <Route exact path="/admin/:id" component={AdminDesc} />
+            <Route exact path="/admin/apply" component={AdminDesc} />
+            <Route exact path="/admin/apply/:id" component={AdminDesc} />
           </Switch>
         </Inner>
       </AdminBox>
