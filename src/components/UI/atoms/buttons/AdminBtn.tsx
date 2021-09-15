@@ -69,7 +69,9 @@ const AdminInput = observer(
     };
 
     const [dropdownTitle, setDropdownTitle] = useState(`${item.title}`);
-    const selectTitle = () => {};
+    const selectTitle = (e: any) => {
+      setDropdownTitle(e.target.value);
+    };
 
     return (
       <DropdownWrap>
@@ -85,6 +87,9 @@ const AdminInput = observer(
           {dropdownTitle}
           <DownImg src="/../../images/downArrow.png" alt="dowm img" />
           <ListWrap width={item.itemWidth} hidden={onOffBtn}>
+            {/* <DropdownList onClick={selectTitle} value={item.list[0]}>
+              {item.list[0]}
+            </DropdownList> */}
             {item.list.map(data => {
               return (
                 <DropdownList key={data} onClick={selectTitle} value={data}>
