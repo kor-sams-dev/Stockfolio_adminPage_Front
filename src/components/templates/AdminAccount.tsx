@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import AdminInput from "../UI/atoms/inputs/AdminInput";
+import AdminAccountList from "../UI/organisms/AdminAccountList";
 
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
@@ -58,59 +59,6 @@ const SortTitle = styled.span`
   font-size: 10px;
 `;
 
-const AccountBtn = styled.button`
-  padding: 10px;
-  margin: 0 5px;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-`;
-
-const AccountContentName = styled.input`
-  font-size: 15px;
-  font-weight: bold;
-  display: inline;
-  background-color: white;
-`;
-
-const AccountContent = styled.input`
-  font-size: 10px;
-  font-weight: 400;
-  display: inline;
-  background-color: white;
-`;
-
-const AccountWrap = styled.div`
-  display: grid;
-  grid-template-columns: 200px 200px 200px auto;
-  width: 100%;
-  padding: 9px 0 9px 30px;
-  border-radius: 10px;
-  margin-top: 10px;
-  align-items: center;
-
-  &:hover {
-    background-color: ${theme.color.greyLight1};
-
-    ${AccountBtn} {
-      background-color: ${theme.color.mainDeep};
-      color: white;
-    }
-
-    ${AccountContentName} {
-      background-color: ${theme.color.greyLight1};
-    }
-
-    ${AccountContent} {
-      background-color: ${theme.color.greyLight1};
-    }
-  }
-`;
-
-const ButtonWrap = styled.div`
-  float: right;
-`;
-
 const AdminAccount = observer((): JSX.Element => {
   const [accountInfo, setAccountInfo] = useState({
     title: "",
@@ -120,23 +68,6 @@ const AdminAccount = observer((): JSX.Element => {
   const writeAdminInfo = (e: any) => {
     const { name, value } = e.target;
     setAccountInfo(prev => ({ ...prev, [name]: value }));
-  };
-
-  const [textCheck, setTextCheck] = useState({
-    id: "",
-    userName: "",
-    email: "",
-    password: "",
-  });
-
-  const changeText = (e: any) => {
-    const { id, userName, email, password } = e.target;
-    setTextCheck(e.target.value);
-  };
-
-  const [handleEditButton, setHandleEditButton] = useState(true);
-  const editText = () => {
-    setHandleEditButton(!handleEditButton);
   };
 
   return (
@@ -160,39 +91,7 @@ const AdminAccount = observer((): JSX.Element => {
             })}
           </Sort>
           {AdminDataForm.accountInput.account.map(list => {
-            return (
-              <AccountWrap key={list.id} onChange={changeText}>
-                <AccountContentName
-                  type="text"
-                  value={
-                    textCheck.userName === ""
-                      ? list.userName
-                      : textCheck.userName
-                  }
-                  disabled={handleEditButton}
-                />
-                <AccountContent
-                  type="text"
-                  value={textCheck.email === "" ? list.email : textCheck.email}
-                  disabled={handleEditButton}
-                />
-                <AccountContent
-                  type="text"
-                  value={
-                    textCheck.password === ""
-                      ? list.password
-                      : textCheck.password
-                  }
-                  disabled={handleEditButton}
-                />
-                <ButtonWrap>
-                  <AccountBtn onClick={editText}>
-                    {handleEditButton ? "수정" : "확인"}
-                  </AccountBtn>
-                  <AccountBtn>삭제</AccountBtn>
-                </ButtonWrap>
-              </AccountWrap>
-            );
+            return <AdminAccountList list={list} key={list.id} />;
           })}
         </AdminWrap>
       </Inner>

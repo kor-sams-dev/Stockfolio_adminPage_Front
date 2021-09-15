@@ -61,8 +61,8 @@ export interface IApplicantPortfolio {
 }
 
 export interface IUserInfo {
-  id: string;
-  name: string;
+  id: number;
+  userName: string;
   email: string;
   password: string;
 }
