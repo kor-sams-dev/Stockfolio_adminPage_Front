@@ -12,6 +12,7 @@ export interface INotificationItem {
   id: number;
   title: string;
   itemWidth: number;
+  list: Array<string>;
 }
 
 export interface IApplicantBasicInfo {

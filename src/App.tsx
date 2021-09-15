@@ -10,6 +10,7 @@ import AdminLogin from "./components/pages/AdminLogin";
 import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
+import AdminApplicantList from "./components/pages/AdminApplicantList";
 import AdminApplicant from "./components/templates/AdminApplicant";
 import AdminNav from "./components/pages/AdminNav";
 import Admin from "./components/pages/Admin";
@@ -58,6 +59,7 @@ function App(): JSX.Element {
         <Route exact path="/recruit/team" component={Recruit} />
         <Route exact path="/login" component={AdminLogin} />
         <Route exact path="/admin" component={AdminMain} />
+        <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/apply" component={Admin} />
         <Route exact path="/admin/apply/:id" component={Admin} />
         <Route exact path="/admin/applicant" component={AdminApplicant} />
