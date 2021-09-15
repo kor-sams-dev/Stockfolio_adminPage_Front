@@ -11,10 +11,12 @@ import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
 import AdminApplicantList from "./components/pages/AdminApplicantList";
+import AdminApplicant from "./components/templates/AdminApplicant";
 import AdminNav from "./components/pages/AdminNav";
 import Admin from "./components/pages/Admin";
 import AdminCurrent from "./components/pages/AdminCurrent";
 import AdminApplyNotice from "./components/pages/AdminApplyNotice";
+import AdminApplicantList from "./components/pages/AdminApplicantList";
 
 const RecruitNav = [
   "/recruit",
@@ -60,6 +62,8 @@ function App(): JSX.Element {
         <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/apply" component={Admin} />
         <Route exact path="/admin/apply/:id" component={Admin} />
+        <Route exact path="/admin/applicant" component={AdminApplicant} />
+        <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/notification" component={AdminNotification} />
         <Route exact path="/admin/applynotice" component={AdminApplyNotice} />
         <Route
