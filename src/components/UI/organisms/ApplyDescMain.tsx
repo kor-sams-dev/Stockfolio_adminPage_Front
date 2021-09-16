@@ -131,6 +131,7 @@ const ApplyDescMain = observer((): JSX.Element => {
       .then(res => res.json())
       .then(data => {
         setSelectedContent(data.result);
+        console.log(data);
       });
   }, []);
 

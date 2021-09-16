@@ -1,7 +1,10 @@
 import styled from "styled-components";
-
+import React, { useState, useEffect } from "react";
+import { observer } from "mobx-react";
 import theme from "../../styles/theme";
 import Inner from "../../styles/Inner";
+import { Recruits } from "../../config";
+import RootStore from "../../stores/RootStore";
 
 import AdminMenuBox from "../UI/organisms/AdminMenuBox";
 import AdminNotice from "../UI/organisms/AdminNotice";
@@ -19,7 +22,63 @@ const Box = styled.section`
   padding-top: 80px;
 `;
 
-const AdminMain = (): JSX.Element => {
+const AdminMain = observer((): JSX.Element => {
+  // const [menu, setmenu] = useState([]);
+  // const TOKEN = sessionStorage.getItem("TOKEN");
+
+  const { ApplyMenuStore, AdminApplyMenuStore } = RootStore();
+  const { setClickedAdmin, setViewContentAdmin, setTotalContentAdmin } =
+    AdminApplyMenuStore;
+  const { setClicked, setViewContent, setTotalContent } = ApplyMenuStore;
+
+  const requestHeaders: HeadersInit = new Headers();
+
+  requestHeaders.set("Content-Type", "application/json");
+  requestHeaders.set(
+    "Authorization",
+    sessionStorage
+      ?.getItem("TOKEN")
+      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
+  );
+
+  useEffect(() => {
+    // fetch("http://192.168.35.101:8000/recruits/admin/dashboard", {
+    //   method: "GET",
+    //   // headers: {
+    //   //   Authorization: TOKEN,
+    //   // },
+    //   headers: requestHeaders,
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     setmenu(data);
+    //     console.log(data);
+    //   });
+
+    // fetch(Recruits)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     setTotalContent(data.results.slice(0, 2));
+    //     // setViewContent(data.results.slice(0, 2));
+    //     setViewContent(data.results.slice(0, 1));
+
+    //     // setViewContent(data.results.filter(isDev));
+    //     setClicked("전체");
+    //   });
+
+    fetch(Recruits)
+      .then(res => res.json())
+      .then(data => {
+        setTotalContentAdmin(data.results);
+        // setViewContent(data.results.slice(0, 2));
+        setViewContentAdmin(data.results.slice(0, 4));
+
+        // setViewContent(data.results.filter(isDev));
+        setClickedAdmin("전체");
+        console.log(data);
+      });
+  }, []);
+
   return (
     <Box>
       <Inner size="wide">
@@ -29,6 +88,6 @@ const AdminMain = (): JSX.Element => {
       </Inner>
     </Box>
   );
-};
+});
 
 export default AdminMain;

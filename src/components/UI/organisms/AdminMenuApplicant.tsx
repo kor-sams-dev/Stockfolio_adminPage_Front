@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import adminMainMenu from "../../../assets/data/adminMainMenu";
 import theme from "../../../styles/theme";
 
@@ -11,6 +11,7 @@ const AdminNav = styled.ul`
   justify-content: space-between;
   margin: 0 auto;
   margin-bottom: 16px;
+  margin-top: 60px;
 `;
 
 const NavTitle = styled.div`
@@ -104,12 +105,17 @@ const Label2 = styled.div`
 
 const AdminMenuApplicant = (): JSX.Element => {
   const { pathname } = useLocation();
+  const history = useHistory();
+
+  const gotodetail = () => {
+    history.push("/admincurrent");
+  };
   return (
     <>
-      {pathname === "/admin/main" && (
+      {pathname === "/admin" && (
         <AdminNav>
           <NavTitle>최근 지원자</NavTitle>
-          <NavButton>전체보기</NavButton>
+          <NavButton onClick={gotodetail}>전체보기</NavButton>
         </AdminNav>
       )}
       {adminMainMenu.data.notice.map(data => {

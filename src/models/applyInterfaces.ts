@@ -8,6 +8,17 @@ interface MenuProps {
   description: string;
 }
 
+interface MenuApplyProps {
+  id: number;
+  position: string;
+  position_title: string;
+  career_type: string;
+  work_type: string;
+  deadline: string;
+  description: string;
+  recruit_application: string;
+}
+
 interface ClickProps {
   isActive: boolean;
 }
@@ -21,4 +32,4 @@ interface TokenProps {
   is_applied: boolean;
 }
 
-export type { MenuProps, ClickProps, IDProp, TokenProps };
+export type { MenuProps, ClickProps, IDProp, TokenProps, MenuApplyProps };

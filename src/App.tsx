@@ -10,7 +10,7 @@ import AdminLogin from "./components/pages/AdminLogin";
 import AdminAccount from "./components/templates/AdminAccount";
 import AdminNotification from "./components/templates/AdminNotification";
 import AdminNotiUpload from "./components/templates/AdminNotiUpload";
-import AdminApplicant from "./components/pages/AdminApplicant";
+import AdminApplicantList from "./components/pages/AdminApplicantList";
 import AdminNav from "./components/pages/AdminNav";
 import Admin from "./components/pages/Admin";
 import AdminCurrent from "./components/pages/AdminCurrent";
@@ -29,13 +29,16 @@ const RecruitNav = [
 ];
 
 const AdminNavbar = [
-  "/admin/main",
   "/admin/login",
   "/admin/account",
-  "/admin",
-  "/admin/:id",
+  "/admin/apply",
+  "/admin/apply/:id",
   "/admin/notification",
   "/admin/notification/write",
+  "/adminapplicant",
+  "/admincurrent",
+  "/adminapplynotice",
+  "/admin",
 ];
 
 function App(): JSX.Element {
@@ -68,7 +71,11 @@ function App(): JSX.Element {
           path="/admin/notification/write"
           component={AdminNotiUpload}
         />
-        <Route exact path="/adminapplicant" component={AdminApplicant} />
+        <Route
+          exact
+          path="/adminapplicantlist"
+          component={AdminApplicantList}
+        />
         <Route exact path="/admincurrent" component={AdminCurrent} />
       </Switch>
       <Switch>
