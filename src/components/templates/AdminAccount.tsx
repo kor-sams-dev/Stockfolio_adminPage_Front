@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import AdminInput from "../UI/atoms/inputs/AdminInput";
+import AdminAccountList from "../UI/organisms/AdminAccountList";
 
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
@@ -19,6 +20,7 @@ const Box = styled.section`
   align-items: flex-start;
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
   background: ${theme.color.white};
   padding-top: 110px;
 `;
@@ -60,46 +62,6 @@ const SortTitle = styled.span`
   font-size: 10px;
 `;
 
-const AccountBtn = styled.button`
-  padding: 10px;
-  margin: 0 5px;
-  border-radius: 10px;
-  font-size: 15px;
-`;
-
-const AccountWrap = styled.div`
-  display: grid;
-  grid-template-columns: 200px 200px 200px auto;
-  width: 100%;
-  padding: 9px 0 9px 30px;
-  border-radius: 10px;
-  margin-top: 10px;
-  align-items: center;
-
-  &:hover {
-    background-color: ${theme.color.greyLight1};
-
-    ${AccountBtn} {
-      background-color: ${theme.color.mainDeep};
-      color: white;
-    }
-  }
-`;
-
-const AccountContentName = styled.span`
-  font-size: 15px;
-  font-weight: bold;
-`;
-
-const AccountContent = styled.span`
-  font-size: 10px;
-  font-weight: 400;
-`;
-
-const ButtonWrap = styled.div`
-  float: right;
-`;
-
 const AdminAccount = observer((): JSX.Element => {
   const requestHeaders: HeadersInit = new Headers();
   requestHeaders.set("Content-Type", "application/json");
@@ -111,20 +73,21 @@ const AdminAccount = observer((): JSX.Element => {
   );
 
   const [accountInfo, setAccountInfo] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
 
+  const { username, email, password } = accountInfo;
+
   const writeAdminInfo = (e: any) => {
     const { name, value } = e.target;
     setAccountInfo(prev => ({ ...prev, [name]: value }));
-    console.log(accountInfo);
   };
 
   const AddAcount = () => {
     if (
-      accountInfo.name.length > 0 &&
+      accountInfo.username.length > 0 &&
       accountInfo.email.length > 0 &&
       accountInfo.password.length > 0
     ) {
@@ -135,10 +98,10 @@ const AdminAccount = observer((): JSX.Element => {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("success", data);
+          setAccountInfo({ username: "", email: "", password: "" });
         });
     } else {
-      alert("빠짐없이 작성해주세요");
+      alert("빈칸 없이 작성해주세요");
     }
   };
 
@@ -153,7 +116,7 @@ const AdminAccount = observer((): JSX.Element => {
       .then(data => {
         setAccountData(data.result);
       });
-  }, []);
+  }, [accountInfo]);
 
   return (
     <Box>
@@ -176,17 +139,7 @@ const AdminAccount = observer((): JSX.Element => {
             })}
           </Sort>
           {accountData?.map(list => {
-            return (
-              <AccountWrap key={list.id}>
-                <AccountContentName>{list.name}</AccountContentName>
-                <AccountContent>{list.email}</AccountContent>
-                <AccountContent>{list.password}</AccountContent>
-                <ButtonWrap>
-                  <AccountBtn>수정</AccountBtn>
-                  <AccountBtn>삭제</AccountBtn>
-                </ButtonWrap>
-              </AccountWrap>
-            );
+            return <AdminAccountList key={list.id} list={list} />;
           })}
         </AdminWrap>
       </Inner>

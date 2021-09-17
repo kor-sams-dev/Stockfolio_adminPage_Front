@@ -4,7 +4,7 @@ const AdminDataForm = {
       {
         id: 0,
         name: "이름",
-        title: "name",
+        title: "username",
         placeholder: "이름",
         itemWidth: 120,
       },

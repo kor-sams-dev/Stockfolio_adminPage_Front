@@ -38,6 +38,7 @@ const AdminInput = observer(
           placeholder={item.placeholder}
           width={item.itemWidth}
           onChange={onChange}
+          type="text"
         />
       </InputWrap>
     );

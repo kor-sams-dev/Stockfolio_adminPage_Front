@@ -1,13 +1,8 @@
-export interface IAccountItem {
-  id: number;
+export interface IAccountItem extends IAccountInfo {
   title: string;
   name: string;
   placeholder?: string;
   itemWidth?: number;
-  email?: string;
-  password?: string;
-  created_at?: string;
-  updated_at?: string;
 }
 
 export interface INotificationItem {
@@ -60,4 +55,13 @@ export interface IApplicantEducation {
 export interface IApplicantPortfolio {
   addFile: string;
   portfolioUrl: string;
+}
+
+export interface IAccountInfo {
+  id: number;
+  username?: string;
+  email?: string;
+  password?: string;
+  created_at?: string;
+  updated_at?: string;
 }
