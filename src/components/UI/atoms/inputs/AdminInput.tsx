@@ -31,10 +31,10 @@ const AdminInput = observer(
     return (
       <InputWrap>
         <Heading4 fontWeight={500} fontSize={14}>
-          {item.title}
+          {item.name}
         </Heading4>
         <InputForm
-          name={item.name}
+          name={item.title}
           placeholder={item.placeholder}
           width={item.itemWidth}
           onChange={onChange}

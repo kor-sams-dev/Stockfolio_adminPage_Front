@@ -9,6 +9,7 @@ import AdminInput from "../UI/atoms/inputs/AdminInput";
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
 import { IAccountItem } from "../../models/AdminAccountInterface";
+import { Account } from "../../config";
 
 const Box = styled.section`
   position: sticky;
@@ -19,7 +20,7 @@ const Box = styled.section`
   width: 100%;
   height: 100vh;
   background: ${theme.color.white};
-  padding-top: 80px;
+  padding-top: 110px;
 `;
 
 const InputWrap = styled.div`
@@ -100,38 +101,59 @@ const ButtonWrap = styled.div`
 `;
 
 const AdminAccount = observer((): JSX.Element => {
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set("Content-Type", "application/json");
+  requestHeaders.set(
+    "Authorization",
+    localStorage
+      ?.getItem("access_token")
+      ?.slice(0, localStorage.getItem("access_token")!.length) || "no token"
+  );
+
   const [accountInfo, setAccountInfo] = useState({
-    title: "",
-    id: "",
+    name: "",
+    email: "",
     password: "",
   });
 
   const writeAdminInfo = (e: any) => {
     const { name, value } = e.target;
     setAccountInfo(prev => ({ ...prev, [name]: value }));
+    console.log(accountInfo);
   };
 
-  // const [accountData, setAccountData] = useState([]);
+  const AddAcount = () => {
+    if (
+      accountInfo.name.length > 0 &&
+      accountInfo.email.length > 0 &&
+      accountInfo.password.length > 0
+    ) {
+      fetch(`${Account}`, {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify(accountInfo),
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log("success", data);
+        });
+    } else {
+      alert("빠짐없이 작성해주세요");
+    }
+  };
 
-  // const requestHeaders: HeadersInit = new Headers();
-  // requestHeaders.set("Content-Type", "application/json");
-  // requestHeaders.set(
-  //   "Authorization",
-  //   localStorage
-  //     ?.getItem("access_token")
-  //     ?.slice(1, localStorage.getItem("access_token")!.length - 1) || "no token"
-  // );
+  const [accountData, setAccountData] = useState<IAccountItem[]>([]);
 
-  // useEffect(() => {
-  //   fetch("http://192.168.35.189:8000/users/admins", {
-  //     method: "GET",
-  //     headers: requestHeaders,
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setAccountData(data.result);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`${Account}`, {
+      method: "GET",
+      headers: requestHeaders,
+    })
+      .then(res => res.json())
+      .then(data => {
+        setAccountData(data.result);
+      });
+  }, []);
 
   return (
     <Box>
@@ -145,15 +167,15 @@ const AdminAccount = observer((): JSX.Element => {
               <AdminInput item={item} key={item.id} onChange={writeAdminInfo} />
             );
           })}
-          <AddAccountBtn>추가</AddAccountBtn>
+          <AddAccountBtn onClick={AddAcount}>추가</AddAccountBtn>
         </InputWrap>
         <AdminWrap>
           <Sort>
             {AdminDataForm.accountInput.item.map(text => {
-              return <SortTitle key={text.id}>{text.title}</SortTitle>;
+              return <SortTitle key={text.id}>{text.name}</SortTitle>;
             })}
           </Sort>
-          {AdminDataForm.accountInput.account.map(list => {
+          {accountData?.map(list => {
             return (
               <AccountWrap key={list.id}>
                 <AccountContentName>{list.name}</AccountContentName>
