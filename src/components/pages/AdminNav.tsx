@@ -124,7 +124,10 @@ function AdminNav(): JSX.Element {
             </NavMenu>
             <NavMenu
               to="/admin/notification"
-              isActive={pathname === "/admin/notification"}
+              isActive={
+                pathname === "/admin/notification" ||
+                pathname === "/admin/notification/write"
+              }
             >
               공고 관리
             </NavMenu>
