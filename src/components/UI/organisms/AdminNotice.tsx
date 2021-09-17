@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useEffect } from "react";
+
 import { useLocation, useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
@@ -8,7 +8,7 @@ import theme from "../../../styles/theme";
 import Label from "../atoms/Labels/Label";
 import Heading2 from "../atoms/texts/Heading2";
 import RootStore from "../../../stores/RootStore";
-import { MenuProps, MenuApplyProps } from "../../../models/applyInterfaces";
+import { MenuApplyProps } from "../../../models/applyInterfaces";
 
 const AdminNav = styled.ul`
   font-size: 18px;
@@ -100,10 +100,6 @@ const AdminNotice = observer((): JSX.Element => {
     history.push("/adminapplynotice");
   };
 
-  const gotolist = () => {
-    history.push("/admincurrent");
-  };
-
   const { SelectedContent, AdminApplyMenuStore } = RootStore();
 
   const { adminviewContent, setSelectedContentAdmin, admintotalContent } =
@@ -142,7 +138,7 @@ const AdminNotice = observer((): JSX.Element => {
                 {li.work_type} <span>|</span> {li.deadline} 마감
               </Career>
               <ListButton>
-                <span>지원자리스트(3)</span>
+                <span>지원자리스트({li.recruit_application})</span>
               </ListButton>
             </PaddingBox>
           </Applicant>

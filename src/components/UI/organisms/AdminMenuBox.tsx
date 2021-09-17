@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { useEffect } from "react";
+import { observer } from "mobx-react";
 import theme from "../../../styles/theme";
-import adminMainMenu from "../../../assets/data/adminMainMenu";
-import { AdminMenu } from "../../../models/adminMainMenu";
+
+import AdminMenuboxStore from "../../../stores/AdminMenuboxStore";
 
 const Admin = styled.div`
   display: flex;
@@ -34,33 +36,50 @@ const NumberSpan = styled.div`
   margin: 39px 24px 24px 0px;
 `;
 
-const AdminMenuBox = (): JSX.Element => {
+const AdminMenuBox = observer((): JSX.Element => {
+  const { setMenu } = AdminMenuboxStore;
+  const requestHeaders: HeadersInit = new Headers();
+
+  requestHeaders.set("Content-Type", "application/json");
+  requestHeaders.set(
+    "Authorization",
+    sessionStorage
+      ?.getItem("TOKEN")
+      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
+  );
+
+  useEffect(() => {
+    fetch("http://192.168.35.101:8000/recruits/admin/dashboard", {
+      method: "GET",
+      headers: requestHeaders,
+    })
+      .then(res => res.json())
+      .then(data => {
+        setMenu(data.results);
+        console.log(data.results);
+      });
+  }, []);
+
   return (
     <Admin>
-      {adminMainMenu.data.menu.map((data: AdminMenu) => {
-        return (
-          <>
-            <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][0]}>
-              <StringSpan>오늘의 지원자</StringSpan>
-              <NumberSpan>{data.number}</NumberSpan>
-            </AdminBox>
-            <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][1]}>
-              <StringSpan>진행중인 공고</StringSpan>
-              <NumberSpan>{data.Id}</NumberSpan>
-            </AdminBox>
-            <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][2]}>
-              <StringSpan>새로 등록된 공고</StringSpan>
-              <NumberSpan>{data.label}</NumberSpan>
-            </AdminBox>
-            <AdminBox key={Object.keys(adminMainMenu.data.menu)[0][3]}>
-              <StringSpan>곧 마감될 공고</StringSpan>
-              <NumberSpan>{data.context}</NumberSpan>
-            </AdminBox>
-          </>
-        );
-      })}
+      <AdminBox>
+        <StringSpan>오늘의 지원자</StringSpan>
+        <NumberSpan>{AdminMenuboxStore.today_applicant}</NumberSpan>
+      </AdminBox>
+      <AdminBox>
+        <StringSpan>진행중인 공고</StringSpan>
+        <NumberSpan>{AdminMenuboxStore.progress_recruit}</NumberSpan>
+      </AdminBox>
+      <AdminBox>
+        <StringSpan>새로 등록된 공고</StringSpan>
+        <NumberSpan>{AdminMenuboxStore.new_recruit}</NumberSpan>
+      </AdminBox>
+      <AdminBox>
+        <StringSpan>곧 마감될 공고</StringSpan>
+        <NumberSpan>{AdminMenuboxStore.deadline_recruit}</NumberSpan>
+      </AdminBox>
     </Admin>
   );
-};
+});
 
 export default AdminMenuBox;
