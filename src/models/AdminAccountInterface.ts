@@ -59,3 +59,10 @@ export interface IApplicantPortfolio {
   addFile: string;
   portfolioUrl: string;
 }
+
+export interface IUserInfo {
+  id: number;
+  userName: string;
+  email: string;
+  password: string;
+}
