@@ -81,7 +81,6 @@ function App(): JSX.Element {
       <Switch>
         <Route exact path={RecruitNav} component={Footer} />
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }
