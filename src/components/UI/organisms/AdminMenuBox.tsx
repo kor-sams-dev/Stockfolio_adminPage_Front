@@ -44,8 +44,8 @@ const AdminMenuBox = observer((): JSX.Element => {
   requestHeaders.set(
     "Authorization",
     sessionStorage
-      ?.getItem("TOKEN")
-      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
+      ?.getItem("login")
+      ?.slice(0, sessionStorage.getItem("login")!.length) || "no token"
   );
 
   useEffect(() => {

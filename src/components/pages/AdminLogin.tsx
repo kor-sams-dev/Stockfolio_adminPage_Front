@@ -80,7 +80,7 @@ const AdminLogin = observer((): JSX.Element => {
   };
 
   const fetchLogin = () => {
-    return fetch("http://192.168.35.101:8000/users/signin", {
+    return fetch(SignIn, {
       method: "POST",
       body: JSON.stringify({
         email: userInput.email,

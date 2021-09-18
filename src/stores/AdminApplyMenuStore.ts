@@ -9,7 +9,8 @@ export const SelectedApplyContent: MenuApplyProps = observable({
   work_type: "",
   deadline: "",
   description: "",
-  recruit_application: "",
+  recruit_application: 1,
+  idx: 1,
 });
 
 export const AdminApplyMenuStore = observable({

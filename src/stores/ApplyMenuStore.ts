@@ -15,6 +15,7 @@ export const ApplyMenuStore = observable({
   clicked: "전체",
   viewContent: [],
   totalContent: [],
+
   setClicked: action((value: string) => {
     ApplyMenuStore.clicked = value;
   }),

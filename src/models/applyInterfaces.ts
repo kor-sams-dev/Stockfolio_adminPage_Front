@@ -16,7 +16,8 @@ interface MenuApplyProps {
   work_type: string;
   deadline: string;
   description: string;
-  recruit_application: string;
+  recruit_application: number;
+  idx: number;
 }
 
 interface ClickProps {

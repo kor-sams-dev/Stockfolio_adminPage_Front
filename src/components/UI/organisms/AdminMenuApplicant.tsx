@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import adminMainMenu from "../../../assets/data/adminMainMenu";
 import theme from "../../../styles/theme";
 
@@ -27,7 +27,7 @@ const NavButton = styled.div`
   margin-right: 32px;
 `;
 
-const Applicant = styled.li`
+const Applicant = styled(Link)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -108,8 +108,13 @@ const AdminMenuApplicant = (): JSX.Element => {
   const history = useHistory();
 
   const gotodetail = () => {
-    history.push("/admincurrent");
+    history.push("/admin/current");
   };
+
+  const gotoapplicant = () => {
+    history.push("/admin/applicant/:id");
+  };
+
   return (
     <>
       {pathname === "/admin" && (
@@ -120,7 +125,7 @@ const AdminMenuApplicant = (): JSX.Element => {
       )}
       {adminMainMenu.data.notice.map(data => {
         return (
-          <Applicant key={data.idx}>
+          <Applicant key={data.idx} to={`/admin/applicant/${data.idx}`}>
             <TitleWrap>
               {pathname === "/admincurrent" && (
                 <Title>{data.developer} 채용</Title>

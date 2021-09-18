@@ -24,21 +24,7 @@ const GlobalStyle = createGlobalStyle`
     font-style: italic;
   }
 
-  ul {
-    li { 
-     list-style: inside;
-     margin-left: 10px;
-     line-height: 1.5;
-    }
-  }
-  
-  ol {
-    li {
-     list-style: decimal;
-     margin-left: 30px;
-     line-height: 1.5;
-   }
-  }
+ 
   
 h1 {
   font-size: 30px;

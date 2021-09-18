@@ -23,6 +23,21 @@ const Box = styled.section`
   overflow-y: scroll;
   background: ${theme.color.white};
   padding-top: 100px;
+  ul {
+    li {
+      list-style: inside;
+      margin-left: 10px;
+      line-height: 1.5;
+    }
+  }
+
+  ol {
+    li {
+      list-style: decimal;
+      margin-left: 30px;
+      line-height: 1.5;
+    }
+  }
 `;
 
 const HeaderWrap = styled.header`

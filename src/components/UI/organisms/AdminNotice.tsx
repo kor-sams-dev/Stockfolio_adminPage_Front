@@ -64,8 +64,7 @@ const PaddingBox = styled.div`
 `;
 
 const Career = styled.div`
-  text-align: right; 
-  }
+  text-align: right;
 `;
 
 const ListButton = styled.button`
@@ -80,12 +79,11 @@ const ListButton = styled.button`
   margin-left: 24px;
   margin-right: 32px;
   padding: 6px 0;
-  cursor: pointer;
-  span {
-    font-size: 12px;
-    font-weight: 700;
-    color: ${theme.color.black};
-  }
+  cursor: ${props => (props.isActive ? "auto" : "pointer")};
+  font-size: 12px;
+  font-weight: 700;
+  color: ${props =>
+    props.isActive ? `${theme.color.lilac}` : `${theme.color.black}`};
 
   &:hover {
     background-color: ${theme.color.greyLight1};
@@ -97,15 +95,18 @@ const AdminNotice = observer((): JSX.Element => {
   const history = useHistory();
 
   const gotodetail = () => {
-    history.push("/adminapplynotice");
+    history.push("/admin/applynotice");
+  };
+
+  const gotoapplicant = (e: any) => {
+    history.push("/admin/applicantlist");
+    e.stopPropagation();
   };
 
   const { SelectedContent, AdminApplyMenuStore } = RootStore();
 
   const { adminviewContent, setSelectedContentAdmin, admintotalContent } =
     AdminApplyMenuStore;
-
-  console.log(SelectedContent.id);
 
   const GoToDetail = (data: MenuApplyProps) => {
     setSelectedContentAdmin(data);
@@ -125,7 +126,7 @@ const AdminNotice = observer((): JSX.Element => {
       {toJS(adminviewContent).map((li: MenuApplyProps) => {
         return (
           <Applicant key={li.id} onClick={() => GoToDetail(li)}>
-            <ListBox>
+            <ListBox onClick={e => e.stopPropagation()}>
               <Label stance={li.career_type as "경력" | "신입"} />
               <PaddingBox>
                 <Heading2 fontSize={18} fontWeight={700}>
@@ -137,9 +138,15 @@ const AdminNotice = observer((): JSX.Element => {
               <Career>
                 {li.work_type} <span>|</span> {li.deadline} 마감
               </Career>
-              <ListButton>
-                <span>지원자리스트({li.recruit_application})</span>
-              </ListButton>
+              {li.id === 4 ? (
+                <ListButton isActive={li.id === 4} disabled>
+                  지원자리스트({li.id})
+                </ListButton>
+              ) : (
+                <ListButton isActive={li.id === 4} onClick={gotoapplicant}>
+                  지원자리스트({li.id})
+                </ListButton>
+              )}
             </PaddingBox>
           </Applicant>
         );

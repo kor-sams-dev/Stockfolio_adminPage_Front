@@ -27,32 +27,23 @@ const AdminMain = observer((): JSX.Element => {
   const { setClickedAdmin, setViewContentAdmin, setTotalContentAdmin } =
     AdminApplyMenuStore;
 
+  const login = sessionStorage.setItem(
+    "login",
+    " eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4ifQ.-Pea-liRXYLQ5sYBSgNpT3h6VaMJ7tJ66LePoQakHj4"
+  );
+
   const requestHeaders: HeadersInit = new Headers();
 
   requestHeaders.set("Content-Type", "application/json");
   requestHeaders.set(
     "Authorization",
     sessionStorage
-      ?.getItem("TOKEN")
-      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
+      ?.getItem("login")
+      ?.slice(0, sessionStorage.getItem("login")!.length) || "no token"
   );
 
   useEffect(() => {
-    // fetch(Recruits)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     setTotalContent(data.results.slice(0, 2));
-    //     // setViewContent(data.results.slice(0, 2));
-    //     setViewContent(data.results.slice(0, 1));
-
-    //     // setViewContent(data.results.filter(isDev));
-    //     setClicked("전체");
-    //   });
-
-    fetch("http://192.168.35.101:8000/recruits/admin", {
-      method: "GET",
-      headers: requestHeaders,
-    })
+    fetch(Recruits)
       .then(res => res.json())
       .then(data => {
         setTotalContentAdmin(data.results);
@@ -60,6 +51,18 @@ const AdminMain = observer((): JSX.Element => {
         setViewContentAdmin(data.results.slice(0, 4));
         setClickedAdmin("전체");
       });
+
+    // fetch("http://192.168.35.101:8000/recruits/admin/recruit-list", {
+    //   method: "GET",
+    //   headers: requestHeaders,
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    // setTotalContentAdmin(data.results);
+    // // setViewContent(data.results.slice(0, 2));
+    // setViewContentAdmin(data.results.slice(0, 4));
+    // setClickedAdmin("전체");
+    //   });
   }, []);
 
   return (

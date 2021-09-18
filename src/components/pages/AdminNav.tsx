@@ -93,6 +93,7 @@ function AdminNav(): JSX.Element {
   };
   const Logout = () => {
     sessionStorage.removeItem("TOKEN");
+    sessionStorage.removeItem("username");
     GotoLogin();
   };
 
@@ -113,11 +114,12 @@ function AdminNav(): JSX.Element {
               홈
             </NavMenu>
             <NavMenu
-              to="/adminapplynotice"
+              to="/admin/applynotice"
               isActive={
                 pathname === "/admin/apply" ||
-                pathname === "/admincurrent" ||
-                pathname === "/adminapplynotice"
+                pathname === "/admin/current" ||
+                pathname === "/admin/applynotice" ||
+                pathname === "/admin/applicantlist"
               }
             >
               채용 공고

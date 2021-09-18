@@ -36,10 +36,11 @@ const AdminNavbar = [
   "/admin/apply/:id",
   "/admin/notification",
   "/admin/notification/write",
-  "/adminapplicant",
-  "/admincurrent",
-  "/adminapplynotice",
+  "/admin/applicant",
+  "/admin/current",
+  "/admin/applynotice",
   "/admin",
+  "/admin/applicantlist",
 ];
 
 function App(): JSX.Element {
@@ -65,6 +66,7 @@ function App(): JSX.Element {
         <Route exact path="/admin/apply" component={Admin} />
         <Route exact path="/admin/apply/:id" component={Admin} />
         <Route exact path="/admin/applicant" component={AdminApplicant} />
+        <Route exact path="/admin/applicant/:id" component={AdminApplicant} />
         <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/notification" component={AdminNotification} />
         <Route exact path="/admin/applynotice" component={AdminApplyNotice} />
@@ -84,7 +86,6 @@ function App(): JSX.Element {
       <Switch>
         <Route exact path={RecruitNav} component={Footer} />
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 }
