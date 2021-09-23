@@ -127,7 +127,7 @@ const AdminMenuApplicant = (): JSX.Element => {
         return (
           <Applicant key={data.idx} to={`/admin/applicant/${data.idx}`}>
             <TitleWrap>
-              {pathname === "/admincurrent" && (
+              {pathname === "/admin/current" && (
                 <Title>{data.developer} 채용</Title>
               )}
               <Name>{data.name}</Name>

@@ -98,7 +98,7 @@ const AdminNotice = observer((): JSX.Element => {
     history.push("/admin/applynotice");
   };
 
-  const gotoapplicant = (e: any) => {
+  const gotoapplicant = (e: React.MouseEvent<HTMLButtonElement>) => {
     history.push("/admin/applicantlist");
     e.stopPropagation();
   };
@@ -126,7 +126,7 @@ const AdminNotice = observer((): JSX.Element => {
       {toJS(adminviewContent).map((li: MenuApplyProps) => {
         return (
           <Applicant key={li.id} onClick={() => GoToDetail(li)}>
-            <ListBox onClick={e => e.stopPropagation()}>
+            <ListBox>
               <Label stance={li.career_type as "경력" | "신입"} />
               <PaddingBox>
                 <Heading2 fontSize={18} fontWeight={700}>
