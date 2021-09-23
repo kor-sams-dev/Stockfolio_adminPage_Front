@@ -4,6 +4,8 @@ export const Recruits = `${BASE_URL}/recruits`;
 
 export const SignIn = `${BASE_URL}/users/signin`;
 
-export const TEST_URL = "http://192.168.35.7:8000";
+export const TEST_URL = "http://10.58.1.168:8000";
 
 export const Account = `${TEST_URL}/users/admins`;
+
+export const Applicant = `${TEST_URL}/applications`;

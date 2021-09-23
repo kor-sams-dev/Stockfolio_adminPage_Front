@@ -32,8 +32,8 @@ const AdminDataForm = {
     item: [
       {
         id: 0,
-        title: "제목",
-        name: "title",
+        title: "title",
+        name: "제목",
         placeholder: "제목",
         itemWidth: 980,
       },

@@ -35,6 +35,7 @@ const AdminNavbar = [
   "/admin/account",
   "/admin",
   "/admin/:id",
+  "/admin/applicant/:id",
   "/admin/notification",
   "/admin/notification/write",
 ];
@@ -61,7 +62,7 @@ function App(): JSX.Element {
         <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/apply" component={Admin} />
         <Route exact path="/admin/apply/:id" component={Admin} />
-        <Route exact path="/admin/applicant" component={AdminApplicant} />
+        <Route exact path="/admin/applicant/:id" component={AdminApplicant} />
         <Route exact path="/admin/account" component={AdminAccount} />
         <Route exact path="/admin/notification" component={AdminNotification} />
         <Route exact path="/admin/applynotice" component={AdminApplyNotice} />

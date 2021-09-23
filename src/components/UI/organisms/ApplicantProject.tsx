@@ -66,7 +66,7 @@ interface IAddText {
 const ApplicantProject = observer(({ item }: IAddText): JSX.Element => {
   return (
     <BasicInfoWrap>
-      <Desc fontSize={16} fontWeight={700}>
+      <Desc fontSize={15} fontWeight={700}>
         프로젝트 수행이력
       </Desc>
       <InfoBox>
