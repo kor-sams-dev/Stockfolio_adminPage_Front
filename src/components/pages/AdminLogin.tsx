@@ -80,12 +80,11 @@ const AdminLogin = observer((): JSX.Element => {
   };
 
   const fetchLogin = () => {
-    return fetch(SignIn, {
+    return fetch("http://10.58.1.177:8000/users/signin", {
       method: "POST",
       body: JSON.stringify({
         email: userInput.email,
         password: userInput.password,
-        recruit_id: 1,
       }),
     })
       .then(res => res.json())

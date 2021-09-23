@@ -15,6 +15,7 @@ import {
   SelectedApplyContent,
 } from "./AdminApplyMenuStore";
 import { UserTokenStore, HandleToken } from "./UserTokenStore";
+import AdminApplicantStore from "./AdminApplicantStore";
 
 const RootStore = () => {
   return {
@@ -35,6 +36,7 @@ const RootStore = () => {
     HandleToken,
     AdminApplyMenuStore,
     SelectedApplyContent,
+    AdminApplicantStore,
   };
 };
 

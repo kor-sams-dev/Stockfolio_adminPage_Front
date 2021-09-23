@@ -49,14 +49,13 @@ const AdminMenuBox = observer((): JSX.Element => {
   );
 
   useEffect(() => {
-    fetch("http://192.168.35.101:8000/recruits/admin/dashboard", {
+    fetch("http://10.58.1.177:8000/recruits/admin/dashboard", {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
         setMenu(data.results);
-        console.log(data.results);
       });
   }, []);
 
