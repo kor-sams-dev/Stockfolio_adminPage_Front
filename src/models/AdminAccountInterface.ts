@@ -165,6 +165,7 @@ export interface IApplicantListData {
   updated_at?: string;
   description: string;
   score: number;
+  id?: number;
 }
 
 export const commentListForm: IApplicantListData = {
@@ -174,4 +175,5 @@ export const commentListForm: IApplicantListData = {
   updated_at: "",
   description: "",
   score: 0,
+  id: 0,
 };

@@ -11,6 +11,7 @@ import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
 import { IAccountItem } from "../../models/AdminAccountInterface";
 import { Account } from "../../config";
+import requestHeaders from "../../utils/getToken";
 
 const Box = styled.section`
   position: sticky;
@@ -63,15 +64,6 @@ const SortTitle = styled.span`
 `;
 
 const AdminAccount = observer((): JSX.Element => {
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set("Content-Type", "application/json");
-  requestHeaders.set(
-    "Authorization",
-    localStorage
-      ?.getItem("access_token")
-      ?.slice(0, localStorage.getItem("access_token")!.length) || "no token"
-  );
-
   const [accountInfo, setAccountInfo] = useState({
     username: "",
     email: "",

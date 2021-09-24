@@ -16,6 +16,7 @@ import ApplicantCommentBox from "../UI/organisms/ApplicantCommentBox";
 import theme from "../../styles/theme";
 import { Applicant } from "../../config";
 import { applicantForm } from "../../models/AdminAccountInterface";
+import requestHeaders from "../../utils/getToken";
 
 const Box = styled.section`
   display: flex;
@@ -48,15 +49,6 @@ const CommentSection = styled.section`
 `;
 
 const AdminApplicant = observer((): JSX.Element => {
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set("Content-Type", "application/json");
-  requestHeaders.set(
-    "Authorization",
-    localStorage
-      ?.getItem("access_token")
-      ?.slice(0, localStorage.getItem("access_token")!.length) || "no token"
-  );
-
   const Location = useLocation();
   const applicantId = Location.pathname.slice(17, Location.pathname.length);
 
@@ -68,7 +60,7 @@ const AdminApplicant = observer((): JSX.Element => {
     })
       .then(res => res.json())
       .then(data => {
-        setApplicantData(data.results[0]);
+        setApplicantData(data.results);
       });
   }, []);
 

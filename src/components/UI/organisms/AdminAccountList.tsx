@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import theme from "../../../styles/theme";
 import { IAccountInfo } from "../../../models/AdminAccountInterface";
 import { TEST_URL } from "../../../config";
+import requestHeaders from "../../../utils/getToken";
 
 const AccountBtn = styled.button`
   padding: 10px;
@@ -64,15 +65,6 @@ interface IAddList {
 }
 
 const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set("Content-Type", "application/json");
-  requestHeaders.set(
-    "Authorization",
-    localStorage
-      ?.getItem("access_token")
-      ?.slice(0, localStorage.getItem("access_token")!.length) || "no token"
-  );
-
   const [textCheck, setTextCheck] = useState({ ...list });
 
   const { id, username, email, password } = textCheck;
@@ -80,7 +72,6 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
   const changeText = (e: any) => {
     const { name, value } = e.target;
     setTextCheck({ ...textCheck, [name]: value });
-    console.log(textCheck);
   };
 
   const [handleEditButton, setHandleEditButton] = useState(true);
