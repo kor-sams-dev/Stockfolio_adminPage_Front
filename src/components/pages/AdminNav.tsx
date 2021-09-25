@@ -114,12 +114,10 @@ function AdminNav(): JSX.Element {
               홈
             </NavMenu>
             <NavMenu
-              to="/admin/applynotice"
+              to="/admin/apply"
               isActive={
                 pathname === "/admin/apply" ||
-                pathname === "/admin/current" ||
-                pathname === "/admin/applynotice" ||
-                pathname === "/admin/applicantlist"
+                pathname === "/admin/applicant/:id"
               }
             >
               채용 공고

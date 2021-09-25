@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
   i {
     font-style: italic;
   }
-
+  
 h1 {
   font-size: 30px;
   font-weight: 900;

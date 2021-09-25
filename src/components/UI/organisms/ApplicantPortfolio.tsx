@@ -64,7 +64,7 @@ const ApplicantPortfolio = observer(({ item }: IAddText): JSX.Element => {
         <TextBox>
           <TextTitle>첨부파일</TextTitle>
           <DownloadBtnWrap>
-            <TextContent>{item.addFile}</TextContent>
+            {/* <TextContent>{item.addFile}</TextContent> */}
             <DownloadBtn>다운로드</DownloadBtn>
           </DownloadBtnWrap>
         </TextBox>

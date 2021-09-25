@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { observer } from "mobx-react";
 
 import theme from "../../../styles/theme";
-import { IUserInfo } from "../../../models/AdminAccountInterface";
+import { IAccountInfo } from "../../../models/AdminAccountInterface";
+import { TEST_URL } from "../../../config";
+import requestHeaders from "../../../utils/getToken";
 
 const AccountBtn = styled.button`
   padding: 10px;
@@ -59,13 +61,13 @@ const ButtonWrap = styled.div`
 `;
 
 interface IAddList {
-  list: IUserInfo;
+  list: IAccountInfo;
 }
 
 const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
   const [textCheck, setTextCheck] = useState({ ...list });
 
-  const { id, userName, email, password } = textCheck;
+  const { id, username, email, password } = textCheck;
 
   const changeText = (e: any) => {
     const { name, value } = e.target;
@@ -73,16 +75,51 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
   };
 
   const [handleEditButton, setHandleEditButton] = useState(true);
-  const editText = () => {
-    setHandleEditButton(!handleEditButton);
+  const editAccount = () => {
+    if (handleEditButton) {
+      textCheck.password = " ";
+      setHandleEditButton(!handleEditButton);
+    } else {
+      fetch(`${TEST_URL}/users/admin/${list.id}`, {
+        method: "PATCH",
+        headers: requestHeaders,
+        body: JSON.stringify({
+          newname: textCheck.username,
+          newemail: textCheck.email,
+          newpassword: textCheck.password?.slice(1, textCheck.password?.length),
+        }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message === "SUCCESS") {
+            alert("수정에 성공했습니다.");
+          } else {
+            alert(
+              "형식을 확인해 주세요 (비밀번호 : 문자, 숫자, 특수문자 포함 8글자 이상)"
+            );
+          }
+        });
+      setHandleEditButton(!handleEditButton);
+    }
+  };
+
+  const deleteAccount = () => {
+    fetch(`${TEST_URL}/users/admin/${list.id}`, {
+      method: "DELETE",
+      headers: requestHeaders,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("messege", data);
+      });
   };
 
   return (
     <AccountWrap key={list.id} onChange={changeText}>
       <AccountContentName
         type="text"
-        name="userName"
-        value={textCheck.userName === "" ? list.userName : textCheck.userName}
+        name="username"
+        value={textCheck.username === "" ? list.username : textCheck.username}
         disabled={handleEditButton}
       />
       <AccountContent
@@ -98,10 +135,10 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
         disabled={handleEditButton}
       />
       <ButtonWrap>
-        <AccountBtn key={list.id} onClick={editText}>
+        <AccountBtn key={list.id} onClick={editAccount}>
           {handleEditButton ? "수정" : "확인"}
         </AccountBtn>
-        <AccountBtn>삭제</AccountBtn>
+        <AccountBtn onClick={deleteAccount}>삭제</AccountBtn>
       </ButtonWrap>
     </AccountWrap>
   );

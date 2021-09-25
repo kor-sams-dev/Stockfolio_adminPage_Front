@@ -32,6 +32,9 @@ const RecruitNav = [
 const AdminNavbar = [
   "/admin/login",
   "/admin/account",
+  "/admin",
+  "/admin/:id",
+  "/admin/applicant/:id",
   "/admin/apply",
   "/admin/apply/:id",
   "/admin/notification",

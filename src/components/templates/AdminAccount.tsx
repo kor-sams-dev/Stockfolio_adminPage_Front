@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -9,6 +9,9 @@ import AdminAccountList from "../UI/organisms/AdminAccountList";
 
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
+import { IAccountItem } from "../../models/AdminAccountInterface";
+import { Account } from "../../config";
+import requestHeaders from "../../utils/getToken";
 
 const Box = styled.section`
   position: sticky;
@@ -18,8 +21,9 @@ const Box = styled.section`
   align-items: flex-start;
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
   background: ${theme.color.white};
-  padding-top: 80px;
+  padding-top: 110px;
 `;
 
 const InputWrap = styled.div`
@@ -61,14 +65,50 @@ const SortTitle = styled.span`
 
 const AdminAccount = observer((): JSX.Element => {
   const [accountInfo, setAccountInfo] = useState({
-    title: "",
-    id: "",
+    username: "",
+    email: "",
     password: "",
   });
+
+  const { username, email, password } = accountInfo;
+
   const writeAdminInfo = (e: any) => {
     const { name, value } = e.target;
     setAccountInfo(prev => ({ ...prev, [name]: value }));
   };
+
+  const AddAcount = () => {
+    if (
+      accountInfo.username.length > 0 &&
+      accountInfo.email.length > 0 &&
+      accountInfo.password.length > 0
+    ) {
+      fetch(`${Account}`, {
+        method: "POST",
+        headers: requestHeaders,
+        body: JSON.stringify(accountInfo),
+      })
+        .then(res => res.json())
+        .then(data => {
+          setAccountInfo({ username: "", email: "", password: "" });
+        });
+    } else {
+      alert("빈칸 없이 작성해주세요");
+    }
+  };
+
+  const [accountData, setAccountData] = useState<IAccountItem[]>([]);
+
+  useEffect(() => {
+    fetch(`${Account}`, {
+      method: "GET",
+      headers: requestHeaders,
+    })
+      .then(res => res.json())
+      .then(data => {
+        setAccountData(data.result);
+      });
+  }, [accountInfo]);
 
   return (
     <Box>
@@ -82,16 +122,16 @@ const AdminAccount = observer((): JSX.Element => {
               <AdminInput item={item} key={item.id} onChange={writeAdminInfo} />
             );
           })}
-          <AddAccountBtn>추가</AddAccountBtn>
+          <AddAccountBtn onClick={AddAcount}>추가</AddAccountBtn>
         </InputWrap>
         <AdminWrap>
           <Sort>
             {AdminDataForm.accountInput.item.map(text => {
-              return <SortTitle key={text.id}>{text.title}</SortTitle>;
+              return <SortTitle key={text.id}>{text.name}</SortTitle>;
             })}
           </Sort>
-          {AdminDataForm.accountInput.account.map(list => {
-            return <AdminAccountList list={list} key={list.id} />;
+          {accountData?.map(list => {
+            return <AdminAccountList key={list.id} list={list} />;
           })}
         </AdminWrap>
       </Inner>

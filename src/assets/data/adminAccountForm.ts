@@ -3,22 +3,22 @@ const AdminDataForm = {
     item: [
       {
         id: 0,
-        title: "이름",
-        name: "title",
+        name: "이름",
+        title: "username",
         placeholder: "이름",
         itemWidth: 120,
       },
       {
         id: 1,
-        title: "아이디",
-        name: "id",
+        name: "아이디",
+        title: "email",
         placeholder: "아이디",
         itemWidth: 240,
       },
       {
         id: 2,
-        title: "비밀번호",
-        name: "password",
+        name: "비밀번호",
+        title: "password",
         placeholder: "비밀번호",
         itemWidth: 240,
       },
@@ -32,8 +32,8 @@ const AdminDataForm = {
     item: [
       {
         id: 0,
-        title: "제목",
-        name: "title",
+        title: "title",
+        name: "제목",
         placeholder: "제목",
         itemWidth: 980,
       },
