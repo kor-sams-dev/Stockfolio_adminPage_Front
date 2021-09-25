@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import React from "react";
-import { useLocation } from "react-router-dom";
+
+import { useLocation, useHistory } from "react-router-dom";
+import { observer } from "mobx-react";
+import { toJS } from "mobx";
 import theme from "../../../styles/theme";
-import { AdminApplicant } from "../../../models/adminMainMenu";
-import adminMainMenu from "../../../assets/data/adminMainMenu";
+
 import Label from "../atoms/Labels/Label";
 import Heading2 from "../atoms/texts/Heading2";
+import RootStore from "../../../stores/RootStore";
+import { MenuApplyProps } from "../../../models/applyInterfaces";
 
 const AdminNav = styled.ul`
   font-size: 18px;
@@ -61,8 +64,7 @@ const PaddingBox = styled.div`
 `;
 
 const Career = styled.div`
-  text-align: right; 
-  }
+  text-align: right;
 `;
 
 const ListButton = styled.button`
@@ -77,52 +79,80 @@ const ListButton = styled.button`
   margin-left: 24px;
   margin-right: 32px;
   padding: 6px 0;
-  cursor: pointer;
-  span {
-    font-size: 12px;
-    font-weight: 700;
-    color: ${theme.color.black};
-  }
+  cursor: ${props => (props.isActive ? "auto" : "pointer")};
+  font-size: 12px;
+  font-weight: 700;
+  color: ${props =>
+    props.isActive ? `${theme.color.lilac}` : `${theme.color.black}`};
 
   &:hover {
     background-color: ${theme.color.greyLight1};
   }
 `;
 
-const AdminNotice = (): JSX.Element => {
+const AdminNotice = observer((): JSX.Element => {
   const { pathname } = useLocation();
+  const history = useHistory();
+
+  const gotodetail = () => {
+    history.push("/admin/applynotice");
+  };
+
+  const gotoapplicant = (e: React.MouseEvent<HTMLButtonElement>) => {
+    history.push("/admin/applicantlist");
+    e.stopPropagation();
+  };
+
+  const { SelectedContent, AdminApplyMenuStore } = RootStore();
+
+  const { adminviewContent, setSelectedContentAdmin, admintotalContent } =
+    AdminApplyMenuStore;
+
+  const GoToDetail = (data: MenuApplyProps) => {
+    setSelectedContentAdmin(data);
+
+    return history.push(`/admin/apply/${data.id}`);
+  };
+
   return (
     <>
-      {pathname === "/admin/main" && (
+      {pathname === "/admin" && (
         <AdminNav>
-          <NavTitle>최근 지원자</NavTitle>
-          <NavButton>전체보기</NavButton>
+          <NavTitle>채용 공고</NavTitle>
+          <NavButton onClick={gotodetail}>전체보기</NavButton>
         </AdminNav>
       )}
-      {adminMainMenu.data.applicant.map((data: AdminApplicant) => {
+
+      {toJS(adminviewContent).map((li: MenuApplyProps) => {
         return (
-          <Applicant key={data.idx}>
+          <Applicant key={li.id} onClick={() => GoToDetail(li)}>
             <ListBox>
-              <Label stance={data.label as "경력" | "신입"} />
+              <Label stance={li.career_type as "경력" | "신입"} />
               <PaddingBox>
                 <Heading2 fontSize={18} fontWeight={700}>
-                  {data.developer}
+                  {li.position_title}
                 </Heading2>
               </PaddingBox>
             </ListBox>
             <PaddingBox>
               <Career>
-                {data.career} <span>|</span> {data.date} 마감
+                {li.work_type} <span>|</span> {li.deadline} 마감
               </Career>
-              <ListButton>
-                <span>지원자리스트({data.number})</span>
-              </ListButton>
+              {li.id === 4 ? (
+                <ListButton isActive={li.id === 4} disabled>
+                  지원자리스트({li.id})
+                </ListButton>
+              ) : (
+                <ListButton isActive={li.id === 4} onClick={gotoapplicant}>
+                  지원자리스트({li.id})
+                </ListButton>
+              )}
             </PaddingBox>
           </Applicant>
         );
       })}
     </>
   );
-};
+});
 
 export default AdminNotice;

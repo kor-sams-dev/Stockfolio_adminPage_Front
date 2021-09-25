@@ -25,17 +25,21 @@ const PositionList = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+
   & + li {
     padding-left: 24px;
   }
+
   ${PositionName} {
     color: ${theme.color.mainDeep};
     transition: color 0.3s;
   }
+
   ${Box} {
     background-color: ${theme.color.mainDeep};
     transition: background-color 0.3s;
   }
+
   ${Text} {
     color: ${theme.color.white};
     transition: color 0.3s;
@@ -46,46 +50,57 @@ const NonePositionList = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+
   & + li {
     padding-left: 24px;
   }
 `;
 
-const ApplyNavBar = observer((): JSX.Element => {
+const AdminApplyNavbar = observer((): JSX.Element => {
   const department = ["전체", "개발", "디자인", "마케팅"];
-  const { ApplyMenuStore } = RootStore();
-  const { clicked, totalContent } = ApplyMenuStore;
+  const { AdminApplyMenuStore } = RootStore();
+  const { adminclicked, admintotalContent } = AdminApplyMenuStore;
 
   useEffect(() => {
     const setDepartment = (arr: any) => {
-      return arr.position === clicked;
+      return arr.position === adminclicked;
     };
 
-    if (ApplyMenuStore.clicked === "전체") {
-      ApplyMenuStore.setViewContent(totalContent);
+    if (AdminApplyMenuStore.adminclicked === "전체") {
+      AdminApplyMenuStore.setViewContentAdmin(admintotalContent);
     } else {
-      ApplyMenuStore.setViewContent(totalContent.filter(setDepartment));
+      AdminApplyMenuStore.setViewContentAdmin(
+        admintotalContent.filter(setDepartment)
+      );
     }
-  }, [ApplyMenuStore.clicked]);
+    // 배열의 포지션이 click 인것만 반환
+    // console.log(ApplyMenuStore.setViewContent);
+    // console.log(admintotalContent.filter(setDepartment));
+  }, [AdminApplyMenuStore.adminclicked]);
 
   return (
     <ApplyNav>
       {department.map(item => {
-        const IsActive = item === clicked ? PositionList : NonePositionList;
+        const IsActive =
+          item === adminclicked ? PositionList : NonePositionList;
         return (
           <IsActive
             key={item}
             onClick={() => {
-              ApplyMenuStore.setClicked(item);
+              AdminApplyMenuStore.setClickedAdmin(item);
             }}
           >
             <PositionName>{item}</PositionName>
             {item === "전체" ? (
-              <QuantityLabel quantity={ApplyMenuStore.totalContent.length} />
+              <QuantityLabel
+                quantity={AdminApplyMenuStore.admintotalContent.length}
+              />
             ) : (
               <QuantityLabel
                 quantity={
-                  ApplyMenuStore.totalContent.filter(function (el: MenuProps) {
+                  AdminApplyMenuStore.admintotalContent.filter(function (
+                    el: MenuProps
+                  ) {
                     return el.position === item;
                   }).length
                 }
@@ -98,4 +113,4 @@ const ApplyNavBar = observer((): JSX.Element => {
   );
 });
 
-export default ApplyNavBar;
+export default AdminApplyNavbar;
