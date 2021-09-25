@@ -10,8 +10,12 @@ import { SelectStore, SelectActions } from "./SelectStore";
 import { CheckboxStore, CheckboxActions } from "./CheckboxStore";
 import { ApplyMenuStore, SelectedContent } from "./ApplyMenuStore";
 import StyledAlertStore from "./StyledAlertStore";
-
+import {
+  AdminApplyMenuStore,
+  SelectedApplyContent,
+} from "./AdminApplyMenuStore";
 import { UserTokenStore, HandleToken } from "./UserTokenStore";
+import AdminApplicantStore from "./AdminApplicantStore";
 
 const RootStore = () => {
   return {
@@ -30,6 +34,9 @@ const RootStore = () => {
     SelectedContent,
     UserTokenStore,
     HandleToken,
+    AdminApplyMenuStore,
+    SelectedApplyContent,
+    AdminApplicantStore,
   };
 };
 

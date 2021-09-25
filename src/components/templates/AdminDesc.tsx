@@ -84,10 +84,10 @@ const AdminDesc = observer((): any => {
           <RecruitList>
             {toJS(viewContent).map((li: MenuProps) => (
               <RecruitCard
-                to={`/admin/${li.id}`}
+                to={`/admin/apply/${li.id}`}
                 key={li.id}
                 onClick={() => setSelectedContent(li)}
-                isActive={location.pathname === `/admin/${li.id}`}
+                isActive={location.pathname === `/admin/apply/${li.id}`}
               >
                 <RecruitHeadline>{li.position_title}</RecruitHeadline>
                 <RecruitDeadline>{li.deadline}까지</RecruitDeadline>
