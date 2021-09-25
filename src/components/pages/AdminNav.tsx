@@ -93,9 +93,11 @@ function AdminNav(): JSX.Element {
   };
   const Logout = () => {
     sessionStorage.removeItem("TOKEN");
+    sessionStorage.removeItem("username");
     GotoLogin();
   };
 
+  const username = sessionStorage.getItem("username");
   return (
     <NavHeader>
       <Inner size="wide">
@@ -111,7 +113,15 @@ function AdminNav(): JSX.Element {
             <NavMenu to="/admin" isActive={pathname === "/admin"}>
               홈
             </NavMenu>
-            <NavMenu to="/admin/apply" isActive={pathname === "/admin/apply"}>
+            <NavMenu
+              to="/admin/applynotice"
+              isActive={
+                pathname === "/admin/apply" ||
+                pathname === "/admin/current" ||
+                pathname === "/admin/applynotice" ||
+                pathname === "/admin/applicantlist"
+              }
+            >
               채용 공고
             </NavMenu>
             <NavMenu
@@ -131,7 +141,7 @@ function AdminNav(): JSX.Element {
             </NavMenu>
           </NavMenuList>
           <NavMenuList>
-            <NavName>조기영님🦄</NavName>
+            <NavName>{username}님🦄</NavName>
             {sessionStorage.getItem("TOKEN") ? (
               <NavLogin onClick={Logout}>로그아웃</NavLogin>
             ) : (
