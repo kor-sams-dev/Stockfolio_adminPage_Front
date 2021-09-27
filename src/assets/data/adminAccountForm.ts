@@ -41,12 +41,25 @@ const AdminDataForm = {
   },
   NotificationUploadDropdown: {
     data: [
-      { id: 0, title: "경력", itemWidth: 124, list: ["신입", "경력 ", "인턴"] },
-      { id: 1, title: "형태", itemWidth: 148, list: ["정규직", "계약직"] },
-      { id: 2, title: "마감일", itemWidth: 180, list: [] },
+      {
+        id: 0,
+        title: "경력",
+        name: "career_type",
+        itemWidth: 124,
+        list: ["신입", "경력 ", "인턴"],
+      },
+      {
+        id: 1,
+        title: "형태",
+        name: "work_type",
+        itemWidth: 148,
+        list: ["정규직", "계약직"],
+      },
+      { id: 2, title: "마감일", name: "deadline", itemWidth: 180, list: [] },
       {
         id: 3,
         title: "직종",
+        name: "position",
         itemWidth: 192,
         list: [
           "개발",

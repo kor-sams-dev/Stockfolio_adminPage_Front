@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import Heading4 from "../texts/Heading4";
 import theme from "../../../../styles/theme";
 import { INotificationItem } from "../../../../models/AdminAccountInterface";
+import SelectedDropdown from "../../../../stores/NotificationStore";
 
 const DropdownWrap = styled.div`
   margin-right: 16px;
@@ -69,9 +70,20 @@ const AdminInput = observer(
     };
 
     const [dropdownTitle, setDropdownTitle] = useState(`${item.title}`);
+    const [uploadData, setUploadData] = useState({
+      career_type: "",
+      work_type: "",
+      deadline: "",
+      position: "",
+    });
+
     const selectTitle = (e: any) => {
+      const { name, value } = e.target;
+      setUploadData(prev => ({ ...prev, [name]: value }));
       setDropdownTitle(e.target.value);
     };
+
+    console.log(uploadData);
 
     return (
       <DropdownWrap>
@@ -87,12 +99,14 @@ const AdminInput = observer(
           {dropdownTitle}
           <DownImg src="/../../images/downArrow.png" alt="dowm img" />
           <ListWrap width={item.itemWidth} hidden={onOffBtn}>
-            {/* <DropdownList onClick={selectTitle} value={item.list[0]}>
-              {item.list[0]}
-            </DropdownList> */}
             {item.list.map(data => {
               return (
-                <DropdownList key={data} onClick={selectTitle} value={data}>
+                <DropdownList
+                  key={data}
+                  name={item.name}
+                  onClick={selectTitle}
+                  value={data}
+                >
                   {data}
                 </DropdownList>
               );

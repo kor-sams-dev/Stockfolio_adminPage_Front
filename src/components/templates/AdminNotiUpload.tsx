@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -54,6 +54,10 @@ const SubmitBtn = styled.button`
 `;
 
 const AdminNotiUpload = observer((): JSX.Element => {
+  const [writeData, setWriteData] = useState({
+    title: "",
+  });
+
   return (
     <Box>
       <Inner size="wide">
@@ -127,6 +131,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
           }}
           onChange={(event: any, editor: any) => {
             const data = editor.getData();
+            console.log(data);
           }}
           onInit={(editor: any) => {
             editor.editing.view.change((writer: any) => {
