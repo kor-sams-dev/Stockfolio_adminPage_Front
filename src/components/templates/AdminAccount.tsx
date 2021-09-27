@@ -127,7 +127,7 @@ const AdminAccount = observer((): JSX.Element => {
         <AdminWrap>
           <Sort>
             {AdminDataForm.accountInput.item.map(text => {
-              return <SortTitle key={text.id}>{text.name}</SortTitle>;
+              return <SortTitle key={text.id}>{text.title}</SortTitle>;
             })}
           </Sort>
           {accountData?.map(list => {

@@ -5,7 +5,8 @@ import { observer } from "mobx-react";
 import Heading4 from "../texts/Heading4";
 import theme from "../../../../styles/theme";
 import { INotificationItem } from "../../../../models/AdminAccountInterface";
-import SelectedDropdown from "../../../../stores/NotificationStore";
+import { DropdownStore } from "../../../../stores/AdminNotificationStore";
+import { INotificationUpload } from "../../../../models/AdminNotificationInterface";
 
 const DropdownWrap = styled.div`
   margin-right: 16px;
@@ -70,20 +71,15 @@ const AdminInput = observer(
     };
 
     const [dropdownTitle, setDropdownTitle] = useState(`${item.title}`);
-    const [uploadData, setUploadData] = useState({
-      career_type: "",
-      work_type: "",
-      deadline: "",
-      position: "",
-    });
 
     const selectTitle = (e: any) => {
       const { name, value } = e.target;
-      setUploadData(prev => ({ ...prev, [name]: value }));
-      setDropdownTitle(e.target.value);
+      setDropdownTitle(value);
+      DropdownStore.setDropdown(
+        name as keyof INotificationUpload,
+        e.target.value
+      );
     };
-
-    console.log(uploadData);
 
     return (
       <DropdownWrap>

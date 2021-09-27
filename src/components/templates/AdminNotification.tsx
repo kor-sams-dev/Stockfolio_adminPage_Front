@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { observer } from "mobx-react";
@@ -6,9 +6,14 @@ import { useHistory } from "react-router-dom";
 import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import Label from "../UI/atoms/Labels/Label";
+import requestHeaders from "../../utils/getToken";
 
 import theme from "../../styles/theme";
-import AdminNotificationList from "../../assets/data/adminNotificationData";
+import { NotificationUrl } from "../../config";
+import {
+  INotificationList,
+  notificationDataForm,
+} from "../../models/AdminNotificationInterface";
 
 const Box = styled.section`
   position: sticky;
@@ -91,6 +96,19 @@ const VolunteerListBtn = styled.button`
 `;
 
 const AdminNotification = observer((): JSX.Element => {
+  const [notiData, setNotiData] = useState(notificationDataForm);
+
+  useEffect(() => {
+    fetch(`${NotificationUrl}/admin/recruit-list`, {
+      method: "GET",
+      headers: requestHeaders,
+    })
+      .then(res => res.json())
+      .then(data => {
+        setNotiData(data);
+      });
+  }, []);
+
   const history = useHistory();
   const uploadNoti = () => {
     history.push("/admin/notification/write");
@@ -106,21 +124,23 @@ const AdminNotification = observer((): JSX.Element => {
             새로운 공고 올리기
           </NewNorificationBtn>
         </HeaderWrap>
-        {AdminNotificationList.data.list.map(list => {
+        {notiData.results.map((list: INotificationList) => {
           return (
-            <ListSection key={list.listNum}>
+            <ListSection key={list.id}>
               <TitleWrap>
                 <LabelBox>
                   <Label stance={list.career_type as "경력" | "신입"} />
                 </LabelBox>
                 <Heading2 fontSize={18} fontWeight={700}>
-                  {list.text}
+                  {list.position_title}
                 </Heading2>
               </TitleWrap>
               <div>
                 <Sort>{list.work_type}</Sort>
                 <Sort>{list.deadline} 마감</Sort>
-                <VolunteerListBtn>지원자 리스트(2)</VolunteerListBtn>
+                <VolunteerListBtn>
+                  지원자 리스트({list.recruit_application})
+                </VolunteerListBtn>
               </div>
             </ListSection>
           );

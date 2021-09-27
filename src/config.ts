@@ -4,7 +4,11 @@ export const Recruits = `${BASE_URL}/recruits`;
 
 export const SignIn = `${BASE_URL}/users/signin`;
 
-export const TEST_URL = "http://192.168.35.5:7800";
+export const TEST_URL = "http://192.168.35.4:8000";
+
+export const LoginAdmin = `${TEST_URL}/users/signin`;
+
+export const NotificationUrl = `${TEST_URL}/recruits`;
 
 export const Account = `${TEST_URL}/users/admins`;
 
