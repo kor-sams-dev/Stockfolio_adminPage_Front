@@ -15,6 +15,7 @@ export interface IAccountInfo {
 export interface INotificationItem {
   id: number;
   title: string;
+  name?: string;
   itemWidth: number;
   list: Array<string>;
 }
