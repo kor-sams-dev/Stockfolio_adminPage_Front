@@ -215,8 +215,8 @@ const EvaluationBox = observer(
           .then(res => {
             setActiveBtn(0);
             setCommentLength("");
-            alert("Comment 등록이 완료되었습니다.");
             reRender();
+            alert("Comment 등록이 완료되었습니다.");
           });
       } else if (saveComment.description.length === 0) {
         alert("Comment를 작성해 주세요");
@@ -232,8 +232,8 @@ const EvaluationBox = observer(
       })
         .then(res => res.json())
         .then(res => {
-          alert("Comment 삭제가 완료되었습니다.");
           func();
+          alert("Comment 삭제가 완료되었습니다.");
         });
     };
 
@@ -246,8 +246,8 @@ const EvaluationBox = observer(
         })
           .then(res => res.json())
           .then(res => {
-            alert("Comment 수정이 완료되었습니다.");
             func();
+            alert("Comment 수정이 완료되었습니다.");
           });
       } else if (saveComment.description.length === 0) {
         alert("Comment를 작성해 주세요");

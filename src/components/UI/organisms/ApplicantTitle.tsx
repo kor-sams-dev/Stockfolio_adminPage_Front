@@ -61,7 +61,7 @@ const ApplicantTitle = observer(({ item, data }: IAddTitle): JSX.Element => {
 
   const history = useHistory();
   const goToRecruit = () => {
-    history.push(`/recruit/apply/${recruit}`);
+    history.push(`/admin/apply/${recruit}`);
   };
 
   const dateSlice = data.created_at?.slice(0, 10);

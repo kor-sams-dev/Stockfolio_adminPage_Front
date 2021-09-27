@@ -23,7 +23,6 @@ const Box = styled.section`
   overflow-y: scroll;
   background: ${theme.color.white};
   padding-top: 100px;
-  
   ul {
     li {
       list-style: inside;

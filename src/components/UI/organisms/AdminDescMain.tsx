@@ -130,7 +130,6 @@ const AdminDescMain = observer((): JSX.Element => {
   const { setSelectedContent } = ApplyMenuStore;
   const params: IDProp = useParams();
   const history = useHistory();
-  console.log(params);
 
   useEffect(() => {
     fetch(`${Recruits}/${params.id}`)
