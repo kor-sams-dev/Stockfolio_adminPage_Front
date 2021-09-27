@@ -34,18 +34,11 @@ function Admin(): JSX.Element {
   const { setClicked, setViewContent, setTotalContent } = ApplyMenuStore;
 
   useEffect(() => {
-    const isDev = (arr: any) => {
-      if (arr.position === "개발") {
-        return true;
-      }
-      return false;
-    };
     fetch(Recruits)
       .then(res => res.json())
       .then(data => {
         setTotalContent(data.results);
         setViewContent(data.results);
-        // setViewContent(data.results.filter(isDev));
         setClicked("전체");
       });
   }, []);

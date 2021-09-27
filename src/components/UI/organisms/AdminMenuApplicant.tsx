@@ -1,7 +1,11 @@
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
+import { toJS } from "mobx";
+import { observer } from "mobx-react";
 import adminMainMenu from "../../../assets/data/adminMainMenu";
 import theme from "../../../styles/theme";
+import AdminApplicantStore from "../../../stores/AdminApplicantStore";
+import { AdminRecentApplicant } from "../../../models/adminMainMenu";
 
 const AdminNav = styled.ul`
   font-size: 18px;
@@ -11,6 +15,7 @@ const AdminNav = styled.ul`
   justify-content: space-between;
   margin: 0 auto;
   margin-bottom: 16px;
+  margin-top: 60px;
 `;
 
 const NavTitle = styled.div`
@@ -26,7 +31,7 @@ const NavButton = styled.div`
   margin-right: 32px;
 `;
 
-const Applicant = styled.li`
+const Applicant = styled(Link)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -87,9 +92,7 @@ const Label2 = styled.div`
   width: 38px;
   height: 18px;
   border-radius: 100px;
-  position: absolute;
-  bottom: 6px;
-  left: 65px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,36 +105,58 @@ const Label2 = styled.div`
   }
 `;
 
-const AdminMenuApplicant = (): JSX.Element => {
+const NameWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const AdminMenuApplicant = observer((): JSX.Element => {
   const { pathname } = useLocation();
+  const history = useHistory();
+  const { ApplicantList } = AdminApplicantStore;
+
+  const gotodetail = () => {
+    history.push("/admin/current");
+  };
+
+  const gotoapplicant = () => {
+    history.push("/admin/applicant/:id");
+  };
+
   return (
     <>
-      {pathname === "/admin/main" && (
+      {pathname === "/admin" && (
         <AdminNav>
           <NavTitle>최근 지원자</NavTitle>
-          <NavButton>전체보기</NavButton>
+          <NavButton onClick={gotodetail}>전체보기</NavButton>
         </AdminNav>
       )}
-      {adminMainMenu.data.notice.map(data => {
+      {toJS(ApplicantList).map((data: AdminRecentApplicant) => {
         return (
-          <Applicant key={data.idx}>
+          <Applicant
+            key={data.created_at}
+            to={`/admin/applicant/${Number(data.recruit_id)}`}
+          >
             <TitleWrap>
-              {pathname === "/admincurrent" && (
-                <Title>{data.developer} 채용</Title>
+              {pathname === "/admin/current" && (
+                <Title>{data.position_title} 채용</Title>
               )}
-              <Name>{data.name}</Name>
-              {data.label ? (
-                <Label2>
-                  <span>new</span>
-                </Label2>
-              ) : null}
+              <NameWrap>
+                <Name>{data.content.basicInfo.userName}</Name>
+                {data.new ? null : (
+                  <Label2>
+                    <span>new</span>
+                  </Label2>
+                )}
+              </NameWrap>
             </TitleWrap>
             <ContentWrap>
               <Career>
-                {data.career} <span>|</span> {data.date}
+                4년 2개월 <span>|</span> {data.deadline}
               </Career>
               <Email>
-                {data.email} <span>|</span> {data.number}
+                {data.content.basicInfo.email} <span>|</span>{" "}
+                {data.content.basicInfo.phoneNumber}
               </Email>
             </ContentWrap>
           </Applicant>
@@ -139,6 +164,6 @@ const AdminMenuApplicant = (): JSX.Element => {
       })}
     </>
   );
-};
+});
 
 export default AdminMenuApplicant;

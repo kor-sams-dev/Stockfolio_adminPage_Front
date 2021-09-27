@@ -1,55 +1,65 @@
 const ApplicantData = {
-  result: {
-    content: {
-      file: {
-        portfolio: {},
-      },
-      career: [
-        {
-          companyName: "위코드",
-          rank: "뉴비",
-          joinDate: "2021/07/01",
-          leavingDate: "2021/09/30",
-          businessTask: "파이썬 공부",
+  results: [
+    {
+      id: 47,
+      content: {
+        file: {},
+        career: [
+          {
+            rank: "계장",
+            joinDate: "2020/01/01",
+            companyName: "wecode",
+            leavingDate: "2021/01/01",
+            businessTask: "이것이 필수항목인가",
+          },
+        ],
+        project: [
+          {
+            endDate: "",
+            mainStack: "",
+            startDate: "",
+            association: "",
+            projectInfo: "",
+            projectName: "",
+          },
+        ],
+        basicInfo: {
+          email: "lala@lala.com",
+          userName: "룰루",
+          phoneNumber: "+821068228634",
         },
-      ],
-      project: [
-        {
-          projectName: "망고플레이트",
-          endDate: "2021/06/01",
-          startDate: "2021/05/01",
-          association: "위코드",
-          mainStack: "Python, Django",
-          projectInfo: "맛집 찾아주는 망고플레이트",
+        education: {
+          grade: "",
+          major: "",
+          background: "",
+          enrollDate: "",
+          schoolName: "",
+          graduateDate: "",
+          graduateState: "",
         },
-      ],
-      basicInfo: {
-        userName: "고유영",
-        email: "youryoung.ko@gmail.com",
-        phoneNumber: "04917655082999",
-        careerType: "신입",
-        supportNoti: "UXUI 디자이너 모집",
-        supportData: "2021-10-10",
+        portfolio: {
+          portfolioUrl:
+            "stockfolio.coo6llienldy.ap-northeast-2.rds.amazonaws.com/f7e90dce-1184-11ec-82d2-0242ac110002",
+        },
+        introduction: {
+          aboutMe: "",
+        },
       },
-      education: {
-        background: "사이버대학",
-        schoolName: "위코드",
-        major: "백엔드",
-        grade: "4.8/4.5",
-        graduateState: "졸업",
-        enrollDate: "2021/07/01",
-        graduateDate: "2021/09/30",
-      },
-      portfolio: {
-        addFile: "port.pdf",
-        portfolioUrl: "https://www.naver.com",
-      },
-      introduction: {
-        aboutMe: "1남1녀 화목한 가정 어쩌구 저쩌구 장점 단점 어쩌구저쩌구",
-      },
-      evaluationList: [{}],
+      status: "ST1",
+      created_at: "2021-09-09T15:45:33.582",
+      updated_at: "2021-09-09T15:46:19.539",
+      user_id: 45,
+      user_email: "yooyoung@stockfolio.com",
+      recruit_id: [2],
+      job_openings: ["0명"],
+      author: ["admin@admin.com"],
+      work_type: ["정규직"],
+      career_type: ["신입"],
+      position_title: ["백엔드 개발자"],
+      position: ["개발"],
+      deadline: ["2021-08-24"],
     },
-  },
+  ],
 };
 
 export default ApplicantData;

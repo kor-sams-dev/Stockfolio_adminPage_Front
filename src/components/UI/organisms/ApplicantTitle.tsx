@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
+import { useHistory } from "react-router-dom";
+import { Recruits } from "../../../config";
 
 import Label from "../atoms/Labels/Label";
 
 import theme from "../../../styles/theme";
-import { IApplicantBasicInfo } from "../../../models/AdminAccountInterface";
+import {
+  IApplicantBasicInfo,
+  IApplicantData,
+} from "../../../models/AdminAccountInterface";
 
 const TitleWrap = styled.div`
   display: flex;
@@ -27,6 +32,7 @@ const NotiWrap = styled.div`
 const SupportNoti = styled.span`
   font-size: 16px;
   color: ${theme.color.blue};
+  cursor: pointer;
 `;
 
 const SupportData = styled.span`
@@ -37,17 +43,37 @@ const SupportData = styled.span`
 
 interface IAddTitle {
   item: IApplicantBasicInfo;
+  data: IApplicantData;
 }
 
-const ApplicantTitle = observer(({ item }: IAddTitle): JSX.Element => {
+const ApplicantTitle = observer(({ item, data }: IAddTitle): JSX.Element => {
+  const recruit = data.recruit_id;
+
+  const [recruitTitle, setRecruitTitle] = useState();
+
+  useEffect(() => {
+    fetch(`${Recruits}/${recruit}`)
+      .then(res => res.json())
+      .then(list => {
+        setRecruitTitle(list.result?.position_title);
+      });
+  }, [data]);
+
+  const history = useHistory();
+  const goToRecruit = () => {
+    history.push(`/recruit/apply/${recruit}`);
+  };
+
+  const dateSlice = data.created_at?.slice(0, 10);
+
   return (
     <>
-      <Label stance={item.careerType as "신입" | "경력"} />
+      <Label stance={data.career_type as "신입" | "경력"} />
       <TitleWrap>
         <TitleName>{item.userName}</TitleName>
         <NotiWrap>
-          <SupportNoti>{item.supportNoti}</SupportNoti>
-          <SupportData>지원일: {item.supportData}</SupportData>
+          <SupportNoti onClick={goToRecruit}>{recruitTitle}</SupportNoti>
+          <SupportData>지원일: {dateSlice}</SupportData>
         </NotiWrap>
       </TitleWrap>
     </>

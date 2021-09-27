@@ -8,6 +8,7 @@ const Text = styled.p`
   font-size: ${({ fontSize }: DescProps) => `${fontSize}px`};
   font-weight: ${({ fontWeight }: DescProps) => `${fontWeight}`};
   line-height: ${({ lineHeight }: DescProps) => `${lineHeight}`};
+  word-break: keep-all;
 `;
 
 function Desc({
