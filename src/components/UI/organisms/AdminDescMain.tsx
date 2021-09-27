@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
-import { Recruits } from "../../../config";
 
 import Heading2 from "../atoms/texts/Heading2";
 import Label from "../atoms/Labels/Label";
@@ -11,6 +10,7 @@ import theme from "../../../styles/theme";
 
 import RootStore from "../../../stores/RootStore";
 import { IDProp } from "../../../models/applyInterfaces";
+import requestHeaders from "../../../utils/getToken";
 
 const ApplyMain = styled.section`
   display: flex;
@@ -125,18 +125,40 @@ const Sidewrap = styled.div`
     margin-left: 11px;
   }
 `;
+
 const AdminDescMain = observer((): JSX.Element => {
   const { ApplyMenuStore, SelectedContent } = RootStore();
   const { setSelectedContent } = ApplyMenuStore;
   const params: IDProp = useParams();
   const history = useHistory();
-  console.log(params);
+  const deleteNotice = () => {
+    fetch(`http://192.168.35.4:7800/recruits/${params.id}`, {
+      method: "DELETE",
+      headers: requestHeaders,
+    }).then(res => res.json());
+  };
+
+  const onRemove = () => {
+    if (window.confirm("정말 삭제합니까?")) {
+      deleteNotice();
+      alert("삭제되었습니다.");
+    } else {
+      alert("취소합니다.");
+    }
+  };
 
   useEffect(() => {
-    fetch(`${Recruits}/${params.id}`)
+    fetch(`http://192.168.35.4:8000/recruits/${params.id}`, {
+      method: "GET",
+      headers: requestHeaders,
+    })
       .then(res => res.json())
       .then(data => {
         setSelectedContent(data.result);
+        console.log(data.result);
+      })
+      .catch(error => {
+        console.error(error);
       });
   }, []);
 
@@ -146,8 +168,8 @@ const AdminDescMain = observer((): JSX.Element => {
         <Label stance={"신입" as "경력" | "신입"} />
         <Sidewrap>
           <Sidebutton>수정</Sidebutton>
-          <Sidebutton>삭제</Sidebutton>
-          <span>게시자 : 조기영</span>
+          <Sidebutton onClick={onRemove}>삭제</Sidebutton>
+          <span>게시자 : {SelectedContent.author_name}</span>
         </Sidewrap>
       </Wrap>
       <InfoBox>
@@ -165,7 +187,9 @@ const AdminDescMain = observer((): JSX.Element => {
           </DeadlineWrapper>
         </HeadBox>
         <BtnBox>
-          <ModRecruitBtn>지원자 리스트(5)</ModRecruitBtn>
+          <ModRecruitBtn>
+            지원자 리스트({SelectedContent.num_applicants})
+          </ModRecruitBtn>
         </BtnBox>
       </InfoBox>
       <DescriptionBox>

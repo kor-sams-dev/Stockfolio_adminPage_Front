@@ -1,7 +1,7 @@
 import { ReactChild, ReactChildren } from "react";
 
 interface ChildrenProps {
-  children: ReactChild | ReactChildren;
+  children: ReactChild | ReactChildren | React.ReactNode;
 }
 
 interface TextProps extends ChildrenProps {

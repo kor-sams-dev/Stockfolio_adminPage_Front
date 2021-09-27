@@ -40,6 +40,9 @@ function Admin(): JSX.Element {
         setTotalContent(data.results);
         setViewContent(data.results);
         setClicked("전체");
+      })
+      .catch(error => {
+        console.error(error);
       });
   }, []);
 

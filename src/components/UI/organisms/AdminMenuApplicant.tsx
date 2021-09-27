@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { toJS } from "mobx";
 import { observer } from "mobx-react";
-import adminMainMenu from "../../../assets/data/adminMainMenu";
+
 import theme from "../../../styles/theme";
 import AdminApplicantStore from "../../../stores/AdminApplicantStore";
-import { AdminRecentApplicant } from "../../../models/adminMainMenu";
+import { AdminRecentApplicant1 } from "../../../models/adminMainMenu";
 
 const AdminNav = styled.ul`
   font-size: 18px;
@@ -54,10 +54,12 @@ const TitleWrap = styled.div`
   position: relative;
 `;
 
-const Title = styled.div`
-  font-size: 12px;
-  color: ${theme.color.grey2};
-  font-weight: 400;
+const Title1 = styled.div`
+  color: ${theme.color.mainDeep};
+  margin-left: 258px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
 `;
 
 const Name = styled.div`
@@ -131,37 +133,38 @@ const AdminMenuApplicant = observer((): JSX.Element => {
           <NavButton onClick={gotodetail}>전체보기</NavButton>
         </AdminNav>
       )}
-      {toJS(ApplicantList).map((data: AdminRecentApplicant) => {
-        return (
-          <Applicant
-            key={data.created_at}
-            to={`/admin/applicant/${Number(data.recruit_id)}`}
-          >
-            <TitleWrap>
-              {pathname === "/admin/current" && (
-                <Title>{data.position_title} 채용</Title>
-              )}
-              <NameWrap>
-                <Name>{data.content.basicInfo.userName}</Name>
-                {data.new ? null : (
-                  <Label2>
-                    <span>new</span>
-                  </Label2>
+      {toJS(ApplicantList)
+        .slice(0, 4)
+        .map((data: AdminRecentApplicant1) => {
+          return (
+            <Applicant
+              key={data.created_at}
+              to={`/admin/applicant/${data.application_id}`}
+            >
+              <TitleWrap>
+                {pathname === "/admin/current" && (
+                  <Title1>{data.position_title} 채용</Title1>
                 )}
-              </NameWrap>
-            </TitleWrap>
-            <ContentWrap>
-              <Career>
-                4년 2개월 <span>|</span> {data.deadline}
-              </Career>
-              <Email>
-                {data.content.basicInfo.email} <span>|</span>{" "}
-                {data.content.basicInfo.phoneNumber}
-              </Email>
-            </ContentWrap>
-          </Applicant>
-        );
-      })}
+                <NameWrap>
+                  <Name>{data.user_name}</Name>
+                  {data.log ? null : (
+                    <Label2>
+                      <span>new</span>
+                    </Label2>
+                  )}
+                </NameWrap>
+              </TitleWrap>
+              <ContentWrap>
+                <Career>
+                  4년 2개월 <span>|</span> {data.created_at.substr(0, 10)}
+                </Career>
+                <Email>
+                  {data.user_email} <span>|</span> {data.user_phoneNumber}
+                </Email>
+              </ContentWrap>
+            </Applicant>
+          );
+        })}
     </>
   );
 });

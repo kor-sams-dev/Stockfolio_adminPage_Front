@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Heading3 from "../UI/atoms/texts/Heading3";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
-import { SignIn } from "../../config";
+import { AdminLogIn } from "../../config";
 
 import theme from "../../styles/theme";
 
@@ -80,7 +80,7 @@ const AdminLogin = observer((): JSX.Element => {
   };
 
   const fetchLogin = () => {
-    return fetch("http://10.58.1.177:8000/users/signin", {
+    return fetch(AdminLogIn, {
       method: "POST",
       body: JSON.stringify({
         email: userInput.email,
@@ -90,15 +90,41 @@ const AdminLogin = observer((): JSX.Element => {
       .then(res => res.json())
       .then(data => {
         if (data.access_token) {
-          sessionStorage.setItem("TOKEN", data.access_token);
+          sessionStorage.setItem("access_token", data.access_token);
           sessionStorage.setItem("username", data.user_name);
+          sessionStorage.setItem("user_role", data.user_role);
           GoToMain();
         } else {
           alert(
             "아이디와 비밀번호를 확인해주세요!\n기타사항은 관리자에게 문의하세요"
           );
         }
+      })
+      .catch(error => {
+        console.error(error);
       });
+  };
+
+  const checkValidation = () => {
+    const EMAIL_VALID_REGEX =
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    const PW_VALID_REGEX =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,\-./:;<=>?@\\[＼\]^_`{|}~\\])[A-Za-z\d!"#$%&'()*+,\-./:;<=>?@\\[＼\]^_`{|}~\\]{8,32}$/;
+
+    const emailValid = EMAIL_VALID_REGEX.test(userInput.email);
+    const pwValid = PW_VALID_REGEX.test(userInput.password);
+
+    return emailValid && pwValid;
+  };
+
+  const handleSubmit = () => {
+    const isValid = checkValidation();
+
+    if (isValid) {
+      fetchLogin();
+    } else {
+      alert("형식을 체크해주세요");
+    }
   };
 
   return (
@@ -137,7 +163,7 @@ const AdminLogin = observer((): JSX.Element => {
         fontSize={14}
         fontColor={theme.color.white}
         fontWeight={700}
-        onClick={fetchLogin}
+        onClick={handleSubmit}
       >
         로그인
       </ConfirmBtn>

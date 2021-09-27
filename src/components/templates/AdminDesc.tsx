@@ -76,7 +76,7 @@ const AdminDesc = observer((): any => {
   const { ApplyMenuStore } = RootStore();
   const { viewContent, setSelectedContent } = ApplyMenuStore;
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
   return (
     <>
       <DescWrapper>

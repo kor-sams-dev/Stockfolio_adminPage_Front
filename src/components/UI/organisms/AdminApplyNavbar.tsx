@@ -73,9 +73,6 @@ const AdminApplyNavbar = observer((): JSX.Element => {
         admintotalContent.filter(setDepartment)
       );
     }
-    // 배열의 포지션이 click 인것만 반환
-    // console.log(ApplyMenuStore.setViewContent);
-    // console.log(admintotalContent.filter(setDepartment));
   }, [AdminApplyMenuStore.adminclicked]);
 
   return (

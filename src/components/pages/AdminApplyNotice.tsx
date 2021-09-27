@@ -4,12 +4,13 @@ import React, { useEffect } from "react";
 import theme from "../../styles/theme";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import Inner from "../../styles/Inner";
-import { Recruits } from "../../config";
+import { AdminRecruitList } from "../../config";
 import RootStore from "../../stores/RootStore";
 import AdminApplyNavbar from "../UI/organisms/AdminApplyNavbar";
 
 import AdminNotice from "../UI/organisms/AdminNotice";
-import { ApplyMenuStore } from "../../stores/ApplyMenuStore";
+
+import requestHeaders from "../../utils/getToken";
 
 const AdminBox = styled.section`
   position: sticky;
@@ -34,27 +35,19 @@ const AdminApplyNotice = observer((): JSX.Element => {
   const { setClickedAdmin, setViewContentAdmin, setTotalContentAdmin } =
     AdminApplyMenuStore;
 
-  const requestHeaders: HeadersInit = new Headers();
-
-  requestHeaders.set("Content-Type", "application/json");
-  requestHeaders.set(
-    "Authorization",
-    sessionStorage
-      ?.getItem("TOKEN")
-      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
-  );
-
   useEffect(() => {
-    fetch("http://192.168.35.101:8000/recruits/admin", {
+    fetch(AdminRecruitList, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
         setTotalContentAdmin(data.results);
-        // setViewContent(data.results.slice(0, 2));
         setViewContentAdmin(data.results);
         setClickedAdmin("전체");
+      })
+      .catch(error => {
+        console.error(error);
       });
   }, []);
 

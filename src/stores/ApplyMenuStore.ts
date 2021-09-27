@@ -9,6 +9,8 @@ export const SelectedContent: MenuProps = observable({
   work_type: "",
   deadline: "",
   description: "",
+  num_applicants: 1,
+  author_name: "",
 });
 
 export const ApplyMenuStore = observable({
@@ -30,6 +32,8 @@ export const ApplyMenuStore = observable({
     SelectedContent.work_type = data.work_type;
     SelectedContent.deadline = data.deadline;
     SelectedContent.description = data.description;
+    SelectedContent.num_applicants = data.num_applicants;
+    SelectedContent.author_name = data.author_name;
   }),
   setTotalContent: action((data: any) => {
     ApplyMenuStore.totalContent = data;
