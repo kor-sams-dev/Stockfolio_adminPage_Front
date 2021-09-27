@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Heading3 from "../UI/atoms/texts/Heading3";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
-import { SignIn } from "../../config";
+import { LoginAdmin } from "../../config";
 
 import theme from "../../styles/theme";
 
@@ -80,7 +80,7 @@ const AdminLogin = observer((): JSX.Element => {
   };
 
   const fetchLogin = () => {
-    return fetch("http://10.58.1.177:8000/users/signin", {
+    return fetch(`${LoginAdmin}`, {
       method: "POST",
       body: JSON.stringify({
         email: userInput.email,

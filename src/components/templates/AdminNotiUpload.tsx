@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
 import { observer } from "mobx-react";
+import { useHistory } from "react-router-dom";
+import requestHeaders from "../../utils/getToken";
+
 import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import AdminInput from "../UI/atoms/inputs/AdminInput";
@@ -11,6 +13,11 @@ import AdminBtn from "../UI/atoms/buttons/AdminBtn";
 
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
+import { TEST_URL } from "../../config";
+import {
+  DropdownStore,
+  selectNotificationData,
+} from "../../stores/AdminNotificationStore";
 
 const Box = styled.section`
   position: sticky;
@@ -23,7 +30,7 @@ const Box = styled.section`
   overflow-y: scroll;
   background: ${theme.color.white};
   padding-top: 100px;
-  
+
   ul {
     li {
       list-style: inside;
@@ -70,6 +77,31 @@ const SubmitBtn = styled.button`
 `;
 
 const AdminNotiUpload = observer((): JSX.Element => {
+  const history = useHistory();
+  const { setDescription } = DropdownStore;
+  const addNoti = () => {
+    fetch(`${TEST_URL}/recruits/admin`, {
+      method: "POST",
+      headers: requestHeaders,
+      body: JSON.stringify(selectNotificationData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("결과", data);
+        if (data.message === "SUCCESS") {
+          alert("공고 등록이 완료되었습니다.");
+          history.push("/admin/notification");
+        } else {
+          alert("공고 내용을 확인해주세요.");
+        }
+      });
+  };
+
+  const { setTitle } = DropdownStore;
+  const writeTitle = (e: any) => {
+    setTitle(e.target.value);
+  };
+
   return (
     <Box>
       <Inner size="wide">
@@ -78,7 +110,10 @@ const AdminNotiUpload = observer((): JSX.Element => {
             새로운 공고 올리기
           </Heading2>
         </HeaderWrap>
-        <AdminInput item={AdminDataForm.notificationInput.item[0]} />
+        <AdminInput
+          item={AdminDataForm.notificationInput.item[0]}
+          onChange={writeTitle}
+        />
         <DropdownSection>
           {AdminDataForm.NotificationUploadDropdown.data.map(item => {
             return <AdminBtn item={item} key={item.id} />;
@@ -143,6 +178,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
           }}
           onChange={(event: any, editor: any) => {
             const data = editor.getData();
+            setDescription(data);
           }}
           onInit={(editor: any) => {
             editor.editing.view.change((writer: any) => {
@@ -155,7 +191,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
           }}
         />
         <BtnWrap>
-          <SubmitBtn>올리기</SubmitBtn>
+          <SubmitBtn onClick={addNoti}>올리기</SubmitBtn>
         </BtnWrap>
       </Inner>
     </Box>

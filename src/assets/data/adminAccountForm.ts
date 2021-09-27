@@ -3,22 +3,22 @@ const AdminDataForm = {
     item: [
       {
         id: 0,
-        name: "이름",
-        title: "username",
+        name: "username",
+        title: "이름",
         placeholder: "이름",
         itemWidth: 120,
       },
       {
         id: 1,
-        name: "아이디",
-        title: "email",
+        name: "email",
+        title: "아이디",
         placeholder: "아이디",
         itemWidth: 240,
       },
       {
         id: 2,
-        name: "비밀번호",
-        title: "password",
+        name: "password",
+        title: "비밀번호",
         placeholder: "비밀번호",
         itemWidth: 240,
       },
@@ -32,8 +32,8 @@ const AdminDataForm = {
     item: [
       {
         id: 0,
-        title: "title",
-        name: "제목",
+        title: "제목",
+        name: "position_title",
         placeholder: "제목",
         itemWidth: 980,
       },
@@ -41,12 +41,25 @@ const AdminDataForm = {
   },
   NotificationUploadDropdown: {
     data: [
-      { id: 0, title: "경력", itemWidth: 124, list: ["신입", "경력 ", "인턴"] },
-      { id: 1, title: "형태", itemWidth: 148, list: ["정규직", "계약직"] },
-      { id: 2, title: "마감일", itemWidth: 180, list: [] },
+      {
+        id: 0,
+        title: "경력 ",
+        name: "career_type",
+        itemWidth: 124,
+        list: ["신입", "경력", "인턴"],
+      },
+      {
+        id: 1,
+        title: "형태",
+        name: "work_type",
+        itemWidth: 148,
+        list: ["정규직", "계약직"],
+      },
+      { id: 2, title: "마감일", name: "deadline", itemWidth: 180, list: [] },
       {
         id: 3,
         title: "직종",
+        name: "position",
         itemWidth: 192,
         list: [
           "개발",
