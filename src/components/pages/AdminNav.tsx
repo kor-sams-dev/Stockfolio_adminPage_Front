@@ -98,6 +98,8 @@ function AdminNav(): JSX.Element {
   };
 
   const username = sessionStorage.getItem("username");
+  const userrole = sessionStorage.getItem("role");
+
   return (
     <NavHeader>
       <Inner size="wide">
@@ -114,9 +116,9 @@ function AdminNav(): JSX.Element {
               홈
             </NavMenu>
             <NavMenu
-              to="/admin/apply"
+              to="/admin/applynotice"
               isActive={
-                pathname === "/admin/apply" ||
+                pathname === "/admin/applynotice" ||
                 pathname === "/admin/applicant/:id"
               }
             >
@@ -139,7 +141,9 @@ function AdminNav(): JSX.Element {
             </NavMenu>
           </NavMenuList>
           <NavMenuList>
-            <NavName>{username}님🦄</NavName>
+            <NavName>
+              {username}님{userrole === "superadmin" && "🦄"}
+            </NavName>
             {sessionStorage.getItem("TOKEN") ? (
               <NavLogin onClick={Logout}>로그아웃</NavLogin>
             ) : (

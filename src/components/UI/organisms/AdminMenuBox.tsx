@@ -4,6 +4,8 @@ import { observer } from "mobx-react";
 import theme from "../../../styles/theme";
 
 import AdminMenuboxStore from "../../../stores/AdminMenuboxStore";
+import requestHeaders from "../../../utils/getToken";
+import { Dashboard } from "../../../config";
 
 const Admin = styled.div`
   display: flex;
@@ -38,24 +40,18 @@ const NumberSpan = styled.div`
 
 const AdminMenuBox = observer((): JSX.Element => {
   const { setMenu } = AdminMenuboxStore;
-  const requestHeaders: HeadersInit = new Headers();
-
-  requestHeaders.set("Content-Type", "application/json");
-  requestHeaders.set(
-    "Authorization",
-    sessionStorage
-      ?.getItem("login")
-      ?.slice(0, sessionStorage.getItem("login")!.length) || "no token"
-  );
 
   useEffect(() => {
-    fetch("http://10.58.1.177:8000/recruits/admin/dashboard", {
+    fetch(Dashboard, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
         setMenu(data.results);
+      })
+      .catch(error => {
+        console.error(error);
       });
   }, []);
 

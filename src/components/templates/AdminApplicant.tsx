@@ -62,6 +62,15 @@ const AdminApplicant = observer((): JSX.Element => {
       .then(data => {
         setApplicantData(data.results);
       });
+
+    fetch(`${Applicant}/${applicantId}`, {
+      method: "GET",
+      headers: requestHeaders,
+    })
+      .then(res => res.json())
+      .then(data => {
+        setApplicantData(data.results);
+      });
   }, []);
 
   const TitleData = applicantData;

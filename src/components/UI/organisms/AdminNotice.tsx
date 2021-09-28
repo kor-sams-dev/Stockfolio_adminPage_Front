@@ -98,20 +98,23 @@ const AdminNotice = observer((): JSX.Element => {
     history.push("/admin/applynotice");
   };
 
-  const gotoapplicant = (e: React.MouseEvent<HTMLButtonElement>) => {
-    history.push("/admin/applicantlist");
-    e.stopPropagation();
-  };
+  const { AdminApplyMenuStore } = RootStore();
 
-  const { SelectedContent, AdminApplyMenuStore } = RootStore();
-
-  const { adminviewContent, setSelectedContentAdmin, admintotalContent } =
-    AdminApplyMenuStore;
+  const { adminviewContent, setSelectedContentAdmin } = AdminApplyMenuStore;
 
   const GoToDetail = (data: MenuApplyProps) => {
     setSelectedContentAdmin(data);
-
     return history.push(`/admin/apply/${data.id}`);
+  };
+
+  const gotoapplicant = (data: MenuApplyProps) => {
+    setSelectedContentAdmin(data);
+
+    return history.push(`/admin/applicantlist/${data.id}`);
+  };
+
+  const eventstop = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
   };
 
   return (
@@ -138,13 +141,19 @@ const AdminNotice = observer((): JSX.Element => {
               <Career>
                 {li.work_type} <span>|</span> {li.deadline} 마감
               </Career>
-              {li.id === 4 ? (
-                <ListButton isActive={li.id === 4} disabled>
-                  지원자리스트({li.id})
+              {li.recruit_application === 0 ? (
+                <ListButton isActive={li.recruit_application === 0} disabled>
+                  지원자리스트({li.recruit_application})
                 </ListButton>
               ) : (
-                <ListButton isActive={li.id === 4} onClick={gotoapplicant}>
-                  지원자리스트({li.id})
+                <ListButton
+                  isActive={li.recruit_application === 0}
+                  onClick={e => {
+                    gotoapplicant(li);
+                    eventstop(e);
+                  }}
+                >
+                  지원자리스트({li.recruit_application})
                 </ListButton>
               )}
             </PaddingBox>

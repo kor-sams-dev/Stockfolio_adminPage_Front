@@ -6,6 +6,8 @@ interface MenuProps {
   work_type: string;
   deadline: string;
   description: string;
+  num_applicants: number;
+  author: string;
 }
 
 interface MenuApplyProps {

@@ -45,6 +45,7 @@ const AdminNavbar = [
   "/admin/applynotice",
   "/admin",
   "/admin/applicantlist",
+  "/admin/applicantlist/:id",
 ];
 
 function App(): JSX.Element {
@@ -83,6 +84,11 @@ function App(): JSX.Element {
         <Route
           exact
           path="/admin/applicantlist"
+          component={AdminApplicantList}
+        />
+        <Route
+          exact
+          path="/admin/applicantlist/:id"
           component={AdminApplicantList}
         />
         <Route exact path="/admin/current" component={AdminCurrent} />

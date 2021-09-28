@@ -74,15 +74,17 @@ const RecruitCard = styled(Link)`
 
 const AdminDesc = observer((): any => {
   const { ApplyMenuStore } = RootStore();
-  const { viewContent, setSelectedContent } = ApplyMenuStore;
+  const { setSelectedContent } = ApplyMenuStore;
   const location = useLocation();
-  console.log(location.pathname);
+  const { AdminApplyMenuStore } = RootStore();
+  const { adminviewContent } = AdminApplyMenuStore;
+
   return (
     <>
       <DescWrapper>
         <aside>
           <RecruitList>
-            {toJS(viewContent).map((li: MenuProps) => (
+            {toJS(adminviewContent).map((li: MenuProps) => (
               <RecruitCard
                 to={`/admin/apply/${li.id}`}
                 key={li.id}

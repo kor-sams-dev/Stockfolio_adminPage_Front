@@ -13,3 +13,9 @@ export const NotificationUrl = `${TEST_URL}/recruits`;
 export const Account = `${TEST_URL}/users/admins`;
 
 export const Applicant = `${TEST_URL}/applications`;
+
+export const AdminRecruitList = `${TEST_URL}/recruits/admin/recruit-list`;
+
+export const Dashboard = `${TEST_URL}/recruits/admin/dashboard`;
+
+export const AdminLogIn = `${TEST_URL}/users/signin`;
