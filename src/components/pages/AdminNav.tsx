@@ -92,7 +92,7 @@ function AdminNav(): JSX.Element {
     history.push("/login");
   };
   const Logout = () => {
-    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("TOKEN");
     sessionStorage.removeItem("username");
     GotoLogin();
   };
@@ -144,7 +144,7 @@ function AdminNav(): JSX.Element {
             <NavName>
               {username}님{userrole === "superadmin" && "🦄"}
             </NavName>
-            {sessionStorage.getItem("access_token") ? (
+            {sessionStorage.getItem("TOKEN") ? (
               <NavLogin onClick={Logout}>로그아웃</NavLogin>
             ) : (
               <NavLogin onClick={GotoLogin}>로그인</NavLogin>
