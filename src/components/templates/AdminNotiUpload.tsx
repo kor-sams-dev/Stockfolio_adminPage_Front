@@ -80,7 +80,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
   const history = useHistory();
   const { setDescription } = DropdownStore;
   const addNoti = () => {
-    fetch(`${TEST_URL}/recruits/admin`, {
+    fetch(`${TEST_URL}/recruits`, {
       method: "POST",
       headers: requestHeaders,
       body: JSON.stringify(selectNotificationData),

@@ -125,6 +125,30 @@ const Sidewrap = styled.div`
     margin-left: 11px;
   }
 `;
+
+const NotiText = styled.iframe`
+  height: 500px;
+  overflow-y: visible;
+  margin-top: 40px;
+
+  p {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  li {
+    padding-top: 10px;
+    list-style: disc inside;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 0.6;
+
+    & + li {
+      padding-top: 10px;
+    }
+  }
+`;
+
 const AdminDescMain = observer((): JSX.Element => {
   const { ApplyMenuStore, SelectedContent } = RootStore();
   const { setSelectedContent } = ApplyMenuStore;
@@ -138,6 +162,8 @@ const AdminDescMain = observer((): JSX.Element => {
         setSelectedContent(data.result);
       });
   }, []);
+
+  const changeHtml = SelectedContent.description;
 
   return (
     <ApplyMain>
@@ -167,7 +193,8 @@ const AdminDescMain = observer((): JSX.Element => {
           <ModRecruitBtn>지원자 리스트(5)</ModRecruitBtn>
         </BtnBox>
       </InfoBox>
-      <DescriptionBox>
+      <NotiText title="test" srcDoc={changeHtml} />
+      {/* <DescriptionBox>
         <Desc
           fontColor={theme.color.black}
           fontSize={14}
@@ -201,7 +228,7 @@ const AdminDescMain = observer((): JSX.Element => {
           <li>디자인 관련 학과 졸업 또는 졸업 예정자</li>
           <li>경력 1년 이상(UI/UX 경험만 인정됨)</li>
         </DescList>
-      </DescriptionBox>
+      </DescriptionBox> */}
     </ApplyMain>
   );
 });
