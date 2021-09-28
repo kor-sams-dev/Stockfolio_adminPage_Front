@@ -89,10 +89,11 @@ const AdminLogin = observer((): JSX.Element => {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         if (data.access_token) {
           sessionStorage.setItem("TOKEN", data.access_token);
           sessionStorage.setItem("username", data.user_name);
-          sessionStorage.setItem("user_role", data.user_role);
+          sessionStorage.setItem("role", data.role);
           GoToMain();
         } else {
           alert(

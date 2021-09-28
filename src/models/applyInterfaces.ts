@@ -7,7 +7,7 @@ interface MenuProps {
   deadline: string;
   description: string;
   num_applicants: number;
-  author_name: string;
+  author: string;
 }
 
 interface MenuApplyProps {

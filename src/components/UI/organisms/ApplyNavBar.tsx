@@ -141,11 +141,9 @@ const ApplyNavBar = observer((): JSX.Element => {
               ) : (
                 <QuantityLabel
                   quantity={
-                    ApplyMenuStore.totalContent.filter(function (
-                      el: MenuProps
-                    ) {
-                      return el.position === item;
-                    }).length
+                    ApplyMenuStore.totalContent.filter(
+                      (el: MenuProps) => el.position === item
+                    ).length
                   }
                 />
               )}

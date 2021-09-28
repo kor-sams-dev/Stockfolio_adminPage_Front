@@ -38,21 +38,21 @@ const AdminMain = observer((): JSX.Element => {
       .then(res => res.json())
       .then(data => {
         setTotalContentAdmin(data.results);
-        setViewContentAdmin(data.results.slice(0, 4));
+        setViewContentAdmin(data.results.slice(0, 5));
         setClickedAdmin("전체");
       })
       .catch(error => {
         console.error(error);
       });
 
-    fetch("http://192.168.35.4:7800/applications/admin/applicator", {
+    fetch("http://192.168.35.101:8000/applications/admin/applicator", {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
         setApplicant(data.results);
-        console.log(data);
+        console.log(data.results);
       })
       .catch(error => {
         console.error(error);

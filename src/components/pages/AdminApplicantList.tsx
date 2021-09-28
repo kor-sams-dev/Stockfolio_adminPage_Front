@@ -122,11 +122,11 @@ const AdminApplicantList = observer((): JSX.Element => {
     user_phoneNumber: "",
     career_type: [""],
     position_title: [""],
-    new: true,
+    log: true,
   });
 
   useEffect(() => {
-    fetch(`http://192.168.35.4:7800/applications/admin/${params.id}`, {
+    fetch(`http://192.168.35.101:8000/applications/admin/${params.id}`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -134,7 +134,6 @@ const AdminApplicantList = observer((): JSX.Element => {
       .then(data => {
         setapplicantlist(data.results);
         setfristapplicant(data.results[0]);
-        console.log(data.results);
       })
       .catch(error => {
         console.error(error);
@@ -175,7 +174,9 @@ const AdminApplicantList = observer((): JSX.Element => {
               </TitleWrap>
               <ContentWrap>
                 <Career>
-                  4년 2개월 <span>|</span> {data.created_at.substr(0, 10)}
+                  {data.career_type}&nbsp;
+                  {data.career_date === "경력 없음" ? null : data.career_date}
+                  <span>|</span> {data.created_at.substr(0, 10)}
                 </Career>
                 <Email>
                   {data.user_email} <span>|</span> {data.user_phoneNumber}

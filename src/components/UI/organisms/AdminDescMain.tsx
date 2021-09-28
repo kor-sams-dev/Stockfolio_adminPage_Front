@@ -73,10 +73,11 @@ const ModRecruitBtn = styled.button`
   border: 1px solid ${theme.color.grey1};
   border-radius: 8px;
   background-color: ${theme.color.white};
-  color: ${theme.color.descDark};
+  color: ${props =>
+    props.isActive ? `${theme.color.lilac}` : `${theme.color.black}`};
   font-size: 14px;
   font-weight: 700;
-  cursor: pointer;
+  cursor: ${props => (props.isActive ? "auto" : "pointer")};
 `;
 
 const DescriptionBox = styled.div`
@@ -133,7 +134,7 @@ const AdminDescMain = observer((): JSX.Element => {
   const history = useHistory();
 
   const deleteNotice = () => {
-    fetch(`http://192.168.35.4:7800/recruits/${params.id}`, {
+    fetch(`http://192.168.35.4:8000/recruits/${params.id}`, {
       method: "DELETE",
       headers: requestHeaders,
     }).then(res => res.json());
@@ -148,6 +149,10 @@ const AdminDescMain = observer((): JSX.Element => {
     }
   };
 
+  const applicantmove = () => {
+    history.push(`/admin/applicantlist/${params.id}`);
+  };
+
   useEffect(() => {
     fetch(`http://192.168.35.4:8000/recruits/${params.id}`, {
       method: "GET",
@@ -156,7 +161,6 @@ const AdminDescMain = observer((): JSX.Element => {
       .then(res => res.json())
       .then(data => {
         setSelectedContent(data.result);
-        console.log(data.result);
       })
       .catch(error => {
         console.error(error);
@@ -170,7 +174,7 @@ const AdminDescMain = observer((): JSX.Element => {
         <Sidewrap>
           <Sidebutton>수정</Sidebutton>
           <Sidebutton onClick={onRemove}>삭제</Sidebutton>
-          <span>게시자 : {SelectedContent.author_name}</span>
+          <span>게시자 : {SelectedContent.author}</span>
         </Sidewrap>
       </Wrap>
       <InfoBox>
@@ -188,9 +192,21 @@ const AdminDescMain = observer((): JSX.Element => {
           </DeadlineWrapper>
         </HeadBox>
         <BtnBox>
-          <ModRecruitBtn>
-            지원자 리스트({SelectedContent.num_applicants})
-          </ModRecruitBtn>
+          {SelectedContent.num_applicants === 0 ? (
+            <ModRecruitBtn
+              isActive={SelectedContent.num_applicants === 0}
+              disabled
+            >
+              지원자 리스트({SelectedContent.num_applicants})
+            </ModRecruitBtn>
+          ) : (
+            <ModRecruitBtn
+              isActive={SelectedContent.num_applicants === 0}
+              onClick={applicantmove}
+            >
+              지원자 리스트({SelectedContent.num_applicants})
+            </ModRecruitBtn>
+          )}
         </BtnBox>
       </InfoBox>
       <DescriptionBox>

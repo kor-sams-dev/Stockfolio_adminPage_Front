@@ -47,6 +47,8 @@ export interface AdminRecentApplicant1 {
   user_email: string;
   user_phoneNumber: string;
   position_title: string[];
-  career_type: string[];
+  career_type: string[] | string;
   log: boolean;
+  career_date: string;
+  career: string;
 }

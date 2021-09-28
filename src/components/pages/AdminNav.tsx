@@ -98,7 +98,7 @@ function AdminNav(): JSX.Element {
   };
 
   const username = sessionStorage.getItem("username");
-  const userrole = sessionStorage.getItem("user_role");
+  const userrole = sessionStorage.getItem("role");
 
   return (
     <NavHeader>

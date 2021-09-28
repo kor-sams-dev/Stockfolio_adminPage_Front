@@ -134,7 +134,7 @@ const AdminMenuApplicant = observer((): JSX.Element => {
         </AdminNav>
       )}
       {toJS(ApplicantList)
-        .slice(0, 4)
+        .slice(0, 5)
         .map((data: AdminRecentApplicant1) => {
           return (
             <Applicant
@@ -156,7 +156,9 @@ const AdminMenuApplicant = observer((): JSX.Element => {
               </TitleWrap>
               <ContentWrap>
                 <Career>
-                  4년 2개월 <span>|</span> {data.created_at.substr(0, 10)}
+                  {data.career_type}&nbsp;
+                  {data.career_date === "경력 없음" ? null : data.career_date}
+                  <span>|</span> {data.created_at.substr(0, 10)}
                 </Career>
                 <Email>
                   {data.user_email} <span>|</span> {data.user_phoneNumber}
