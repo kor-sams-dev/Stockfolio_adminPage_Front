@@ -5,6 +5,7 @@ import { observer } from "mobx-react";
 import Heading4 from "../texts/Heading4";
 import theme from "../../../../styles/theme";
 import { IAccountItem } from "../../../../models/AdminAccountInterface";
+import { selectNotificationData } from "../../../../stores/AdminNotificationStore";
 
 const InputWrap = styled.div`
   margin-top: 60px;
@@ -31,14 +32,15 @@ const AdminInput = observer(
     return (
       <InputWrap>
         <Heading4 fontWeight={500} fontSize={14}>
-          {item.name}
+          {item.title}
         </Heading4>
         <InputForm
-          name={item.title}
+          name={item.name}
           placeholder={item.placeholder}
           width={item.itemWidth}
           onChange={onChange}
           type="text"
+          value={selectNotificationData.position_title}
         />
       </InputWrap>
     );

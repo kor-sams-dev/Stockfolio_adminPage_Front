@@ -11,7 +11,7 @@ import requestHeaders from "../../../utils/getToken";
 
 const EvaluationWrap = styled.div`
   margin-top: 10px;
-  padding: 16px 20px;
+  padding: 16px 15px;
   border-radius: 8px;
   box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
 `;

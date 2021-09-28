@@ -131,6 +131,7 @@ const AdminDescMain = observer((): JSX.Element => {
   const { setSelectedContent } = ApplyMenuStore;
   const params: IDProp = useParams();
   const history = useHistory();
+
   const deleteNotice = () => {
     fetch(`http://192.168.35.4:7800/recruits/${params.id}`, {
       method: "DELETE",
