@@ -105,7 +105,12 @@ const ApplicantCommentList = observer(
             </TitleText>
             <AdminWrap>
               <TextWrap>
-                <EditComment onClick={handleEditComment}>수정하기</EditComment>
+                <EditComment
+                  onClick={handleEditComment}
+                  hidden={sessionStorage.username !== item.admin_name}
+                >
+                  수정하기
+                </EditComment>
                 <AdminAccount>{item.admin_name}</AdminAccount>
               </TextWrap>
               <TimeDate>
