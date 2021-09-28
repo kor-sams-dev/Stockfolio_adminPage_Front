@@ -4,11 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Heading3 from "../UI/atoms/texts/Heading3";
 import SquareBtn from "../UI/atoms/buttons/SquareBtn";
-<<<<<<< HEAD
-import { AdminLogIn } from "../../config";
-=======
 import { LoginAdmin } from "../../config";
->>>>>>> develop
 
 import theme from "../../styles/theme";
 
@@ -84,11 +80,7 @@ const AdminLogin = observer((): JSX.Element => {
   };
 
   const fetchLogin = () => {
-<<<<<<< HEAD
-    return fetch(AdminLogIn, {
-=======
     return fetch(`${LoginAdmin}`, {
->>>>>>> develop
       method: "POST",
       body: JSON.stringify({
         email: userInput.email,
