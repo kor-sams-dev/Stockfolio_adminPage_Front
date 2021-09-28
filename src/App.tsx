@@ -40,6 +40,7 @@ const AdminNavbar = [
   "/admin/notification",
   "/admin/notification/write",
   "/admin/applicant",
+  "/admin/applicant/:id",
   "/admin/current",
   "/admin/applynotice",
   "/admin",
