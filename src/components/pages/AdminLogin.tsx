@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Heading3 from "../UI/atoms/texts/Heading3";
-import SquareBtn from "../UI/atoms/buttons/SquareBtn";
-import { LoginAdmin } from "../../config";
 
 import theme from "../../styles/theme";
+
+import { LoginAdmin } from "../../config";
+
+import Heading3 from "../UI/atoms/texts/Heading3";
+import SquareBtn from "../UI/atoms/buttons/SquareBtn";
 
 const Container = styled.div`
   display: flex;
@@ -25,11 +27,11 @@ const Logobox = styled.div`
 `;
 
 const ConfirmBtn = styled(SquareBtn)`
+  margin-top: 100px;
   height: 54px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 100px;
 `;
 
 const InputInfo = styled.input`
@@ -42,9 +44,9 @@ const InputInfo = styled.input`
   background-color: ${theme.color.greyLight1};
 
   ::placeholder {
-    color: ${theme.color.grey1};
     font-size: 14px;
     font-weight: 400;
+    color: ${theme.color.grey1};
   }
 `;
 
@@ -55,10 +57,10 @@ const InputBox = styled.div`
 `;
 
 const Heading = styled.div`
-  color: ${theme.color.black};
+  margin-bottom: 64px;
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 64px;
+  color: ${theme.color.black};
 `;
 
 const InputBox1 = styled.div`
@@ -89,7 +91,6 @@ const AdminLogin = observer((): JSX.Element => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.access_token) {
           sessionStorage.setItem("TOKEN", data.access_token);
           sessionStorage.setItem("username", data.user_name);

@@ -3,15 +3,16 @@ import styled from "styled-components";
 import { observer } from "mobx-react";
 
 import Inner from "../../styles/Inner";
-import Heading2 from "../UI/atoms/texts/Heading2";
-import AdminInput from "../UI/atoms/inputs/AdminInput";
-import AdminAccountList from "../UI/organisms/AdminAccountList";
-
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
+
 import { IAccountItem } from "../../models/AdminAccountInterface";
 import { Account } from "../../config";
 import requestHeaders from "../../utils/getToken";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
+import AdminInput from "../UI/atoms/inputs/AdminInput";
+import AdminAccountList from "../UI/organisms/AdminAccountList";
 
 const Box = styled.section`
   position: sticky;
@@ -19,11 +20,11 @@ const Box = styled.section`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding-top: 110px;
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
   background: ${theme.color.white};
-  padding-top: 110px;
 `;
 
 const InputWrap = styled.div`
@@ -33,15 +34,15 @@ const InputWrap = styled.div`
 `;
 
 const AddAccountBtn = styled.button`
-  background-color: ${theme.color.mainDeep};
   position: relative;
   bottom: 0;
   right: 0;
   padding: 16px 55px;
-  border-radius: 8px;
-  color: white;
   margin-top: 90px;
   margin-left: 10px;
+  background-color: ${theme.color.mainDeep};
+  border-radius: 8px;
+  color: white;
   cursor: pointer;
 `;
 
@@ -52,10 +53,10 @@ const AdminWrap = styled.section`
 `;
 
 const Sort = styled.div`
-  width: 100%;
-  padding-left: 30px;
   display: grid;
   grid-template-columns: 200px 200px 200px auto;
+  padding-left: 30px;
+  width: 100%;
 `;
 
 const SortTitle = styled.span`
@@ -78,11 +79,7 @@ const AdminAccount = observer((): JSX.Element => {
   };
 
   const AddAcount = () => {
-    if (
-      accountInfo.username.length > 0 &&
-      accountInfo.email.length > 0 &&
-      accountInfo.password.length > 0
-    ) {
+    if (username.length > 0 && email.length > 0 && password.length > 0) {
       fetch(`${Account}`, {
         method: "POST",
         headers: requestHeaders,
@@ -90,7 +87,9 @@ const AdminAccount = observer((): JSX.Element => {
       })
         .then(res => res.json())
         .then(data => {
-          setAccountInfo({ username: "", email: "", password: "" });
+          if (data.message === "SUCCESS") {
+            setAccountInfo({ username: "", email: "", password: "" });
+          }
         });
     } else {
       alert("빈칸 없이 작성해주세요");

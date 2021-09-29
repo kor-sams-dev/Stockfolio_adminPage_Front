@@ -23,7 +23,6 @@ const NavHeader = styled.div`
   top: 0;
   width: 100%;
   height: 80px;
-  /* background-color: ${theme.color.white}; */
   backdrop-filter: blur(5px);
   z-index: 99999;
 `;
@@ -53,13 +52,11 @@ const Link = ({ isActive, children, ...props }: ClickProps) => {
 
 const NavMenu = styled(Link)`
   margin: 0 30px;
-  /* color: ${theme.color.black}; */
   font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
   font-weight: ${props => (props.isActive ? 900 : 400)};
   color: ${props =>
     props.isActive ? `${theme.color.black}` : `${theme.color.grey1}`};
+  cursor: pointer;
 `;
 
 const NavText = styled.div`
@@ -74,8 +71,8 @@ const LogoWrap = styled.div`
 `;
 
 const NavName = styled.span`
-  font-size: 14px;
   margin-right: 39px;
+  font-size: 14px;
   color: ${theme.color.main};
 `;
 

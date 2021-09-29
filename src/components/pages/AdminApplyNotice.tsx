@@ -1,16 +1,17 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
-import React, { useEffect } from "react";
+
 import theme from "../../styles/theme";
-import Heading2 from "../UI/atoms/texts/Heading2";
 import Inner from "../../styles/Inner";
-import { AdminRecruitList } from "../../config";
+
 import RootStore from "../../stores/RootStore";
-import AdminApplyNavbar from "../UI/organisms/AdminApplyNavbar";
-
-import AdminNotice from "../UI/organisms/AdminNotice";
-
+import { AdminRecruitList } from "../../config";
 import requestHeaders from "../../utils/getToken";
+
+import AdminApplyNavbar from "../UI/organisms/AdminApplyNavbar";
+import Heading2 from "../UI/atoms/texts/Heading2";
+import AdminNotice from "../UI/organisms/AdminNotice";
 
 const AdminBox = styled.section`
   position: sticky;

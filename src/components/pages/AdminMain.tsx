@@ -1,16 +1,18 @@
-import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { observer } from "mobx-react";
+
 import theme from "../../styles/theme";
 import Inner from "../../styles/Inner";
-import { AdminRecruitList } from "../../config";
+
 import RootStore from "../../stores/RootStore";
+import AdminApplicantStore from "../../stores/AdminApplicantStore";
+import requestHeaders from "../../utils/getToken";
+import { AdminRecruitList, ApplicantApi } from "../../config";
 
 import AdminMenuBox from "../UI/organisms/AdminMenuBox";
 import AdminNotice from "../UI/organisms/AdminNotice";
 import AdminMenuApplicant from "../UI/organisms/AdminMenuApplicant";
-import AdminApplicantStore from "../../stores/AdminApplicantStore";
-import requestHeaders from "../../utils/getToken";
 
 const Box = styled.section`
   position: sticky;
@@ -45,7 +47,7 @@ const AdminMain = observer((): JSX.Element => {
         console.error(error);
       });
 
-    fetch("http://192.168.35.101:8000/applications/admin/applicator", {
+    fetch(`${ApplicantApi}/admin/applicator`, {
       method: "GET",
       headers: requestHeaders,
     })

@@ -3,19 +3,19 @@ import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
 
-import Heading2 from "../atoms/texts/Heading2";
-import Label from "../atoms/Labels/Label";
-import Desc from "../atoms/texts/Desc";
 import theme from "../../../styles/theme";
 
 import RootStore from "../../../stores/RootStore";
 import { IDProp } from "../../../models/applyInterfaces";
 import requestHeaders from "../../../utils/getToken";
+import { NotificationUrl } from "../../../config";
+
+import Heading2 from "../atoms/texts/Heading2";
+import Label from "../atoms/Labels/Label";
 
 const ApplyMain = styled.section`
   display: flex;
   justify-content: flex-start;
-  /* align-items: flex-start; */
   flex-direction: column;
   margin: 0 0 80px 40px;
   padding: 40px 32px 60px 32px;
@@ -80,31 +80,6 @@ const ModRecruitBtn = styled.button`
   cursor: ${props => (props.isActive ? "auto" : "pointer")};
 `;
 
-const DescriptionBox = styled.div`
-  padding-top: 96px;
-`;
-
-const DescList = styled.ul`
-  margin-top: 40px;
-
-  em {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  li {
-    padding-top: 10px;
-    list-style: disc inside;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 0.6;
-
-    & + li {
-      padding-top: 10px;
-    }
-  }
-`;
-
 const Sidebutton = styled.div`
   font-size: 14px;
   margin-right: 16px;
@@ -128,26 +103,9 @@ const Sidewrap = styled.div`
 `;
 
 const NotiText = styled.iframe`
-  height: 500px;
+  height: 700px;
   overflow-y: visible;
   margin-top: 40px;
-
-  p {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  li {
-    padding-top: 10px;
-    list-style: disc inside;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 0.6;
-
-    & + li {
-      padding-top: 10px;
-    }
-  }
 `;
 
 const AdminDescMain = observer((): JSX.Element => {
@@ -157,7 +115,7 @@ const AdminDescMain = observer((): JSX.Element => {
   const history = useHistory();
 
   const deleteNotice = () => {
-    fetch(`http://192.168.35.4:8000/recruits/${params.id}`, {
+    fetch(`${NotificationUrl}/${params.id}`, {
       method: "DELETE",
       headers: requestHeaders,
     }).then(res => res.json());
@@ -177,25 +135,24 @@ const AdminDescMain = observer((): JSX.Element => {
   };
 
   useEffect(() => {
-    fetch(`http://192.168.35.4:8000/recruits/${params.id}`, {
+    fetch(`${NotificationUrl}/${params.id}`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setSelectedContent(data.result);
       })
       .catch(error => {
         console.error(error);
       });
-  }, []);
-
-  const changeHtml = SelectedContent.description;
+  }, [params]);
 
   return (
     <ApplyMain>
       <Wrap>
-        <Label stance={"신입" as "경력" | "신입"} />
+        <Label stance={SelectedContent.career_type as "경력" | "신입"} />
         <Sidewrap>
           <Sidebutton>수정</Sidebutton>
           <Sidebutton onClick={onRemove}>삭제</Sidebutton>
@@ -234,42 +191,7 @@ const AdminDescMain = observer((): JSX.Element => {
           )}
         </BtnBox>
       </InfoBox>
-      <NotiText title="test" srcDoc={changeHtml} />
-      {/* <DescriptionBox>
-        <Desc
-          fontColor={theme.color.black}
-          fontSize={14}
-          fontWeight={400}
-          lineHeight={1.5}
-        >
-          {SelectedContent.description}
-        </Desc>
-        <DescList>
-          <em>담당 업무</em>
-          <li>플랫폼 디자인 전반적인 업무</li>
-          <li>앱 UI/UX 설계 및 디자인</li>
-        </DescList>
-        <DescList>
-          <em>자격 요건</em>
-          <li>구분: 경력(3년 이상)</li>
-          <li>sketch, figma, zeplin, xd 중 1개 이상 사용 경험</li>
-          <li>앱, 웹에 대한 이해도가 있는 분</li>
-          <li>앱 디자인 경험과 높은 이해도</li>
-          <li>포트폴리오 필수</li>
-          <li>디자인 관련 학과 졸업 또는 졸업 예정자</li>
-          <li>경력 1년 이상(UI/UX 경험만 인정됨)</li>
-        </DescList>
-        <DescList>
-          <em>우대 사항</em>
-          <li>구분: 경력(3년 이상)</li>
-          <li>sketch, figma, zeplin, xd 중 1개 이상 사용 경험</li>
-          <li>앱, 웹에 대한 이해도가 있는 분</li>
-          <li>앱 디자인 경험과 높은 이해도</li>
-          <li>포트폴리오 필수</li>
-          <li>디자인 관련 학과 졸업 또는 졸업 예정자</li>
-          <li>경력 1년 이상(UI/UX 경험만 인정됨)</li>
-        </DescList>
-      </DescriptionBox> */}
+      <NotiText title="test" srcDoc={SelectedContent.description} />
     </ApplyMain>
   );
 });

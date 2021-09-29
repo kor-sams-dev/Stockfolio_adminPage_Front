@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
+
 import theme from "../../../styles/theme";
 
 const TimeDate = styled.span`

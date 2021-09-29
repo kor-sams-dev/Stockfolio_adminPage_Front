@@ -22,10 +22,10 @@ const AdminBox = styled.section`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding-top: 80px;
   width: 100%;
   height: 100vh;
   background: ${theme.color.white};
-  padding-top: 80px;
 `;
 
 const NavWrap = styled.div`
@@ -56,41 +56,25 @@ const Admin = observer((): JSX.Element => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route
-          exact
-          path="/admin/applicantlist"
-          component={AdminApplicantList}
-        />
-        <Route
-          exact
-          path="/admin/applicantlist/:id"
-          component={AdminApplicantList}
-        />
-        <Route exact path="/admin/applicant" component={AdminApplicant} />
-        <Route exact path="/admin/applicant/:id" component={AdminApplicant} />
-      </Switch>
-      <AdminBox>
-        <Inner size="narrow">
-          <NavWrap>
-            <Heading2
-              fontColor={theme.color.black}
-              fontSize={24}
-              fontWeight={700}
-            >
-              공고내역
-            </Heading2>
-            <AdminApplyNavbar />
-          </NavWrap>
-          <Switch>
-            <Route exact path="/admin/apply" component={AdminDesc} />
-            <Route exact path="/admin/apply/:id" component={AdminDesc} />
-            <Route exact path="/admin/apply/:id" component={AdminDesc} />
-          </Switch>
-        </Inner>
-      </AdminBox>
-    </BrowserRouter>
+    <AdminBox>
+      <Inner size="narrow">
+        <NavWrap>
+          <Heading2
+            fontColor={theme.color.black}
+            fontSize={24}
+            fontWeight={700}
+          >
+            공고내역
+          </Heading2>
+          <AdminApplyNavbar />
+        </NavWrap>
+        <Switch>
+          <Route exact path="/admin/apply" component={AdminDesc} />
+          <Route exact path="/admin/apply/:id" component={AdminDesc} />
+          <Route exact path="/admin/apply/:id" component={AdminDesc} />
+        </Switch>
+      </Inner>
+    </AdminBox>
   );
 });
 

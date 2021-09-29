@@ -1,16 +1,17 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useLocation, useParams, Link } from "react-router-dom";
 
-import { useEffect, useState } from "react";
 import theme from "../../styles/theme";
 import Inner from "../../styles/Inner";
-import Heading2 from "../UI/atoms/texts/Heading2";
+import requestHeaders from "../../utils/getToken";
+import { ApplicantApi } from "../../config";
 
 import { AdminRecentApplicant1 } from "../../models/adminMainMenu";
-
-import requestHeaders from "../../utils/getToken";
 import { IDProp } from "../../models/applyInterfaces";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
 
 const AdminBox = styled.section`
   position: sticky;
@@ -79,8 +80,7 @@ const ContentWrap = styled.div`
 `;
 
 const Career = styled.div`
-  text-align: right; 
-  }
+  text-align: right;
 `;
 
 const Email = styled.div`
@@ -126,7 +126,7 @@ const AdminApplicantList = observer((): JSX.Element => {
   });
 
   useEffect(() => {
-    fetch(`http://192.168.35.101:8000/applications/admin/${params.id}`, {
+    fetch(`${ApplicantApi}/admin/${params.id}`, {
       method: "GET",
       headers: requestHeaders,
     })

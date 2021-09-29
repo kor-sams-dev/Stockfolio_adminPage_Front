@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
-import Inner from "../../styles/Inner";
-import Heading2 from "../UI/atoms/texts/Heading2";
-import Label from "../UI/atoms/Labels/Label";
-import requestHeaders from "../../utils/getToken";
 
+import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
-import { NotificationUrl } from "../../config";
+
+import { AdminRecruitList } from "../../config";
 import {
   INotificationList,
   notificationDataForm,
 } from "../../models/AdminNotificationInterface";
+import requestHeaders from "../../utils/getToken";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
+import Label from "../UI/atoms/Labels/Label";
 
 const Box = styled.section`
   position: sticky;
@@ -35,11 +36,11 @@ const HeaderWrap = styled.header`
 `;
 
 const NewNorificationBtn = styled.button`
-  background-color: ${theme.color.main};
   padding: 16px 35px;
+  border-radius: 10px;
+  background-color: ${theme.color.main};
   color: white;
   font-weight: bold;
-  border-radius: 10px;
   cursor: pointer;
 `;
 
@@ -99,7 +100,7 @@ const AdminNotification = observer((): JSX.Element => {
   const [notiData, setNotiData] = useState(notificationDataForm);
 
   useEffect(() => {
-    fetch(`${NotificationUrl}/admin/recruit-list`, {
+    fetch(AdminRecruitList, {
       method: "GET",
       headers: requestHeaders,
     })

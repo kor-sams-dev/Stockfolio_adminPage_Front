@@ -4,6 +4,12 @@ import { observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 
 import Inner from "../../styles/Inner";
+import theme from "../../styles/theme";
+
+import { ApplicantApi } from "../../config";
+import { applicantForm } from "../../models/AdminAccountInterface";
+import requestHeaders from "../../utils/getToken";
+
 import ApplicantTitle from "../UI/organisms/ApplicantTitle";
 import ApplicantBasicInfo from "../UI/organisms/ApplicantBasicInfo";
 import ApplicantCareer from "../UI/organisms/ApplicantCareer";
@@ -12,11 +18,6 @@ import ApplicantIntroduce from "../UI/organisms/ApplicantIntroduce";
 import ApplicantEducation from "../UI/organisms/ApplicantEducation";
 import ApplicantPortfolio from "../UI/organisms/ApplicantPortfolio";
 import ApplicantCommentBox from "../UI/organisms/ApplicantCommentBox";
-
-import theme from "../../styles/theme";
-import { Applicant } from "../../config";
-import { applicantForm } from "../../models/AdminAccountInterface";
-import requestHeaders from "../../utils/getToken";
 
 const Box = styled.section`
   display: flex;
@@ -54,7 +55,7 @@ const AdminApplicant = observer((): JSX.Element => {
 
   const [applicantData, setApplicantData] = useState(applicantForm);
   useEffect(() => {
-    fetch(`${Applicant}/${applicantId}`, {
+    fetch(`${ApplicantApi}/${applicantId}`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -63,7 +64,7 @@ const AdminApplicant = observer((): JSX.Element => {
         setApplicantData(data.results);
       });
 
-    fetch(`${Applicant}/${applicantId}`, {
+    fetch(`${ApplicantApi}/${applicantId}`, {
       method: "GET",
       headers: requestHeaders,
     })

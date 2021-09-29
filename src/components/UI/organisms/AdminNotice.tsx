@@ -1,23 +1,23 @@
 import styled from "styled-components";
-
 import { useLocation, useHistory } from "react-router-dom";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
+
 import theme from "../../../styles/theme";
 
-import Label from "../atoms/Labels/Label";
-import Heading2 from "../atoms/texts/Heading2";
 import RootStore from "../../../stores/RootStore";
 import { MenuApplyProps } from "../../../models/applyInterfaces";
 
+import Label from "../atoms/Labels/Label";
+import Heading2 from "../atoms/texts/Heading2";
+
 const AdminNav = styled.ul`
-  font-size: 18px;
-  color: ${theme.color.black};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
+  font-size: 18px;
+  color: ${theme.color.black};
 `;
 
 const ListBox = styled.div`
@@ -28,15 +28,15 @@ const ListBox = styled.div`
 
 const NavTitle = styled.div`
   font-size: 18px;
-  color: ${theme.color.black};
   font-weight: 700;
+  color: ${theme.color.black};
 `;
 
 const NavButton = styled.div`
+  margin-right: 32px;
   font-size: 13px;
   color: ${theme.color.grey2};
   cursor: pointer;
-  margin-right: 32px;
 `;
 
 const Applicant = styled.li`
@@ -44,12 +44,12 @@ const Applicant = styled.li`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 16px 0px;
+  height: 82px;
   border: none;
   background: ${theme.color.white};
   border-radius: 16px;
   cursor: pointer;
-  height: 82px;
-  margin: 16px 0px;
 
   &:hover {
     background-color: ${theme.color.greyLight1};
@@ -57,33 +57,33 @@ const Applicant = styled.li`
 `;
 
 const PaddingBox = styled.div`
-  padding-left: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 24px;
 `;
 
 const Career = styled.div`
   text-align: right;
 `;
 
-const ListButton = styled.button`
-  background-color: ${theme.color.white};
-  width: 112px;
-  height: 40px;
-  border-radius: 8px;
+const ListButton = styled.button<{ isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${theme.color.grey1};
   margin-left: 24px;
   margin-right: 32px;
   padding: 6px 0;
-  cursor: ${props => (props.isActive ? "auto" : "pointer")};
+  width: 112px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid ${theme.color.grey1};
+  background-color: ${theme.color.white};
   font-size: 12px;
   font-weight: 700;
   color: ${props =>
     props.isActive ? `${theme.color.lilac}` : `${theme.color.black}`};
+  cursor: ${props => (props.isActive ? "auto" : "pointer")};
 
   &:hover {
     background-color: ${theme.color.greyLight1};

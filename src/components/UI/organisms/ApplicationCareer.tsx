@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
-import AddListBtn from "../atoms/buttons/AddListBtn";
-import CheckBox from "../atoms/inputs/CheckBox";
-import Desc from "../atoms/texts/Desc";
-import Heading2 from "../atoms/texts/Heading2";
-
 import theme from "../../../styles/theme";
 
 import applicationForm from "../../../assets/data/applicationForm";
@@ -20,6 +15,11 @@ import {
   ICareerAttrs,
 } from "../../../models/ApplicationInterfaces";
 import RootStore from "../../../stores/RootStore";
+
+import AddListBtn from "../atoms/buttons/AddListBtn";
+import CheckBox from "../atoms/inputs/CheckBox";
+import Desc from "../atoms/texts/Desc";
+import Heading2 from "../atoms/texts/Heading2";
 
 const { CheckboxActions, CheckboxStore, ApplicationStore } = RootStore();
 

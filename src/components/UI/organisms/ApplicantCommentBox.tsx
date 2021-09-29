@@ -12,7 +12,7 @@ import EvaluationBox from "../molecules/EvaluationBox";
 import ApplicantCommentList from "./ApplicantCommentList";
 
 import requestHeaders from "../../../utils/getToken";
-import { Applicant } from "../../../config";
+import { ApplicantApi } from "../../../config";
 
 const ListAlert = styled.div`
   font-size: 14px;
@@ -30,7 +30,7 @@ const ApplicantCommentBox = observer(({ data }: IAddData): JSX.Element => {
 
   const [commentList, setCommentList] = useState(commentForm);
   useEffect(() => {
-    fetch(`${Applicant}/${applicantId}/comments`, {
+    fetch(`${ApplicantApi}/${applicantId}/comments`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -41,7 +41,7 @@ const ApplicantCommentBox = observer(({ data }: IAddData): JSX.Element => {
   }, []);
 
   const reRender = () => {
-    fetch(`${Applicant}/${applicantId}/comments`, {
+    fetch(`${ApplicantApi}/${applicantId}/comments`, {
       method: "GET",
       headers: requestHeaders,
     })

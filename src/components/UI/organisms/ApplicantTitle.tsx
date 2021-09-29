@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
-import { Recruits } from "../../../config";
-
-import Label from "../atoms/Labels/Label";
 
 import theme from "../../../styles/theme";
+
 import {
   IApplicantBasicInfo,
   IApplicantData,
 } from "../../../models/AdminAccountInterface";
+import { Recruits } from "../../../config";
+
+import Label from "../atoms/Labels/Label";
 
 const TitleWrap = styled.div`
   display: flex;

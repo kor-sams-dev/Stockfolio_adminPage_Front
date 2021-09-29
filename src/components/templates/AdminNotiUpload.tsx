@@ -4,20 +4,21 @@ import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
-import requestHeaders from "../../utils/getToken";
 
 import Inner from "../../styles/Inner";
-import Heading2 from "../UI/atoms/texts/Heading2";
-import AdminInput from "../UI/atoms/inputs/AdminInput";
-import AdminBtn from "../UI/atoms/buttons/AdminBtn";
-
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
-import { TEST_URL } from "../../config";
+
+import { NotificationUrl } from "../../config";
 import {
   DropdownStore,
   selectNotificationData,
 } from "../../stores/AdminNotificationStore";
+import requestHeaders from "../../utils/getToken";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
+import AdminInput from "../UI/atoms/inputs/AdminInput";
+import AdminBtn from "../UI/atoms/buttons/AdminBtn";
 
 const Box = styled.section`
   position: sticky;
@@ -31,19 +32,30 @@ const Box = styled.section`
   background: ${theme.color.white};
   padding-top: 100px;
 
+  h3 {
+    margin: 15px 0;
+    font-weight: 700;
+  }
+
   ul {
     li {
+      padding: 10px 0px;
       list-style: inside;
       margin-left: 10px;
-      line-height: 1.5;
+      line-height: 0.6;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 
   ol {
     li {
+      padding-top: 10px;
       list-style: decimal;
       margin-left: 30px;
       line-height: 1.5;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 `;
@@ -56,9 +68,9 @@ const HeaderWrap = styled.header`
 `;
 
 const DropdownSection = styled.section`
-  margin: 24px 0 24px 10px;
   display: flex;
   justify-content: flex-start;
+  margin: 24px 0 24px 10px;
 `;
 
 const BtnWrap = styled.div`
@@ -69,10 +81,10 @@ const BtnWrap = styled.div`
 const SubmitBtn = styled.button`
   margin: 40px 0;
   padding: 16px;
-  background-color: ${theme.color.mainDeep};
-  color: white;
   width: 312px;
   border-radius: 10px;
+  background-color: ${theme.color.mainDeep};
+  color: white;
   cursor: pointer;
 `;
 
@@ -80,7 +92,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
   const history = useHistory();
   const { setDescription } = DropdownStore;
   const addNoti = () => {
-    fetch(`${TEST_URL}/recruits`, {
+    fetch(NotificationUrl, {
       method: "POST",
       headers: requestHeaders,
       body: JSON.stringify(selectNotificationData),

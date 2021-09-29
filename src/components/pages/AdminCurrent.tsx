@@ -1,16 +1,18 @@
+import { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
 import { observer } from "mobx-react";
-import { useEffect } from "react";
-import { useLocation, useHistory, Link } from "react-router-dom";
 import { toJS } from "mobx";
-import Heading2 from "../UI/atoms/texts/Heading2";
+
 import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
 
 import AdminApplicantStore from "../../stores/AdminApplicantStore";
 import requestHeaders from "../../utils/getToken";
-
 import { AdminRecentApplicant1 } from "../../models/adminMainMenu";
+import { ApplicantApi } from "../../config";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
 
 const AdminBox = styled.section`
   position: sticky;
@@ -33,12 +35,12 @@ const Applicant = styled(Link)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border: none;
-  background: ${theme.color.white};
-  border-radius: 16px;
-  cursor: pointer;
-  height: 82px;
   margin: 16px 0px;
+  height: 82px;
+  border: none;
+  border-radius: 16px;
+  background: ${theme.color.white};
+  cursor: pointer;
 
   &:hover {
     background-color: ${theme.color.greyLight1};
@@ -46,15 +48,15 @@ const Applicant = styled(Link)`
 `;
 
 const TitleWrap = styled.div`
-  font-size: 12px;
-  margin-left: 24px;
   position: relative;
+  margin-left: 24px;
+  font-size: 12px;
 `;
 
 const Title = styled.div`
   font-size: 12px;
-  color: ${theme.color.grey2};
   font-weight: 400;
+  color: ${theme.color.grey2};
 `;
 
 const Name = styled.div`
@@ -64,10 +66,10 @@ const Name = styled.div`
 `;
 
 const ContentWrap = styled.div`
+  margin-right: 24px;
   font-size: 12px;
   font-weight: 400;
   color: ${theme.color.black};
-  margin-right: 24px;
   line-height: 20px;
   span {
     margin: 0px 8px 0px 8px;
@@ -85,15 +87,14 @@ const Email = styled.div`
 `;
 
 const Label2 = styled.div`
-  background-color: ${theme.color.red2};
-  width: 38px;
-  height: 18px;
-  border-radius: 100px;
-
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 6px 0;
+  width: 38px;
+  height: 18px;
+  border-radius: 100px;
+  background-color: ${theme.color.red2};
 
   span {
     font-size: 12px;
@@ -111,11 +112,10 @@ const AdminCurrent = observer((): JSX.Element => {
   const { setApplicant } = AdminApplicantStore;
 
   const { pathname } = useLocation();
-  const history = useHistory();
   const { ApplicantList } = AdminApplicantStore;
 
   useEffect(() => {
-    fetch("http://192.168.35.101:8000/applications/admin/applicator", {
+    fetch(`${ApplicantApi}/admin/applicator`, {
       method: "GET",
       headers: requestHeaders,
     })

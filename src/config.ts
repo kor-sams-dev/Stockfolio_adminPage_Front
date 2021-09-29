@@ -4,18 +4,16 @@ export const Recruits = `${BASE_URL}/recruits`;
 
 export const SignIn = `${BASE_URL}/users/signin`;
 
-export const TEST_URL = "http://192.168.35.4:8000";
+export const TEST_URL = "http://192.168.35.189:8000";
 
 export const LoginAdmin = `${TEST_URL}/users/signin`;
 
-export const NotificationUrl = `${TEST_URL}/recruits`;
-
 export const Account = `${TEST_URL}/users/admins`;
 
-export const Applicant = `${TEST_URL}/applications`;
+export const ApplicantApi = `${TEST_URL}/applications`;
 
-export const AdminRecruitList = `${TEST_URL}/recruits/admin/recruit-list`;
+export const NotificationUrl = `${TEST_URL}/recruits`;
 
-export const Dashboard = `${TEST_URL}/recruits/admin/dashboard`;
+export const AdminRecruitList = `${NotificationUrl}/admin/recruit-list`;
 
-export const AdminLogIn = `${TEST_URL}/users/signin`;
+export const Dashboard = `${NotificationUrl}/admin/dashboard`;

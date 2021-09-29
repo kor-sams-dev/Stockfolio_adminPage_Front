@@ -8,7 +8,7 @@ import { IApplicantListData } from "../../../models/AdminAccountInterface";
 import AdminCommentForm from "../../../assets/data/adminCommentForm";
 import EvaluationBox from "../molecules/EvaluationBox";
 
-const CommentBox = styled.div`
+const CommentBox = styled.div<{ tabIndex: number }>`
   margin-top: 10px;
   padding: 16px 20px;
   border-radius: 8px;
@@ -31,7 +31,7 @@ const CommentTitleWrap = styled.div`
   border-bottom: 1px solid ${theme.color.greyLight2};
 `;
 
-const TitleText = styled.div`
+const TitleText = styled.div<{ tabIndex: number }>`
   display: inline;
   font-size: 14px;
   font-weight: 700;
@@ -63,9 +63,9 @@ const AdminAccount = styled.span`
 `;
 
 const TimeDate = styled.span`
-  color: ${theme.color.grey2};
   font-size: 6px;
   line-height: 1.5;
+  color: ${theme.color.grey2};
 `;
 
 const TextBox = styled.div`
