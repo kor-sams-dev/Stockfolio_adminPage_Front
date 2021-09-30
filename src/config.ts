@@ -17,3 +17,5 @@ export const ApplicationsAdmin = `${Applications}/admin`;
 export const NotificationUrl = `${BASE_URL}/recruits/user`;
 
 export const Account = `${BASE_URL}/users/admins`;
+
+export const AccountAdmin = `${BASE_URL}/users/admin`;

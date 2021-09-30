@@ -5,7 +5,7 @@ import { observer } from "mobx-react";
 import theme from "../../../styles/theme";
 
 import { IAccountInfo } from "../../../models/AdminAccountInterface";
-import { Account } from "../../../config";
+import { AccountAdmin } from "../../../config";
 import requestHeaders from "../../../utils/getToken";
 
 const AccountBtn = styled.button`
@@ -81,7 +81,7 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
       textCheck.password = " ";
       setHandleEditButton(!handleEditButton);
     } else {
-      fetch(`${Account}/${list.id}`, {
+      fetch(`${AccountAdmin}/${list.id}`, {
         method: "PATCH",
         headers: requestHeaders,
         body: JSON.stringify({
@@ -105,7 +105,7 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
   };
 
   const deleteAccount = () => {
-    fetch(`${Account}/${list.id}`, {
+    fetch(`${AccountAdmin}/${list.id}`, {
       method: "DELETE",
       headers: requestHeaders,
     })
