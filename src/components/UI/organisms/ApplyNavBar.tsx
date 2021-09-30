@@ -67,7 +67,7 @@ const Sort = styled.div`
   }
 `;
 
-const SortText = styled.div`
+const SortText = styled.div<{ isActive: boolean }>`
   font-size: 14px;
   margin: 0px 16px;
   color: ${props =>

@@ -66,7 +66,7 @@ const BtnBox = styled.div`
   flex-direction: column;
 `;
 
-const ModRecruitBtn = styled.button`
+const ModRecruitBtn = styled.button<{ isActive: boolean }>`
   margin-top: 8px;
   width: 180px;
   height: 54px;

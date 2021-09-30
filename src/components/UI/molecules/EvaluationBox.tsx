@@ -33,7 +33,7 @@ const ButtonWrap = styled.div`
   margin: 12px 0px;
 `;
 
-const GoodBtn = styled.button`
+const GoodBtn = styled.button<{ isActive: number }>`
   padding: 4px 8px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
@@ -49,7 +49,7 @@ const GoodBtn = styled.button`
   }
 `;
 
-const SosoBtn = styled.button`
+const SosoBtn = styled.button<{ isActive: number }>`
   padding: 5px 7px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
@@ -65,7 +65,7 @@ const SosoBtn = styled.button`
   }
 `;
 
-const BadBtn = styled.button`
+const BadBtn = styled.button<{ isActive: number }>`
   padding: 5px 7px;
   border: 1px solid ${theme.color.greyLight2};
   border-radius: 8px;
