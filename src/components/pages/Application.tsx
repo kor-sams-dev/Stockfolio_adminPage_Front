@@ -193,8 +193,8 @@ const Application = observer(() => {
           <ApplicationCareer />
           <ApplicationProject />
           <ApplicationIntroduction />
-          <ApplicationPortfolio />
           <ApplicationEducation />
+          <ApplicationPortfolio />
         </Content>
         <BtnBox>
           <SquareBtn

@@ -8,14 +8,36 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body *{
-    color: black;
-      /* font-family: 'Noto Sans KR', sans-serif; */
-  }
+    color: black;    
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 
-   a {
+  a {
       color: inherit;
       text-decoration: none;
   }
+
+  strong {
+    font-weight: 900;
+  }
+
+  i {
+    font-style: italic;
+  }
+  
+h1 {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
 
    button {
      padding: 0;
@@ -26,10 +48,6 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     }
   }
-
-   li {
-     list-style: none;
-   }
 
    input{
     border: none;

@@ -30,10 +30,12 @@ function ApplyList(): JSX.Element {
       .then(res => res.json())
       .then(data => {
         setTotalContent(data.results);
-        setViewContent(data.results.filter(isDev));
-        setClicked("개발");
+        setViewContent(data.results);
+        // setViewContent(data.results.filter(isDev));
+        setClicked("전체");
       });
   }, []);
+
   return (
     <BrowserRouter>
       <Container>

@@ -31,23 +31,35 @@ const Text = styled.em`
 
 const HoverBox = styled.section`
   position: relative;
+  overflow: hidden;
 `;
 
 const Img = styled.img`
   filter: ${({ isActive }: EventProps) => isActive && "blur(8px)"};
-  transition: filter 1.5s ease-out;
+  transition: filter 0.3s ease-out;
+`;
+
+const NameText = styled.div`
+  position: absolute;
+  z-index: 1;
+  left: 20px;
+  bottom: 25px;
+  font-size: 15px;
+  color: white;
+  opacity: ${({ isActive }: EventProps) => isActive && 0};
+  transition: opacity 0.3s ease-out;
 `;
 
 const PlusBtn = styled.img`
   position: absolute;
-  bottom: 16px;
+  bottom: 20px;
   right: 16px;
   width: 42px;
   height: 42px;
   z-index: 1;
   cursor: pointer;
   opacity: ${({ isActive }: EventProps) => isActive && 0};
-  transition: opacity 1s ease-out;
+  transition: opacity 0.3s ease-out;
 `;
 
 const handleMouseOver = () => {
@@ -77,6 +89,7 @@ const Mission = observer(() => {
               src="./images/whoAreWe.png"
               alt="오연우 대표"
             />
+            <NameText isActive={MissionStore.isActive}>오연우 대표</NameText>
             <PlusBtn
               onMouseOver={handleMouseOver}
               onMouseOut={handleMouseOver}

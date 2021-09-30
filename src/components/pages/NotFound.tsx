@@ -9,7 +9,6 @@ const NotFound = (): JSX.Element => {
     align-items: center;
     width: 100%;
     height: calc(100vh - 177px);
-    background: ${theme.color.greyLight2};
   `;
 
   const Text = styled.span`
@@ -20,7 +19,7 @@ const NotFound = (): JSX.Element => {
 
   return (
     <Box>
-      <Text>존재하지 않는 페이지입니다</Text>
+      <Text>페이지를 불러오는 중입니다</Text>
     </Box>
   );
 };

@@ -9,12 +9,15 @@ export const SelectedContent: MenuProps = observable({
   work_type: "",
   deadline: "",
   description: "",
+  num_applicants: 1,
+  author: "",
 });
 
 export const ApplyMenuStore = observable({
-  clicked: "개발",
+  clicked: "전체",
   viewContent: [],
   totalContent: [],
+
   setClicked: action((value: string) => {
     ApplyMenuStore.clicked = value;
   }),
@@ -29,6 +32,8 @@ export const ApplyMenuStore = observable({
     SelectedContent.work_type = data.work_type;
     SelectedContent.deadline = data.deadline;
     SelectedContent.description = data.description;
+    SelectedContent.num_applicants = data.num_applicants;
+    SelectedContent.author = data.author;
   }),
   setTotalContent: action((data: any) => {
     ApplyMenuStore.totalContent = data;

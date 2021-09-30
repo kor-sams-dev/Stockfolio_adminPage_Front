@@ -23,7 +23,7 @@ const List = styled.ul`
   padding: 40px 40px 0;
   background: rgba(0, 0, 0, 0.8);
   opacity: ${({ isActive }: EventProps) => (isActive ? 1 : 0)};
-  transition: opacity 1.5s ease-out;
+  transition: opacity 0.3s ease-out;
 `;
 
 const Item = styled.li`

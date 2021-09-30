@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
-import Desc from "../atoms/texts/Desc";
-import Heading2 from "../atoms/texts/Heading2";
-import applicationForm from "../../../assets/data/applicationForm";
-import ApplicationInput from "../atoms/inputs/ApplicationInput";
-
 import theme from "../../../styles/theme";
 
 import RootStore from "../../../stores/RootStore";
 import { IBasicInfoAttrs } from "../../../models/ApplicationInterfaces";
+
+import Desc from "../atoms/texts/Desc";
+import Heading2 from "../atoms/texts/Heading2";
+import applicationForm from "../../../assets/data/applicationForm";
+import ApplicationInput from "../atoms/inputs/ApplicationInput";
 
 const { ApplicationActions, ApplicationStore } = RootStore();
 

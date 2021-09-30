@@ -38,9 +38,23 @@ const InputBox = styled.div`
   flex-wrap: wrap;
 `;
 
+const Required = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14px;
+
+  i {
+    color: ${theme.color.red};
+  }
+`;
+
 const ApplicationEducation = observer((): JSX.Element => {
   return (
     <Box>
+      <Required>
+        <i>*</i>는 필수입력사항입니다.
+      </Required>
       <HeaderBox>
         <Heading2 fontSize={18} fontWeight={700}>
           {applicationForm.education.title}

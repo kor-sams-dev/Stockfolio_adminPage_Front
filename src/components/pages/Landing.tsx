@@ -31,7 +31,7 @@ const Landing = observer(() => {
     //   _.debounce(handleScroll, 300, { trailing: false, leading: true })
     // );
     window.addEventListener("scroll", handleScroll);
-
+    window.scrollTo(0, 0);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
