@@ -141,19 +141,19 @@ const AdminNotice = observer((): JSX.Element => {
               <Career>
                 {li.work_type} <span>|</span> {li.deadline} 마감
               </Career>
-              {li.recruit_application === 0 ? (
-                <ListButton isActive={li.recruit_application === 0} disabled>
-                  지원자리스트({li.recruit_application})
+              {li.applicants_num === 0 ? (
+                <ListButton isActive={li.applicants_num === 0} disabled>
+                  지원자리스트({li.applicants_num})
                 </ListButton>
               ) : (
                 <ListButton
-                  isActive={li.recruit_application === 0}
+                  isActive={li.applicants_num === 0}
                   onClick={e => {
                     gotoapplicant(li);
                     eventstop(e);
                   }}
                 >
-                  지원자리스트({li.recruit_application})
+                  지원자리스트({li.applicants_num})
                 </ListButton>
               )}
             </PaddingBox>

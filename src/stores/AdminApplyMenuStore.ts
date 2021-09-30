@@ -9,7 +9,7 @@ export const SelectedApplyContent: MenuApplyProps = observable({
   work_type: "",
   deadline: "",
   description: "",
-  recruit_application: 1,
+  applicants_num: 1,
   idx: 1,
 });
 

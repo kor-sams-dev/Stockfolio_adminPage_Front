@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { observer } from "mobx-react";
 
 import Inner from "../../styles/Inner";
@@ -8,13 +8,11 @@ import Inner from "../../styles/Inner";
 import Heading2 from "../UI/atoms/texts/Heading2";
 import theme from "../../styles/theme";
 
-import { AdminRecruitList } from "../../config";
+import { RecruitAdmin } from "../../config";
 import AdminDesc from "../templates/AdminDesc";
 import AdminApplyNavbar from "../UI/organisms/AdminApplyNavbar";
 import requestHeaders from "../../utils/getToken";
 import RootStore from "../../stores/RootStore";
-import AdminApplicantList from "./AdminApplicantList";
-import AdminApplicant from "../templates/AdminApplicant";
 
 const AdminBox = styled.section`
   position: sticky;
@@ -40,7 +38,7 @@ const Admin = observer((): JSX.Element => {
     AdminApplyMenuStore;
 
   useEffect(() => {
-    fetch(AdminRecruitList, {
+    fetch(RecruitAdmin, {
       method: "GET",
       headers: requestHeaders,
     })

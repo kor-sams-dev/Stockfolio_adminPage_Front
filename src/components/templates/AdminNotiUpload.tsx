@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
+import AdminDefaultNotiForm from "../../assets/data/adminDefaultNotiForm";
 
 import { NotificationUrl } from "../../config";
 import {
@@ -125,6 +126,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
         <AdminInput
           item={AdminDataForm.notificationInput.item[0]}
           onChange={writeTitle}
+          value={selectNotificationData.position_title}
         />
         <DropdownSection>
           {AdminDataForm.NotificationUploadDropdown.data.map(item => {
@@ -133,61 +135,8 @@ const AdminNotiUpload = observer((): JSX.Element => {
         </DropdownSection>
         <CKEditor
           editor={ClassicEditor}
-          config={{
-            placeholder: "내용을 작성해 주세요",
-            toolbar: {
-              items: [
-                "heading",
-                "|",
-                "bold",
-                "italic",
-                "link",
-                "bulletedList",
-                "numberedList",
-                "imageUpload",
-                "blockQuote",
-                "insertTable",
-                "mediaEmbed",
-                "undo",
-                "redo",
-              ],
-            },
-            image: {
-              toolbar: [
-                "imageStyle:full",
-                "imageStyle:side",
-                "|",
-                "imageTextAlternative",
-              ],
-            },
-            heading: {
-              options: [
-                {
-                  model: "heading1",
-                  view: "h1",
-                  title: "헤더1",
-                  class: "ck-heading_heading1",
-                },
-                {
-                  model: "heading2",
-                  view: "h2",
-                  title: "헤더2",
-                  class: "ck-heading_heading2",
-                },
-                {
-                  model: "heading3",
-                  view: "h3",
-                  title: "헤더3",
-                  class: "ck-heading_heading3",
-                },
-                {
-                  model: "paragraph",
-                  title: "내용",
-                  class: "ck-heading_paragraph",
-                },
-              ],
-            },
-          }}
+          data={AdminDefaultNotiForm.basicForm}
+          config={AdminDefaultNotiForm.configData}
           onChange={(event: any, editor: any) => {
             const data = editor.getData();
             setDescription(data);

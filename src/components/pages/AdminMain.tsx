@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
@@ -8,7 +8,7 @@ import Inner from "../../styles/Inner";
 import RootStore from "../../stores/RootStore";
 import AdminApplicantStore from "../../stores/AdminApplicantStore";
 import requestHeaders from "../../utils/getToken";
-import { AdminRecruitList, ApplicantApi } from "../../config";
+import { RecruitAdmin, ApplicationsAdmin } from "../../config";
 
 import AdminMenuBox from "../UI/organisms/AdminMenuBox";
 import AdminNotice from "../UI/organisms/AdminNotice";
@@ -33,7 +33,7 @@ const AdminMain = observer((): JSX.Element => {
   const { setApplicant } = AdminApplicantStore;
 
   useEffect(() => {
-    fetch(AdminRecruitList, {
+    fetch(`${RecruitAdmin}/list`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -47,14 +47,13 @@ const AdminMain = observer((): JSX.Element => {
         console.error(error);
       });
 
-    fetch(`${ApplicantApi}/admin/applicator`, {
+    fetch(`${ApplicationsAdmin}/recent`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
         setApplicant(data.results);
-        console.log(data.results);
       })
       .catch(error => {
         console.error(error);

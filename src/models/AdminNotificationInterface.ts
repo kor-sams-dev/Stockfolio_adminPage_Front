@@ -23,6 +23,6 @@ export interface INotificationList {
   job_openings?: string;
   position: string;
   position_title: string;
-  recruit_application: number;
+  applicants_num: number;
   work_type: string;
 }

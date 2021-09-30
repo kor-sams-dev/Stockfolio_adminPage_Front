@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 import theme from "../../../styles/theme";
 
-import { ApplicantApi } from "../../../config";
+import { ApplicationsAdmin } from "../../../config";
 import requestHeaders from "../../../utils/getToken";
 
 import TimeForm from "../atoms/TimeForm";
@@ -207,7 +207,7 @@ const EvaluationBox = observer(
 
     const addComment = () => {
       if (saveComment.description.length > 0 && saveComment.score > 0) {
-        fetch(`${ApplicantApi}/${applicantId}/comments`, {
+        fetch(`${ApplicationsAdmin}/${applicantId}/comments`, {
           method: "POST",
           headers: requestHeaders,
           body: JSON.stringify(saveComment),
@@ -229,7 +229,7 @@ const EvaluationBox = observer(
     };
 
     const deleteComment = () => {
-      fetch(`${ApplicantApi}/${applicantId}/comment/${commentId}`, {
+      fetch(`${ApplicationsAdmin}/${applicantId}/comment/${commentId}`, {
         method: "DELETE",
         headers: requestHeaders,
       })
@@ -244,7 +244,7 @@ const EvaluationBox = observer(
 
     const editComment = () => {
       if (saveComment.description.length > 0 && saveComment.score > 0) {
-        fetch(`${ApplicantApi}/${applicantId}/comment/${commentId}`, {
+        fetch(`${ApplicationsAdmin}/${applicantId}/comment/${commentId}`, {
           method: "PATCH",
           headers: requestHeaders,
           body: JSON.stringify(saveComment),

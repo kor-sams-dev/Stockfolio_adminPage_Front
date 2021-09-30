@@ -5,7 +5,10 @@ import { observer } from "mobx-react";
 import theme from "../../../../styles/theme";
 
 import { INotificationItem } from "../../../../models/AdminAccountInterface";
-import { DropdownStore } from "../../../../stores/AdminNotificationStore";
+import {
+  DropdownStore,
+  selectNotificationData,
+} from "../../../../stores/AdminNotificationStore";
 import { INotificationUpload } from "../../../../models/AdminNotificationInterface";
 
 import Heading4 from "../texts/Heading4";

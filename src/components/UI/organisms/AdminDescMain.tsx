@@ -141,7 +141,6 @@ const AdminDescMain = observer((): JSX.Element => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setSelectedContent(data.result);
       })
       .catch(error => {

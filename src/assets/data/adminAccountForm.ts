@@ -35,7 +35,7 @@ const AdminDataForm = {
         title: "제목",
         name: "position_title",
         placeholder: "제목",
-        itemWidth: 980,
+        itemWidth: 930,
       },
     ],
   },

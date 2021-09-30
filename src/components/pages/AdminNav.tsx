@@ -83,6 +83,10 @@ const NavLogin = styled.div`
 
 function AdminNav(): JSX.Element {
   const { pathname } = useLocation();
+  const pathnameId = pathname.slice(
+    pathname.lastIndexOf("/") + 1,
+    pathname.length
+  );
   const history = useHistory();
   const GoToMain = () => history.push("/admin");
   const GotoLogin = () => {
@@ -116,7 +120,9 @@ function AdminNav(): JSX.Element {
               to="/admin/applynotice"
               isActive={
                 pathname === "/admin/applynotice" ||
-                pathname === "/admin/applicant/:id"
+                pathname === `/admin/apply/${pathnameId}` ||
+                pathname === `/admin/applicantlist/${pathnameId}` ||
+                pathname === `/admin/applicant/${pathnameId}`
               }
             >
               채용 공고

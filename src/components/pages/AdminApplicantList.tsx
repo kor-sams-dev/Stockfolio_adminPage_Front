@@ -6,7 +6,7 @@ import { useLocation, useParams, Link } from "react-router-dom";
 import theme from "../../styles/theme";
 import Inner from "../../styles/Inner";
 import requestHeaders from "../../utils/getToken";
-import { ApplicantApi } from "../../config";
+import { ApplicationsAdmin } from "../../config";
 
 import { AdminRecentApplicant1 } from "../../models/adminMainMenu";
 import { IDProp } from "../../models/applyInterfaces";
@@ -126,7 +126,7 @@ const AdminApplicantList = observer((): JSX.Element => {
   });
 
   useEffect(() => {
-    fetch(`${ApplicantApi}/admin/${params.id}`, {
+    fetch(`${ApplicationsAdmin}/recruits/${params.id}`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -174,8 +174,9 @@ const AdminApplicantList = observer((): JSX.Element => {
               </TitleWrap>
               <ContentWrap>
                 <Career>
-                  {data.career_type}&nbsp;
-                  {data.career_date === "경력 없음" ? null : data.career_date}
+                  {data.career_type.length === 0 ? "신입" : data.career_type}
+                  &nbsp;
+                  {data.career_date.replace("0년", "")}
                   <span>|</span> {data.created_at.substr(0, 10)}
                 </Career>
                 <Email>

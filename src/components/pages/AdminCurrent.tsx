@@ -10,7 +10,7 @@ import theme from "../../styles/theme";
 import AdminApplicantStore from "../../stores/AdminApplicantStore";
 import requestHeaders from "../../utils/getToken";
 import { AdminRecentApplicant1 } from "../../models/adminMainMenu";
-import { ApplicantApi } from "../../config";
+import { ApplicationsAdmin } from "../../config";
 
 import Heading2 from "../UI/atoms/texts/Heading2";
 
@@ -115,7 +115,7 @@ const AdminCurrent = observer((): JSX.Element => {
   const { ApplicantList } = AdminApplicantStore;
 
   useEffect(() => {
-    fetch(`${ApplicantApi}/admin/applicator`, {
+    fetch(`${ApplicationsAdmin}/recent`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -161,10 +161,12 @@ const AdminCurrent = observer((): JSX.Element => {
               </TitleWrap>
               <ContentWrap>
                 <Career>
-                  {data.career_type}&nbsp;
-                  {data.career_date === "경력 없음" ? null : data.career_date}
+                  {data.career_type.length === 0 ? "신입" : data.career_type}
+                  &nbsp;
+                  {data.career_date.replace("0년", "")}
                   <span>|</span> {data.created_at.substr(0, 10)}
                 </Career>
+
                 <Email>
                   {data.user_email} <span>|</span> {data.user_phoneNumber}
                 </Email>

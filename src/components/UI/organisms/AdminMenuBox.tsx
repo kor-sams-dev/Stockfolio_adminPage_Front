@@ -6,7 +6,7 @@ import theme from "../../../styles/theme";
 
 import AdminMenuboxStore from "../../../stores/AdminMenuboxStore";
 import requestHeaders from "../../../utils/getToken";
-import { Dashboard } from "../../../config";
+import { RecruitAdmin } from "../../../config";
 
 const Admin = styled.div`
   display: flex;
@@ -41,7 +41,7 @@ const AdminMenuBox = observer((): JSX.Element => {
   const { setMenu } = AdminMenuboxStore;
 
   useEffect(() => {
-    fetch(Dashboard, {
+    fetch(`${RecruitAdmin}/number`, {
       method: "GET",
       headers: requestHeaders,
     })

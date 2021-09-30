@@ -149,8 +149,9 @@ const AdminMenuApplicant = observer((): JSX.Element => {
               </TitleWrap>
               <ContentWrap>
                 <Career>
-                  {data.career_type}&nbsp;
-                  {data.career_date === "경력 없음" ? null : data.career_date}
+                  {data.career_type.length === 0 ? "신입" : data.career_type}
+                  &nbsp;
+                  {data.career_date.replace("0년", "")}
                   <span>|</span> {data.created_at.substr(0, 10)}
                 </Career>
                 <Email>

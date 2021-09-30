@@ -6,7 +6,7 @@ import theme from "../../styles/theme";
 import Inner from "../../styles/Inner";
 
 import RootStore from "../../stores/RootStore";
-import { AdminRecruitList } from "../../config";
+import { RecruitAdmin } from "../../config";
 import requestHeaders from "../../utils/getToken";
 
 import AdminApplyNavbar from "../UI/organisms/AdminApplyNavbar";
@@ -37,7 +37,7 @@ const AdminApplyNotice = observer((): JSX.Element => {
     AdminApplyMenuStore;
 
   useEffect(() => {
-    fetch(AdminRecruitList, {
+    fetch(RecruitAdmin, {
       method: "GET",
       headers: requestHeaders,
     })
