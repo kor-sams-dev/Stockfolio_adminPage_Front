@@ -42,7 +42,6 @@ const AdminInput = observer(
           width={item.itemWidth}
           onChange={onChange}
           type="text"
-          value={selectNotificationData.position_title}
         />
       </InputWrap>
     );

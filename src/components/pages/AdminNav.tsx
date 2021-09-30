@@ -113,7 +113,10 @@ function AdminNav(): JSX.Element {
             <NavText>관리자 페이지</NavText>
           </LogoWrap>
           <NavMenuList>
-            <NavMenu to="/admin" isActive={pathname === "/admin"}>
+            <NavMenu
+              to="/admin"
+              isActive={pathname === "/admin" || pathname === "/admin/current"}
+            >
               홈
             </NavMenu>
             <NavMenu

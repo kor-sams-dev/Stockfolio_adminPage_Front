@@ -27,16 +27,8 @@ function Recruit(): JSX.Element {
             <Route exact path="/recruit" component={ApplyList} />
             <Route exact path="/recruit/apply" component={ApplyList} />
             <Route exact path="/recruit/apply/:id" component={ApplyList} />
-            <Route
-              exact
-              path="/recruit/apply/:id/register"
-              component={ApplyForm}
-            />
-            <Route
-              exact
-              path="/recruit/apply/:id/modify"
-              component={ApplyForm}
-            />
+            <Route path="/recruit/apply/:id/register" component={ApplyForm} />
+            <Route path="/recruit/apply/:id/modify" component={ApplyForm} />
             <Route
               exact
               path="/recruit/apply/:id/resume"

@@ -7,7 +7,6 @@ import Inner from "../../styles/Inner";
 
 import RootStore from "../../stores/RootStore";
 import AdminApplicantStore from "../../stores/AdminApplicantStore";
-import requestHeaders from "../../utils/getToken";
 import { RecruitAdmin, ApplicationsAdmin } from "../../config";
 
 import AdminMenuBox from "../UI/organisms/AdminMenuBox";
@@ -31,6 +30,15 @@ const AdminMain = observer((): JSX.Element => {
   const { setClickedAdmin, setViewContentAdmin, setTotalContentAdmin } =
     AdminApplyMenuStore;
   const { setApplicant } = AdminApplicantStore;
+
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set("Content-Type", "application/json");
+  requestHeaders.set(
+    "Authorization",
+    sessionStorage
+      ?.getItem("TOKEN")
+      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
+  );
 
   useEffect(() => {
     fetch(`${RecruitAdmin}/list`, {

@@ -69,7 +69,6 @@ const Admin = observer((): JSX.Element => {
         <Switch>
           <Route exact path="/admin/apply" component={AdminDesc} />
           <Route exact path="/admin/apply/:id" component={AdminDesc} />
-          <Route exact path="/admin/apply/:id" component={AdminDesc} />
         </Switch>
       </Inner>
     </AdminBox>

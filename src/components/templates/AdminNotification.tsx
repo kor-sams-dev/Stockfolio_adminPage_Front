@@ -114,7 +114,6 @@ const AdminNotification = observer((): JSX.Element => {
       .then(res => res.json())
       .then(data => {
         setNotiData(data);
-        console.log(data);
       });
   }, []);
 
