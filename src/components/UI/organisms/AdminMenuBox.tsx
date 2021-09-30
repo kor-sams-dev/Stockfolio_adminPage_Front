@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useEffect } from "react";
 import { observer } from "mobx-react";
+
 import theme from "../../../styles/theme";
 
 import AdminMenuboxStore from "../../../stores/AdminMenuboxStore";
 import requestHeaders from "../../../utils/getToken";
-import { Dashboard } from "../../../config";
+import { RecruitAdmin } from "../../../config";
 
 const Admin = styled.div`
   display: flex;
@@ -14,35 +15,33 @@ const Admin = styled.div`
 `;
 
 const AdminBox = styled.div`
+  margin: 40px 16px 60px auto;
   width: 212px;
   height: 140px;
-  margin-top: 40px;
   border: 1px solid ${theme.color.greyLight2};
-  margin-right: 16px;
-  margin-bottom: 60px;
   border-radius: 8px;
 `;
 
 const StringSpan = styled.div`
-  font-weight: 400;
-  color: ${theme.color.black};
   margin: 16px 0px 0px 20px;
   font-size: 16px;
+  font-weight: 400;
+  color: ${theme.color.black};
 `;
 
 const NumberSpan = styled.div`
+  margin: 39px 24px 24px 0px;
+  text-align: right;
+  font-size: 40px;
   font-weight: 700;
   color: ${theme.color.mainDeep};
-  font-size: 40px;
-  text-align: right;
-  margin: 39px 24px 24px 0px;
 `;
 
 const AdminMenuBox = observer((): JSX.Element => {
   const { setMenu } = AdminMenuboxStore;
 
   useEffect(() => {
-    fetch(Dashboard, {
+    fetch(`${RecruitAdmin}/number`, {
       method: "GET",
       headers: requestHeaders,
     })

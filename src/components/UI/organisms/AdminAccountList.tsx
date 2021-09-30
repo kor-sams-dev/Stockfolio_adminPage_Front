@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { observer } from "mobx-react";
 
 import theme from "../../../styles/theme";
+
 import { IAccountInfo } from "../../../models/AdminAccountInterface";
-import { TEST_URL } from "../../../config";
+import { Account } from "../../../config";
 import requestHeaders from "../../../utils/getToken";
 
 const AccountBtn = styled.button`
@@ -16,27 +17,27 @@ const AccountBtn = styled.button`
 `;
 
 const AccountContentName = styled.input`
-  font-size: 15px;
-  font-weight: bold;
   display: inline;
   background-color: white;
+  font-size: 15px;
+  font-weight: bold;
 `;
 
 const AccountContent = styled.input`
-  font-size: 10px;
-  font-weight: 400;
   display: inline;
   background-color: white;
+  font-size: 10px;
+  font-weight: 400;
 `;
 
 const AccountWrap = styled.div`
   display: grid;
   grid-template-columns: 200px 200px 200px auto;
-  width: 100%;
-  padding: 9px 0 9px 30px;
-  border-radius: 10px;
-  margin-top: 10px;
   align-items: center;
+  margin-top: 10px;
+  padding: 9px 0 9px 30px;
+  width: 100%;
+  border-radius: 10px;
 
   &:hover {
     background-color: ${theme.color.greyLight1};
@@ -80,7 +81,7 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
       textCheck.password = " ";
       setHandleEditButton(!handleEditButton);
     } else {
-      fetch(`${TEST_URL}/users/admin/${list.id}`, {
+      fetch(`${Account}/${list.id}`, {
         method: "PATCH",
         headers: requestHeaders,
         body: JSON.stringify({
@@ -104,7 +105,7 @@ const AdminAccountList = observer(({ list }: IAddList): JSX.Element => {
   };
 
   const deleteAccount = () => {
-    fetch(`${TEST_URL}/users/admin/${list.id}`, {
+    fetch(`${Account}/${list.id}`, {
       method: "DELETE",
       headers: requestHeaders,
     })

@@ -1,20 +1,20 @@
 import { action, observable } from "mobx";
 import { INotificationUpload } from "../models/AdminNotificationInterface";
+import AdminDefaultNotiForm from "../assets/data/adminDefaultNotiForm";
 
 export const selectNotificationData: INotificationUpload = observable({
-  career_type: "",
-  work_type: "",
-  deadline: "",
-  position: "",
   position_title: "",
-  description: "",
+  career_type: "경력",
+  work_type: "형태",
+  deadline: "마감일",
+  position: "직종",
+  description: `${AdminDefaultNotiForm.basicForm}`,
 });
 
 export const DropdownStore = observable({
   setDropdown: action((name: keyof INotificationUpload, data: string) => {
     selectNotificationData[name] = data;
     selectNotificationData.deadline = "2021-10-10";
-    console.log(selectNotificationData);
   }),
   setTitle: action((data: string) => {
     selectNotificationData.position_title = data;

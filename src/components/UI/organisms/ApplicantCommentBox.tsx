@@ -12,7 +12,7 @@ import EvaluationBox from "../molecules/EvaluationBox";
 import ApplicantCommentList from "./ApplicantCommentList";
 
 import requestHeaders from "../../../utils/getToken";
-import { Applicant } from "../../../config";
+import { ApplicationsAdmin } from "../../../config";
 
 const ListAlert = styled.div`
   font-size: 14px;
@@ -30,24 +30,32 @@ const ApplicantCommentBox = observer(({ data }: IAddData): JSX.Element => {
 
   const [commentList, setCommentList] = useState(commentForm);
   useEffect(() => {
-    fetch(`${Applicant}/${applicantId}/comments`, {
+    fetch(`${ApplicationsAdmin}/${applicantId}/comments`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(item => {
-        setCommentList(item.results);
+        if (item.message === "APPLICATION_NOT_FOUND") {
+          setCommentList(commentForm);
+        } else {
+          setCommentList(item.results);
+        }
       });
   }, []);
 
   const reRender = () => {
-    fetch(`${Applicant}/${applicantId}/comments`, {
+    fetch(`${ApplicationsAdmin}/${applicantId}/comments`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(item => {
-        setCommentList(item.results);
+        if (item.message === "APPLICATION_NOT_FOUND") {
+          setCommentList(commentForm);
+        } else {
+          setCommentList(item.results);
+        }
       });
   };
 

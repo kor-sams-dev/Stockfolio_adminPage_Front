@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
-import Heading4 from "../texts/Heading4";
+
 import theme from "../../../../styles/theme";
+
 import { INotificationItem } from "../../../../models/AdminAccountInterface";
-import { DropdownStore } from "../../../../stores/AdminNotificationStore";
+import {
+  DropdownStore,
+  selectNotificationData,
+} from "../../../../stores/AdminNotificationStore";
 import { INotificationUpload } from "../../../../models/AdminNotificationInterface";
+
+import Heading4 from "../texts/Heading4";
 
 const DropdownWrap = styled.div`
   margin-right: 16px;
 `;
 
-const DropdownBtn = styled.button`
+const DropdownBtn = styled.button<{
+  width: number;
+  name: string;
+  value: string;
+}>`
   padding: 16px 0 16px 16px;
   width: ${props => props.width}px;
   background-color: ${theme.color.greyLight1};
@@ -31,7 +40,7 @@ const DownImg = styled.img`
   width: 14px;
 `;
 
-const ListWrap = styled.div`
+const ListWrap = styled.div<{ width: number }>`
   width: ${props => props.width}px;
   background-color: white;
   position: absolute;

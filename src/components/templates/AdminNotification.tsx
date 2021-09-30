@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
-import Inner from "../../styles/Inner";
-import Heading2 from "../UI/atoms/texts/Heading2";
-import Label from "../UI/atoms/Labels/Label";
-import requestHeaders from "../../utils/getToken";
 
+import Inner from "../../styles/Inner";
 import theme from "../../styles/theme";
-import { NotificationUrl } from "../../config";
+
+import { RecruitAdmin } from "../../config";
 import {
   INotificationList,
   notificationDataForm,
 } from "../../models/AdminNotificationInterface";
+import requestHeaders from "../../utils/getToken";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
+import Label from "../UI/atoms/Labels/Label";
 
 const Box = styled.section`
   position: sticky;
@@ -35,11 +36,11 @@ const HeaderWrap = styled.header`
 `;
 
 const NewNorificationBtn = styled.button`
-  background-color: ${theme.color.main};
   padding: 16px 35px;
+  border-radius: 10px;
+  background-color: ${theme.color.main};
   color: white;
   font-weight: bold;
-  border-radius: 10px;
   cursor: pointer;
 `;
 
@@ -60,6 +61,7 @@ const ListSection = styled.div`
 const TitleWrap = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const LabelBox = styled.div`
@@ -87,19 +89,25 @@ const Sort = styled.span`
   }
 `;
 
-const VolunteerListBtn = styled.button`
+const VolunteerListBtn = styled.button<{ isActive: boolean }>`
   border: 1px solid ${theme.color.grey1};
   border-radius: 10px;
   margin-left: 30px;
   padding: 11px 13px;
-  cursor: pointer;
+  color: ${props =>
+    props.isActive ? `${theme.color.lilac}` : `${theme.color.black}`};
+  cursor: ${props => (props.isActive ? "auto" : "pointer")};
+
+  &:hover {
+    background-color: ${theme.color.greyLight1};
+  }
 `;
 
 const AdminNotification = observer((): JSX.Element => {
   const [notiData, setNotiData] = useState(notificationDataForm);
 
   useEffect(() => {
-    fetch(`${NotificationUrl}/admin/recruit-list`, {
+    fetch(`${RecruitAdmin}/my`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -113,6 +121,7 @@ const AdminNotification = observer((): JSX.Element => {
   const uploadNoti = () => {
     history.push("/admin/notification/write");
   };
+
   return (
     <Box>
       <Inner size="wide">
@@ -127,7 +136,11 @@ const AdminNotification = observer((): JSX.Element => {
         {notiData.results.map((list: INotificationList) => {
           return (
             <ListSection key={list.id}>
-              <TitleWrap>
+              <TitleWrap
+                onClick={() => {
+                  history.push(`/admin/apply/${list.id}`);
+                }}
+              >
                 <LabelBox>
                   <Label stance={list.career_type as "경력" | "신입"} />
                 </LabelBox>
@@ -138,9 +151,23 @@ const AdminNotification = observer((): JSX.Element => {
               <div>
                 <Sort>{list.work_type}</Sort>
                 <Sort>{list.deadline} 마감</Sort>
-                <VolunteerListBtn>
-                  지원자 리스트({list.recruit_application})
-                </VolunteerListBtn>
+                {list.applicants_num === 0 ? (
+                  <VolunteerListBtn
+                    isActive={list.applicants_num === 0}
+                    disabled
+                  >
+                    지원자 리스트({list.applicants_num})
+                  </VolunteerListBtn>
+                ) : (
+                  <VolunteerListBtn
+                    isActive={list.applicants_num === 0}
+                    onClick={() => {
+                      history.push(`/admin/applicantlist/${list.id}`);
+                    }}
+                  >
+                    지원자 리스트({list.applicants_num})
+                  </VolunteerListBtn>
+                )}
               </div>
             </ListSection>
           );

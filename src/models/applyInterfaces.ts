@@ -18,7 +18,7 @@ interface MenuApplyProps {
   work_type: string;
   deadline: string;
   description: string;
-  recruit_application: number;
+  applicants_num: number;
   idx: number;
 }
 

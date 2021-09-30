@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-
 import { observer } from "mobx-react";
-import Heading4 from "../texts/Heading4";
+
 import theme from "../../../../styles/theme";
+
 import { IAccountItem } from "../../../../models/AdminAccountInterface";
 import { selectNotificationData } from "../../../../stores/AdminNotificationStore";
+
+import Heading4 from "../texts/Heading4";
 
 const InputWrap = styled.div`
   margin-top: 60px;
@@ -40,7 +42,6 @@ const AdminInput = observer(
           width={item.itemWidth}
           onChange={onChange}
           type="text"
-          value={selectNotificationData.position_title}
         />
       </InputWrap>
     );

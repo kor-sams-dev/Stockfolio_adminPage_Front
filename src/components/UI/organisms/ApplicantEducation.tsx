@@ -2,23 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
-import Desc from "../atoms/texts/Desc";
-
 import theme from "../../../styles/theme";
+
 import { IApplicantEducation } from "../../../models/AdminAccountInterface";
 
+import Desc from "../atoms/texts/Desc";
+
 const BasicInfoWrap = styled.section`
-  margin: 60px 0;
   display: flex;
   justify-content: space-between;
+  margin: 60px 0;
 `;
 
 const InfoBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   margin-left: 40px;
   padding-bottom: 60px;
   width: 450px;
-  display: flex;
-  flex-wrap: wrap;
   border-bottom: 1px solid ${theme.color.greyLight2};
 `;
 

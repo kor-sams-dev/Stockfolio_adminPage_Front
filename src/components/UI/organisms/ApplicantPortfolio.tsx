@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
-import Desc from "../atoms/texts/Desc";
-
 import theme from "../../../styles/theme";
+
 import { IApplicantPortfolio } from "../../../models/AdminAccountInterface";
 
+import Desc from "../atoms/texts/Desc";
+
 const BasicInfoWrap = styled.section`
-  margin: 60px 0;
   display: flex;
   justify-content: space-between;
+  margin: 60px 0;
 `;
 
 const InfoBox = styled.div`
@@ -26,9 +27,9 @@ const TextBox = styled.div`
 `;
 
 const TextTitle = styled.div`
+  width: 100%;
   font-size: 12px;
   color: ${theme.color.grey2};
-  width: 100%;
 `;
 
 const TextContent = styled.div`
@@ -42,11 +43,11 @@ const DownloadBtnWrap = styled.div`
 `;
 
 const DownloadBtn = styled.button`
-  background-color: ${theme.color.blue};
-  color: white;
-  font-size: 12px;
   padding: 6px 12px;
   border-radius: 8px;
+  background-color: ${theme.color.blue};
+  font-size: 12px;
+  color: white;
   cursor: pointer;
 `;
 

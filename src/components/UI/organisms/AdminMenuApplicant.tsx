@@ -8,27 +8,25 @@ import AdminApplicantStore from "../../../stores/AdminApplicantStore";
 import { AdminRecentApplicant1 } from "../../../models/adminMainMenu";
 
 const AdminNav = styled.ul`
-  font-size: 18px;
-  color: ${theme.color.black};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
-  margin-bottom: 16px;
-  margin-top: 60px;
+  margin: 60px auto 16px;
+  font-size: 18px;
+  color: ${theme.color.black};
 `;
 
 const NavTitle = styled.div`
   font-size: 18px;
-  color: ${theme.color.black};
   font-weight: 700;
+  color: ${theme.color.black};
 `;
 
 const NavButton = styled.div`
+  margin-right: 32px;
   font-size: 13px;
   color: ${theme.color.grey2};
   cursor: pointer;
-  margin-right: 32px;
 `;
 
 const Applicant = styled(Link)`
@@ -39,9 +37,9 @@ const Applicant = styled(Link)`
   border: none;
   background: ${theme.color.white};
   border-radius: 16px;
-  cursor: pointer;
   height: 82px;
   margin: 16px 0px;
+  margin-right: 32px;
 
   &:hover {
     background-color: ${theme.color.greyLight1};
@@ -49,17 +47,17 @@ const Applicant = styled(Link)`
 `;
 
 const TitleWrap = styled.div`
-  font-size: 12px;
-  margin-left: 24px;
   position: relative;
+  margin-left: 24px;
+  font-size: 12px;
 `;
 
 const Title1 = styled.div`
-  color: ${theme.color.mainDeep};
   margin-left: 258px;
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
+  color: ${theme.color.mainDeep};
 `;
 
 const Name = styled.div`
@@ -81,8 +79,7 @@ const ContentWrap = styled.div`
 `;
 
 const Career = styled.div`
-  text-align: right; 
-  }
+  text-align: right;
 `;
 
 const Email = styled.div`
@@ -121,10 +118,6 @@ const AdminMenuApplicant = observer((): JSX.Element => {
     history.push("/admin/current");
   };
 
-  const gotoapplicant = () => {
-    history.push("/admin/applicant/:id");
-  };
-
   return (
     <>
       {pathname === "/admin" && (
@@ -156,8 +149,9 @@ const AdminMenuApplicant = observer((): JSX.Element => {
               </TitleWrap>
               <ContentWrap>
                 <Career>
-                  {data.career_type}&nbsp;
-                  {data.career_date === "경력 없음" ? null : data.career_date}
+                  {data.career_type.length === 0 ? "신입" : data.career_type}
+                  &nbsp;
+                  {data.career_date.replace("0년", "")}
                   <span>|</span> {data.created_at.substr(0, 10)}
                 </Career>
                 <Email>

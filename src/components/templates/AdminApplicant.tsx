@@ -4,6 +4,12 @@ import { observer } from "mobx-react";
 import { useLocation } from "react-router-dom";
 
 import Inner from "../../styles/Inner";
+import theme from "../../styles/theme";
+
+import { ApplicationsAdmin } from "../../config";
+import { applicantForm } from "../../models/AdminAccountInterface";
+import requestHeaders from "../../utils/getToken";
+
 import ApplicantTitle from "../UI/organisms/ApplicantTitle";
 import ApplicantBasicInfo from "../UI/organisms/ApplicantBasicInfo";
 import ApplicantCareer from "../UI/organisms/ApplicantCareer";
@@ -12,11 +18,7 @@ import ApplicantIntroduce from "../UI/organisms/ApplicantIntroduce";
 import ApplicantEducation from "../UI/organisms/ApplicantEducation";
 import ApplicantPortfolio from "../UI/organisms/ApplicantPortfolio";
 import ApplicantCommentBox from "../UI/organisms/ApplicantCommentBox";
-
-import theme from "../../styles/theme";
-import { Applicant } from "../../config";
-import { applicantForm } from "../../models/AdminAccountInterface";
-import requestHeaders from "../../utils/getToken";
+import NotFound from "../pages/NotFound";
 
 const Box = styled.section`
   display: flex;
@@ -50,26 +52,37 @@ const CommentSection = styled.section`
 
 const AdminApplicant = observer((): JSX.Element => {
   const Location = useLocation();
-  const applicantId = Location.pathname.slice(17, Location.pathname.length);
+  const applicantId = Location.pathname.slice(
+    Location.pathname.lastIndexOf("/") + 1,
+    Location.pathname.length
+  );
 
   const [applicantData, setApplicantData] = useState(applicantForm);
   useEffect(() => {
-    fetch(`${Applicant}/${applicantId}`, {
+    fetch(`${ApplicationsAdmin}/${applicantId}`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
-        setApplicantData(data.results);
+        if (data.message === "APPLICATION_NOT_FOUND") {
+          setApplicantData(applicantForm);
+        } else {
+          setApplicantData(data.results);
+        }
       });
 
-    fetch(`${Applicant}/${applicantId}`, {
+    fetch(`${ApplicationsAdmin}/${applicantId}`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
-        setApplicantData(data.results);
+        if (data.message === "APPLICATION_NOT_FOUND") {
+          setApplicantData(applicantForm);
+        } else {
+          setApplicantData(data.results);
+        }
       });
   }, []);
 
@@ -79,7 +92,9 @@ const AdminApplicant = observer((): JSX.Element => {
   const EducationData = applicantData.content?.education;
   const PortfolioData = applicantData.content?.portfolio;
 
-  return (
+  return applicantData === applicantForm ? (
+    <NotFound />
+  ) : (
     <Box>
       <Inner size="wide">
         <ApplicantWrap>

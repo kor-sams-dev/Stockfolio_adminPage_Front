@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 
-import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 import theme from "../../../styles/theme";
 
 import RootStore from "../../../stores/RootStore";
 import { MenuProps } from "../../../models/applyInterfaces";
+
+import QuantityLabel, { Text, Box } from "../atoms/Labels/QuantityLabel";
 
 const ApplyNav = styled.ul`
   display: flex;

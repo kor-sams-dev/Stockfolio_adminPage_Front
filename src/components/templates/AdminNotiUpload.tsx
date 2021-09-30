@@ -4,20 +4,22 @@ import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { observer } from "mobx-react";
 import { useHistory } from "react-router-dom";
-import requestHeaders from "../../utils/getToken";
 
 import Inner from "../../styles/Inner";
-import Heading2 from "../UI/atoms/texts/Heading2";
-import AdminInput from "../UI/atoms/inputs/AdminInput";
-import AdminBtn from "../UI/atoms/buttons/AdminBtn";
-
 import theme from "../../styles/theme";
 import AdminDataForm from "../../assets/data/adminAccountForm";
-import { TEST_URL } from "../../config";
+import AdminDefaultNotiForm from "../../assets/data/adminDefaultNotiForm";
+
+import { NotificationUrl } from "../../config";
 import {
   DropdownStore,
   selectNotificationData,
 } from "../../stores/AdminNotificationStore";
+import requestHeaders from "../../utils/getToken";
+
+import Heading2 from "../UI/atoms/texts/Heading2";
+import AdminInput from "../UI/atoms/inputs/AdminInput";
+import AdminBtn from "../UI/atoms/buttons/AdminBtn";
 
 const Box = styled.section`
   position: sticky;
@@ -31,19 +33,30 @@ const Box = styled.section`
   background: ${theme.color.white};
   padding-top: 100px;
 
+  h3 {
+    margin: 15px 0;
+    font-weight: 700;
+  }
+
   ul {
     li {
+      padding: 10px 0px;
       list-style: inside;
       margin-left: 10px;
-      line-height: 1.5;
+      line-height: 0.6;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 
   ol {
     li {
+      padding-top: 10px;
       list-style: decimal;
       margin-left: 30px;
       line-height: 1.5;
+      font-size: 14px;
+      font-weight: 400;
     }
   }
 `;
@@ -56,9 +69,9 @@ const HeaderWrap = styled.header`
 `;
 
 const DropdownSection = styled.section`
-  margin: 24px 0 24px 10px;
   display: flex;
   justify-content: flex-start;
+  margin: 24px 0 24px 10px;
 `;
 
 const BtnWrap = styled.div`
@@ -69,10 +82,10 @@ const BtnWrap = styled.div`
 const SubmitBtn = styled.button`
   margin: 40px 0;
   padding: 16px;
-  background-color: ${theme.color.mainDeep};
-  color: white;
   width: 312px;
   border-radius: 10px;
+  background-color: ${theme.color.mainDeep};
+  color: white;
   cursor: pointer;
 `;
 
@@ -80,7 +93,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
   const history = useHistory();
   const { setDescription } = DropdownStore;
   const addNoti = () => {
-    fetch(`${TEST_URL}/recruits`, {
+    fetch(NotificationUrl, {
       method: "POST",
       headers: requestHeaders,
       body: JSON.stringify(selectNotificationData),
@@ -113,6 +126,7 @@ const AdminNotiUpload = observer((): JSX.Element => {
         <AdminInput
           item={AdminDataForm.notificationInput.item[0]}
           onChange={writeTitle}
+          value={selectNotificationData.position_title}
         />
         <DropdownSection>
           {AdminDataForm.NotificationUploadDropdown.data.map(item => {
@@ -121,61 +135,8 @@ const AdminNotiUpload = observer((): JSX.Element => {
         </DropdownSection>
         <CKEditor
           editor={ClassicEditor}
-          config={{
-            placeholder: "내용을 작성해 주세요",
-            toolbar: {
-              items: [
-                "heading",
-                "|",
-                "bold",
-                "italic",
-                "link",
-                "bulletedList",
-                "numberedList",
-                "imageUpload",
-                "blockQuote",
-                "insertTable",
-                "mediaEmbed",
-                "undo",
-                "redo",
-              ],
-            },
-            image: {
-              toolbar: [
-                "imageStyle:full",
-                "imageStyle:side",
-                "|",
-                "imageTextAlternative",
-              ],
-            },
-            heading: {
-              options: [
-                {
-                  model: "heading1",
-                  view: "h1",
-                  title: "헤더1",
-                  class: "ck-heading_heading1",
-                },
-                {
-                  model: "heading2",
-                  view: "h2",
-                  title: "헤더2",
-                  class: "ck-heading_heading2",
-                },
-                {
-                  model: "heading3",
-                  view: "h3",
-                  title: "헤더3",
-                  class: "ck-heading_heading3",
-                },
-                {
-                  model: "paragraph",
-                  title: "내용",
-                  class: "ck-heading_paragraph",
-                },
-              ],
-            },
-          }}
+          data={AdminDefaultNotiForm.basicForm}
+          config={AdminDefaultNotiForm.configData}
           onChange={(event: any, editor: any) => {
             const data = editor.getData();
             setDescription(data);

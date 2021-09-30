@@ -1,16 +1,17 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
+
 import theme from "../../styles/theme";
 import Inner from "../../styles/Inner";
-import { AdminRecruitList } from "../../config";
+
 import RootStore from "../../stores/RootStore";
+import AdminApplicantStore from "../../stores/AdminApplicantStore";
+import { RecruitAdmin, ApplicationsAdmin } from "../../config";
 
 import AdminMenuBox from "../UI/organisms/AdminMenuBox";
 import AdminNotice from "../UI/organisms/AdminNotice";
 import AdminMenuApplicant from "../UI/organisms/AdminMenuApplicant";
-import AdminApplicantStore from "../../stores/AdminApplicantStore";
-import requestHeaders from "../../utils/getToken";
 
 const Box = styled.section`
   position: sticky;
@@ -30,8 +31,17 @@ const AdminMain = observer((): JSX.Element => {
     AdminApplyMenuStore;
   const { setApplicant } = AdminApplicantStore;
 
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set("Content-Type", "application/json");
+  requestHeaders.set(
+    "Authorization",
+    sessionStorage
+      ?.getItem("TOKEN")
+      ?.slice(0, sessionStorage.getItem("TOKEN")!.length) || "no token"
+  );
+
   useEffect(() => {
-    fetch(AdminRecruitList, {
+    fetch(`${RecruitAdmin}/list`, {
       method: "GET",
       headers: requestHeaders,
     })
@@ -45,14 +55,13 @@ const AdminMain = observer((): JSX.Element => {
         console.error(error);
       });
 
-    fetch("http://192.168.35.101:8000/applications/admin/applicator", {
+    fetch(`${ApplicationsAdmin}/recent`, {
       method: "GET",
       headers: requestHeaders,
     })
       .then(res => res.json())
       .then(data => {
         setApplicant(data.results);
-        console.log(data.results);
       })
       .catch(error => {
         console.error(error);

@@ -3,12 +3,13 @@ import styled, { css } from "styled-components";
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import { Link, useLocation } from "react-router-dom";
-import AdminDescMain from "../UI/organisms/AdminDescMain";
 
 import theme from "../../styles/theme";
 
 import RootStore from "../../stores/RootStore";
 import { MenuProps, ClickProps } from "../../models/applyInterfaces";
+
+import AdminDescMain from "../UI/organisms/AdminDescMain";
 
 const DescWrapper = styled.div`
   display: flex;
