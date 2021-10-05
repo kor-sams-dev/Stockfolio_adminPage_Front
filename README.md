@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Stockfolio Admin Page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+해당 
 
 ## Available Scripts
 
