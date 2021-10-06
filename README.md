@@ -9,20 +9,17 @@
 
 - F.E<br>
   [김명성](https://github.com/sstaar91)
-  [문주영](https://github.com/minmin9324)
+  [문주영](https://github.com/moonjuyoung1)
   <br>
 - B.E<br>
   [고유영](https://github.com/lunayyko)
-  [김도담](https://github.com/Samdaso-o)
+  [김도담](https://github.com/damdream)
   <br>
 
-## What is Tango Plate Project?
+## What is Stockfolio Project?
 
-- 국내 맛집이란 맛집은 다 모인 [망고플레이트](https://www.mangoplate.com/) 클론 프로젝트
-- 촉박한 프로젝트 기간으로 최소 기능을 구현할 수 있는 페이지만 클론
-- wecode Bootcamp에서 배운 내용들을 바탕으로 구현할 수 있는 기능들과<br>
-  그 외에 추가로 구현할 수 있는 기능들을 선정해 구현했습니다.
-- 개발은 초기 세팅부터 직접 구현했으며, 프론트와 백을 연결해 실제 사용 가능한 수준으로 개발했습니다.
+- 스톡영상 제공 및 영상 제작 사업을 진행하는 [스톡폴리오](https://stockfolio.ai/) 와의 기업협업 프로젝트입니다.
+- 랜딩 페이지에서
 
 ### 개발 인원 및 기간
 
