@@ -1,46 +1,93 @@
 # Stockfolio Admin Page
 
-해당 
+## Reference
 
-## Available Scripts
+- 해당 프로젝트에서는 [스톡폴리오](https://we.stockfolio.ai/) 관리자 페이지 제작에 참여했습니다.
+- 오픈소스로 만들었지만 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
 
-In the project directory, you can run:
+## Stockfolio Project Family
 
-### `yarn start`
+- F.E<br>
+  [김명성](https://github.com/sstaar91)
+  [문주영](https://github.com/minmin9324)
+  <br>
+- B.E<br>
+  [고유영](https://github.com/lunayyko)
+  [김도담](https://github.com/Samdaso-o)
+  <br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## What is Tango Plate Project?
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 국내 맛집이란 맛집은 다 모인 [망고플레이트](https://www.mangoplate.com/) 클론 프로젝트
+- 촉박한 프로젝트 기간으로 최소 기능을 구현할 수 있는 페이지만 클론
+- wecode Bootcamp에서 배운 내용들을 바탕으로 구현할 수 있는 기능들과<br>
+  그 외에 추가로 구현할 수 있는 기능들을 선정해 구현했습니다.
+- 개발은 초기 세팅부터 직접 구현했으며, 프론트와 백을 연결해 실제 사용 가능한 수준으로 개발했습니다.
 
-### `yarn test`
+### 개발 인원 및 기간
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 개발기간 : 2021/8/2 ~ 2021/8/13
+- 개발 인원 : 프론트엔드 3명, 백엔드 2명
+- [B.E github 링크](https://github.com/wecode-bootcamp-korea/23-1st-TangoPlate-backend)
 
-### `yarn build`
+### 프로젝트 선정이유
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 그동안 wecode에서 구현했던 기술들을 접목해 클론 하기 적합한 난이도
+- 사용자에게 일방적인 정보 제공보다 여러 사용자의 데이터를 기반으로<br>다른 사용자에게 나은 정보를 제공한다는 점에 매력을 느낌
+- 인간의 3대욕구 중 하나와 관련된 사이트이다 보니, 코드로 구현하는 부분 외에도<br>다양한 즐거운 부분이 있어 프로젝트 진행 과정에서 지치지 않고 할 수 있음
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 적용 기술 및 구현 기능
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 적용 기술
 
-### `yarn eject`
+> -Front-End : javascript, React.js framwork, sass<br>
+> -Back-End : Python, Django web framework, MySQL, Bcrypt, pyjwt<br>
+> -Common : POSTMAN, RESTful API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 구현 기능
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 직접 담당한 페이지 및 기능
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 메인 페이지 레이아웃 담당
+- 메인 페이지의 검색 기능 구현
+  - 메뉴 혹은 지역 검색을 통해 해당 데이터가 화면에 구현 될 수 있도록 구현
+- 이미지 슬라이드 기능 구현 (라이브러리 사용 X)
+  - 이미지 슬라이드에 해당하는 카테고리 클릭시 해당 내용에 맞는 데이터를 리스트 페이지로 전달
+- 페이지 이동 기능 구현
+  - 검색과 카테고리 클릭의 데이터를 구별해 리스트 페이지에 구현 될 수 있도록 구현
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+아래부터는 해당 페이지에 적용된 기능입니다.
 
-## Learn More
+#### 회원가입 / 로그인 모달창
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 회원가입 시 정규식을 통한 유효성 검사. (소문자, 대문자, 특수문자의 조합)
+- 로그인 이후 토큰 발행, 계정 활성화
+- 로그아웃 시 토큰 삭제, 계정 비활성화 
+- 비회원일 경우 회원 권한이 필요한 곳 (리뷰쓰기, 가고싶다 찜기능) 에 접근 시 로그인 유도
+- 로그인 전 : 내 정보 아이콘 클릑 시 로그인과 회원가입 가능한 모달창
+- 로그인 후 : 내 정보 아이콘 클릭 시 유저 정보와 가고싶다(찜기능)목록 중 선택하여 볼 수 있는 모달창
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 맛집 리스트 페이지
+
+- 키워드(카테고리, 지역명) 필터링.
+- 카테고리에 대한 식당 리스트를 평점순으로 나열.
+- 클릭시 상세 페이지로 이동.
+- 가고싶다(찜)여부
+- 더보기 기능
+- nav바, footer 레이아웃
+
+#### 상세페이지
+
+- 해당 식당의 사진들, 상세정보, 리뷰에 따른 별점 , 가고싶다 (찜)여부.
+- 식당에 대한 리뷰 평점순으로 나열, 페이지네이션.
+- 가고싶다(위시리스트) 추가, 삭제
+- 리뷰 생성(별점 부여,텍스트, Img url), 해당 유저가 쓴 리뷰만 가능한 수정, 삭제
+- 리뷰 더보기 기능
+
+<br>
+
+## Reference
+
+- 이 프로젝트는 [망고플레이트](https://www.mangoplate.com/) 사이트를 참조하여 학습목적으로 만들었습니다.
+- 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
+- 이 프로젝트에서 사용하고 있는 사진 대부분은 위코드에서 구매한 것이므로 해당 프로젝트 외부인이 사용할 수 없습니다.
